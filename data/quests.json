@@ -1,0 +1,32 @@
+[
+    {
+        "id": "q_01",
+        "title": "Secrets of the Ancient Chest",
+        "description": "The Oracle has spoken of a silver key hidden within a rusted coffer. Find the chest and uncover its contents.",
+        "status": "ACTIVE",
+        "objectives": [
+            {
+                "description": "Locate the Ancient Chest on the map.",
+                "slug": "locate_chest",
+                "target_count": 1,
+                "current_count": 1,
+                "is_complete": true
+            },
+            {
+                "description": "Interact with the chest to find the Silver Key.",
+                "slug": "open_chest",
+                "target_count": 1,
+                "current_count": 0,
+                "is_complete": false
+            }
+        ],
+        "rewards": {
+            "gold": 50,
+            "xp": 100,
+            "items": [
+                "Silver Key"
+            ]
+        },
+        "narrative_hook": "The coffer reeks of brine and ancient metal. The silver key within is the only hope of opening the Heavy Oak Door."
+    }
+]

@@ -38,3 +38,25 @@ export interface SessionData {
     entities: Entity[];
     log: string[];
 }
+
+export interface QuestObjective {
+    description: string;
+    slug: string;
+    target_count: number;
+    current_count: number;
+    is_complete: boolean;
+}
+
+export interface Quest {
+    id: string;
+    title: string;
+    description: string;
+    status: 'ACTIVE' | 'COMPLETED' | 'FAILED';
+    objectives: QuestObjective[];
+    rewards: {
+        gold: number;
+        xp: number;
+        items: string[];
+    };
+    narrative_hook: string;
+}

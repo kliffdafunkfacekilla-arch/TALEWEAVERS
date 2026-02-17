@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { MapGrid } from './components/MapGrid';
 import { InventoryDrawer } from './components/InventoryDrawer';
+import { QuestLog } from './components/QuestLog';
 import { useGameStore } from './store';
 import { Terminal, Scroll, Skull, Shield, Sword, MessageSquare, Sparkles } from 'lucide-react';
 import { clsx } from 'clsx';
 
 function App() {
-    const { meta, log, fetchNewSession, submitResult, entities, dmChat, isDMThinking } = useGameStore();
+    const {
+        meta, log, fetchNewSession, submitResult, entities, dmChat, isDMThinking,
+        isInventoryOpen, setInventoryOpen, isQuestLogOpen, setQuestLogOpen
+    } = useGameStore();
+
     const [dmInput, setDmInput] = useState("");
-    const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
     useEffect(() => {
         fetchNewSession();
@@ -31,9 +35,17 @@ function App() {
                 <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-700 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.3)] border border-yellow-400/20 group cursor-pointer hover:scale-105 transition-transform">
                     <Sword size={22} className="text-white drop-shadow-md" />
                 </div>
-                <button className="p-2.5 text-slate-500 hover:text-yellow-500 hover:bg-white/5 rounded-xl transition-all"><Scroll size={22} /></button>
                 <button
-                    onClick={() => setIsInventoryOpen(true)}
+                    onClick={() => setQuestLogOpen(true)}
+                    className={clsx(
+                        "p-2.5 rounded-xl transition-all",
+                        isQuestLogOpen ? "text-yellow-500 bg-white/5" : "text-slate-500 hover:text-yellow-500 hover:bg-white/5"
+                    )}
+                >
+                    <Scroll size={22} />
+                </button>
+                <button
+                    onClick={() => setInventoryOpen(true)}
                     className={clsx(
                         "p-2.5 rounded-xl transition-all",
                         isInventoryOpen ? "text-yellow-500 bg-white/5" : "text-slate-500 hover:text-yellow-500 hover:bg-white/5"
@@ -165,7 +177,8 @@ function App() {
                 </div>
             </div>
 
-            <InventoryDrawer isOpen={isInventoryOpen} onClose={() => setIsInventoryOpen(false)} />
+            <InventoryDrawer isOpen={isInventoryOpen} onClose={() => setInventoryOpen(false)} />
+            <QuestLog isOpen={isQuestLogOpen} onClose={() => setQuestLogOpen(false)} />
         </div>
     );
 }

@@ -1,0 +1,14 @@
+INFO:     Started server process [3904]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+[Mechanics] Warning: Could not import ProgressionEngine
+[BOOT] Taleweavers Brain initializing...
+[BOOT] Root: C:\Users\krazy\Documents\GitHub\TALEWEAVERS
+[BOOT] Data: C:\Users\krazy\Documents\GitHub\TALEWEAVERS\data
+[DATA] Loaded 194 lore entries.
+[DATA] Loaded Gamestate (Epoch: 100)
+[DATA] Factions: 76 | Nodes: 21
+[ERROR] Failed to load gamestate.json: name 'os' is not defined

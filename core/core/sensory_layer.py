@@ -25,7 +25,7 @@ class SensoryLayer:
         }
         
         try:
-            response = requests.post(url, json=payload, timeout=10)
+            response = requests.post(url, json=payload, timeout=30)
             if response.status_code == 200:
                 return response.json().get("response", "No response.")
             return f"Error: Ollama returned {response.status_code}"
@@ -39,13 +39,17 @@ class SensoryLayer:
 
     def generate_narrative(self, action_result, world_context, persona="Dark & Visceral"):
         """
-        The 'Prompt Sandwich' logic.
-        1. Context Layer (Bottom)
-        2. Simulation Layer (Meat)
-        3. Persona Layer (Top)
+        The 'Prompt Sandwich' logic with Quest Awareness (Deep Sight).
         """
-        # 1. BOTTOM: Context (Lore & World State)
+        # 1. BOTTOM: Context (Lore & World State & Quests)
         bottom = f"WORLD_STATE: {world_context.get('chaos', 'Stable')}\n"
+        
+        if world_context.get('active_quests'):
+            bottom += f"ACTIVE_QUESTS: {json.dumps(world_context['active_quests'])}\n"
+            
+        if world_context.get('visible_objects'):
+            bottom += f"VISIBLE_OBJECTS: {json.dumps(world_context['visible_objects'])}\n"
+
         if world_context.get('lore'):
             bottom += f"LORE_RELEVANCE: {world_context['lore']}\n"
             
@@ -53,7 +57,7 @@ class SensoryLayer:
         meat = f"SIM_RESULT: {action_result}\n"
         
         # 3. TOP: Persona & Formatting
-        top = f"PERSONA: {persona}\nCONSTRAINT: 2-3 sentences. No internal monologue."
+        top = f"PERSONA: {persona}\nCONSTRAINT: 2-3 sentences. Focus on sensory details and quest relevance. No internal monologue."
         
         full_prompt = f"{bottom}\n{meat}\n{top}"
         return self.chat(full_prompt)

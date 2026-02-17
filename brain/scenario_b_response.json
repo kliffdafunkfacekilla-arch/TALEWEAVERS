@@ -1,0 +1,9 @@
+{
+  "intent": {
+    "action": "TALK",
+    "text": "Connection Failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=10)"
+  },
+  "narrative": "Connection Failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=10)",
+  "visual_updates": [],
+  "mechanical_log": "The world remains still."
+}

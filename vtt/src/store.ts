@@ -13,6 +13,14 @@ interface GameState extends SessionData {
     loadPlayerDetailed: (name: string) => Promise<void>;
     equipItem: (itemId: string, slot: string) => Promise<void>;
     isDMThinking: boolean;
+    quests: any[];
+    fetchQuests: () => Promise<void>;
+
+    // UI Drawer States
+    isInventoryOpen: boolean;
+    setInventoryOpen: (open: boolean) => void;
+    isQuestLogOpen: boolean;
+    setQuestLogOpen: (open: boolean) => void;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -22,8 +30,14 @@ export const useGameStore = create<GameState>((set, get) => ({
     log: ["Tactical Interface initialized."],
     selectedEntityId: null,
     isDMThinking: false,
+    quests: [],
+    isInventoryOpen: false,
+    isQuestLogOpen: false,
 
     loadSession: (data) => set({ ...data }),
+
+    setInventoryOpen: (open) => set({ isInventoryOpen: open }),
+    setQuestLogOpen: (open) => set({ isQuestLogOpen: open }),
 
     moveEntity: (id, [x, y]) => set((state) => ({
         entities: state.entities.map(e =>
@@ -66,6 +80,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     message,
                     context: {
                         world_pos: meta.world_pos,
+                        player: entities.find(e => e.type === 'player') || {},
                         entities: entities.map(e => ({ id: e.id, name: e.name, hp: e.hp, pos: e.pos }))
                     }
                 })
@@ -85,8 +100,6 @@ export const useGameStore = create<GameState>((set, get) => ({
             if (data.visual_updates && Array.isArray(data.visual_updates)) {
                 data.visual_updates.forEach((update: any) => {
                     if (update.type === 'MOVE_TOKEN') {
-                        // For the demo, we just apply the move
-                        // In reality, we'd find the entity and update its pos
                         set((state) => ({
                             entities: state.entities.map(e =>
                                 (e.id === update.id || e.name === update.id) ? { ...e, pos: update.pos } : e
@@ -100,7 +113,27 @@ export const useGameStore = create<GameState>((set, get) => ({
                             )
                         }));
                     }
+                    if (update.type === 'ADD_ITEM') {
+                        set((state) => ({
+                            entities: state.entities.map(e =>
+                                e.type === 'player' ? {
+                                    ...e,
+                                    inventory: [...(e.inventory || []), update.item]
+                                } : e
+                            )
+                        }));
+                        set((state) => ({ log: [...state.log, `[LOOT] Found item: ${update.item.Name}`] }));
+                    }
+                    if (update.type === 'OPEN_INVENTORY') {
+                        set({ isInventoryOpen: true });
+                    }
                 });
+            }
+
+            // Sync quests if quest updates happened
+            if (data.mechanical_log.includes("Success") || data.mechanical_log.includes("You searched")) {
+                const { fetchQuests } = get();
+                fetchQuests();
             }
 
         } catch (e) {
@@ -159,6 +192,17 @@ export const useGameStore = create<GameState>((set, get) => ({
             }));
         } catch (e) {
             console.error("Failed to load detailed player stats", e);
+        }
+    },
+
+    fetchQuests: async () => {
+        try {
+            const response = await fetch('/api/campaign/quests');
+            if (!response.ok) throw new Error('Failed to fetch quests');
+            const data = await response.json();
+            set({ quests: data });
+        } catch (e) {
+            console.error("Failed to fetch quests", e);
         }
     },
 

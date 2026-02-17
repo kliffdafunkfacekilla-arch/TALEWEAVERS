@@ -27,7 +27,20 @@
     "Inventory": [
         "Rusted Dagger",
         "Canvas Tunic",
-        "Bread"
+        "Bread",
+        {
+            "id": "item_1799387355",
+            "name": "Reinforced Chainmail",
+            "category": "ARMOR",
+            "base_type": "Chainmail",
+            "material": "Reinforced",
+            "stats": {
+                "Protection": 2,
+                "Cost": "3 SP",
+                "Trait": "Reliable (Cannot be broken)"
+            },
+            "rarity": "Tier 2"
+        }
     ],
     "Gold": 10,
     "HP": 19,
