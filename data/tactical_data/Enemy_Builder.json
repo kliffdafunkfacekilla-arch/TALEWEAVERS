@@ -1,0 +1,173 @@
+{
+    "enemy_builder_v1": {
+        "philosophy": "Rank + Role + Loadout + Species = Monster",
+        "1_RANK": {
+            "description": "Sets the Scale (HP, Action Economy, and Threat).",
+            "options": {
+                "SWARM": {
+                    "hp_mult": 0.2,
+                    "damage_mult": 0.5,
+                    "size": "Tiny",
+                    "ai_tag": "SWARM (Move to surround, attack adjacent)",
+                    "reward_mod": 0.1
+                },
+                "FODDER": {
+                    "hp_mult": 0.8,
+                    "damage_mult": 1.0,
+                    "size": "Medium",
+                    "ai_tag": "MINION (Follow Elite, attack nearest)",
+                    "reward_mod": 0.5
+                },
+                "ELITE": {
+                    "hp_mult": 2.0,
+                    "damage_mult": 1.5,
+                    "size": "Large",
+                    "ai_tag": "TACTICAL (Use Cover, Focus Fire)",
+                    "reward_mod": 2.0
+                },
+                "BOSS": {
+                    "hp_mult": 5.0,
+                    "damage_mult": 2.0,
+                    "size": "Huge",
+                    "ai_tag": "LEGENDARY (2 Turns per Round, Immune to Stun)",
+                    "reward_mod": 10.0
+                }
+            }
+        },
+        "2_ROLE": {
+            "description": "Sets the Stats and AI Behavior.",
+            "options": {
+                "BERZERKER": {
+                    "stat_priority": [
+                        "Might",
+                        "Vitality"
+                    ],
+                    "ai_behavior": "RUSH (Dash to melee, never retreat)",
+                    "bonus": "Advantage on Saves vs Fear"
+                },
+                "SNIPER": {
+                    "stat_priority": [
+                        "Awareness",
+                        "Reflexes"
+                    ],
+                    "ai_behavior": "KITE (Keep max range, seek cover)",
+                    "bonus": "Ignores Partial Cover"
+                },
+                "TANK": {
+                    "stat_priority": [
+                        "Endurance",
+                        "Fortitude"
+                    ],
+                    "ai_behavior": "GUARD (Stand between Enemy and Ally)",
+                    "bonus": "+2 Armor, Cannot be Knocked Prone"
+                },
+                "LURKER": {
+                    "stat_priority": [
+                        "Finesse",
+                        "Intuition"
+                    ],
+                    "ai_behavior": "AMBUSH (Hide until target is close/flanked)",
+                    "bonus": "Critical Hits deal 3x Damage"
+                },
+                "CONTROLLER": {
+                    "stat_priority": [
+                        "Willpower",
+                        "Charm"
+                    ],
+                    "ai_behavior": "SUPPORT (Buff allies, Debuff enemies)",
+                    "bonus": "Aura 30ft: Allies gain +1 to Hit"
+                }
+            }
+        },
+        "3_OFFENSE": {
+            "description": "The Weapon Block (Damage Type & Range).",
+            "options": {
+                "REND": {
+                    "type": "Melee",
+                    "dmg": "Slashing",
+                    "effect": "Bleed (DoT)",
+                    "tag": "Claws/Swords"
+                },
+                "CRUSH": {
+                    "type": "Melee",
+                    "dmg": "Bludgeoning",
+                    "effect": "Stun (Save vs Con)",
+                    "tag": "Hammers/Fists"
+                },
+                "PIERCE": {
+                    "type": "Ranged",
+                    "dmg": "Piercing",
+                    "effect": "Sunder (-1 Armor)",
+                    "tag": "Spines/Bows"
+                },
+                "BURN": {
+                    "type": "Magic",
+                    "dmg": "Fire",
+                    "effect": "Panic (Save vs Fear)",
+                    "tag": "Flamethrower/Breath"
+                },
+                "ROT": {
+                    "type": "Magic",
+                    "dmg": "Necrotic",
+                    "effect": "Weaken (-Strength)",
+                    "tag": "Bite/Curse"
+                }
+            }
+        },
+        "4_DEFENSE": {
+            "description": "The Armor Block (Mitigation).",
+            "options": {
+                "ARMORED": {
+                    "ac_bonus": 4,
+                    "weakness": "Shock",
+                    "desc": "Heavy Plating/Metal"
+                },
+                "EVASIVE": {
+                    "ac_bonus": 1,
+                    "trait": "Dodge (Reaction to 0 dmg)",
+                    "desc": "Reflexes/Blur"
+                },
+                "REGENERATING": {
+                    "ac_bonus": 0,
+                    "trait": "Heal 5 HP/Turn",
+                    "desc": "Troll Blood/Plants"
+                },
+                "SHIELDED": {
+                    "ac_bonus": 2,
+                    "trait": "Block (Reaction +2 AC)",
+                    "desc": "Physical Shield/Force Field"
+                }
+            }
+        },
+        "5_TACTIC": {
+            "description": "The 'Nasty Surprise' (Cooldown Ability).",
+            "options": {
+                "GRAPPLE": {
+                    "action": "Restrain Target",
+                    "cd": 3,
+                    "desc": "Web/Net/Bearhug"
+                },
+                "AOE_BLAST": {
+                    "action": "Cone 15ft Dmg",
+                    "cd": 4,
+                    "desc": "Breath Weapon/Grenade"
+                },
+                "SUMMON": {
+                    "action": "Spawn 1d4 Swarm Minions",
+                    "cd": 1,
+                    "limit": "Once",
+                    "desc": "Call Pack/Raise Dead"
+                },
+                "TELEPORT": {
+                    "action": "Move 60ft (Bonus)",
+                    "cd": 2,
+                    "desc": "Blink/Burrow"
+                }
+            }
+        },
+        "6_REWARD": {
+            "description": "Loot generation based on Rank.",
+            "logic": "Roll d100 + (RankMod * Luck). If > Threshold, Drop Item."
+        }
+    }
+}

@@ -1,0 +1,4189 @@
+{
+    "Species": {
+        "Mammal": {
+            "Might": 10,
+            "Endurance": 11,
+            "Finesse": 12,
+            "Reflexes": 9,
+            "Vitality": 10,
+            "Fortitude": 8,
+            "Knowledge": 12,
+            "Logic": 8,
+            "Awareness": 9,
+            "Intuition": 10,
+            "Charm": 11,
+            "Willpower": 10
+        },
+        "Avian": {
+            "Might": 8,
+            "Endurance": 10,
+            "Finesse": 10,
+            "Reflexes": 12,
+            "Vitality": 11,
+            "Fortitude": 9,
+            "Knowledge": 11,
+            "Logic": 9,
+            "Awareness": 12,
+            "Intuition": 8,
+            "Charm": 10,
+            "Willpower": 10
+        },
+        "Reptile": {
+            "Might": 10,
+            "Endurance": 9,
+            "Finesse": 8,
+            "Reflexes": 11,
+            "Vitality": 10,
+            "Fortitude": 12,
+            "Knowledge": 10,
+            "Logic": 12,
+            "Awareness": 8,
+            "Intuition": 11,
+            "Charm": 10,
+            "Willpower": 9
+        },
+        "Insect": {
+            "Might": 12,
+            "Endurance": 8,
+            "Finesse": 10,
+            "Reflexes": 10,
+            "Vitality": 9,
+            "Fortitude": 11,
+            "Knowledge": 9,
+            "Logic": 10,
+            "Awareness": 11,
+            "Intuition": 10,
+            "Charm": 8,
+            "Willpower": 12
+        },
+        "Aquatic": {
+            "Might": 9,
+            "Endurance": 12,
+            "Finesse": 11,
+            "Reflexes": 10,
+            "Vitality": 8,
+            "Fortitude": 10,
+            "Knowledge": 10,
+            "Logic": 11,
+            "Awareness": 10,
+            "Intuition": 12,
+            "Charm": 9,
+            "Willpower": 8
+        },
+        "Plant": {
+            "Might": 11,
+            "Endurance": 10,
+            "Finesse": 9,
+            "Reflexes": 8,
+            "Vitality": 12,
+            "Fortitude": 10,
+            "Knowledge": 8,
+            "Logic": 10,
+            "Awareness": 10,
+            "Intuition": 9,
+            "Charm": 12,
+            "Willpower": 11
+        }
+    },
+    "Weapons": {},
+    "Armor": {},
+    "Skills": {
+        "Great Weapons": {
+            "Attribute": "MIGHT",
+            "Type": "Weapon",
+            "Skill Name": "Great Weapons",
+            "Description": "Mastery of heavy impact weapons like greatswords and mauls."
+        },
+        "The Ballistics": {
+            "Attribute": "MIGHT",
+            "Type": "Weapon",
+            "Skill Name": "The Ballistics",
+            "Description": "Mastery of high-draw-weight ranged weapons like warbows and ballistae."
+        },
+        "Intimidation": {
+            "Attribute": "MIGHT",
+            "Type": "Social",
+            "Skill Name": "Intimidation",
+            "Description": "Using physical presence and threats of violence to force compliance."
+        },
+        "Athletics": {
+            "Attribute": "MIGHT",
+            "Type": "Utility",
+            "Skill Name": "Athletics",
+            "Description": "Action: Swimming, climbing, breaking objects. Lore: War tactics and sieges."
+        },
+        "Heavy": {
+            "Attribute": "ENDURANCE",
+            "Type": "Armor",
+            "Skill Name": "Heavy",
+            "Description": "Mastery of full plate and heavy chitin armor. You are the anvil."
+        },
+        "Shield": {
+            "Attribute": "ENDURANCE",
+            "Type": "Tool",
+            "Skill Name": "Shield",
+            "Description": "Mastery of bucklers, heaters, and tower shields for active cover and bashing."
+        },
+        "Stoicism": {
+            "Attribute": "ENDURANCE",
+            "Type": "Social",
+            "Skill Name": "Stoicism",
+            "Description": "Mastery of the ego. Remaining unbothered by insults, pain, or fear."
+        },
+        "Labor": {
+            "Attribute": "ENDURANCE",
+            "Type": "Utility",
+            "Skill Name": "Labor",
+            "Description": "Action: Sustained heavy work, carrying loads. Lore: Structure and masonry."
+        },
+        "Small": {
+            "Attribute": "FINESSE",
+            "Type": "Weapon",
+            "Skill Name": "Small",
+            "Description": "Mastery of precision weapons like rapiers, shivs, and stilettos."
+        },
+        "Thrown": {
+            "Attribute": "FINESSE",
+            "Type": "Weapon",
+            "Skill Name": "Thrown",
+            "Description": "Mastery of balanced throwing weapons like knives, axes, and kunai."
+        },
+        "Repartee": {
+            "Attribute": "FINESSE",
+            "Type": "Social",
+            "Skill Name": "Repartee",
+            "Description": "Using wit, mockery, and stinging insults to fluster an opponent."
+        },
+        "Mechanism": {
+            "Attribute": "FINESSE",
+            "Type": "Utility",
+            "Skill Name": "Mechanism",
+            "Description": "Action: Picking locks, disarming traps. Lore: Gears and complex devices."
+        },
+        "Light": {
+            "Attribute": "REFLEXES",
+            "Type": "Armor",
+            "Skill Name": "Light",
+            "Description": "Mastery of light hides and padded armor for maximum mobility."
+        },
+        "Snares": {
+            "Attribute": "REFLEXES",
+            "Type": "Tool",
+            "Skill Name": "Snares",
+            "Description": "Mastery of caltrops, tripwires, and smoke bombs to control the ground."
+        },
+        "Guile": {
+            "Attribute": "REFLEXES",
+            "Type": "Social",
+            "Skill Name": "Guile",
+            "Description": "Feigning ignorance, hiding emotions, and deceiving others."
+        },
+        "Motion": {
+            "Attribute": "REFLEXES",
+            "Type": "Utility",
+            "Skill Name": "Motion",
+            "Description": "Action: Acrobatics, stealth, balancing. Lore: Ballistics and physics of speed."
+        },
+        "Natural": {
+            "Attribute": "VITALITY",
+            "Type": "Armor",
+            "Skill Name": "Natural",
+            "Description": "Mastery of armor made from once-living things (furs, bone, wood)."
+        },
+        "Tinctures": {
+            "Attribute": "VITALITY",
+            "Type": "Tool",
+            "Skill Name": "Tinctures",
+            "Description": "Mastery of non-magical aids like herbal salves, bandages, and stimulants."
+        },
+        "Poise": {
+            "Attribute": "VITALITY",
+            "Type": "Social",
+            "Skill Name": "Poise",
+            "Description": "Being naturally radiant, likable, and projecting health/status."
+        },
+        "Nature": {
+            "Attribute": "VITALITY",
+            "Type": "Utility",
+            "Skill Name": "Nature",
+            "Description": "Action: Survival, handling animals. Lore: Biology, ecology, and healing."
+        },
+        "Fist": {
+            "Attribute": "FORTITUDE",
+            "Type": "Weapon",
+            "Skill Name": "Fist",
+            "Description": "Mastery of unarmed strikes, cestus, and claws. Clinch fighting."
+        },
+        "Simple": {
+            "Attribute": "FORTITUDE",
+            "Type": "Weapon",
+            "Skill Name": "Simple",
+            "Description": "Mastery of simple kinetic weapons like slings and shortbows."
+        },
+        "Coercion": {
+            "Attribute": "FORTITUDE",
+            "Type": "Social",
+            "Skill Name": "Coercion",
+            "Description": "Using relentless pressure and \"The Gaze\" to corner an opponent."
+        },
+        "Craft": {
+            "Attribute": "FORTITUDE",
+            "Type": "Utility",
+            "Skill Name": "Craft",
+            "Description": "Action: Repairing gear, smithing, hardening. Lore: Physiology and metallurgy."
+        },
+        "Cloth": {
+            "Attribute": "KNOWLEDGE",
+            "Type": "Armor",
+            "Skill Name": "Cloth",
+            "Description": "Mastery of runed cloth and woven wards that require academic understanding."
+        },
+        "Catalysts": {
+            "Attribute": "KNOWLEDGE",
+            "Type": "Tool",
+            "Skill Name": "Catalysts",
+            "Description": "Mastery of items that channel magic, such as scrolls, wands, and staves."
+        },
+        "Etiquette": {
+            "Attribute": "KNOWLEDGE",
+            "Type": "Social",
+            "Skill Name": "Etiquette",
+            "Description": "Using rank, protocol, and proper titles as a social shield."
+        },
+        "Academics": {
+            "Attribute": "KNOWLEDGE",
+            "Type": "Utility",
+            "Skill Name": "Academics",
+            "Description": "Action: Researching libraries. Lore: History, languages, and heraldry."
+        },
+        "Medium": {
+            "Attribute": "LOGIC",
+            "Type": "Weapon",
+            "Skill Name": "Medium",
+            "Description": "Mastery of technical swordsmanship like katanas and arming swords."
+        },
+        "Blast": {
+            "Attribute": "LOGIC",
+            "Type": "Weapon",
+            "Skill Name": "Blast",
+            "Description": "Mastery of chemical weapons, grenades, scatterguns, and fuse times."
+        },
+        "Rhetoric": {
+            "Attribute": "LOGIC",
+            "Type": "Social",
+            "Skill Name": "Rhetoric",
+            "Description": "Using facts, logic, and debate to dismantle arguments."
+        },
+        "Analysis": {
+            "Attribute": "LOGIC",
+            "Type": "Utility",
+            "Skill Name": "Analysis",
+            "Description": "Action: Solving puzzles, deduction. Lore: Math, engineering, and chemistry."
+        },
+        "Large": {
+            "Attribute": "AWARENESS",
+            "Type": "Weapon",
+            "Skill Name": "Large",
+            "Description": "Mastery of spears and halberds. Keeping enemies at exact range."
+        },
+        "Long Shot": {
+            "Attribute": "AWARENESS",
+            "Type": "Weapon",
+            "Skill Name": "Long Shot",
+            "Description": "Mastery of sniper rifles, crossbows, and flintlocks. Lining up the shot."
+        },
+        "Insight": {
+            "Attribute": "AWARENESS",
+            "Type": "Social",
+            "Skill Name": "Insight",
+            "Description": "Using cold reading to detect lies and expose secrets."
+        },
+        "Scouting": {
+            "Attribute": "AWARENESS",
+            "Type": "Utility",
+            "Skill Name": "Scouting",
+            "Description": "Action: Tracking, spotting danger. Lore: Forensics and investigation."
+        },
+        "Utility": {
+            "Attribute": "INTUITION",
+            "Type": "Armor",
+            "Skill Name": "Utility",
+            "Description": "Mastery of utility vests, ghillie suits, and \"deep pockets\" preparation."
+        },
+        "Curios": {
+            "Attribute": "INTUITION",
+            "Type": "Tool",
+            "Skill Name": "Curios",
+            "Description": "Mastery of gaming sets, dice, tarot, and tokens of luck/fate."
+        },
+        "Empathy": {
+            "Attribute": "INTUITION",
+            "Type": "Social",
+            "Skill Name": "Empathy",
+            "Description": "Sensing the \"vibe,\" emotional intent, and defusing anger."
+        },
+        "Mysticism": {
+            "Attribute": "INTUITION",
+            "Type": "Utility",
+            "Skill Name": "Mysticism",
+            "Description": "Action: Gut-feeling pathfinding. Lore: Folklore, spirits, and omens."
+        },
+        "Exotic Melee": {
+            "Attribute": "CHARM",
+            "Type": "Weapon",
+            "Skill Name": "Exotic Melee",
+            "Description": "Mastery of performance weapons like whips and nunchaku. Flow and style."
+        },
+        "Exotic Ranged": {
+            "Attribute": "CHARM",
+            "Type": "Weapon",
+            "Skill Name": "Exotic Ranged",
+            "Description": "Mastery of tricky tools like bolas and blowguns."
+        },
+        "Persuasion": {
+            "Attribute": "CHARM",
+            "Type": "Social",
+            "Skill Name": "Persuasion",
+            "Description": "Using allure and inspiration to seduce or motivate others."
+        },
+        "Performance": {
+            "Attribute": "CHARM",
+            "Type": "Utility",
+            "Skill Name": "Performance",
+            "Description": "Action: Acting, disguise. Lore: Art, culture, and high fashion."
+        },
+        "Medium": {
+            "Attribute": "WILLPOWER",
+            "Type": "Armor",
+            "Skill Name": "Medium",
+            "Description": "Mastery of chain and scale. Relying on reliability and faith."
+        },
+        "Regalia": {
+            "Attribute": "WILLPOWER",
+            "Type": "Tool",
+            "Skill Name": "Regalia",
+            "Description": "Mastery of banners, warhorns, and badges to signal and rally troops."
+        },
+        "Discipline": {
+            "Attribute": "WILLPOWER",
+            "Type": "Social",
+            "Skill Name": "Discipline",
+            "Description": "Resisting fear, mind control, and maintaining order."
+        },
+        "Command": {
+            "Attribute": "WILLPOWER",
+            "Type": "Utility",
+            "Skill Name": "Command",
+            "Description": "Action: Leadership, interrogation. Lore: Religion, theology, and cults."
+        }
+    },
+    "Talents": {
+        "Sunder": {
+            "Requirement_ID": "The Great Weapons",
+            "Requirement_Value": "3",
+            "Effect_Logic": "damage_bonus_vs_tag(shield, armor)",
+            "Description": "Bonus damage against shields and armor."
+        },
+        "Follow Through": {
+            "Requirement_ID": "The Great Weapons",
+            "Requirement_Value": "6",
+            "Effect_Logic": "on_kill(cleave_damage)",
+            "Description": "If you kill a target or break an object, deal damage to an adjacent target."
+        },
+        "Impact": {
+            "Requirement_ID": "The Great Wepons",
+            "Requirement_Value": "10",
+            "Effect_Logic": "crit_effect(knockback, prone)",
+            "Description": "Critical hits knock targets prone or fling them backwards."
+        },
+        "Heavy Pull": {
+            "Requirement_ID": "Ballistics",
+            "Requirement_Value": "3",
+            "Effect_Logic": "stat_swap(damage, might)",
+            "Description": "You can use your Might stat for damage instead of Reflex/Finesse."
+        },
+        "Skewering Shot": {
+            "Requirement_ID": "Ballistics",
+            "Requirement_Value": "6",
+            "Effect_Logic": "projectile_pierce(1)",
+            "Description": "Your shots can pass through one enemy to hit a second one behind them."
+        },
+        "Artillery": {
+            "Requirement_ID": "Ballistics",
+            "Requirement_Value": "10",
+            "Effect_Logic": "ignore_range_penalty; penetrate_cover",
+            "Description": "Ignore range penalties. Your arrows punch through cover."
+        },
+        "Loom": {
+            "Requirement_ID": "Intimidation",
+            "Requirement_Value": "3",
+            "Effect_Logic": "stat_swap(social_check, might)",
+            "Description": "You can Intimidate using Strength instead of Charm/Social stats."
+        },
+        "Terrify": {
+            "Requirement_ID": "Intimidation",
+            "Requirement_Value": "6",
+            "Effect_Logic": "status_effect(initiative_last)",
+            "Description": "Enemies you intimidate hesitate, acting last in the turn order."
+        },
+        "The Aura": {
+            "Requirement_ID": "Intimidation",
+            "Requirement_Value": "10",
+            "Effect_Logic": "aura(sanctuary_effect)",
+            "Description": "Enemies within melee range must pass a check to attack you."
+        },
+        "Iron Grip": {
+            "Requirement_ID": "Athletics",
+            "Requirement_Value": "3",
+            "Effect_Logic": "immunity(disarm)",
+            "Description": "You cannot be disarmed or forced to drop something you are holding."
+        },
+        "Wrecking Ball": {
+            "Requirement_ID": "Athletics",
+            "Requirement_Value": "6",
+            "Effect_Logic": "damage_mult_vs_tag(object, 2.0)",
+            "Description": "You deal double damage to inanimate objects (doors, walls)."
+        },
+        "Titan": {
+            "Requirement_ID": "Athletics",
+            "Requirement_Value": "10",
+            "Effect_Logic": "carry_cap_mult(2); move_speed(climb, normal)",
+            "Description": "Your lifting/carrying capacity is doubled. You can swim/climb at full running speed."
+        },
+        "Second Skin": {
+            "Requirement_ID": "Heavy",
+            "Requirement_Value": "3",
+            "Effect_Logic": "ignore_fatigue(armor_sleep)",
+            "Description": "Sleeping in heavy armor causes no fatigue penalty."
+        },
+        "Glancing Blows": {
+            "Requirement_ID": "Heavy",
+            "Requirement_Value": "6",
+            "Effect_Logic": "crit_defense_mult(0.5)",
+            "Description": "Reduces Critical Hit damage taken by half."
+        },
+        "Juggernaut": {
+            "Requirement_ID": "Heavy",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(prone, push)",
+            "Description": "You cannot be knocked prone or pushed against your will while armored."
+        },
+        "Shield Wall": {
+            "Requirement_ID": "Shield",
+            "Requirement_Value": "3",
+            "Effect_Logic": "aura(adjacent_allies, heavy_cover)",
+            "Description": "You provide heavy cover to adjacent allies."
+        },
+        "Bash": {
+            "Requirement_ID": "Shield",
+            "Requirement_Value": "6",
+            "Effect_Logic": "attack_bonus_action(stun)",
+            "Description": "You can make an off-hand attack with your shield to stun enemies."
+        },
+        "Interpose": {
+            "Requirement_ID": "Shield",
+            "Requirement_Value": "10",
+            "Effect_Logic": "redirect_damage(ally, self)",
+            "Description": "Once per round, you can take a hit meant for an adjacent ally."
+        },
+        "Thick Skin": {
+            "Requirement_ID": "Stoicism",
+            "Requirement_Value": "3",
+            "Effect_Logic": "ignore_penalty(pain)",
+            "Description": "Ignore penalties from pain or minor wounds."
+        },
+        "Unbothered": {
+            "Requirement_ID": "Stoicism",
+            "Requirement_Value": "6",
+            "Effect_Logic": "immunity(taunt, social_shame)",
+            "Description": "You are immune to taunts and social embarrassment."
+        },
+        "Death\u0092s Door": {
+            "Requirement_ID": "Stoicism",
+            "Requirement_Value": "10",
+            "Effect_Logic": "death_delay(1_round)",
+            "Description": "You stay conscious and can act for one round after hitting 0 HP."
+        },
+        "Workhorse": {
+            "Requirement_ID": "Labor",
+            "Requirement_Value": "3",
+            "Effect_Logic": "stamina_mult(2.0)",
+            "Description": "You can perform heavy labor for 16 hours without exhaustion."
+        },
+        "Structural Eye": {
+            "Requirement_ID": "Labor",
+            "Requirement_Value": "6",
+            "Effect_Logic": "skill_bonus(demolition, advantage)",
+            "Description": "You instantly spot weak points in stone/wood structures (bonus to Demolition)."
+        },
+        "Atlas": {
+            "Requirement_ID": "Labor",
+            "Requirement_Value": "10",
+            "Effect_Logic": "temp_stat_boost(strength, infinite)",
+            "Description": "For one turn, you can hold an impossible weight (e.g., a falling portcullis)."
+        },
+        "Quick Draw": {
+            "Requirement_ID": "Small",
+            "Requirement_Value": "3",
+            "Effect_Logic": "equip_speed(instant)",
+            "Description": "Drawing a hidden weapon is a free action."
+        },
+        "Bleed Out": {
+            "Requirement_ID": "Small",
+            "Requirement_Value": "6",
+            "Effect_Logic": "crit_effect(bleed)",
+            "Description": "Critical hits cause ongoing damage over time."
+        },
+        "Vital Point": {
+            "Requirement_ID": "Small",
+            "Requirement_Value": "10",
+            "Effect_Logic": "ignore_armor(condition:unaware)",
+            "Description": "You ignore armor rating on targets that are unaware of you."
+        },
+        "Juggler": {
+            "Requirement_ID": "Thrown",
+            "Requirement_Value": "3",
+            "Effect_Logic": "multi_attack(thrown, 2)",
+            "Description": "You can draw and throw two small weapons in a single action."
+        },
+        "Ricochet": {
+            "Requirement_ID": "Thrown",
+            "Requirement_Value": "6",
+            "Effect_Logic": "ignore_cover(bounce)",
+            "Description": "You can bounce thrown weapons off walls to hit enemies behind cover."
+        },
+        "Perfect Arc": {
+            "Requirement_ID": "Thrown",
+            "Requirement_Value": "10",
+            "Effect_Logic": "range_penalty(0)",
+            "Description": "Range penalties for thrown weapons are removed."
+        },
+        "Goad": {
+            "Requirement_ID": "Repartee",
+            "Requirement_Value": "3",
+            "Effect_Logic": "taunt_target",
+            "Description": "Force an enemy to focus their attacks on you (drawing aggro)."
+        },
+        "Stinging Wit": {
+            "Requirement_ID": "Repartee",
+            "Requirement_Value": "6",
+            "Effect_Logic": "debuff_target(roll_penalty)",
+            "Description": "Your insults cause enemies to take a penalty to their next roll."
+        },
+        "Last Word": {
+            "Requirement_ID": "Repartee",
+            "Requirement_Value": "10",
+            "Effect_Logic": "on_kill(aoe_fear)",
+            "Description": "If you kill an enemy, you can demoralize their allies instantly."
+        },
+        "Tumbler": {
+            "Requirement_ID": "Mechanism",
+            "Requirement_Value": "3",
+            "Effect_Logic": "stealth_action(lockpick)",
+            "Description": "You can attempt to pick locks silently during combat."
+        },
+        "Saboteur": {
+            "Requirement_ID": "Mechanism",
+            "Requirement_Value": "6",
+            "Effect_Logic": "craft_speed(traps, 0.5)",
+            "Description": "You can rig a trap or jam a door in half the normal time."
+        },
+        "Skeleton Key": {
+            "Requirement_ID": "Mechanism",
+            "Requirement_Value": "10",
+            "Effect_Logic": "auto_success(lockpick, non_magical)",
+            "Description": "You can unlock any non-magical lock instantly without rolling."
+        },
+        "Fitted": {
+            "Requirement_ID": "Light",
+            "Requirement_Value": "3",
+            "Effect_Logic": "ignore_penalty(stealth_armor)",
+            "Description": "You suffer no stealth penalties while wearing leather/hide."
+        },
+        "Roll With It": {
+            "Requirement_ID": "Light",
+            "Requirement_Value": "6",
+            "Effect_Logic": "damage_resist(fall, 0.5)",
+            "Description": "When you take falling damage, reduce it by half."
+        },
+        "Evasion": {
+            "Requirement_ID": "Light",
+            "Requirement_Value": "10",
+            "Effect_Logic": "save_effect(aoe_zero_damage)",
+            "Description": "If an AOE attack allows a save for half damage, you take zero on a success."
+        },
+        "Fast Hands": {
+            "Requirement_ID": "Snares",
+            "Requirement_Value": "3",
+            "Effect_Logic": "quick_use(trap_item)",
+            "Description": "You can deploy caltrops or smoke bombs as a reaction."
+        },
+        "Hidden Trap": {
+            "Requirement_ID": "Snares",
+            "Requirement_Value": "6",
+            "Effect_Logic": "trap_difficulty_increase",
+            "Description": "Enemies suffer a penalty to spot traps you have set."
+        },
+        "Chain Reaction": {
+            "Requirement_ID": "Snares",
+            "Requirement_Value": "10",
+            "Effect_Logic": "remote_trigger(trap)",
+            "Description": "You can trigger your traps remotely from a distance."
+        },
+        "Poker Face": {
+            "Requirement_ID": "Guile",
+            "Requirement_Value": "3",
+            "Effect_Logic": "immunity(insight_check)",
+            "Description": "You are immune to Insight checks trying to read your emotions."
+        },
+        "Feint": {
+            "Requirement_ID": "Guile",
+            "Requirement_Value": "6",
+            "Effect_Logic": "action_buff(advantage_next_attack)",
+            "Description": "You can use Guile to trick an enemy, giving you Advantage on your next attack."
+        },
+        "Imposter": {
+            "Requirement_ID": "Guile",
+            "Requirement_Value": "10",
+            "Effect_Logic": "mimic_voice(perfect)",
+            "Description": "You can mimic voices and mannerisms perfectly after listening for 1 minute."
+        },
+        "Cat\u0092s Grace": {
+            "Requirement_ID": "Motion",
+            "Requirement_Value": "3",
+            "Effect_Logic": "auto_success(balance)",
+            "Description": "You possess perfect balance on narrow ledges/ropes."
+        },
+        "Wall Run": {
+            "Requirement_ID": "Motion",
+            "Requirement_Value": "6",
+            "Effect_Logic": "movement_mode(wall_run)",
+            "Description": "You can move vertically up walls as part of your movement."
+        },
+        "Ghost": {
+            "Requirement_ID": "Motion",
+            "Requirement_Value": "10",
+            "Effect_Logic": "stealth_bonus(silent_move)",
+            "Description": "You leave no footprints and make no sound, even when running."
+        },
+        "Blend": {
+            "Requirement_ID": "Natural",
+            "Requirement_Value": "3",
+            "Effect_Logic": "conditional_bonus(stealth, biome_match)",
+            "Description": "+2 to Stealth in natural environments matching your armor."
+        },
+        "Regrowth": {
+            "Requirement_ID": "Natural",
+            "Requirement_Value": "6",
+            "Effect_Logic": "rest_regen_bonus",
+            "Description": "While resting in Bio armor, you heal faster than normal."
+        },
+        "Adaptation": {
+            "Requirement_ID": "Natural",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(weather_extreme)",
+            "Description": "You are immune to extreme weather (heat/cold) while wearing this armor."
+        },
+        "Field Medic": {
+            "Requirement_ID": "Tinctures",
+            "Requirement_Value": "3",
+            "Effect_Logic": "use_speed(medical, 0.5)",
+            "Description": "Applying a salve/bandage takes half the time."
+        },
+        "Potency": {
+            "Requirement_ID": "Tinctures",
+            "Requirement_Value": "6",
+            "Effect_Logic": "item_effect_mult(1.25)",
+            "Description": "Consumables you craft heal/buff for 25% more."
+        },
+        "Witch Doctor": {
+            "Requirement_ID": "Tinctures",
+            "Requirement_Value": "10",
+            "Effect_Logic": "craft_anywhere(medical)",
+            "Description": "You can scavenge nearby flora to create a generic antidote/salve anywhere."
+        },
+        "First Impression": {
+            "Requirement_ID": "Poise",
+            "Requirement_Value": "3",
+            "Effect_Logic": "npc_attitude_start(friendly)",
+            "Description": "NPCs start with a Friendly disposition towards you by default."
+        },
+        "Radiance": {
+            "Requirement_ID": "Poise",
+            "Requirement_Value": "6",
+            "Effect_Logic": "remove_status(panic, aoe)",
+            "Description": "Your presence calms panicked crowds or allies."
+        },
+        "Purity": {
+            "Requirement_ID": "Poise",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(disease_mundane)",
+            "Description": "You are immune to non-magical diseases and look eternally youthful."
+        },
+        "Forager": {
+            "Requirement_ID": "Nature",
+            "Requirement_Value": "3",
+            "Effect_Logic": "auto_success(forage_self)",
+            "Description": "You always find enough food/water for yourself in the wild."
+        },
+        "Beast Friend": {
+            "Requirement_ID": "Nature",
+            "Requirement_Value": "6",
+            "Effect_Logic": "faction_peace(animals)",
+            "Description": "Wild animals will not attack you unless provoked."
+        },
+        "Apex": {
+            "Requirement_ID": "Nature",
+            "Requirement_Value": "10",
+            "Effect_Logic": "track_difficulty(impossible)",
+            "Description": "You can track enemies over water or stone where no tracks should exist."
+        },
+        "Iron Knuckle": {
+            "Requirement_ID": "Fist",
+            "Requirement_Value": "3",
+            "Effect_Logic": "unarmed_damage_type(lethal)",
+            "Description": "Your unarmed strikes do lethal damage instead of subdual."
+        },
+        "Clinch": {
+            "Requirement_ID": "Fist",
+            "Requirement_Value": "6",
+            "Effect_Logic": "bonus(grapple)",
+            "Description": "You gain a bonus to grapple or hold enemies in place."
+        },
+        "Quivering Palm": {
+            "Requirement_ID": "Fist",
+            "Requirement_Value": "10",
+            "Effect_Logic": "status_effect(stun)",
+            "Description": "You can stun an enemy with a precise unarmed strike."
+        },
+        "Mobile Fire": {
+            "Requirement_ID": "Simple",
+            "Requirement_Value": "3",
+            "Effect_Logic": "ignore_penalty(move_shoot)",
+            "Description": "You do not suffer penalties for shooting while moving."
+        },
+        "Rapid Reload": {
+            "Requirement_ID": "Simple",
+            "Requirement_Value": "6",
+            "Effect_Logic": "reload_speed(instant)",
+            "Description": "Reloading a sling/shortbow is a free action."
+        },
+        "Trick Shot": {
+            "Requirement_ID": "Exotic Ranged",
+            "Requirement_Value": "10",
+            "Effect_Logic": "interact_ranged",
+            "Description": "You can hit buttons/levers remotely with impossible angles."
+        },
+        "Pressure": {
+            "Requirement_ID": "Coercion",
+            "Requirement_Value": "3",
+            "Effect_Logic": "skill_bonus_stack(time)",
+            "Description": "You gain bonuses to Coercion the longer the interrogation lasts."
+        },
+        "Cornered": {
+            "Requirement_ID": "Coercion",
+            "Requirement_Value": "6",
+            "Effect_Logic": "debuff_morale(condition:no_escape)",
+            "Description": "Enemies gain a penalty to morale when they have no escape route."
+        },
+        "The Gaze": {
+            "Requirement_ID": "Coercion",
+            "Requirement_Value": "10",
+            "Effect_Logic": "cc_effect(paralyze_attack)",
+            "Description": "You can stop a hostile creature from attacking just by locking eyes."
+        },
+        "Patch Job": {
+            "Requirement_ID": "Craft",
+            "Requirement_Value": "3",
+            "Effect_Logic": "repair_speed(instant_temp)",
+            "Description": "You can temporarily repair broken gear in 1 action."
+        },
+        "Hardening": {
+            "Requirement_ID": "Craft",
+            "Requirement_Value": "6",
+            "Effect_Logic": "craft_quality_bonus(durability)",
+            "Description": "Armor/Weapons you craft have higher durability than standard."
+        },
+        "Iron Stomach": {
+            "Requirement_ID": "Craft",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(ingested_poison)",
+            "Description": "You can eat spoiled food or drink mild poisons without effect."
+        },
+        "Warded": {
+            "Requirement_ID": "Cloth",
+            "Requirement_Value": "3",
+            "Effect_Logic": "damage_resist(elemental)",
+            "Description": "You gain a small magical shield against elemental damage."
+        },
+        "Deep Pockets": {
+            "Requirement_ID": "Cloth",
+            "Requirement_Value": "6",
+            "Effect_Logic": "inventory_weight_mult(0.5)",
+            "Description": "Your robes can store items in a pocket dimension (reduced weight)."
+        },
+        "Reflection": {
+            "Requirement_ID": "Cloth",
+            "Requirement_Value": "10",
+            "Effect_Logic": "spell_reflect(1_per_day)",
+            "Description": "Once per day, you can reflect a hostile spell back at the caster."
+        },
+        "Channel": {
+            "Requirement_ID": "Catalysts",
+            "Requirement_Value": "3",
+            "Effect_Logic": "store_spell",
+            "Description": "You can hold a spell charge in your staff to release later."
+        },
+        "Scroll Master": {
+            "Requirement_ID": "Catalysts",
+            "Requirement_Value": "6",
+            "Effect_Logic": "use_item_tier_ignore",
+            "Description": "You can use scrolls from a higher tier than your level without failure."
+        },
+        "Overcharge": {
+            "Requirement_ID": "Catalysts",
+            "Requirement_Value": "10",
+            "Effect_Logic": "consume_item(max_damage)",
+            "Description": "You can break a wand/staff to cast a spell with maximum damage."
+        },
+        "Protocol": {
+            "Requirement_ID": "Etiquette",
+            "Requirement_Value": "3",
+            "Effect_Logic": "social_safety_net",
+            "Description": "You never accidentally offend nobility or break local taboos."
+        },
+        "Name Drop": {
+            "Requirement_ID": "Etiquette",
+            "Requirement_Value": "6",
+            "Effect_Logic": "unlock_access(vip)",
+            "Description": "You can demand audience with local leaders based on your rank."
+        },
+        "Sanctuary": {
+            "Requirement_ID": "Etiquette",
+            "Requirement_Value": "10",
+            "Effect_Logic": "zone_effect(peace)",
+            "Description": "You can invoke laws of hospitality to prevent violence in neutral ground."
+        },
+        "Polyglot": {
+            "Requirement_ID": "Academics",
+            "Requirement_Value": "3",
+            "Effect_Logic": "lang_read(all)",
+            "Description": "You can read any standard language, even if you can't speak it."
+        },
+        "Researcher": {
+            "Requirement_ID": "Academics",
+            "Requirement_Value": "6",
+            "Effect_Logic": "task_speed(research, 0.5)",
+            "Description": "You find information in libraries/archives in half the time."
+        },
+        "Eidetic Memory": {
+            "Requirement_ID": "Academics",
+            "Requirement_Value": "10",
+            "Effect_Logic": "memory_recall(perfect)",
+            "Description": "You perfectly recall anything you have ever read or seen."
+        },
+        "Parry": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "3",
+            "Effect_Logic": "ac_bonus(reaction)",
+            "Description": "You can use your reaction to increase your Armor Rating against one hit."
+        },
+        "Riposte": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "6",
+            "Effect_Logic": "counter_attack(on_miss)",
+            "Description": "If an enemy misses you, you get a free counter-attack."
+        },
+        "Disarm": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "10",
+            "Effect_Logic": "crit_effect(disarm)",
+            "Description": "On a Critical Hit, you fling the opponent's weapon away."
+        },
+        "Demolitionist": {
+            "Requirement_ID": "Blast",
+            "Requirement_Value": "3",
+            "Effect_Logic": "damage_mult_struct(2.0)",
+            "Description": "You deal double damage to structures with explosives."
+        },
+        "Shaped Charge": {
+            "Requirement_ID": "Blast",
+            "Requirement_Value": "6",
+            "Effect_Logic": "aoe_safe(allies)",
+            "Description": "Your explosives do not deal friendly-fire damage to allies."
+        },
+        "Pyrotechnics": {
+            "Requirement_ID": "Blast",
+            "Requirement_Value": "10",
+            "Effect_Logic": "craft_item(flashbang)",
+            "Description": "You can craft explosives that blind or deafen instead of killing."
+        },
+        "Filibuster": {
+            "Requirement_ID": "Rhetoric",
+            "Requirement_Value": "3",
+            "Effect_Logic": "delay_combat",
+            "Description": "You can talk in circles to stall for time, preventing combat starting."
+        },
+        "Logic Trap": {
+            "Requirement_ID": "Rhetoric",
+            "Requirement_Value": "6",
+            "Effect_Logic": "social_bind(peace)",
+            "Description": "If an NPC agrees to your premise, they cannot attack you without penalty."
+        },
+        "Deconstruct": {
+            "Requirement_ID": "Rhetoric",
+            "Requirement_Value": "10",
+            "Effect_Logic": "mental_break_target",
+            "Description": "You can verbally dismantle an NPC's belief system, causing a crisis of faith."
+        },
+        "Calculator": {
+            "Requirement_ID": "Analysis",
+            "Requirement_Value": "3",
+            "Effect_Logic": "hud_info(measurements)",
+            "Description": "You can estimate distances, counts, and measurements instantly."
+        },
+        "Deduction": {
+            "Requirement_ID": "Analysis",
+            "Requirement_Value": "6",
+            "Effect_Logic": "scene_reconstruct",
+            "Description": "By observing a room, you can reconstruct what happened in the last hour."
+        },
+        "Grand Design": {
+            "Requirement_ID": "Analysis",
+            "Requirement_Value": "10",
+            "Effect_Logic": "craft_blueprint(unique)",
+            "Description": "You can invent new unique blueprints for devices never seen before."
+        },
+        "Brace": {
+            "Requirement_ID": "Large",
+            "Requirement_Value": "3",
+            "Effect_Logic": "damage_bonus(vs_charge)",
+            "Description": "You deal double damage against charging enemies."
+        },
+        "Sweep": {
+            "Requirement_ID": "Large",
+            "Requirement_Value": "6",
+            "Effect_Logic": "aoe_attack(cone_trip)",
+            "Description": "You can trip or knock back multiple enemies in a cone."
+        },
+        "Zone of Control": {
+            "Requirement_ID": "Large",
+            "Requirement_Value": "10",
+            "Effect_Logic": "opportunity_attack(on_enter)",
+            "Description": "Enemies provoke attacks just by entering your reach."
+        },
+        "Steady Aim": {
+            "Requirement_ID": "Long Shot",
+            "Requirement_Value": "3",
+            "Effect_Logic": "stationary_bonus(range)",
+            "Description": "If you don't move, range penalties are halved."
+        },
+        "Sniper": {
+            "Requirement_ID": "Long Shot",
+            "Requirement_Value": "6",
+            "Effect_Logic": "stealth_maintain(on_attack)",
+            "Description": "If you are hidden, your shot does not reveal your exact location."
+        },
+        "Kill Shot": {
+            "Requirement_ID": "Long Shot",
+            "Requirement_Value": "10",
+            "Effect_Logic": "damage_scale(distance)",
+            "Description": "Bonus Critical damage on targets who are at maximum range."
+        },
+        "Lie Detector": {
+            "Requirement_ID": "Insight",
+            "Requirement_Value": "3",
+            "Effect_Logic": "detect_lie",
+            "Description": "You always know if someone is intentionally lying (doesn't detect omission)."
+        },
+        "Read Lips": {
+            "Requirement_ID": "Insight",
+            "Requirement_Value": "6",
+            "Effect_Logic": "visual_audio",
+            "Description": "You can understand conversations from a distance if you can see them."
+        },
+        "Prediction": {
+            "Requirement_ID": "Insight",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(surprise)",
+            "Description": "You can sense hostile intent before a weapon is even drawn (cannot be surprised)."
+        },
+        "Trap Sense": {
+            "Requirement_ID": "Scouting",
+            "Requirement_Value": "3",
+            "Effect_Logic": "passive_detect(traps)",
+            "Description": "You get a passive check to notice traps within 5 feet."
+        },
+        "Tracker": {
+            "Requirement_ID": "Scouting",
+            "Requirement_Value": "6",
+            "Effect_Logic": "track_info(detailed)",
+            "Description": "You can determine the number, type, and speed of creatures from tracks."
+        },
+        "Eagle Eye": {
+            "Requirement_ID": "Scouting",
+            "Requirement_Value": "10",
+            "Effect_Logic": "ignore_environment(vision)",
+            "Description": "Visibility penalties from fog, rain, or dim light are ignored."
+        },
+        "Quick Change": {
+            "Requirement_ID": "Utility",
+            "Requirement_Value": "3",
+            "Effect_Logic": "equip_speed(instant)",
+            "Description": "You can don or doff this armor/clothing in seconds."
+        },
+        "Prepared": {
+            "Requirement_ID": "Utility",
+            "Requirement_Value": "6",
+            "Effect_Logic": "spawn_item(mundane_utility)",
+            "Description": "You have a utility slot that produces any small mundane item you need."
+        },
+        "Vanish": {
+            "Requirement_ID": "Utility",
+            "Requirement_Value": "10",
+            "Effect_Logic": "invisibility(stationary)",
+            "Description": "While stationary in a Ghillie suit, you are effectively invisible."
+        },
+        "Wager": {
+            "Requirement_ID": "Curios",
+            "Requirement_Value": "3",
+            "Effect_Logic": "reroll(1_per_session)",
+            "Description": "Once per session you can reroll a failure."
+        },
+        "Card Sharp": {
+            "Requirement_ID": "Curios",
+            "Requirement_Value": "6",
+            "Effect_Logic": "auto_success(gambling)",
+            "Description": "You can cheat at gambling games without being caught."
+        },
+        "Fated": {
+            "Requirement_ID": "Curios",
+            "Requirement_Value": "10",
+            "Effect_Logic": "enemy_reroll(1_per_session)",
+            "Description": "Once per session you can force the DM/Enemy to reroll a success."
+        },
+        "Vibe Check": {
+            "Requirement_ID": "Empathy",
+            "Requirement_Value": "3",
+            "Effect_Logic": "detect_emotion(aoe)",
+            "Description": "You instantly know the emotional state of everyone in the room."
+        },
+        "Soothe": {
+            "Requirement_ID": "Empathy",
+            "Requirement_Value": "6",
+            "Effect_Logic": "cure_status(mental)",
+            "Description": "You can remove Fear or Rage effects from an ally."
+        },
+        "Soul Bond": {
+            "Requirement_ID": "Empathy",
+            "Requirement_Value": "10",
+            "Effect_Logic": "telepathy(single_target)",
+            "Description": "You share a telepathic link with one close ally."
+        },
+        "Bad Feeling": {
+            "Requirement_ID": "Mysticism",
+            "Requirement_Value": "3",
+            "Effect_Logic": "predict_outcome(binary)",
+            "Description": "You sense if a choice will lead to Woe or Weal."
+        },
+        "Spirit Sight": {
+            "Requirement_ID": "Mysticism",
+            "Requirement_Value": "6",
+            "Effect_Logic": "vision_mode(ethereal)",
+            "Description": "You can see ghosts or invisible entities."
+        },
+        "Omen": {
+            "Requirement_ID": "Mysticism",
+            "Requirement_Value": "10",
+            "Effect_Logic": "narrative_control(minor)",
+            "Description": "You can declare a single fact about the future; the DM tries to make it true."
+        },
+        "Entangle": {
+            "Requirement_ID": "Exotic Melee",
+            "Requirement_Value": "3",
+            "Effect_Logic": "grapple_ranged",
+            "Description": "Whips/chains can grapple enemies from a distance."
+        },
+        "Flashy": {
+            "Requirement_ID": "Exotic Melee",
+            "Requirement_Value": "6",
+            "Effect_Logic": "combo_combat_social",
+            "Description": "Attacks give you a bonus to your next social interaction."
+        },
+        "Pain Compliance": {
+            "Requirement_ID": "Exotic Melee",
+            "Requirement_Value": "10",
+            "Effect_Logic": "debuff_stat(willpower)",
+            "Description": "Enemies hit by these weapons suffer a penalty to Willpower."
+        },
+        "Silent Takedown": {
+            "Requirement_ID": "Exotic Ranged",
+            "Requirement_Value": "3",
+            "Effect_Logic": "attack_silent",
+            "Description": "Blowgun/Bola attacks make zero noise."
+        },
+        "Debilitate": {
+            "Requirement_ID": "Exotic Ranged",
+            "Requirement_Value": "6",
+            "Effect_Logic": "status_duration_mult(2.0)",
+            "Description": "Poisons applied to these weapons last twice as long."
+        },
+        "Silver Tongue": {
+            "Requirement_ID": "Persuasion",
+            "Requirement_Value": "3",
+            "Effect_Logic": "shop_discount",
+            "Description": "You get a discount at all merchants."
+        },
+        "Charm Person": {
+            "Requirement_ID": "Persuasion",
+            "Requirement_Value": "6",
+            "Effect_Logic": "status_effect(charmed)",
+            "Description": "An NPC becomes temporarily helpful/infatuated."
+        },
+        "Cult of Personality": {
+            "Requirement_ID": "Persuasion",
+            "Requirement_Value": "10",
+            "Effect_Logic": "spawn_follower",
+            "Description": "You can attract a following of loyal henchmen."
+        },
+        "Mimicry": {
+            "Requirement_ID": "Performance",
+            "Requirement_Value": "3",
+            "Effect_Logic": "audio_distraction",
+            "Description": "You can throw your voice to appear to come from elsewhere."
+        },
+        "Disguise": {
+            "Requirement_ID": "Performance",
+            "Requirement_Value": "6",
+            "Effect_Logic": "disguise_quality(perfect)",
+            "Description": "You can craft a disguise that stands up to physical inspection."
+        },
+        "Enthrall": {
+            "Requirement_ID": "Performance",
+            "Requirement_Value": "10",
+            "Effect_Logic": "cc_aoe(distract)",
+            "Description": "You can captivate a crowd, distracting them so they notice nothing else."
+        },
+        "Muffled": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "3",
+            "Effect_Logic": "reduce_penalty(stealth_armor)",
+            "Description": "Reduces the noise penalty of wearing metal armor."
+        },
+        "Faith": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "6",
+            "Effect_Logic": "heal_received_mult(1.2)",
+            "Description": "Magical healing received is more effective on you."
+        },
+        "Unbreakable": {
+            "Requirement_ID": "Medium",
+            "Requirement_Value": "10",
+            "Effect_Logic": "immunity(crit_extra_damage)",
+            "Description": "Critical Hits against you are treated as normal hits."
+        },
+        "Colors": {
+            "Requirement_ID": "Regalia",
+            "Requirement_Value": "3",
+            "Effect_Logic": "aura_buff(resist_fear)",
+            "Description": "Allies who can see your banner/symbol gain a bonus against Fear."
+        },
+        "Rally": {
+            "Requirement_ID": "Regalia",
+            "Requirement_Value": "6",
+            "Effect_Logic": "aoe_heal(temp_hp)",
+            "Description": "Once per combat your signal grants all allies temporary HP."
+        },
+        "Dread": {
+            "Requirement_ID": "Regalia",
+            "Requirement_Value": "10",
+            "Effect_Logic": "aura_debuff(morale)",
+            "Description": "Enemies who see your banner suffer a morale penalty."
+        },
+        "Iron Mind": {
+            "Requirement_ID": "Discipline",
+            "Requirement_Value": "3",
+            "Effect_Logic": "save_bonus(mental)",
+            "Description": "You have Advantage/Bonus to resist mind control."
+        },
+        "Focus": {
+            "Requirement_ID": "Discipline",
+            "Requirement_Value": "6",
+            "Effect_Logic": "concentration_unbreakable",
+            "Description": "You can maintain concentration on spells/tasks even when taking damage."
+        },
+        "Snap Out Of It": {
+            "Requirement_ID": "Discipline",
+            "Requirement_Value": "10",
+            "Effect_Logic": "cure_status(ally_mental)",
+            "Description": "You can use an action to remove a mental effect from an ally."
+        },
+        "Orders": {
+            "Requirement_ID": "Command",
+            "Requirement_Value": "3",
+            "Effect_Logic": "grant_action(ally)",
+            "Description": "You can grant an ally an immediate reaction attack."
+        },
+        "Tactician": {
+            "Requirement_ID": "Command",
+            "Requirement_Value": "6",
+            "Effect_Logic": "party_buff(initiative)",
+            "Description": "Your team gains a bonus to Initiative rolls."
+        },
+        "Martyr": {
+            "Requirement_ID": "Command",
+            "Requirement_Value": "10",
+            "Effect_Logic": "transfer_hp(ally)",
+            "Description": "If an ally drops to 0 HP you can give them your HP to keep them fighting."
+        },
+        "Herculean Effort": {
+            "Requirement_ID": "MIGHT",
+            "Requirement_Value": "16",
+            "Effect_Logic": "auto_success(might_check)",
+            "Description": "Once per day, automatically succeed on a Strength-based check to lift or break something."
+        },
+        "Titan's Grip": {
+            "Requirement_ID": "MIGHT",
+            "Requirement_Value": "20",
+            "Effect_Logic": "equip_slot_override(2h_as_1h)",
+            "Description": "You can wield Two-Handed weapons in one hand."
+        },
+        "Marathoner": {
+            "Requirement_ID": "ENDURANCE",
+            "Requirement_Value": "16",
+            "Effect_Logic": "immunity(exhaustion_travel)",
+            "Description": "You never suffer exhaustion from travel or lack of sleep (must still rest for HP)."
+        },
+        "Unkillable": {
+            "Requirement_ID": "ENDURANCE",
+            "Requirement_Value": "20",
+            "Effect_Logic": "cheat_death(1_per_day)",
+            "Description": "If you would die, you instead drop to 1 HP and become immune to damage for 1 round."
+        },
+        "Surgical Precision": {
+            "Requirement_ID": "FINESSE",
+            "Requirement_Value": "16",
+            "Effect_Logic": "reroll_1s(finesse)",
+            "Description": "You can reroll any 1s rolled on damage or skill checks involving dexterity."
+        },
+        "Perfect Strike": {
+            "Requirement_ID": "FINESSE",
+            "Requirement_Value": "20",
+            "Effect_Logic": "crit_range_expand(2)",
+            "Description": "Your Critical Hit range expands by 2 (e.g., 18-20)."
+        },
+        "Lightning Reflexes": {
+            "Requirement_ID": "REFLEXES",
+            "Requirement_Value": "16",
+            "Effect_Logic": "initiative_mult(2.0)",
+            "Description": "You add your Reflex bonus to your Initiative rolls twice."
+        },
+        "Bullet Time": {
+            "Requirement_ID": "REFLEXES",
+            "Requirement_Value": "20",
+            "Effect_Logic": "action_surge",
+            "Description": "Take two full Actions in a single turn. (Once per long rest)."
+        },
+        "Primal Vigor": {
+            "Requirement_ID": "VITALITY",
+            "Requirement_Value": "16",
+            "Effect_Logic": "regen_hourly",
+            "Description": "Regenerate HP equal to your Vitality bonus every hour."
+        },
+        "Timeless Body": {
+            "Requirement_ID": "VITALITY",
+            "Requirement_Value": "20",
+            "Effect_Logic": "immunity(age, disease, poison)",
+            "Description": "You stop aging and are immune to all non-magical diseases and poisons."
+        },
+        "Thick Skinned": {
+            "Requirement_ID": "FORTITUDE",
+            "Requirement_Value": "16",
+            "Effect_Logic": "hp_bonus_level(1)",
+            "Description": "Gain +1 Max HP for every level you have (retroactive)."
+        },
+        "Impervious": {
+            "Requirement_ID": "FORTITUDE",
+            "Requirement_Value": "20",
+            "Effect_Logic": "damage_reduction(flat_fort)",
+            "Description": "Reduce all incoming physical damage by your Fortitude bonus."
+        },
+        "Polymath": {
+            "Requirement_ID": "KNOWLEDGE",
+            "Requirement_Value": "16",
+            "Effect_Logic": "skill_proficiency(all_lore)",
+            "Description": "You are considered \"Proficient\" in all Lore skills, even untrained ones."
+        },
+        "Living Library": {
+            "Requirement_ID": "KNOWLEDGE",
+            "Requirement_Value": "20",
+            "Effect_Logic": "meta_knowledge(truth)",
+            "Description": "Once per day, ask the GM a specific question about the world; they must answer truthfully."
+        },
+        "Calculated Risk": {
+            "Requirement_ID": "LOGIC",
+            "Requirement_Value": "16",
+            "Effect_Logic": "buff_advantage(target)",
+            "Description": "Analyze an enemy to gain Advantage on all attacks against them for 1 minute."
+        },
+        "Mastermind": {
+            "Requirement_ID": "LOGIC",
+            "Requirement_Value": "20",
+            "Effect_Logic": "flashback_mechanic",
+            "Description": "You can retroactively declare you \"prepared\" for this specific situation (have the right item/key)."
+        },
+        "Sentinel": {
+            "Requirement_ID": "AWARENESS",
+            "Requirement_Value": "16",
+            "Effect_Logic": "immunity(surprise)",
+            "Description": "You cannot be surprised while you are conscious."
+        },
+        "True Sight": {
+            "Requirement_ID": "AWARENESS",
+            "Requirement_Value": "20",
+            "Effect_Logic": "vision_true(60ft)",
+            "Description": "See through Invisibility and Illusions out to 60ft."
+        },
+        "Trust Your Gut": {
+            "Requirement_ID": "INTUITION",
+            "Requirement_Value": "16",
+            "Effect_Logic": "danger_sense_meta",
+            "Description": "The GM will warn you if you are about to walk into a lethal trap or impossible fight."
+        },
+        "Fate Bender": {
+            "Requirement_ID": "INTUITION",
+            "Requirement_Value": "20",
+            "Effect_Logic": "reroll_target(any)",
+            "Description": "Force any creature (ally or enemy) to reroll a die just rolled."
+        },
+        "Magnetism": {
+            "Requirement_ID": "CHARM",
+            "Requirement_Value": "16",
+            "Effect_Logic": "economy_bonus",
+            "Description": "Merchants buy items for 20% more and sell for 20% less to you."
+        },
+        "Cult Leader": {
+            "Requirement_ID": "CHARM",
+            "Requirement_Value": "20",
+            "Effect_Logic": "follower_spawn",
+            "Description": "You can attract a dedicated follower (NPC) who serves you loyally until death."
+        },
+        "Iron Will": {
+            "Requirement_ID": "WILLPOWER",
+            "Requirement_Value": "16",
+            "Effect_Logic": "save_advantage(magic)",
+            "Description": "You have Advantage on all saves against Magic."
+        },
+        "Unshakable": {
+            "Requirement_ID": "WILLPOWER",
+            "Requirement_Value": "20",
+            "Effect_Logic": "immunity(mind_control, fear)",
+            "Description": "You are immune to Mind Control, Possession, and Fear."
+        }
+    },
+    "Spells": {
+        "Push": {
+            "Cost": "1",
+            "Cost_Type": "Might",
+            "Effect": "Shove target away (Knockback).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Brace": {
+            "Cost": "1",
+            "Cost_Type": "Might",
+            "Effect": "Ignore Knockback or Prone effects.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Lift": {
+            "Cost": "1",
+            "Cost_Type": "Might",
+            "Effect": "Reduce the weight of an object.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Pull": {
+            "Cost": "2",
+            "Cost_Type": "Might",
+            "Effect": "Drag target closer to you.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Catch": {
+            "Cost": "4",
+            "Cost_Type": "Reflexes",
+            "Effect": "Snatch arrow/bolt from air.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Jump": {
+            "Cost": "2",
+            "Cost_Type": "Might",
+            "Effect": "Boost jump height/distance significantly.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Slam": {
+            "Cost": "3",
+            "Cost_Type": "Might",
+            "Effect": "Knock target Prone with heavy force.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Repel": {
+            "Cost": "3",
+            "Cost_Type": "Might",
+            "Effect": "Deflect arrows/bolts aimed at you.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Burden": {
+            "Cost": "3",
+            "Cost_Type": "Might",
+            "Effect": "Increase weight of target (Slow).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Crush": {
+            "Cost": "4",
+            "Cost_Type": "Might",
+            "Effect": "Constrict/Squeeze target (Grapple).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Dense": {
+            "Cost": "4",
+            "Cost_Type": "Might",
+            "Effect": "Reduce incoming Physical Damage.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Climb": {
+            "Cost": "4",
+            "Cost_Type": "Might",
+            "Effect": "Spider Climb (Shift gravity).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Launch": {
+            "Cost": "5",
+            "Cost_Type": "Might",
+            "Effect": "Fling enemy a long distance.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Orbit": {
+            "Cost": "5",
+            "Cost_Type": "Might",
+            "Effect": "Shield of debris circles you.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Feather": {
+            "Cost": "5",
+            "Cost_Type": "Might",
+            "Effect": "Slow Fall / No fall damage.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Breach": {
+            "Cost": "6",
+            "Cost_Type": "Might",
+            "Effect": "Destroy cover or walls instantly.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Heavy": {
+            "Cost": "6",
+            "Cost_Type": "Might",
+            "Effect": "You cannot be moved against your will.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Float": {
+            "Cost": "6",
+            "Cost_Type": "Might",
+            "Effect": "Levitate self or object.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Flatten": {
+            "Cost": "7",
+            "Cost_Type": "Might",
+            "Effect": "Compress target into 2D space.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Nullify": {
+            "Cost": "7",
+            "Cost_Type": "Might",
+            "Effect": "Stop all momentum in an area.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Fly": {
+            "Cost": "7",
+            "Cost_Type": "Might",
+            "Effect": "True Flight (Control Gravity).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Implode": {
+            "Cost": "8",
+            "Cost_Type": "Might",
+            "Effect": "Create a vacuum (Massive Damage).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Field": {
+            "Cost": "8",
+            "Cost_Type": "Might",
+            "Effect": "Anti-Gravity Aura (Enemies float).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Reverse": {
+            "Cost": "8",
+            "Cost_Type": "Might",
+            "Effect": "Flip gravity (Ceiling is floor).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Meteor": {
+            "Cost": "9",
+            "Cost_Type": "Might",
+            "Effect": "Orbital Strike from above.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Event Horizon": {
+            "Cost": "9",
+            "Cost_Type": "Might",
+            "Effect": "Absorb incoming magical projectiles.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Well": {
+            "Cost": "9",
+            "Cost_Type": "Might",
+            "Effect": "Create heavy Gravity Well.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Erase": {
+            "Cost": "10",
+            "Cost_Type": "Might",
+            "Effect": "Delete matter from existence.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Invincible": {
+            "Cost": "10",
+            "Cost_Type": "Might",
+            "Effect": "Infinite Mass (Cannot be hurt).",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Black Hole": {
+            "Cost": "10",
+            "Cost_Type": "Might",
+            "Effect": "Consume light and matter.",
+            "School": "Mass",
+            "Damage_Type": "Force"
+        },
+        "Halt": {
+            "Cost": "1",
+            "Cost_Type": "Willpower",
+            "Effect": "Stop movement.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Stand": {
+            "Cost": "1",
+            "Cost_Type": "Endurance",
+            "Effect": "Stand up from Prone instantly.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Hold": {
+            "Cost": "1",
+            "Cost_Type": "Endurance",
+            "Effect": "Keep a door or object shut.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Trip": {
+            "Cost": "2",
+            "Cost_Type": "Intuition",
+            "Effect": "Cause Prone (Bad Luck).",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Skin": {
+            "Cost": "2",
+            "Cost_Type": "Endurance",
+            "Effect": "Natural Armor bonus.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Sustain": {
+            "Cost": "2",
+            "Cost_Type": "Endurance",
+            "Effect": "Ignore hunger/thirst/fatigue.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Trap": {
+            "Cost": "6",
+            "Cost_Type": "Knowledge",
+            "Effect": "Explosive Rune defense.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Anchor": {
+            "Cost": "7",
+            "Cost_Type": "Knowledge",
+            "Effect": "Block Teleportation.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Bridge": {
+            "Cost": "3",
+            "Cost_Type": "Endurance",
+            "Effect": "Create a temporary structure.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Cage": {
+            "Cost": "4",
+            "Cost_Type": "Endurance",
+            "Effect": "Create walls around target.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Barricade": {
+            "Cost": "4",
+            "Cost_Type": "Endurance",
+            "Effect": "Create cover instantly.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Preserve": {
+            "Cost": "4",
+            "Cost_Type": "Endurance",
+            "Effect": "Stop decay on object/body.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Petrify": {
+            "Cost": "5",
+            "Cost_Type": "Endurance",
+            "Effect": "Turn target to stone (Save).",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Reinforce": {
+            "Cost": "5",
+            "Cost_Type": "Endurance",
+            "Effect": "Gain Temporary HP.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Shelter": {
+            "Cost": "5",
+            "Cost_Type": "Endurance",
+            "Effect": "Create a safe hut/bunker.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Entomb": {
+            "Cost": "6",
+            "Cost_Type": "Endurance",
+            "Effect": "Bury target under earth.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Absorb": {
+            "Cost": "6",
+            "Cost_Type": "Endurance",
+            "Effect": "Take damage meant for an ally.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Lock": {
+            "Cost": "6",
+            "Cost_Type": "Endurance",
+            "Effect": "Arcane Lock (Unopenable).",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Stasis": {
+            "Cost": "7",
+            "Cost_Type": "Endurance",
+            "Effect": "Freeze target in time/space.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Reflect": {
+            "Cost": "7",
+            "Cost_Type": "Endurance",
+            "Effect": "Return damage to attacker.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Statue": {
+            "Cost": "7",
+            "Cost_Type": "Endurance",
+            "Effect": "Feign Death (Indistinguishable).",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Arrest": {
+            "Cost": "8",
+            "Cost_Type": "Endurance",
+            "Effect": "Stop target's heart (Save).",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Immunity": {
+            "Cost": "8",
+            "Cost_Type": "Endurance",
+            "Effect": "Take 0 Damage for 1 round.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Stamina": {
+            "Cost": "8",
+            "Cost_Type": "Endurance",
+            "Effect": "Run forever without tiring.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Crystallize": {
+            "Cost": "9",
+            "Cost_Type": "Endurance",
+            "Effect": "Make target fragile (Shatter).",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Fortress": {
+            "Cost": "9",
+            "Cost_Type": "Endurance",
+            "Effect": "Invulnerable Structure.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Monolith": {
+            "Cost": "9",
+            "Cost_Type": "Endurance",
+            "Effect": "Create permanent wall/tower.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Stop": {
+            "Cost": "8",
+            "Cost_Type": "Reflexes",
+            "Effect": "Time Stop (Short).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Eternal": {
+            "Cost": "10",
+            "Cost_Type": "Endurance",
+            "Effect": "Cannot die this round.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Foundation": {
+            "Cost": "10",
+            "Cost_Type": "Endurance",
+            "Effect": "Create new land/island.",
+            "School": "Ordo",
+            "Damage_Type": "Cold"
+        },
+        "Pierce": {
+            "Cost": "1",
+            "Cost_Type": "Finesse",
+            "Effect": "Ignore Armor Rating (AR).",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Dodge": {
+            "Cost": "3",
+            "Cost_Type": "Intuition",
+            "Effect": "Uncanny Dodge.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Unlock": {
+            "Cost": "1",
+            "Cost_Type": "Finesse",
+            "Effect": "Open simple mechanism.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Parry": {
+            "Cost": "2",
+            "Cost_Type": "Finesse",
+            "Effect": "Reduce incoming melee damage.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Untie": {
+            "Cost": "2",
+            "Cost_Type": "Finesse",
+            "Effect": "Escape bindings/grapple.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Disarm": {
+            "Cost": "3",
+            "Cost_Type": "Finesse",
+            "Effect": "Force drop of held item.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Swap": {
+            "Cost": "3",
+            "Cost_Type": "Finesse",
+            "Effect": "Switch held items instantly.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Bleed": {
+            "Cost": "4",
+            "Cost_Type": "Finesse",
+            "Effect": "Deal Damage over Time.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Deflect": {
+            "Cost": "4",
+            "Cost_Type": "Finesse",
+            "Effect": "Redirect attack to adjacent.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Guide": {
+            "Cost": "4",
+            "Cost_Type": "Finesse",
+            "Effect": "Next attack is Auto-Hit.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Snatch": {
+            "Cost": "5",
+            "Cost_Type": "Finesse",
+            "Effect": "Steal equipped item.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Blur": {
+            "Cost": "1",
+            "Cost_Type": "Awareness",
+            "Effect": "Visual Noise (Def Bonus).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Filter": {
+            "Cost": "5",
+            "Cost_Type": "Finesse",
+            "Effect": "Clean poison/toxin from liquid.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Sever": {
+            "Cost": "6",
+            "Cost_Type": "Finesse",
+            "Effect": "Cut off a limb or appendage.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Flow": {
+            "Cost": "6",
+            "Cost_Type": "Finesse",
+            "Effect": "Move 5ft when hit (Reaction).",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Phase": {
+            "Cost": "6",
+            "Cost_Type": "Finesse",
+            "Effect": "Walk through solid wall.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Needle": {
+            "Cost": "7",
+            "Cost_Type": "Finesse",
+            "Effect": "Line attack through enemies.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Ghost": {
+            "Cost": "7",
+            "Cost_Type": "Finesse",
+            "Effect": "Become Ethereal (No Phys Dmg).",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Pass": {
+            "Cost": "7",
+            "Cost_Type": "Finesse",
+            "Effect": "Allow ally to phase.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Ricochet": {
+            "Cost": "7",
+            "Cost_Type": "Intuition",
+            "Effect": "Miss hits Ally.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Displace": {
+            "Cost": "8",
+            "Cost_Type": "Finesse",
+            "Effect": "You appear 5ft from real spot.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Navigate": {
+            "Cost": "8",
+            "Cost_Type": "Finesse",
+            "Effect": "Find path to any location.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Atomize": {
+            "Cost": "9",
+            "Cost_Type": "Finesse",
+            "Effect": "Disintegrate target.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Liquid": {
+            "Cost": "9",
+            "Cost_Type": "Finesse",
+            "Effect": "Amorphous (Immune Crits/Grap).",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Separate": {
+            "Cost": "9",
+            "Cost_Type": "Finesse",
+            "Effect": "Un-mix a potion/compound.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Perfect": {
+            "Cost": "10",
+            "Cost_Type": "Finesse",
+            "Effect": "Auto-Critical Hit.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Intangible": {
+            "Cost": "10",
+            "Cost_Type": "Finesse",
+            "Effect": "Permanent Phasing state.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Singularity": {
+            "Cost": "10",
+            "Cost_Type": "Finesse",
+            "Effect": "Compress space to a point.",
+            "School": "Flux",
+            "Damage_Type": "Acid"
+        },
+        "Snap": {
+            "Cost": "1",
+            "Cost_Type": "Reflexes",
+            "Effect": "Quick low-damage hit.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Duck": {
+            "Cost": "1",
+            "Cost_Type": "Reflexes",
+            "Effect": "Reaction AC bonus.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Step": {
+            "Cost": "1",
+            "Cost_Type": "Reflexes",
+            "Effect": "5ft Shift (No Opportunity).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Barrage": {
+            "Cost": "2",
+            "Cost_Type": "Reflexes",
+            "Effect": "Multi-hit attack (Low Dmg).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Weave": {
+            "Cost": "10",
+            "Cost_Type": "Intuition",
+            "Effect": "Retcon History.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Dash": {
+            "Cost": "2",
+            "Cost_Type": "Reflexes",
+            "Effect": "Bonus Move action.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Spin": {
+            "Cost": "3",
+            "Cost_Type": "Reflexes",
+            "Effect": "AOE hit around self.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Evasion": {
+            "Cost": "3",
+            "Cost_Type": "Reflexes",
+            "Effect": "Dodge AOE effects (Save).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Leap": {
+            "Cost": "3",
+            "Cost_Type": "Reflexes",
+            "Effect": "Teleport 10ft.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Vibrate": {
+            "Cost": "4",
+            "Cost_Type": "Reflexes",
+            "Effect": "Sonic Damage (Bypass Armor).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Haste": {
+            "Cost": "4",
+            "Cost_Type": "Reflexes",
+            "Effect": "Increase Speed buff.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Blitz": {
+            "Cost": "5",
+            "Cost_Type": "Reflexes",
+            "Effect": "Line Charge attack.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Blink": {
+            "Cost": "5",
+            "Cost_Type": "Reflexes",
+            "Effect": "Teleport Dodge (Reaction).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Warp": {
+            "Cost": "5",
+            "Cost_Type": "Reflexes",
+            "Effect": "Teleport 60ft.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Impact": {
+            "Cost": "6",
+            "Cost_Type": "Reflexes",
+            "Effect": "Damage scales with Speed.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Afterimage": {
+            "Cost": "6",
+            "Cost_Type": "Reflexes",
+            "Effect": "Create decoy clones.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Loop": {
+            "Cost": "6",
+            "Cost_Type": "Logic",
+            "Effect": "Trap enemy in logic loop.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Age": {
+            "Cost": "7",
+            "Cost_Type": "Reflexes",
+            "Effect": "Rapid aging attack.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Rewind": {
+            "Cost": "7",
+            "Cost_Type": "Reflexes",
+            "Effect": "Undo recent damage taken.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Portal": {
+            "Cost": "7",
+            "Cost_Type": "Reflexes",
+            "Effect": "Create travel gate.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Lag": {
+            "Cost": "8",
+            "Cost_Type": "Reflexes",
+            "Effect": "Delay enemy turn/action.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Stutter": {
+            "Cost": "8",
+            "Cost_Type": "Reflexes",
+            "Effect": "Phase out of reality briefly.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Paradox": {
+            "Cost": "9",
+            "Cost_Type": "Logic",
+            "Effect": "Brain Melt (Int Dmg).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Reset": {
+            "Cost": "9",
+            "Cost_Type": "Reflexes",
+            "Effect": "Restart the combat round.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Timeline": {
+            "Cost": "9",
+            "Cost_Type": "Reflexes",
+            "Effect": "Predict exact future.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Infinite": {
+            "Cost": "10",
+            "Cost_Type": "Reflexes",
+            "Effect": "Attack every target instantly.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Gone": {
+            "Cost": "10",
+            "Cost_Type": "Reflexes",
+            "Effect": "Non-Existence (Safe).",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Reality": {
+            "Cost": "10",
+            "Cost_Type": "Reflexes",
+            "Effect": "Reload Save / Retcon.",
+            "School": "Motus",
+            "Damage_Type": "Sonic"
+        },
+        "Sting": {
+            "Cost": "1",
+            "Cost_Type": "Vitality",
+            "Effect": "Minor Poison damage.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Clot": {
+            "Cost": "1",
+            "Cost_Type": "Vitality",
+            "Effect": "Stop Bleeding immediately.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Mend": {
+            "Cost": "1",
+            "Cost_Type": "Vitality",
+            "Effect": "Heal minor wounds.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Tangle": {
+            "Cost": "2",
+            "Cost_Type": "Vitality",
+            "Effect": "Vines restrict movement.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Bark": {
+            "Cost": "2",
+            "Cost_Type": "Vitality",
+            "Effect": "Natural Armor skin.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Purge": {
+            "Cost": "2",
+            "Cost_Type": "Vitality",
+            "Effect": "Cure Poison/Toxin.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Rot": {
+            "Cost": "3",
+            "Cost_Type": "Vitality",
+            "Effect": "Necrotic damage.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Resist": {
+            "Cost": "3",
+            "Cost_Type": "Vitality",
+            "Effect": "Resist Elemental damage.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Grow": {
+            "Cost": "3",
+            "Cost_Type": "Vitality",
+            "Effect": "Enlarge self or target.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Drain": {
+            "Cost": "4",
+            "Cost_Type": "Vitality",
+            "Effect": "Lifesteal (Heal for Dmg).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Adrenaline": {
+            "Cost": "4",
+            "Cost_Type": "Vitality",
+            "Effect": "Gain Temporary HP.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Adapt": {
+            "Cost": "4",
+            "Cost_Type": "Vitality",
+            "Effect": "Grow Gills/Claws/Wings.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Infect": {
+            "Cost": "5",
+            "Cost_Type": "Vitality",
+            "Effect": "Inflict Disease.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Regen": {
+            "Cost": "5",
+            "Cost_Type": "Vitality",
+            "Effect": "Heal HP every turn.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Sense": {
+            "Cost": "5",
+            "Cost_Type": "Vitality",
+            "Effect": "Detect Life (Radar).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Wither": {
+            "Cost": "6",
+            "Cost_Type": "Vitality",
+            "Effect": "Drain Stat (Str/Dex).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Carapace": {
+            "Cost": "6",
+            "Cost_Type": "Vitality",
+            "Effect": "Damage Reduction (Flat).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Awaken": {
+            "Cost": "6",
+            "Cost_Type": "Vitality",
+            "Effect": "Animate Plant/Tree.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Devour": {
+            "Cost": "7",
+            "Cost_Type": "Vitality",
+            "Effect": "Eat minion to heal full.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Immune": {
+            "Cost": "7",
+            "Cost_Type": "Vitality",
+            "Effect": "Cure Disease/Immunity.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Link": {
+            "Cost": "7",
+            "Cost_Type": "Vitality",
+            "Effect": "Life Bond (Share HP).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Plague": {
+            "Cost": "8",
+            "Cost_Type": "Vitality",
+            "Effect": "Spreading DoT infection.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Cocoon": {
+            "Cost": "8",
+            "Cost_Type": "Vitality",
+            "Effect": "Stasis Heal (Full recovery).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Revive": {
+            "Cost": "8",
+            "Cost_Type": "Vitality",
+            "Effect": "Resurrect dead.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Cancer": {
+            "Cost": "9",
+            "Cost_Type": "Vitality",
+            "Effect": "Massive Rapid DoT.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Swarm": {
+            "Cost": "9",
+            "Cost_Type": "Vitality",
+            "Effect": "Turn into bugs (Immune).",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Clone": {
+            "Cost": "9",
+            "Cost_Type": "Vitality",
+            "Effect": "Grow spare body.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Extinct": {
+            "Cost": "10",
+            "Cost_Type": "Vitality",
+            "Effect": "Kill creature type.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Reborn": {
+            "Cost": "10",
+            "Cost_Type": "Vitality",
+            "Effect": "Auto-Life on death.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Genesis": {
+            "Cost": "10",
+            "Cost_Type": "Vitality",
+            "Effect": "Create new Lifeform.",
+            "School": "Vita",
+            "Damage_Type": "Poison"
+        },
+        "Heat": {
+            "Cost": "1",
+            "Cost_Type": "Fortitude",
+            "Effect": "Deal Fire Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Harden": {
+            "Cost": "1",
+            "Cost_Type": "Fortitude",
+            "Effect": "Bonus AC.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Shape": {
+            "Cost": "1",
+            "Cost_Type": "Fortitude",
+            "Effect": "Mold clay/stone/wood.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Chill": {
+            "Cost": "2",
+            "Cost_Type": "Fortitude",
+            "Effect": "Deal Cold Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Insulate": {
+            "Cost": "2",
+            "Cost_Type": "Fortitude",
+            "Effect": "Resist Elements.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Fuse": {
+            "Cost": "2",
+            "Cost_Type": "Fortitude",
+            "Effect": "Weld metal/stone together.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Shock": {
+            "Cost": "3",
+            "Cost_Type": "Fortitude",
+            "Effect": "Deal Lightning Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Ground": {
+            "Cost": "3",
+            "Cost_Type": "Fortitude",
+            "Effect": "Absorb Shock/Electricity.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Rust": {
+            "Cost": "3",
+            "Cost_Type": "Fortitude",
+            "Effect": "Weaken metal item.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Burn": {
+            "Cost": "4",
+            "Cost_Type": "Fortitude",
+            "Effect": "Ignite target (DoT).",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Heavy": {
+            "Cost": "4",
+            "Cost_Type": "Fortitude",
+            "Effect": "Skin becomes Iron.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Repair": {
+            "Cost": "4",
+            "Cost_Type": "Fortitude",
+            "Effect": "Fix broken item.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Melt": {
+            "Cost": "5",
+            "Cost_Type": "Fortitude",
+            "Effect": "Deal Acid Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Cool": {
+            "Cost": "5",
+            "Cost_Type": "Fortitude",
+            "Effect": "Extinguish fires instantly.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Forge": {
+            "Cost": "5",
+            "Cost_Type": "Fortitude",
+            "Effect": "Create weapon from raw mats.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Shatter": {
+            "Cost": "9",
+            "Cost_Type": "Charm",
+            "Effect": "Break Mind (Insanity).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Diamond": {
+            "Cost": "6",
+            "Cost_Type": "Fortitude",
+            "Effect": "Skin becomes Diamond (High AC).",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Transmute": {
+            "Cost": "6",
+            "Cost_Type": "Fortitude",
+            "Effect": "Change material type.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Explode": {
+            "Cost": "7",
+            "Cost_Type": "Fortitude",
+            "Effect": "Deal Force Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Rubber": {
+            "Cost": "7",
+            "Cost_Type": "Fortitude",
+            "Effect": "Bounce Physical Damage.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Liquify": {
+            "Cost": "7",
+            "Cost_Type": "Fortitude",
+            "Effect": "Turn solid to liquid.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Vaporize": {
+            "Cost": "8",
+            "Cost_Type": "Fortitude",
+            "Effect": "Turn solid to gas (Cloud).",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Mirror": {
+            "Cost": "3",
+            "Cost_Type": "Awareness",
+            "Effect": "Create Decoys.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Gas": {
+            "Cost": "8",
+            "Cost_Type": "Fortitude",
+            "Effect": "Turn self to Mist.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Fission": {
+            "Cost": "9",
+            "Cost_Type": "Fortitude",
+            "Effect": "Nuclear Damage (Nuke).",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Void": {
+            "Cost": "9",
+            "Cost_Type": "Fortitude",
+            "Effect": "Absorb All Damage types.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Gold": {
+            "Cost": "9",
+            "Cost_Type": "Fortitude",
+            "Effect": "Lead to Gold (Wealth).",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Unmake": {
+            "Cost": "10",
+            "Cost_Type": "Willpower",
+            "Effect": "Erase from timeline.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Indestructible": {
+            "Cost": "10",
+            "Cost_Type": "Fortitude",
+            "Effect": "God-like durability.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Matter": {
+            "Cost": "10",
+            "Cost_Type": "Fortitude",
+            "Effect": "Create Matter from nothing.",
+            "School": "Nexus",
+            "Damage_Type": "Fire"
+        },
+        "Mark": {
+            "Cost": "1",
+            "Cost_Type": "Knowledge",
+            "Effect": "Prevent Stealth.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Shield": {
+            "Cost": "6",
+            "Cost_Type": "Willpower",
+            "Effect": "Mental Armor.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Read": {
+            "Cost": "1",
+            "Cost_Type": "Knowledge",
+            "Effect": "Decipher text/runes.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Bolt": {
+            "Cost": "2",
+            "Cost_Type": "Knowledge",
+            "Effect": "Magic Missile (Auto hit).",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Mask": {
+            "Cost": "2",
+            "Cost_Type": "Knowledge",
+            "Effect": "Nondetection (Anti-Scry).",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Identify": {
+            "Cost": "2",
+            "Cost_Type": "Knowledge",
+            "Effect": "Learn item properties.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Bind": {
+            "Cost": "3",
+            "Cost_Type": "Knowledge",
+            "Effect": "Hold Person (Paralyze).",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Circle": {
+            "Cost": "3",
+            "Cost_Type": "Knowledge",
+            "Effect": "Protect Area (Magic Circle).",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Tongues": {
+            "Cost": "3",
+            "Cost_Type": "Knowledge",
+            "Effect": "Speak any language.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Silence": {
+            "Cost": "6",
+            "Cost_Type": "Willpower",
+            "Effect": "Prevent Sound.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Dampen": {
+            "Cost": "4",
+            "Cost_Type": "Knowledge",
+            "Effect": "Resist Magic Damage.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Light": {
+            "Cost": "4",
+            "Cost_Type": "Knowledge",
+            "Effect": "Create Illusion (Visual).",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Dispel": {
+            "Cost": "5",
+            "Cost_Type": "Knowledge",
+            "Effect": "End active spell.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Counter": {
+            "Cost": "5",
+            "Cost_Type": "Knowledge",
+            "Effect": "Stop spell being cast.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Summon": {
+            "Cost": "5",
+            "Cost_Type": "Knowledge",
+            "Effect": "Call Ally/Monster.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Banish": {
+            "Cost": "6",
+            "Cost_Type": "Knowledge",
+            "Effect": "Send to another plane.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Message": {
+            "Cost": "6",
+            "Cost_Type": "Knowledge",
+            "Effect": "Long range comms.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Reflection": {
+            "Cost": "7",
+            "Cost_Type": "Knowledge",
+            "Effect": "Return Spell to caster.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Scry": {
+            "Cost": "7",
+            "Cost_Type": "Knowledge",
+            "Effect": "Spy on location.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Unbind": {
+            "Cost": "8",
+            "Cost_Type": "Knowledge",
+            "Effect": "Destroy Magic Item.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Prism": {
+            "Cost": "5",
+            "Cost_Type": "Awareness",
+            "Effect": "Split Beam (Multi-hit).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Gate": {
+            "Cost": "8",
+            "Cost_Type": "Knowledge",
+            "Effect": "Planar Travel.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Seal": {
+            "Cost": "9",
+            "Cost_Type": "Knowledge",
+            "Effect": "Permanent Binding.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Invulnerability": {
+            "Cost": "9",
+            "Cost_Type": "Knowledge",
+            "Effect": "Immune to Magic.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Memory": {
+            "Cost": "8",
+            "Cost_Type": "Charm",
+            "Effect": "Modify Memory.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Source": {
+            "Cost": "10",
+            "Cost_Type": "Knowledge",
+            "Effect": "Drain Magic slots.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Antimagic": {
+            "Cost": "10",
+            "Cost_Type": "Knowledge",
+            "Effect": "Create Dead Magic Zone.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Wish": {
+            "Cost": "10",
+            "Cost_Type": "Knowledge",
+            "Effect": "Alter Reality.",
+            "School": "Anumis",
+            "Damage_Type": "Arcane"
+        },
+        "Angle": {
+            "Cost": "1",
+            "Cost_Type": "Logic",
+            "Effect": "Ignore Cover penalty.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Predict": {
+            "Cost": "1",
+            "Cost_Type": "Logic",
+            "Effect": "Small AC Bonus.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Count": {
+            "Cost": "1",
+            "Cost_Type": "Logic",
+            "Effect": "Know exact number of items.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Target": {
+            "Cost": "2",
+            "Cost_Type": "Logic",
+            "Effect": "True Strike (Bonus to Hit).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Calculate": {
+            "Cost": "2",
+            "Cost_Type": "Logic",
+            "Effect": "Dodge action (Int based).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Scan": {
+            "Cost": "2",
+            "Cost_Type": "Logic",
+            "Effect": "See Enemy Stats/HP.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Fracture": {
+            "Cost": "3",
+            "Cost_Type": "Logic",
+            "Effect": "Hit Weak Point (Crit).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Pattern": {
+            "Cost": "3",
+            "Cost_Type": "Logic",
+            "Effect": "Avoid Traps automatically.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Solve": {
+            "Cost": "3",
+            "Cost_Type": "Logic",
+            "Effect": "Unlock Puzzle/Lock.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Deconstruct": {
+            "Cost": "4",
+            "Cost_Type": "Logic",
+            "Effect": "Debuff Enemy Armor.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Vector": {
+            "Cost": "4",
+            "Cost_Type": "Logic",
+            "Effect": "Deflect Ranged Attack.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Optimize": {
+            "Cost": "4",
+            "Cost_Type": "Logic",
+            "Effect": "Max Damage Roll.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Grid": {
+            "Cost": "5",
+            "Cost_Type": "Logic",
+            "Effect": "Create Difficult Terrain.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Correction": {
+            "Cost": "5",
+            "Cost_Type": "Logic",
+            "Effect": "Bonus to Saving Throw.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Analyze": {
+            "Cost": "5",
+            "Cost_Type": "Logic",
+            "Effect": "Learn Lore/History.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Algorithm": {
+            "Cost": "6",
+            "Cost_Type": "Logic",
+            "Effect": "Auto-Damage (No Roll).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Program": {
+            "Cost": "6",
+            "Cost_Type": "Logic",
+            "Effect": "Set Triggered Spell.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Divide": {
+            "Cost": "7",
+            "Cost_Type": "Logic",
+            "Effect": "Split Damage among foes.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Equilibrium": {
+            "Cost": "7",
+            "Cost_Type": "Logic",
+            "Effect": "Flatten Damage curve.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Construct": {
+            "Cost": "7",
+            "Cost_Type": "Logic",
+            "Effect": "Create Automaton.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Error": {
+            "Cost": "8",
+            "Cost_Type": "Logic",
+            "Effect": "Psychic Stun.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Axiom": {
+            "Cost": "8",
+            "Cost_Type": "Logic",
+            "Effect": "Impose Rule (No Flight).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Deduce": {
+            "Cost": "8",
+            "Cost_Type": "Logic",
+            "Effect": "Reconstruct Scene.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Null": {
+            "Cost": "9",
+            "Cost_Type": "Logic",
+            "Effect": "Negate Enemy Action.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Blueprint": {
+            "Cost": "9",
+            "Cost_Type": "Logic",
+            "Effect": "Invent new device.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Zero": {
+            "Cost": "10",
+            "Cost_Type": "Logic",
+            "Effect": "Delete Entity (Math).",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Absolute": {
+            "Cost": "10",
+            "Cost_Type": "Willpower",
+            "Effect": "God-like Will.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Rewrite": {
+            "Cost": "10",
+            "Cost_Type": "Logic",
+            "Effect": "Change Physics Constant.",
+            "School": "Ratio",
+            "Damage_Type": "Shock"
+        },
+        "Flare": {
+            "Cost": "1",
+            "Cost_Type": "Awareness",
+            "Effect": "Dazzle (-1 to Hit).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Spot": {
+            "Cost": "1",
+            "Cost_Type": "Awareness",
+            "Effect": "Bonus Perception.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Beam": {
+            "Cost": "2",
+            "Cost_Type": "Awareness",
+            "Effect": "Laser Damage.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Flash": {
+            "Cost": "2",
+            "Cost_Type": "Awareness",
+            "Effect": "Blind foe (1 Round).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Darkvision": {
+            "Cost": "2",
+            "Cost_Type": "Awareness",
+            "Effect": "See in Darkness.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Searing": {
+            "Cost": "3",
+            "Cost_Type": "Awareness",
+            "Effect": "Burn Undead/Shadow.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Reveal": {
+            "Cost": "3",
+            "Cost_Type": "Awareness",
+            "Effect": "See Invisible.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Focus": {
+            "Cost": "1",
+            "Cost_Type": "Willpower",
+            "Effect": "Save Bonus.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Invis": {
+            "Cost": "4",
+            "Cost_Type": "Awareness",
+            "Effect": "Turn Invisible.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "X-Ray": {
+            "Cost": "4",
+            "Cost_Type": "Awareness",
+            "Effect": "See Through Walls.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Camouflage": {
+            "Cost": "5",
+            "Cost_Type": "Awareness",
+            "Effect": "Blend with surroundings.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Project": {
+            "Cost": "5",
+            "Cost_Type": "Awareness",
+            "Effect": "Hologram Illusion.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Radiate": {
+            "Cost": "6",
+            "Cost_Type": "Awareness",
+            "Effect": "Aura Damage.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Disguise": {
+            "Cost": "6",
+            "Cost_Type": "Awareness",
+            "Effect": "Alter Self Appearance.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "True Sight": {
+            "Cost": "6",
+            "Cost_Type": "Awareness",
+            "Effect": "Trueseeing (Perfect).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Sun": {
+            "Cost": "7",
+            "Cost_Type": "Awareness",
+            "Effect": "Massive Light Damage.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Darkness": {
+            "Cost": "7",
+            "Cost_Type": "Awareness",
+            "Effect": "Block Sight Line.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Zone": {
+            "Cost": "6",
+            "Cost_Type": "Willpower",
+            "Effect": "Zone of Truth.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Blind": {
+            "Cost": "8",
+            "Cost_Type": "Awareness",
+            "Effect": "Permanent Blindness.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Phantom": {
+            "Cost": "8",
+            "Cost_Type": "Awareness",
+            "Effect": "Major Image (Real).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "History": {
+            "Cost": "8",
+            "Cost_Type": "Awareness",
+            "Effect": "Postcognition (See Past).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Nova": {
+            "Cost": "9",
+            "Cost_Type": "Awareness",
+            "Effect": "Explosion of Light.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Mirage": {
+            "Cost": "9",
+            "Cost_Type": "Awareness",
+            "Effect": "Fake Terrain.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Map": {
+            "Cost": "9",
+            "Cost_Type": "Awareness",
+            "Effect": "Know Location (GPS).",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Supernova": {
+            "Cost": "10",
+            "Cost_Type": "Awareness",
+            "Effect": "Nuclear Light.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Nonexistence": {
+            "Cost": "10",
+            "Cost_Type": "Awareness",
+            "Effect": "Hidden from Reality.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Omniscience": {
+            "Cost": "10",
+            "Cost_Type": "Awareness",
+            "Effect": "Know Everything.",
+            "School": "Lux",
+            "Damage_Type": "Radiant"
+        },
+        "Jinx": {
+            "Cost": "1",
+            "Cost_Type": "Intuition",
+            "Effect": "-1d4 to Hit.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Bless": {
+            "Cost": "1",
+            "Cost_Type": "Intuition",
+            "Effect": "+1d4 to Hit.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Guess": {
+            "Cost": "1",
+            "Cost_Type": "Intuition",
+            "Effect": "Coin Flip (50/50).",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Miss": {
+            "Cost": "2",
+            "Cost_Type": "Intuition",
+            "Effect": "Force Reroll (Take Low).",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Find": {
+            "Cost": "2",
+            "Cost_Type": "Intuition",
+            "Effect": "Locate Object.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Jam": {
+            "Cost": "3",
+            "Cost_Type": "Intuition",
+            "Effect": "Weapon Failure.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Hunch": {
+            "Cost": "3",
+            "Cost_Type": "Intuition",
+            "Effect": "Danger Sense.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Backfire": {
+            "Cost": "4",
+            "Cost_Type": "Intuition",
+            "Effect": "Enemy hits self.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Lucky": {
+            "Cost": "4",
+            "Cost_Type": "Intuition",
+            "Effect": "Reroll 1s.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Path": {
+            "Cost": "4",
+            "Cost_Type": "Intuition",
+            "Effect": "Best Route finding.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Curse": {
+            "Cost": "5",
+            "Cost_Type": "Intuition",
+            "Effect": "Disadvantage on Rolls.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Fate": {
+            "Cost": "5",
+            "Cost_Type": "Intuition",
+            "Effect": "Advantage on Rolls.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Gamble": {
+            "Cost": "5",
+            "Cost_Type": "Intuition",
+            "Effect": "Random Buff effect.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Fumble": {
+            "Cost": "6",
+            "Cost_Type": "Intuition",
+            "Effect": "Enemy drops item.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Serendipity": {
+            "Cost": "6",
+            "Cost_Type": "Intuition",
+            "Effect": "Find Loot/Potion.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Spirit": {
+            "Cost": "6",
+            "Cost_Type": "Intuition",
+            "Effect": "Talk to Dead.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Karma": {
+            "Cost": "7",
+            "Cost_Type": "Intuition",
+            "Effect": "Reflect Hit to attacker.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Augury": {
+            "Cost": "7",
+            "Cost_Type": "Intuition",
+            "Effect": "Hint of Future.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Calamity": {
+            "Cost": "8",
+            "Cost_Type": "Intuition",
+            "Effect": "Force Crit Fail.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Miracle": {
+            "Cost": "8",
+            "Cost_Type": "Intuition",
+            "Effect": "Survive with 1HP.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Destiny": {
+            "Cost": "8",
+            "Cost_Type": "Intuition",
+            "Effect": "Force specific Roll.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Doom": {
+            "Cost": "9",
+            "Cost_Type": "Intuition",
+            "Effect": "Instant Kill.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Divine": {
+            "Cost": "9",
+            "Cost_Type": "Intuition",
+            "Effect": "Auto-Save success.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Prophecy": {
+            "Cost": "9",
+            "Cost_Type": "Intuition",
+            "Effect": "Narrative Truth.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Ruin": {
+            "Cost": "10",
+            "Cost_Type": "Intuition",
+            "Effect": "Total Loss/Destruction.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Favor": {
+            "Cost": "10",
+            "Cost_Type": "Intuition",
+            "Effect": "Auto-Natural 20.",
+            "School": "Omen",
+            "Damage_Type": "Necrotic"
+        },
+        "Mock": {
+            "Cost": "1",
+            "Cost_Type": "Charm",
+            "Effect": "Psychic Damage.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Friend": {
+            "Cost": "1",
+            "Cost_Type": "Charm",
+            "Effect": "Sanctuary (No Attack).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Chime": {
+            "Cost": "1",
+            "Cost_Type": "Charm",
+            "Effect": "Attract attention.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Taunt": {
+            "Cost": "2",
+            "Cost_Type": "Charm",
+            "Effect": "Force Attack.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Calm": {
+            "Cost": "2",
+            "Cost_Type": "Charm",
+            "Effect": "End Rage/Hostility.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Bond": {
+            "Cost": "2",
+            "Cost_Type": "Charm",
+            "Effect": "Empathy Link.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Fear": {
+            "Cost": "3",
+            "Cost_Type": "Charm",
+            "Effect": "Cause Fleeing.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Trust": {
+            "Cost": "3",
+            "Cost_Type": "Charm",
+            "Effect": "Ally Help Action.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Whisper": {
+            "Cost": "3",
+            "Cost_Type": "Charm",
+            "Effect": "Send Message.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Doubt": {
+            "Cost": "4",
+            "Cost_Type": "Charm",
+            "Effect": "Hesitate (Skip Turn).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Peace": {
+            "Cost": "4",
+            "Cost_Type": "Charm",
+            "Effect": "Stop Fight (Calm).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Suggestion": {
+            "Cost": "4",
+            "Cost_Type": "Charm",
+            "Effect": "Implant Idea.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Enrage": {
+            "Cost": "5",
+            "Cost_Type": "Charm",
+            "Effect": "Berserk (Attack All).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Charm": {
+            "Cost": "5",
+            "Cost_Type": "Charm",
+            "Effect": "Befriend Target.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Detect": {
+            "Cost": "5",
+            "Cost_Type": "Willpower",
+            "Effect": "Know Alignment/Type.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Despair": {
+            "Cost": "6",
+            "Cost_Type": "Charm",
+            "Effect": "Stun with Sadness.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Heroism": {
+            "Cost": "6",
+            "Cost_Type": "Charm",
+            "Effect": "Buff HP/Morale.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Inspire": {
+            "Cost": "6",
+            "Cost_Type": "Charm",
+            "Effect": "Buff Skill check.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Terror": {
+            "Cost": "7",
+            "Cost_Type": "Charm",
+            "Effect": "Paralyze with Fear.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Devotion": {
+            "Cost": "7",
+            "Cost_Type": "Charm",
+            "Effect": "Gain Bodyguard.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Geas": {
+            "Cost": "7",
+            "Cost_Type": "Charm",
+            "Effect": "Magical Mission.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Betray": {
+            "Cost": "8",
+            "Cost_Type": "Charm",
+            "Effect": "Attack own Ally.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Love": {
+            "Cost": "8",
+            "Cost_Type": "Charm",
+            "Effect": "Permanent Thrall.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Sanctuary": {
+            "Cost": "9",
+            "Cost_Type": "Charm",
+            "Effect": "Zone of Peace.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Dream": {
+            "Cost": "9",
+            "Cost_Type": "Charm",
+            "Effect": "Inception/Dreamwalk.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Soul": {
+            "Cost": "10",
+            "Cost_Type": "Charm",
+            "Effect": "Kill Spirit (Husk).",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Worship": {
+            "Cost": "10",
+            "Cost_Type": "Charm",
+            "Effect": "Gain Followers.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Identity": {
+            "Cost": "10",
+            "Cost_Type": "Charm",
+            "Effect": "Rewrite Personality.",
+            "School": "Aura",
+            "Damage_Type": "Spirit"
+        },
+        "Open": {
+            "Cost": "1",
+            "Cost_Type": "Willpower",
+            "Effect": "Unlock (Command).",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Drop": {
+            "Cost": "2",
+            "Cost_Type": "Willpower",
+            "Effect": "Disarm target.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Ignore": {
+            "Cost": "2",
+            "Cost_Type": "Willpower",
+            "Effect": "Resist Pain/Wound.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Truth": {
+            "Cost": "2",
+            "Cost_Type": "Willpower",
+            "Effect": "Prevent Lying.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Kneel": {
+            "Cost": "3",
+            "Cost_Type": "Willpower",
+            "Effect": "Force Prone.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Deny": {
+            "Cost": "3",
+            "Cost_Type": "Willpower",
+            "Effect": "Block Path (Mental).",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Speak": {
+            "Cost": "3",
+            "Cost_Type": "Willpower",
+            "Effect": "Force Speech.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Pain": {
+            "Cost": "4",
+            "Cost_Type": "Willpower",
+            "Effect": "Psychic Damage.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Clear": {
+            "Cost": "4",
+            "Cost_Type": "Willpower",
+            "Effect": "Remove Fear/Charm.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Oath": {
+            "Cost": "4",
+            "Cost_Type": "Willpower",
+            "Effect": "Contract/Bond.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Obey": {
+            "Cost": "5",
+            "Cost_Type": "Willpower",
+            "Effect": "Command 1 Action.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Forbid": {
+            "Cost": "5",
+            "Cost_Type": "Willpower",
+            "Effect": "Block Action type.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Dominate": {
+            "Cost": "7",
+            "Cost_Type": "Willpower",
+            "Effect": "Mind Control.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Iron": {
+            "Cost": "7",
+            "Cost_Type": "Willpower",
+            "Effect": "Immune Charm/Fear.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Decree": {
+            "Cost": "7",
+            "Cost_Type": "Willpower",
+            "Effect": "Set Rule in area.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Exile": {
+            "Cost": "8",
+            "Cost_Type": "Willpower",
+            "Effect": "Banishment.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Refuse": {
+            "Cost": "8",
+            "Cost_Type": "Willpower",
+            "Effect": "Immune Magic.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Title": {
+            "Cost": "8",
+            "Cost_Type": "Willpower",
+            "Effect": "Gain Rank/Status.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Kill": {
+            "Cost": "9",
+            "Cost_Type": "Willpower",
+            "Effect": "Power Word Kill.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Unbreakable": {
+            "Cost": "9",
+            "Cost_Type": "Willpower",
+            "Effect": "Immune to All.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Legend": {
+            "Cost": "9",
+            "Cost_Type": "Willpower",
+            "Effect": "Mass Awe/Fear.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        },
+        "Law": {
+            "Cost": "10",
+            "Cost_Type": "Willpower",
+            "Effect": "New Physics Law.",
+            "School": "Lex",
+            "Damage_Type": "Psychic"
+        }
+    },
+    "Derived_Stats": {
+        "HP": {
+            "Stat_ID": "HP",
+            "Full_Name": "Hit Points (Meat)",
+            "Base_Value": "10",
+            "Attribute_A": "Might",
+            "Attribute_B": "Refflexes",
+            "Attribute_C": "Vitality",
+            "Formula_Logic": "Base + A + B",
+            "Description": "Physical health. If 0, you are Dying."
+        },
+        "CMP": {
+            "Stat_ID": "CMP",
+            "Full_Name": "Composure",
+            "Base_Value": "10",
+            "Attribute_A": "Willpower",
+            "Attribute_B": "Logic",
+            "Attribute_C": "Awareness",
+            "Formula_Logic": "Base + A + B",
+            "Description": "Mental health. If 0, you are Broken (Panic/Surrender)."
+        },
+        "SP": {
+            "Stat_ID": "SP",
+            "Full_Name": "Stamina Points",
+            "Base_Value": "0",
+            "Attribute_A": "Endurance",
+            "Attribute_B": "Finesse",
+            "Attribute_C": "Fortitude",
+            "Formula_Logic": "A + B + C",
+            "Description": "Fuel for Physical Abilities and special attacks."
+        },
+        "FP": {
+            "Stat_ID": "FP",
+            "Full_Name": "Focus Points",
+            "Base_Value": "0",
+            "Attribute_A": "Knowledge",
+            "Attribute_B": "Charm",
+            "Attribute_C": "Intuition",
+            "Formula_Logic": "A + B + C",
+            "Description": "Fuel for Spells and Mental Abilities."
+        },
+        "ALT": {
+            "Stat_ID": "ALT",
+            "Full_Name": "Alertness",
+            "Base_Value": "0",
+            "Attribute_A": "Intuition",
+            "Attribute_B": "Reflex",
+            "Attribute_C": "-",
+            "Formula_Logic": "A + B + d20",
+            "Description": "Combat turn order."
+        },
+        "SPD": {
+            "Stat_ID": "SPD",
+            "Full_Name": "Move Speed",
+            "Base_Value": "B D",
+            "Attribute_A": "Vitality",
+            "Attribute_B": "Willpower",
+            "Attribute_C": "-",
+            "Formula_Logic": "Base + (A * 5)",
+            "Description": "Movement in feet per turn."
+        },
+        "CAMO": {
+            "Stat_ID": "CAMO",
+            "Full_Name": "Stealth",
+            "Base_Value": "B D",
+            "Attribute_A": "Finesse",
+            "Attribute_B": "Awareness",
+            "Attribute_C": "-",
+            "Formula_Logic": "Base+(A+Bx5)",
+            "Description": "your stealth floor wont be seen if not moving"
+        },
+        "CACHE": {
+            "Stat_ID": "CACHE",
+            "Full_Name": "Carry Cap.",
+            "Base_Value": "B D",
+            "Attribute_A": "Might",
+            "Attribute_B": "Knowledge",
+            "Attribute_C": "-",
+            "Formula_Logic": "base+(A+B)",
+            "Description": "pockets or slots for quick items"
+        },
+        "THERM": {
+            "Stat_ID": "THERM",
+            "Full_Name": "Temp Regulation",
+            "Base_Value": "B D",
+            "Attribute_A": "Endurance",
+            "Attribute_B": "Logic",
+            "Attribute_C": "-",
+            "Formula_Logic": "base+(A+B)",
+            "Description": "the range out of you comfort zone you can handle"
+        },
+        "HYDRO": {
+            "Stat_ID": "HYDRO",
+            "Full_Name": "Drought Sensitivity",
+            "Base_Value": "B D",
+            "Attribute_A": "Fortitude",
+            "Attribute_B": "Charm",
+            "Attribute_C": "-",
+            "Formula_Logic": "base+(A+B)",
+            "Description": "the range out of you comfort zone you can handle"
+        }
+    },
+    "Combat_Rules": [
+        {
+            "Outcome": "CRITICAL",
+            "Range": {
+                "min": 200,
+                "max": 200
+            },
+            "Effect": "INJURY (Roll on Injury Table).",
+            "Damage_Type": "Double Damage"
+        },
+        {
+            "Outcome": "CRUSHING BLOW",
+            "Range": {
+                "min": 10,
+                "max": 99
+            },
+            "Effect": "Target is STAGGERED (No Reactions, Next Action Disadv).",
+            "Damage_Type": "Normal HP Damage"
+        },
+        {
+            "Outcome": "SOLID HIT",
+            "Range": {
+                "min": 5,
+                "max": 9
+            },
+            "Effect": "None.",
+            "Damage_Type": "Normal HP Damage"
+        },
+        {
+            "Outcome": "GRAZE",
+            "Range": {
+                "min": 1,
+                "max": 4
+            },
+            "Effect": "1d4 Composure Dmg (Stress/Fear).",
+            "Damage_Type": "Half HP Damage"
+        },
+        {
+            "Outcome": "THE CLASH",
+            "Range": {
+                "min": 0,
+                "max": 0
+            },
+            "Effect": "Initiate Clash Protocol.",
+            "Damage_Type": "See Clash Table"
+        },
+        {
+            "Outcome": "CLEAN MISS",
+            "Range": {
+                "min": -5,
+                "max": -1
+            },
+            "Effect": "None.",
+            "Damage_Type": ""
+        },
+        {
+            "Outcome": "BAD MISS",
+            "Range": {
+                "min": -11,
+                "max": -6
+            },
+            "Effect": "Attacker is STAGGERED (Off-balance).",
+            "Damage_Type": ""
+        },
+        {
+            "Outcome": "FAIL",
+            "Range": {
+                "min": -99,
+                "max": -12
+            },
+            "Effect": "Attacker falls PRONE.",
+            "Damage_Type": ""
+        },
+        {
+            "Outcome": "DISASTER",
+            "Range": {
+                "min": -200,
+                "max": -200
+            },
+            "Effect": "Attacker is PRONE & DISARMED.",
+            "Damage_Type": "1d4 Self Damage"
+        },
+        {
+            "Outcome": "COST",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "EFFECT DESCRIPTION"
+        },
+        {
+            "Outcome": "2 Stamina",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Force a Hit. Deal Normal Damage. (If both Overpower, both take damage)."
+        },
+        {
+            "Outcome": "2 Stamina",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Force a Miss. Deflect and make an immediate Free Attack."
+        },
+        {
+            "Outcome": "-1 Durability",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Sunder. Take the hit but the enemy Weapon/Shield takes -1 Penalty permanently."
+        },
+        {
+            "Outcome": "",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Retreat. No Damage. You are pushed back 5ft and lose Initiative."
+        },
+        {
+            "Outcome": "MECHANIC / RULE",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "EFFECT / COST"
+        },
+        {
+            "Outcome": "Pay HP for missing Stamina",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Cost: 2 HP per 1 Stamina. (Muscle Tear)."
+        },
+        {
+            "Outcome": "Pay Comp for missing Focus",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Cost: 2 Composure per 1 Focus. (Mind Fracture)."
+        },
+        {
+            "Outcome": "HP < 50% or Focus 0",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Apply STATUS: Weakened or Shaken."
+        },
+        {
+            "Outcome": "Nat 20 or Massive Dmg",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "1: Concussion (No Focus). 2: Broken Arm. 3: Broken Leg."
+        },
+        {
+            "Outcome": "...",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "4: Eye/Ear Loss. 5: Internal Bleeding. 6: Severed Limb."
+        },
+        {
+            "Outcome": "EFFECT SUMMARY",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "CURE / END CONDITION"
+        },
+        {
+            "Outcome": "No Reactions. Next Action has Disadvantage.",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "End of your next Turn."
+        },
+        {
+            "Outcome": "Melee hits you with Advantage. Ranged has Disadvantage.",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Spend Half Movement to stand."
+        },
+        {
+            "Outcome": "Weapon drops in adjacent square (or flies 10ft).",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Interact Action to pick up."
+        },
+        {
+            "Outcome": "0 Composure. Cannot Attack/Cast. Can only Defend/Flee.",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Rally Action or Restore Composure."
+        },
+        {
+            "Outcome": "Structural Damage (Broken Bone, Concussion).",
+            "Range": {
+                "min": -999,
+                "max": 999
+            },
+            "Effect": "",
+            "Damage_Type": "Medical Surgery or High-Tier Magic."
+        }
+    ],
+    "Biomes": {
+        "The Whispering Savannah": {
+            "Description": "A vast, broken landscape dominated by tall, waving grasses that can swallow travelers whole, punctuated by rugged outcrops and dense thorny thickets.",
+            "Factions": [
+                "Guerrilla Clans"
+            ]
+        },
+        "The Canopy Forests": {
+            "Description": "Massive, high-altitude forests with trees large enough to support civilizations in their branches.",
+            "Factions": [
+                "Canopy Clans",
+                "Sylvan Empire"
+            ]
+        },
+        "The Lush Valley": {
+            "Description": "A fertile, vibrant valley located between the spurs of the mountain chain, protected from the harsher elements.",
+            "Factions": [
+                "Flower Valley Folk"
+            ]
+        },
+        "The Petrified Crystal Forest": {
+            "Description": "Once a living forest, now turned into stone and crystal by Chaos energy, located within the Crystal Basin.",
+            "Factions": [
+                "Prism-Scale Collective"
+            ]
+        },
+        "The Iron Caldera": {
+            "Description": "A harsh, endless desert centered around volcanic activity. It features grit, intense heat, and \"Ironwood Oases\".",
+            "Factions": [
+                "Ironborn",
+                "Dust-Husk Drifters"
+            ]
+        },
+        "The Crystal Basin": {
+            "Description": "An ancient ocean bed turned into a shimmering salt desert after being heaved to the surface.",
+            "Factions": [
+                "Prism-Scale Collective"
+            ]
+        },
+        "The Crater-Pocked Wasteland": {
+            "Description": "A desolate, scarred landscape filled with impact craters.",
+            "Factions": [
+                "Vaneer Concord"
+            ]
+        },
+        "Obsidian Flatlands": {
+            "Description": "Volcanic plains located on the East Coast near the jungles.",
+            "Factions": [
+                "Scute Confederacy"
+            ]
+        },
+        "The Rusty Cliffs": {
+            "Description": "Rocky, inaccessible islands and cliffs along the southern coast.",
+            "Factions": [
+                "Marsupial Folk"
+            ]
+        },
+        "The Toxic River Delta": {
+            "Description": "A massive, biologically hazardous river system filled with industrial runoff and natural toxins.",
+            "Factions": [
+                "River Folk"
+            ]
+        },
+        "The Sump-Mire": {
+            "Description": "A dark, muddy swamp region similar to a \"Bayou Noir\" setting, featuring heavy fog and submerged dangers.",
+            "Factions": [
+                "Sump-Kin",
+                "River Syndicate"
+            ]
+        },
+        "The Lagoons": {
+            "Description": "A maze of water channels along the East Coast jungles.",
+            "Factions": [
+                "River Folk"
+            ]
+        },
+        "Southern Mineral Springs": {
+            "Description": "Geothermally heated springs in the southern mountains.",
+            "Factions": [
+                "Ghosts"
+            ]
+        },
+        "The Central Mountain Chain": {
+            "Description": "A massive range bisecting the continent, featuring snow-capped peaks and deep chasms.",
+            "Factions": [
+                "Ursine Hegemony",
+                "Avian Empire"
+            ]
+        },
+        "The Misty Crags": {
+            "Description": "A vertical biome of sheer cliffs, deep shadows, and constant fog/mist.",
+            "Factions": [
+                "Hive Commonwealth"
+            ]
+        },
+        "Volcanic Islands": {
+            "Description": "Active volcanic chains, particularly in the North.",
+            "Factions": [
+                "Coastal Empire"
+            ]
+        },
+        "Chaos Zones": {
+            "Description": "Areas of unstable reality that separate the stable biomes. Physics do not function correctly here.",
+            "Factions": [
+                "None"
+            ]
+        },
+        "The Impact Crater": {
+            "Description": "A massive crater roughly in the center of the continent where the \"Engineer\" god rests.",
+            "Factions": [
+                "None"
+            ]
+        },
+        "The Agricultural Heartland": {
+            "Description": "Stable, fertile plains used for massive-scale farming.",
+            "Factions": [
+                "Heartland Alliance"
+            ]
+        }
+    }
+}

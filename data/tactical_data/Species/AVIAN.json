@@ -1,0 +1,367 @@
+{
+    "species": "Avian",
+    "base_stats": {
+        "Might": 8,
+        "Endurance": 10,
+        "Finesse": 10,
+        "Reflexes": 12,
+        "Vitality": 9,
+        "Fortitude": 11,
+        "Knowledge": 11,
+        "Logic": 9,
+        "Awareness": 12,
+        "Intuition": 10,
+        "Willpower": 8,
+        "Charm": 10
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Hooked Beak",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "TEAR: Unarmed Strike (1d4). +2 Damage vs Bleeding targets."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Helmeted Casque",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "HEADBUTT: Immune to Critical Hits to head."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Mimic Syrinx",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "VOICE: Mimic any sound/voice perfectly."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Owl Eyes",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "SIGHT: Darkvision 120ft. See magical auras."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Aerodynamic",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DIVE: Deal +1d6 damage on Charge attacks from above."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Telescopic",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "ZOOM: No penalty for Ranged Attacks at max range."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Spurred Wings",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "WING-BEAT: Bonus Action. Shove target 5ft."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Thick Down",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "WARMTH: Immune to Environmental Cold."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Plumage Display",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "FLAUNT: Advantage on Performance/Charm."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Mana-Feathers",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "BATTERY: Pluck feather to use as 1-use Scroll."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Hollow Bones",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "LIGHT: Jump height doubled. Fall damage halved."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Gullet",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "STORE: Swallow item to hide it. Regurgitate later."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Wing-Blades",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "SLASH: Wings deal 1d6 Slashing. Cannot Fly if used to atk."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Shield Wings",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "COVER: Action. Wrap wings for +2 AC. Cannot Fly."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Wide Span",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "INTIMIDATE: Advantage on Intimidate when wings spread."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Rune-Scribed",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "CONDUCT: Wings act as Staff/Wand for casting."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "True Wings",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "FLIGHT: Fly Speed = Walk Speed. Light Armor only."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Hand-Wings",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "DEXTROUS: Can use items while flying (bat-like)."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Raptor Talons",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SNATCH: Fly-by attack. Grapple target and keep moving."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Scaled Legs",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "HARD: Legs have +2 Armor vs Caltrops/Traps."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Dancing Feet",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "RHYTHM: Advantage on Performance (Dance)."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Perch",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "MEDITATE: Regain Focus faster while perched high."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Spring Legs",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "LAUNCH: Take off into flight without running start."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Grasping Feet",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "CARRY: Can carry medium object in flight."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Barbed Feathers",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "CUT: Grapplers take 1d4 Slashing."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Oily Coating",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SLICK: Waterproof. Acid Resistance."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Iridescent",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "FLASH: Blind enemy 1 round (1/Day)."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Void Plumage",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "STEALTH: Invisible to Magical Sight."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Silent Feathers",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SILENCE: Advantage on Stealth while Flying."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Molting",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "CLEANSE: Shed feathers to remove Parasites/Fire."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Sonic Screech",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "BLAST: Cone 15ft. 1d6 Thunder damage."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Dust Cloud",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "CLOUD: Action. Flap up dust. Heavily Obscured."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Songbird",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "LULLABY: Action. Target Sleeps (Will Save)."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Phoenix Blood",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "REBIRTH: When reduced to 0 HP, explode for 1d6 Fire. Stabilize."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Jet Stream",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "SPEED: Dash as Bonus Action while flying."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Magnetic Sense",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "NAVIGATE: Never get lost. Know North."
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,700 @@
+# Effects to Implement
+
+## PASSIVE_STAT (0)
+
+## PASSIVE_SKILL (1)
+- [ ] Species_Plant: Allure -> Release a pleasant scent. Humanoids must save (Will) or be Charmed (Passive/Non-hostile) for 1 minute.
+
+## ON_ATTACK (80)
+- [ ] School: Aura -> Attack own Ally.
+- [ ] School: Aura -> Berserk (Attack All).
+- [ ] School: Aura -> Force Attack.
+- [ ] School: Aura -> Sanctuary (No Attack).
+- [ ] School: Flux -> Attack chains to new targets.
+- [ ] School: Flux -> Attacks have Disadvantage.
+- [ ] School: Flux -> Bonus to AC vs one attack.
+- [ ] School: Flux -> Line attack through enemies.
+- [ ] School: Flux -> Next attack is Auto-Hit.
+- [ ] School: Flux -> Redirect attack to adjacent.
+- [ ] School: Motus -> Attack every target instantly.
+- [ ] School: Motus -> Line Charge attack.
+- [ ] School: Motus -> Multi-hit attack (Low Dmg).
+- [ ] School: Motus -> Rapid aging attack.
+- [ ] School: Omen -> Reflect Hit to attacker.
+- [ ] School: Ordo -> Return damage to attacker.
+- [ ] School: Ratio -> Deflect Ranged Attack.
+- [ ] Species_Aquatic: Chromatophore -> Match your surroundings perfectly. Turn Invisible until you move or attack.
+- [ ] Species_Aquatic: Cutwater -> Charge through water. If you move 20ft, your next attack deals extra slashing damage.
+- [ ] Species_Aquatic: Deflection -> Gain +2 AC against a single melee attack by turning your armored side to the blow.
+- [ ] Species_Aquatic: Flash Pattern -> Rapidly cycle colors to confuse an enemy. Target has Disadvantage on their next attack.
+- [ ] Species_Aquatic: Shock -> Touch attack. Target takes Lightning damage and cannot take Reactions until their next turn.
+- [ ] Species_Aquatic: Shred -> Your bite attacks deal Bleed damage (1d4) at the start of the target's next turn.
+- [ ] Species_Aquatic: Smokescreen -> When attacked, release an ink cloud (5ft radius). Attackers are Blinded and you can Disengage.
+- [ ] Species_Aquatic: Tail Lash -> Make a quick sting attack against an enemy flanking you.
+- [ ] Species_Aquatic: Toughness -> Reduce damage from a Slashing attack by half (scales are hard as teeth).
+- [ ] Species_Aquatic: Wrap -> Attempt to Grapple a target. If successful, they are Restrained (cannot move or attack easily).
+- [ ] Species_Avian: Allure -> When a humanoid attacks you, use "Cute Eyes." They must make a Will save or deal half damage.
+- [ ] Species_Avian: Blur -> When targeted by a ranged attack, shake your feathers to distort your outline, imposing Disadvantage on the hit.
+- [ ] Species_Avian: Charge -> Move at least 20ft straight toward a target and attack. Deal +2 damage on a hit.
+- [ ] Species_Avian: Lift Off -> When an enemy moves within 5ft of you, you can fly 10ft away without provoking an attack.
+- [ ] Species_Avian: Light Sensitivity -> You have Superior Darkvision (120ft), but Disadvantage on attacks in direct bright sunlight.
+- [ ] Species_Avian: Precision Peck -> Make an attack against a specific body part (eyes/hands) with a -2 penalty. On hit, apply a debuff (Blind/Disarm).
+- [ ] Species_Avian: Rake -> Make a kick attack. If the target is Prone, this attack deals Critical Damage.
+- [ ] Species_Avian: Shell Cracker -> Your bite attacks ignore Resistance provided by natural armor or chitin.
+- [ ] Species_Avian: Snatch -> Fly by a target smaller than you. You can Grapple them and continue moving without provoking Opportunity Attacks.
+- [ ] Species_Avian: Spot Weakness -> Analyze a target. Your next attack against them scores a Critical Hit on a roll of 19 or 20.
+- [ ] Species_Avian: Stabilize -> You suffer no penalties to Perception or Ranged Attacks while moving at full speed.
+- [ ] Species_Avian: Tear Flesh -> Make a bite attack. If it hits, the target takes extra Bleed damage equal to your Proficiency Bonus.
+- [ ] Species_Insect: Active Camo -> Turn Invisible until you move or attack by matching the background perfectly.
+- [ ] Species_Insect: Ambush -> If you attack a target that hasn't seen you, you deal extra damage equal to your Level.
+- [ ] Species_Insect: Confusion -> Release a cloud. Enemies within 10ft must save or attack a random target next turn.
+- [ ] Species_Insect: Deflect -> Reduce damage from a non-magical slashing or piercing attack by half.
+- [ ] Species_Insect: Desperation -> If you drop to 0 HP, make one immediate Stinger attack before falling.
+- [ ] Species_Insect: Envenom -> Coat your next bite attack with poison. Target must save or be Poisoned for 1 minute.
+- [ ] Species_Insect: Flash -> When attacked, flare your colors. The attacker must save (Will) or choose a new target.
+- [ ] Species_Insect: Impale -> Make a piercing attack. On hit, leave the stinger in; target takes damage every turn until removed.
+- [ ] Species_Insect: Kick Off -> When an enemy moves within 5ft, you can jump 10ft away without provoking an attack.
+- [ ] Species_Insect: Low Profile -> When targeted by a ranged attack, flatten yourself to the ground to impose Disadvantage.
+- [ ] Species_Insect: Parry -> Gain +2 AC against one melee attack by blocking with your blades.
+- [ ] Species_Insect: Pierce Armor -> Make an attack that ignores the target's Armor Class bonus from shields or heavy armor.
+- [ ] Species_Insect: Pinpoint -> Your critical hit range is 19-20 on piercing attacks.
+- [ ] Species_Insect: Scythe Sweep -> Make one attack roll against two adjacent enemies within your reach.
+- [ ] Species_Mammal: Ambush -> You deal extra damage on attacks against creatures that haven't detected you yet.
+- [ ] Species_Mammal: Blend In -> If standing near foliage, turn Invisible until you move or attack.
+- [ ] Species_Mammal: Focus -> For the rest of this turn, your ranged attacks ignore Half-Cover and Three-Quarters Cover.
+- [ ] Species_Mammal: Gore -> If you move 20ft in a straight line, your next attack deals +1d6 damage and knocks the target Prone.
+- [ ] Species_Mammal: Gut Rake -> If you have a target Grappled, make a free claw attack against them with Advantage.
+- [ ] Species_Mammal: Hangman -> Hang upside down from a stable point; Ranged attacks against you have Disadvantage.
+- [ ] Species_Mammal: Musk Spray -> Release a 5ft cloud. Creatures inside must save or be Sickened (Disadvantage on attacks).
+- [ ] Species_Mammal: Rear Kick -> When an enemy enters the space directly behind you, make a reflex attack against them.
+- [ ] Species_Mammal: Regal Roar -> Bellow to give allies within 30ft a +1 bonus to Attack Rolls for the next round.
+- [ ] Species_Mammal: Shrug It Off -> Once per encounter, reduce the damage of an incoming Bludgeoning attack by half.
+- [ ] Species_Mammal: Uncanny Dodge -> Take half damage from a Ranged Attack that you hear coming.
+- [ ] Species_Plant: Itch -> Touch attack. Target gets a rash and has Disadvantage on Concentration checks.
+- [ ] Species_Plant: Needle Burst -> When hit by melee, explode spines outward. Attackers within 5ft take Piercing damage.
+- [ ] Species_Plant: Poison Coat -> Coat a weapon or your hands in sap. Your next attack deals extra Poison damage.
+- [ ] Species_Plant: Snap Trap -> Make a bite attack. If it hits, the target is automatically Grappled.
+- [ ] Species_Plant: Splatter -> When you take Slashing damage, your blood sprays. Attacker must save (Dex) or take Acid damage.
+- [ ] Species_Plant: Sway -> Gain +2 AC against a Ranged Attack by bending your flexible body out of the way.
+- [ ] Species_Plant: Umbrella -> Shield yourself or an adjacent ally from rain, falling debris, or overhead acid attacks.
+- [ ] Species_Reptile: Bulwark -> You are immune to Critical Hits; attacks striking your shell become normal hits.
+- [ ] Species_Reptile: Flash -> When hit by a spell attack, shift colors to reflect the energy, gaining Resistance to that damage type for the hit.
+- [ ] Species_Reptile: Focus -> Analyze a target. Your next attack against them has +2 Accuracy.
+- [ ] Species_Reptile: Hypnotic Gaze -> Lock eyes with a target. They are Charmed by you until you or your allies attack them.
+- [ ] Species_Reptile: Latch On -> Jump onto a creature larger than you and attach. You move with them and have Advantage on attacks against them.
+- [ ] Species_Reptile: Lure -> Shake softly to mimic an insect buzz, distracting a target to give an ally Advantage on their next attack.
+- [ ] Species_Reptile: Reflection -> When hit by a Radiant or Light-based attack, reduce damage by half.
+- [ ] Species_Reptile: Snap -> Make a bite attack with Reach (10ft range).
+- [ ] Species_Reptile: Stabilizer -> When hit by a water-based attack or current, you remain upright and are not pushed.
+
+## ON_HIT (90)
+- [ ] School: Anumis -> Magic Missile (Auto hit).
+- [ ] School: Anumis -> Resist Magic Damage.
+- [ ] School: Aura -> Psychic Damage.
+- [ ] School: Flux -> Auto-Critical Hit.
+- [ ] School: Flux -> Deal Damage over Time.
+- [ ] School: Flux -> Move 5ft when hit (Reaction).
+- [ ] School: Flux -> Precision hit to knock down.
+- [ ] School: Flux -> Reduce incoming melee damage.
+- [ ] School: Lex -> Psychic Damage.
+- [ ] School: Lux -> Aura Damage.
+- [ ] School: Lux -> Dazzle (-1 to Hit).
+- [ ] School: Lux -> Laser Damage.
+- [ ] School: Lux -> Massive Light Damage.
+- [ ] School: Lux -> Split Beam (Multi-hit).
+- [ ] School: Mass -> Create a vacuum (Massive Damage).
+- [ ] School: Mass -> Reduce incoming Physical Damage.
+- [ ] School: Mass -> Slow Fall / No fall damage.
+- [ ] School: Motus -> AOE hit around self.
+- [ ] School: Motus -> Damage scales with Speed.
+- [ ] School: Motus -> Quick low-damage hit.
+- [ ] School: Motus -> Sonic Damage (Bypass Armor).
+- [ ] School: Motus -> Undo recent damage taken.
+- [ ] School: Nexus -> Absorb All Damage types.
+- [ ] School: Nexus -> Bounce Physical Damage.
+- [ ] School: Nexus -> Deal Acid Damage.
+- [ ] School: Nexus -> Deal Cold Damage.
+- [ ] School: Nexus -> Deal Fire Damage.
+- [ ] School: Nexus -> Deal Force Damage.
+- [ ] School: Nexus -> Deal Lightning Damage.
+- [ ] School: Nexus -> Deal Sonic Damage.
+- [ ] School: Nexus -> Nuclear Damage (Nuke).
+- [ ] School: Omen -> +1d4 to Hit.
+- [ ] School: Omen -> -1d4 to Hit.
+- [ ] School: Omen -> Enemy hits self.
+- [ ] School: Omen -> Miss hits Ally.
+- [ ] School: Ordo -> Take 0 Damage for 1 round.
+- [ ] School: Ordo -> Take damage meant for an ally.
+- [ ] School: Ratio -> Auto-Damage (No Roll).
+- [ ] School: Ratio -> Flatten Damage curve.
+- [ ] School: Ratio -> Hit Weak Point (Crit).
+- [ ] School: Ratio -> Max Damage Roll.
+- [ ] School: Ratio -> Split Damage among foes.
+- [ ] School: Ratio -> True Strike (Bonus to Hit).
+- [ ] School: Vita -> Damage Reduction (Flat).
+- [ ] School: Vita -> Minor Poison damage.
+- [ ] School: Vita -> Necrotic damage.
+- [ ] School: Vita -> Resist Elemental damage.
+- [ ] Skill: Plate -> Mastery of full plate and heavy chitin armor. You are the anvil.
+- [ ] Species_Aquatic: Abrasive -> Enemies that Grapple you take Slashing damage every turn from your rough skin.
+- [ ] Species_Aquatic: Crush -> If you have a target Grappled, deal automatic Bludgeoning damage to them.
+- [ ] Species_Aquatic: Impact Absorb -> When you take Bludgeoning damage, you can reduce the damage by your Constitution modifier.
+- [ ] Species_Aquatic: Ram -> Slam your armored body into an enemy. Deal Bludgeoning damage and shove them 5ft.
+- [ ] Species_Avian: Air Brake -> When falling or flying too fast, spread your tail to stop instantly or take 0 falling damage.
+- [ ] Species_Avian: Crush -> If you have a target Grappled, deal Bludgeoning damage equal to your Strength modifier.
+- [ ] Species_Avian: Regurgitate -> Expel stomach contents as a projectile weapon (Acid damage) or to feed an ally (Transfer HP).
+- [ ] Species_Avian: Waterproof -> You are immune to the soaked condition and resist Cold damage from water.
+- [ ] Species_Insect: Crush -> Make a Grapple attempt. If successful, the target takes Bludgeoning damage immediately.
+- [ ] Species_Insect: Hardened -> You have Resistance to one damage type (Fire, Cold, or Lightning) chosen at creation.
+- [ ] Species_Insect: Heavy Chitin -> Your base Armor Class is 13 + Dexterity modifier (max +2).
+- [ ] Species_Insect: Insulation -> You have Resistance to Acid damage and cannot be dissolved by slimes.
+- [ ] Species_Insect: Knee Strike -> If you have a target Grappled, deal Piercing damage to them automatically.
+- [ ] Species_Insect: Necrosis -> Damage dealt by your fangs cannot be healed by non-magical means for 1 hour.
+- [ ] Species_Mammal: Barbed -> Any creature that Grapples you or hits you with an Unarmed Strike takes 1d4 Piercing damage.
+- [ ] Species_Mammal: Bellow -> Shout in a 15ft cone. Targets must save or be Deafened and take Thunder damage.
+- [ ] Species_Mammal: Cat Fall -> You take half damage from falls and always land on your feet.
+- [ ] Species_Mammal: Insulated -> You are immune to extreme cold weather and resist Cold damage.
+- [ ] Species_Mammal: Parry -> When hit by melee, reduce the damage taken by 1d6 + Might.
+- [ ] Species_Mammal: Quill Shot -> Shake your body to fire loose quills in a 10ft cone (Dex save for damage).
+- [ ] Species_Mammal: Scavenge -> Eat spoiled food/raw meat to regain Hit Points as if it were a standard ration.
+- [ ] Species_Mammal: Throat Guard -> You are immune to "Critical Hits" caused by called shots to the neck or strangulation.
+- [ ] Species_Mammal: Trample -> Move through a smaller enemy's space. They must save or take damage and fall Prone.
+- [ ] Species_Plant: Bludgeon -> Use your heavy base to slam a prone enemy. Deal critical damage.
+- [ ] Species_Plant: Carpet -> Shake off needles to cover the floor. The area becomes Difficult Terrain and deals 1 damage per 5ft moved.
+- [ ] Species_Plant: Dampen -> You are constantly moist. You have Resistance to Fire damage.
+- [ ] Species_Plant: Digest -> Deal Acid damage to a creature you currently have Grappled.
+- [ ] Species_Plant: Knotty Skin -> You are immune to Critical Hits; knots deflect the blow to non-vital wood.
+- [ ] Species_Plant: Leaf Storm -> Fire a volley of sharp leaves in a 15ft cone. Deal Slashing damage (Dex save for half).
+- [ ] Species_Plant: Obscure -> Shake loose a cloud of white fluff. Creates a Heavily Obscured area (fog cloud) for 1 round.
+- [ ] Species_Plant: Photosynth -> If you rest in direct sunlight, you regain maximum Hit Points possible for your dice roll.
+- [ ] Species_Plant: Scaly Armor -> You have Resistance to Piercing damage (overlapping wooden scales).
+- [ ] Species_Plant: Seed Grenade -> Throw a cone. It explodes on impact, dealing Bludgeoning damage in a 5ft radius.
+- [ ] Species_Plant: Serrated -> Your unarmed strikes deal Slashing damage instead of Bludgeoning.
+- [ ] Species_Plant: Spike Armor -> Creatures that hit you with unarmed strikes or Grapple you take 1d4 Piercing damage.
+- [ ] Species_Plant: Trigger -> You cannot be Surprised. You feel air displacement before a hit connects.
+- [ ] Species_Reptile: Booming Call -> Amplify your voice to be heard up to 1 mile away, or to deal Thunder damage in a 10ft cone.
+- [ ] Species_Reptile: Headbutt -> Make an unarmed strike with your head. If it hits, the target is shoved back 5ft.
+- [ ] Species_Reptile: Rend -> Bite a target. If they are already bleeding or below half HP, deal double damage.
+- [ ] Species_Reptile: Slow Fall -> You take no damage from falls of 30ft or less.
+- [ ] Species_Reptile: Sticky Trap -> Snatch a small projectile (arrow/rock) out of the air to reduce damage to 0.
+- [ ] Species_Reptile: Venom Injection -> If you hit with a bite, inject venom. Target takes 1d6 Poison damage.
+
+## ON_DEFEND (5)
+- [ ] School: Motus -> Dodge AOE effects (Save).
+- [ ] School: Motus -> Teleport Dodge (Reaction).
+- [ ] School: Omen -> Uncanny Dodge.
+- [ ] School: Ratio -> Dodge action (Int based).
+- [ ] Species_Insect: Reflex Dodge -> You gain +2 to Reflex saves against Area of Effect spells (you see it coming).
+
+## ACTIVE (31)
+- [ ] School: Anumis -> Prevent Casting/Sound.
+- [ ] School: Anumis -> Return Spell to caster.
+- [ ] School: Anumis -> Stop spell being cast.
+- [ ] School: Aura -> Ally Help Action.
+- [ ] School: Lex -> Block Action type.
+- [ ] School: Lex -> Command 1 Action.
+- [ ] School: Motus -> Bonus Move action.
+- [ ] School: Motus -> Delay enemy turn/action.
+- [ ] School: Motus -> Reaction AC bonus.
+- [ ] School: Motus -> Repeat last action.
+- [ ] School: Ratio -> Negate Enemy Action.
+- [ ] Skill: Academics -> Action: Researching libraries. Lore: History, languages, and heraldry.
+- [ ] Skill: Analysis -> Action: Solving puzzles, deduction. Lore: Math, engineering, and chemistry.
+- [ ] Skill: Athletics -> Action: Swimming, climbing, breaking objects. Lore: War tactics and sieges.
+- [ ] Skill: Command -> Action: Leadership, interrogation. Lore: Religion, theology, and cults.
+- [ ] Skill: Craft -> Action: Repairing gear, smithing, hardening. Lore: Physiology and metallurgy.
+- [ ] Skill: Labor -> Action: Sustained heavy work, carrying loads. Lore: Structure and masonry.
+- [ ] Skill: Mechanism -> Action: Picking locks, disarming traps. Lore: Gears and complex devices.
+- [ ] Skill: Motion -> Action: Acrobatics, stealth, balancing. Lore: Ballistics and physics of speed.
+- [ ] Skill: Mysticism -> Action: Gut-feeling pathfinding. Lore: Folklore, spirits, and omens.
+- [ ] Skill: Nature -> Action: Survival, handling animals. Lore: Biology, ecology, and healing.
+- [ ] Skill: Performance -> Action: Acting, disguise. Lore: Art, culture, and high fashion.
+- [ ] Skill: Scouting -> Action: Tracking, spotting danger. Lore: Forensics and investigation.
+- [ ] Species_Insect: Mold Earth -> You can turn a 5ft square of ground into Difficult Terrain (rubble) as an Action.
+- [ ] Species_Insect: Unnerving -> Stare at a target. They must save (Will) or hesitate, losing their Reaction for the round.
+- [ ] Species_Mammal: Choke -> If you Grapple a target, you can prevent them from speaking or casting verbal spells.
+- [ ] Species_Mammal: Distract -> You can use the Help action as a Bonus Action by catching an enemy's gaze.
+- [ ] Species_Plant: Bad Taste -> Any creature that bites you must make a Con save or spend their next action retching (Stunned).
+- [ ] Species_Plant: Entangle -> Cast a vine to Grapple a target 10ft away. If successful, they are Restrained.
+- [ ] Species_Reptile: Hydrodynamics -> While swimming, you can Dash as a Bonus Action.
+- [ ] Species_Reptile: Mud Slinger -> Kick up mud or sand into an adjacent enemy's face. They are Blinded until they wipe it off (Action).
+
+## OTHER (477)
+- [ ] School: Anumis -> Alter Reality.
+- [ ] School: Anumis -> Block Teleportation.
+- [ ] School: Anumis -> Call Ally/Monster.
+- [ ] School: Anumis -> Create Dead Magic Zone.
+- [ ] School: Anumis -> Create Illusion (Visual).
+- [ ] School: Anumis -> Decipher text/runes.
+- [ ] School: Anumis -> Destroy Magic Item.
+- [ ] School: Anumis -> Drain Magic slots.
+- [ ] School: Anumis -> End active spell.
+- [ ] School: Anumis -> Explosive Rune defense.
+- [ ] School: Anumis -> Hold Person (Paralyze).
+- [ ] School: Anumis -> Immune to Magic.
+- [ ] School: Anumis -> Learn item properties.
+- [ ] School: Anumis -> Long range comms.
+- [ ] School: Anumis -> Magic Armor (Temp AC).
+- [ ] School: Anumis -> Modify Memory.
+- [ ] School: Anumis -> Nondetection (Anti-Scry).
+- [ ] School: Anumis -> Permanent Binding.
+- [ ] School: Anumis -> Planar Travel.
+- [ ] School: Anumis -> Prevent Stealth.
+- [ ] School: Anumis -> Protect Area (Magic Circle).
+- [ ] School: Anumis -> Send to another plane.
+- [ ] School: Anumis -> Speak any language.
+- [ ] School: Anumis -> Split incoming spell.
+- [ ] School: Anumis -> Spy on location.
+- [ ] School: Aura -> Attract attention.
+- [ ] School: Aura -> Befriend Target.
+- [ ] School: Aura -> Break Mind (Insanity).
+- [ ] School: Aura -> Buff HP/Morale.
+- [ ] School: Aura -> Buff Skill check.
+- [ ] School: Aura -> Cause Fleeing.
+- [ ] School: Aura -> Empathy Link.
+- [ ] School: Aura -> End Rage/Hostility.
+- [ ] School: Aura -> Gain Bodyguard.
+- [ ] School: Aura -> Gain Followers.
+- [ ] School: Aura -> Hesitate (Skip Turn).
+- [ ] School: Aura -> Implant Idea.
+- [ ] School: Aura -> Inception/Dreamwalk.
+- [ ] School: Aura -> Kill Spirit (Husk).
+- [ ] School: Aura -> Magical Mission.
+- [ ] School: Aura -> Modify Memory.
+- [ ] School: Aura -> Paralyze with Fear.
+- [ ] School: Aura -> Permanent Thrall.
+- [ ] School: Aura -> Read Mood/Intent.
+- [ ] School: Aura -> Rewrite Personality.
+- [ ] School: Aura -> Send Message.
+- [ ] School: Aura -> Stop Fight (Calm).
+- [ ] School: Aura -> Stun with Sadness.
+- [ ] School: Aura -> Zone of Peace.
+- [ ] School: Flux -> Allow ally to phase.
+- [ ] School: Flux -> Amorphous (Immune Crits/Grap).
+- [ ] School: Flux -> Become Ethereal (No Phys Dmg).
+- [ ] School: Flux -> Clean poison/toxin from liquid.
+- [ ] School: Flux -> Compress space to a point.
+- [ ] School: Flux -> Cut off a limb or appendage.
+- [ ] School: Flux -> Disintegrate target.
+- [ ] School: Flux -> Escape bindings/grapple.
+- [ ] School: Flux -> Find path to any location.
+- [ ] School: Flux -> Force drop of held item.
+- [ ] School: Flux -> Grab weapon/item thrown at you.
+- [ ] School: Flux -> Ignore Armor Rating (AR).
+- [ ] School: Flux -> Open simple mechanism.
+- [ ] School: Flux -> Permanent Phasing state.
+- [ ] School: Flux -> Steal equipped item.
+- [ ] School: Flux -> Switch held items instantly.
+- [ ] School: Flux -> Un-mix a potion/compound.
+- [ ] School: Flux -> Walk through solid wall.
+- [ ] School: Flux -> You appear 5ft from real spot.
+- [ ] School: Lex -> Banishment.
+- [ ] School: Lex -> Block Path (Mental).
+- [ ] School: Lex -> Contract/Bond.
+- [ ] School: Lex -> Disarm target.
+- [ ] School: Lex -> Erase from timeline.
+- [ ] School: Lex -> Force Prone.
+- [ ] School: Lex -> Force Speech.
+- [ ] School: Lex -> Gain Rank/Status.
+- [ ] School: Lex -> God-like Will.
+- [ ] School: Lex -> Immune Charm/Fear.
+- [ ] School: Lex -> Immune Magic.
+- [ ] School: Lex -> Immune to All.
+- [ ] School: Lex -> Know Alignment/Type.
+- [ ] School: Lex -> Mass Awe/Fear.
+- [ ] School: Lex -> Mental Armor.
+- [ ] School: Lex -> Mind Control.
+- [ ] School: Lex -> New Physics Law.
+- [ ] School: Lex -> Power Word Kill.
+- [ ] School: Lex -> Prevent Lying.
+- [ ] School: Lex -> Prevent Sound.
+- [ ] School: Lex -> Remove Fear/Charm.
+- [ ] School: Lex -> Resist Pain/Wound.
+- [ ] School: Lex -> Save Bonus.
+- [ ] School: Lex -> Set Rule in area.
+- [ ] School: Lex -> Stop movement.
+- [ ] School: Lex -> Unlock (Command).
+- [ ] School: Lex -> Zone of Truth.
+- [ ] School: Lux -> Alter Self Appearance.
+- [ ] School: Lux -> Blend with surroundings.
+- [ ] School: Lux -> Blind foe (1 Round).
+- [ ] School: Lux -> Block Sight Line.
+- [ ] School: Lux -> Bonus Perception.
+- [ ] School: Lux -> Burn Undead/Shadow.
+- [ ] School: Lux -> Create Decoys.
+- [ ] School: Lux -> Explosion of Light.
+- [ ] School: Lux -> Fake Terrain.
+- [ ] School: Lux -> Heat Metal (Burn).
+- [ ] School: Lux -> Hidden from Reality.
+- [ ] School: Lux -> Hologram Illusion.
+- [ ] School: Lux -> Know Everything.
+- [ ] School: Lux -> Know Location (GPS).
+- [ ] School: Lux -> Major Image (Real).
+- [ ] School: Lux -> Nuclear Light.
+- [ ] School: Lux -> Permanent Blindness.
+- [ ] School: Lux -> Postcognition (See Past).
+- [ ] School: Lux -> Remote Viewing.
+- [ ] School: Lux -> See Invisible.
+- [ ] School: Lux -> See Through Walls.
+- [ ] School: Lux -> See in Darkness.
+- [ ] School: Lux -> Trueseeing (Perfect).
+- [ ] School: Lux -> Turn Invisible.
+- [ ] School: Lux -> Visual Noise (Def Bonus).
+- [ ] School: Mass -> Absorb incoming magical projectiles.
+- [ ] School: Mass -> Anti-Gravity Aura (Enemies float).
+- [ ] School: Mass -> Boost jump height/distance significantly.
+- [ ] School: Mass -> Compress target into 2D space.
+- [ ] School: Mass -> Constrict/Squeeze target (Grapple).
+- [ ] School: Mass -> Consume light and matter.
+- [ ] School: Mass -> Create heavy Gravity Well.
+- [ ] School: Mass -> Deflect arrows/bolts aimed at you.
+- [ ] School: Mass -> Delete matter from existence.
+- [ ] School: Mass -> Destroy cover or walls instantly.
+- [ ] School: Mass -> Drag target closer to you.
+- [ ] School: Mass -> Fling enemy a long distance.
+- [ ] School: Mass -> Flip gravity (Ceiling is floor).
+- [ ] School: Mass -> Ignore Knockback or Prone effects.
+- [ ] School: Mass -> Increase weight of target (Slow).
+- [ ] School: Mass -> Infinite Mass (Cannot be hurt).
+- [ ] School: Mass -> Knock target Prone with heavy force.
+- [ ] School: Mass -> Levitate self or object.
+- [ ] School: Mass -> Orbital Strike from above.
+- [ ] School: Mass -> Reduce the weight of an object.
+- [ ] School: Mass -> Shield of debris circles you.
+- [ ] School: Mass -> Shove target away (Knockback).
+- [ ] School: Mass -> Spider Climb (Shift gravity).
+- [ ] School: Mass -> Stop a physical projectile mid-air.
+- [ ] School: Mass -> Stop all momentum in an area.
+- [ ] School: Mass -> True Flight (Control Gravity).
+- [ ] School: Mass -> You cannot be moved against your will.
+- [ ] School: Motus -> 5ft Shift (No Opportunity).
+- [ ] School: Motus -> Create decoy clones.
+- [ ] School: Motus -> Create travel gate.
+- [ ] School: Motus -> Exist twice (Double turns).
+- [ ] School: Motus -> Increase Speed buff.
+- [ ] School: Motus -> Move through enemy space.
+- [ ] School: Motus -> Non-Existence (Safe).
+- [ ] School: Motus -> Phase out of reality briefly.
+- [ ] School: Motus -> Predict exact future.
+- [ ] School: Motus -> Reload Save / Retcon.
+- [ ] School: Motus -> Restart the combat round.
+- [ ] School: Motus -> Snatch arrow/bolt from air.
+- [ ] School: Motus -> Teleport 10ft.
+- [ ] School: Motus -> Teleport 60ft.
+- [ ] School: Motus -> Time Stop (Short).
+- [ ] School: Nexus -> Absorb Shock/Electricity.
+- [ ] School: Nexus -> Bonus AC.
+- [ ] School: Nexus -> Change material type.
+- [ ] School: Nexus -> Create Matter from nothing.
+- [ ] School: Nexus -> Create weapon from raw mats.
+- [ ] School: Nexus -> Disintegrate Matter.
+- [ ] School: Nexus -> Extinguish fires instantly.
+- [ ] School: Nexus -> Fix broken item.
+- [ ] School: Nexus -> God-like durability.
+- [ ] School: Nexus -> Ignite target (DoT).
+- [ ] School: Nexus -> Lead to Gold (Wealth).
+- [ ] School: Nexus -> Mold clay/stone/wood.
+- [ ] School: Nexus -> Reflect Ray spells.
+- [ ] School: Nexus -> Resist Elements.
+- [ ] School: Nexus -> Skin becomes Diamond (High AC).
+- [ ] School: Nexus -> Skin becomes Iron.
+- [ ] School: Nexus -> Turn self to Mist.
+- [ ] School: Nexus -> Turn solid to gas (Cloud).
+- [ ] School: Nexus -> Turn solid to liquid.
+- [ ] School: Nexus -> Weaken metal item.
+- [ ] School: Nexus -> Weld metal/stone together.
+- [ ] School: Omen -> Advantage on Rolls.
+- [ ] School: Omen -> Auto-Natural 20.
+- [ ] School: Omen -> Auto-Save success.
+- [ ] School: Omen -> Best Route finding.
+- [ ] School: Omen -> Cause Prone (Bad Luck).
+- [ ] School: Omen -> Coin Flip (50/50).
+- [ ] School: Omen -> Danger Sense.
+- [ ] School: Omen -> Disadvantage on Rolls.
+- [ ] School: Omen -> Enemy drops item.
+- [ ] School: Omen -> Find Loot/Potion.
+- [ ] School: Omen -> Force Crit Fail.
+- [ ] School: Omen -> Force Reroll (Take Low).
+- [ ] School: Omen -> Force specific Roll.
+- [ ] School: Omen -> Hint of Future.
+- [ ] School: Omen -> Instant Kill.
+- [ ] School: Omen -> Locate Object.
+- [ ] School: Omen -> Narrative Truth.
+- [ ] School: Omen -> Random Buff effect.
+- [ ] School: Omen -> Reroll 1s.
+- [ ] School: Omen -> Retcon History.
+- [ ] School: Omen -> Survive with 1HP.
+- [ ] School: Omen -> Talk to Dead.
+- [ ] School: Omen -> Total Loss/Destruction.
+- [ ] School: Omen -> Weapon Failure.
+- [ ] School: Ordo -> Arcane Lock (Unopenable).
+- [ ] School: Ordo -> Become immovable.
+- [ ] School: Ordo -> Bind target's legs/wheels.
+- [ ] School: Ordo -> Bury target under earth.
+- [ ] School: Ordo -> Cannot die this round.
+- [ ] School: Ordo -> Create a safe hut/bunker.
+- [ ] School: Ordo -> Create a temporary structure.
+- [ ] School: Ordo -> Create an obstacle to trip foes.
+- [ ] School: Ordo -> Create cover instantly.
+- [ ] School: Ordo -> Create new land/island.
+- [ ] School: Ordo -> Create permanent wall/tower.
+- [ ] School: Ordo -> Create walls around target.
+- [ ] School: Ordo -> End Time for target.
+- [ ] School: Ordo -> Feign Death (Indistinguishable).
+- [ ] School: Ordo -> Freeze target in time/space.
+- [ ] School: Ordo -> Gain Temporary HP.
+- [ ] School: Ordo -> Ignore hunger/thirst/fatigue.
+- [ ] School: Ordo -> Invulnerable Structure.
+- [ ] School: Ordo -> Keep a door or object shut.
+- [ ] School: Ordo -> Make target fragile (Shatter).
+- [ ] School: Ordo -> Natural Armor bonus.
+- [ ] School: Ordo -> Run forever without tiring.
+- [ ] School: Ordo -> Stand up from Prone instantly.
+- [ ] School: Ordo -> Stop decay on object/body.
+- [ ] School: Ordo -> Stop target movement completely.
+- [ ] School: Ordo -> Stop target's heart (Save).
+- [ ] School: Ordo -> Turn target to stone (Save).
+- [ ] School: Ratio -> Avoid Traps automatically.
+- [ ] School: Ratio -> Bonus to Saving Throw.
+- [ ] School: Ratio -> Brain Melt (Int Dmg).
+- [ ] School: Ratio -> Cannot Fail rolls.
+- [ ] School: Ratio -> Change Physics Constant.
+- [ ] School: Ratio -> Create Automaton.
+- [ ] School: Ratio -> Create Difficult Terrain.
+- [ ] School: Ratio -> Debuff Enemy Armor.
+- [ ] School: Ratio -> Delete Entity (Math).
+- [ ] School: Ratio -> Ignore Cover penalty.
+- [ ] School: Ratio -> Impose Rule (No Flight).
+- [ ] School: Ratio -> Invent new device.
+- [ ] School: Ratio -> Know exact number of items.
+- [ ] School: Ratio -> Learn Lore/History.
+- [ ] School: Ratio -> Psychic Stun.
+- [ ] School: Ratio -> Reconstruct Scene.
+- [ ] School: Ratio -> See Enemy Stats/HP.
+- [ ] School: Ratio -> Set Triggered Spell.
+- [ ] School: Ratio -> Small AC Bonus.
+- [ ] School: Ratio -> Trap enemy in logic loop.
+- [ ] School: Ratio -> Unlock Puzzle/Lock.
+- [ ] School: Vita -> Animate Plant/Tree.
+- [ ] School: Vita -> Auto-Life on death.
+- [ ] School: Vita -> Create new Lifeform.
+- [ ] School: Vita -> Cure Disease/Immunity.
+- [ ] School: Vita -> Cure Poison/Toxin.
+- [ ] School: Vita -> Detect Life (Radar).
+- [ ] School: Vita -> Drain Stat (Str/Dex).
+- [ ] School: Vita -> Eat minion to heal full.
+- [ ] School: Vita -> Enlarge self or target.
+- [ ] School: Vita -> Gain Temporary HP.
+- [ ] School: Vita -> Grow Gills/Claws/Wings.
+- [ ] School: Vita -> Grow spare body.
+- [ ] School: Vita -> Heal HP every turn.
+- [ ] School: Vita -> Heal minor wounds.
+- [ ] School: Vita -> Inflict Disease.
+- [ ] School: Vita -> Kill creature type.
+- [ ] School: Vita -> Life Bond (Share HP).
+- [ ] School: Vita -> Lifesteal (Heal for Dmg).
+- [ ] School: Vita -> Massive Rapid DoT.
+- [ ] School: Vita -> Natural Armor skin.
+- [ ] School: Vita -> Resurrect dead.
+- [ ] School: Vita -> Spreading DoT infection.
+- [ ] School: Vita -> Stasis Heal (Full recovery).
+- [ ] School: Vita -> Stop Bleeding immediately.
+- [ ] School: Vita -> Turn into bugs (Immune).
+- [ ] School: Vita -> Vines restrict movement.
+- [ ] Skill: Bio -> Mastery of armor made from once-living things (furs, bone, wood).
+- [ ] Skill: Catalysts -> Mastery of items that channel magic, such as scrolls, wands, and staves.
+- [ ] Skill: Coercion -> Using relentless pressure and "The Gaze" to corner an opponent.
+- [ ] Skill: Curios -> Mastery of gaming sets, dice, tarot, and tokens of luck/fate.
+- [ ] Skill: Discipline -> Resisting fear, mind control, and maintaining order.
+- [ ] Skill: Empathy -> Sensing the "vibe," emotional intent, and defusing anger.
+- [ ] Skill: Etiquette -> Using rank, protocol, and proper titles as a social shield.
+- [ ] Skill: Great Weapons -> Mastery of heavy impact weapons like greatswords and mauls.
+- [ ] Skill: Guile -> Feigning ignorance, hiding emotions, and deceiving others.
+- [ ] Skill: Insight -> Using cold reading to detect lies and expose secrets.
+- [ ] Skill: Intimidation -> Using physical presence and threats of violence to force compliance.
+- [ ] Skill: Leather -> Mastery of light hides and padded armor for maximum mobility.
+- [ ] Skill: Mail -> Mastery of chain and scale. Relying on reliability and faith.
+- [ ] Skill: Melee Exotics -> Mastery of performance weapons like whips and nunchaku. Flow and style.
+- [ ] Skill: Persuasion -> Using allure and inspiration to seduce or motivate others.
+- [ ] Skill: Poise -> Being naturally radiant, likable, and projecting health/status.
+- [ ] Skill: Ranged Exotics -> Mastery of tricky tools like bolas and blowguns.
+- [ ] Skill: Regalia -> Mastery of banners, warhorns, and badges to signal and rally troops.
+- [ ] Skill: Repartee -> Using wit, mockery, and stinging insults to fluster an opponent.
+- [ ] Skill: Rhetoric -> Using facts, logic, and debate to dismantle arguments.
+- [ ] Skill: Rigs -> Mastery of utility vests, ghillie suits, and "deep pockets" preparation.
+- [ ] Skill: Robes -> Mastery of runed cloth and woven wards that require academic understanding.
+- [ ] Skill: Snares -> Mastery of caltrops, tripwires, and smoke bombs to control the ground.
+- [ ] Skill: Stoicism -> Mastery of the ego. Remaining unbothered by insults, pain, or fear.
+- [ ] Skill: The Ballistics -> Mastery of high-draw-weight ranged weapons like warbows and ballistae.
+- [ ] Skill: The Blades -> Mastery of precision weapons like rapiers, shivs, and stilettos.
+- [ ] Skill: The Blast -> Mastery of chemical weapons, grenades, scatterguns, and fuse times.
+- [ ] Skill: The Fist -> Mastery of unarmed strikes, cestus, and claws. Clinch fighting.
+- [ ] Skill: The Long Blade -> Mastery of technical swordsmanship like katanas and arming swords.
+- [ ] Skill: The Long Shot -> Mastery of sniper rifles, crossbows, and flintlocks. Lining up the shot.
+- [ ] Skill: The Polearms -> Mastery of spears and halberds. Keeping enemies at exact range.
+- [ ] Skill: The Shield -> Mastery of bucklers, heaters, and tower shields for active cover and bashing.
+- [ ] Skill: The Simple Shot -> Mastery of simple kinetic weapons like slings and shortbows.
+- [ ] Skill: The Thrown -> Mastery of balanced throwing weapons like knives, axes, and kunai.
+- [ ] Skill: Tinctures -> Mastery of non-magical aids like herbal salves, bandages, and stimulants.
+- [ ] Species_Aquatic: Anchor -> Advantage on checks to avoid being Moved, Shoved, or Pulled against your will.
+- [ ] Species_Aquatic: Bio-Sense -> Detect the heartbeat (electricity) of living creatures within 10ft, even through walls.
+- [ ] Species_Aquatic: Buoyancy -> You naturally float in water. You have Advantage on Athletics checks to swim in rough water.
+- [ ] Species_Aquatic: Compact -> Fold your limbs tight against your body to fit into spaces one size smaller than you.
+- [ ] Species_Aquatic: Deep Dive -> You can hold your breath for 1 hour.
+- [ ] Species_Aquatic: Deep Dweller -> You are immune to the effects of extreme water pressure.
+- [ ] Species_Aquatic: Dexterity -> Advantage on Sleight of Hand checks to manipulate fine mechanisms.
+- [ ] Species_Aquatic: Elastic -> Stretch your arm to reach an object or ledge up to 10ft away.
+- [ ] Species_Aquatic: Flashbang -> Flare your light. Creatures within 10ft must save (Con) or be Blinded for 1 round.
+- [ ] Species_Aquatic: Friction -> You have Advantage on checks to maintain a Grapple on slippery enemies.
+- [ ] Species_Aquatic: Hydro-Hearing -> You have no penalty to Perception (Hearing) while underwater.
+- [ ] Species_Aquatic: Lure -> Shine your light in darkness. A creature that looks at it must save (Will) or move toward you.
+- [ ] Species_Aquatic: Neurotoxin -> Sting a target. They must save (Con) or be Paralyzed for 1 round.
+- [ ] Species_Aquatic: Pelagic Camo -> Advantage on Stealth checks while submerged in water.
+- [ ] Species_Aquatic: Propel -> You gain a Swim Speed equal to your Walk Speed.
+- [ ] Species_Aquatic: Push -> Blast a wave of water at a target. They must save (Strength) or be pushed back 10ft.
+- [ ] Species_Aquatic: Reach -> Your melee reach increases by 5ft.
+- [ ] Species_Aquatic: Regrow -> If you lose teeth (or break them on armor), they grow back fully after a Long Rest.
+- [ ] Species_Aquatic: Resonate -> Amplify your voice. All creatures in 30ft can hear you clearly, even underwater.
+- [ ] Species_Aquatic: Respire -> You can breathe underwater as long as your skin remains wet.
+- [ ] Species_Aquatic: Sandpaper -> Your skin acts as a grinding tool; you can wear through ropes or wood over time.
+- [ ] Species_Aquatic: Scuttle -> You can move sideways or backwards at full speed without penalty.
+- [ ] Species_Aquatic: Shield Arm -> You can use your large claw as a Shield (+2 AC) if you are not holding anything in it.
+- [ ] Species_Aquatic: Slick -> Spray ink on the ground. It becomes difficult terrain; creatures must save (Dex) or fall Prone.
+- [ ] Species_Aquatic: Slippery -> Advantage on checks to escape a Grapple or bindings.
+- [ ] Species_Aquatic: Snatch -> Catch a small moving object (fish, arrow, coin) out of the air/water.
+- [ ] Species_Aquatic: Spout -> Spray a high-pressure jet of water. Extinguish fires or blind a target for 1 turn.
+- [ ] Species_Aquatic: Squeeze -> Move through any opening large enough for your beak/head without slowing down.
+- [ ] Species_Aquatic: Stabilizer -> You cannot be knocked Prone while underwater.
+- [ ] Species_Aquatic: Storage -> Swallow an object size Small or smaller to carry it safely in your pouch.
+- [ ] Species_Aquatic: Streamline -> Your Swim speed increases by +10ft (drag reduction).
+- [ ] Species_Aquatic: Wall Cling -> You can adhere to smooth surfaces (glass, wet stone) and climb without checks.
+- [ ] Species_Avian: Aggressor -> You gain a +2 bonus to Initiative rolls.
+- [ ] Species_Avian: Bore -> You can drill a small hole through wood or stone (1 inch/minute) to spy or create a peephole.
+- [ ] Species_Avian: Deep Breath -> You can hold your breath for 15 minutes (high altitude adaptation).
+- [ ] Species_Avian: Display -> Spread your tail. Creatures in a 15ft cone must save (Charisma) or be Charmed or Intimidated.
+- [ ] Species_Avian: Dual Tone -> You can produce two distinct sounds at once (e.g., speaking while whistling a signal).
+- [ ] Species_Avian: Fragile Speed -> Your Fly speed increases by +10ft, but your max carrying capacity is halved.
+- [ ] Species_Avian: Grip -> You have Advantage on checks to maintain a grapple on a target you have bitten.
+- [ ] Species_Avian: Gullet Storage -> You can swallow an item up to the size of a potion bottle and hold it safely in your crop.
+- [ ] Species_Avian: Gust -> Flap powerfully to create a 15ft line of wind. Creatures must save (Strength) or be pushed back 10ft.
+- [ ] Species_Avian: Harmony -> Advantage on Persuasion checks when speaking to intelligent creatures.
+- [ ] Species_Avian: Inspire -> Sing a chord to give one ally a d6 Inspiration Die to use on their next roll.
+- [ ] Species_Avian: Mimicry -> Perfectly imitate a voice or sound you have heard (e.g., a baby crying, a guard captain's order).
+- [ ] Species_Avian: Night Vision -> You can see in Dim Light as if it were Bright Light.
+- [ ] Species_Avian: No Escape -> If you swallow a creature (Small or Tiny), they cannot escape your stomach.
+- [ ] Species_Avian: Omen -> Fluff your feathers and stare. Target must save (Willpower) or be Frightened (Bad Luck omen).
+- [ ] Species_Avian: Paddle -> You gain a Swim Speed equal to your Walk Speed.
+- [ ] Species_Avian: Perch -> You can sleep comfortably on narrow branches or ropes without falling.
+- [ ] Species_Avian: Project Voice -> Your voice carries clearly over loud noises (storms, battle) up to 300ft.
+- [ ] Species_Avian: Resonance -> Hum a low frequency. Allies touching you recover from the Frightened condition.
+- [ ] Species_Avian: Rhythm -> Entrancing movement. A target watching you has Disadvantage on Wisdom saves until you stop.
+- [ ] Species_Avian: Sense Current -> You automatically detect changes in air pressure (incoming storms or invisible flying enemies).
+- [ ] Species_Avian: Shadow Blend -> Advantage on Stealth checks when in Dim Light or Darkness.
+- [ ] Species_Avian: Signal -> Raise/Lower crest to send a silent coded message to allies within sight.
+- [ ] Species_Avian: Slick Escape -> Advantage on checks to escape a Grapple or bindings (ropes/nets).
+- [ ] Species_Avian: Soar -> You can fly for hours without exhaustion if you are high enough to catch thermals.
+- [ ] Species_Avian: Static Camo -> Press yourself against tree bark or stone. You become Invisible as long as you do not move.
+- [ ] Species_Avian: Sunder -> Strike an object or armor. Reduce the target's Armor Class (AC) by 1 until repaired.
+- [ ] Species_Avian: Surface Dash -> You can run across the surface of water for one turn without sinking.
+- [ ] Species_Avian: Telescopic -> You suffer no penalties on Perception checks due to distance. You can read lips from 100ft.
+- [ ] Species_Avian: Vigilant -> You cannot be Surprised while you are awake.
+- [ ] Species_Insect: Air Bubble -> You can trap air in your shell, allowing you to function underwater for 1 hour.
+- [ ] Species_Insect: Anchor -> You cannot be moved against your will while standing on natural earth/stone.
+- [ ] Species_Insect: Burrow -> You gain a Burrow speed of 15ft through loose soil or sand.
+- [ ] Species_Insect: Compression -> You can squeeze through gaps as small as 1 inch wide without slowing down.
+- [ ] Species_Insect: Entrench -> Dig a foxhole in 1 round. You gain Half-Cover while standing in that spot.
+- [ ] Species_Insect: Latch -> Advantage on checks to avoid being Disarmed or dropping an item.
+- [ ] Species_Insect: Multi-Task -> Use an object, reload a weapon, or open a door while keeping your main hands full.
+- [ ] Species_Insect: Omni-Vision -> You can see in all directions at once. You cannot be Flanked.
+- [ ] Species_Insect: Power Leap -> Jump up to 30ft horizontally or 15ft vertically without a running start.
+- [ ] Species_Insect: Purge -> Advantage on saving throws against inhaled gases or Cloudkill effects.
+- [ ] Species_Insect: Rally -> Release a scent cloud. Allies within 10ft gain Temporary HP equal to your Proficiency Bonus.
+- [ ] Species_Insect: Scent Trail -> You can track a creature by pheromones or scent with Advantage on Survival checks.
+- [ ] Species_Insect: Sever -> When an enemy misses you with a weapon, attempt to Disarm them (catch the blade).
+- [ ] Species_Insect: Silk Rope -> Produce up to 50ft of silk rope per day. It is strong enough to hold your weight.
+- [ ] Species_Insect: Slippery -> Advantage on checks to escape a Grapple or Web trap.
+- [ ] Species_Insect: Spell Shield -> Gain Advantage on a Saving Throw against a magical spell or effect.
+- [ ] Species_Insect: Stability -> You have Advantage on saving throws against being knocked Prone or Shoved.
+- [ ] Species_Insect: Tremorsense -> You can detect the location of any moving creature on the ground within 30ft.
+- [ ] Species_Insect: Unreadable -> You are immune to Insight checks; creatures cannot determine your emotions or next move.
+- [ ] Species_Insect: Vault -> When an enemy misses you, you can jump over them to the opposite side (flanking position).
+- [ ] Species_Insect: Wall Walk -> You can walk on walls and ceilings at full speed.
+- [ ] Species_Insect: Warning -> You have Advantage on Intimidation checks (biological warning signals).
+- [ ] Species_Insect: Web Shot -> Fire a sticky net (30ft). Target must save (Dex) or be Restrained.
+- [ ] Species_Mammal: Climber -> You gain a Climb Speed equal to your Walk Speed.
+- [ ] Species_Mammal: Crunch -> You can bite through inanimate objects (wood, bone, soft metal) to sunder items.
+- [ ] Species_Mammal: Eavesdrop -> You suffer no penalties to Perception when listening through doors or thin walls.
+- [ ] Species_Mammal: Groom -> Clean self or ally to remove smells and dirt, curing minor diseases or parasites.
+- [ ] Species_Mammal: Gulp -> Swallow a small object (key/ring) instantly to hide it, regurgitating it later safely.
+- [ ] Species_Mammal: Lockjaw -> Creatures grappled by your mouth have Disadvantage on checks to escape.
+- [ ] Species_Mammal: Lunge -> Your melee reach increases by +5 feet on your turn.
+- [ ] Species_Mammal: Mark Territory -> Mark an area. Animals of your species recognize your claim and may be Friendly or Fearful.
+- [ ] Species_Mammal: Night Hunter -> You treat Dim Light as Bright Light and Darkness as Dim Light.
+- [ ] Species_Mammal: Paddle -> You gain a Swim Speed equal to your Walk Speed.
+- [ ] Species_Mammal: Pickpocket -> Attempt to steal an item from an adjacent distracted target (Sleight of Hand).
+- [ ] Species_Mammal: Puppy Dog -> When targeted by a humanoid, force a Will save. On fail, they must choose a different target.
+- [ ] Species_Mammal: Radar -> Listen to a door to identify exactly how many creatures are in the next room.
+- [ ] Species_Mammal: Rudder -> Gain Advantage on checks to avoid being knocked Prone or Shoved.
+- [ ] Species_Mammal: Silence -> Moving at normal speed does not impose penalties on Stealth checks.
+- [ ] Species_Mammal: Silent Fabric -> Your fur makes no sound. Gain Advantage on Stealth checks in quiet environments.
+- [ ] Species_Mammal: Slippery -> Automatically succeed on a check to escape a Grapple.
+- [ ] Species_Mammal: Snowshoe -> You ignore Difficult Terrain caused by snow, mud, or sand.
+- [ ] Species_Mammal: Sonar -> Instantly pinpoint the location of any invisible or hidden moving creature within 30ft.
+- [ ] Species_Mammal: Swing -> You can move through trees, rafters, or hanging ropes at full speed without checks.
+- [ ] Species_Mammal: Tactile Grip -> Use your tail to press buttons, pull levers, or lift light items (under 5lbs) behind you.
+- [ ] Species_Mammal: Third Hand -> Hold a torch or light item in your tail, leaving your hands free for weapons/shields.
+- [ ] Species_Mammal: Toxin Filter -> You have Advantage on saving throws against Ingested Poisons.
+- [ ] Species_Mammal: Waterproof -> You dry off instantly and never suffer penalties from being wet or cold due to water.
+- [ ] Species_Plant: Ancient Visage -> You have Advantage on Insight and History checks (you look wise and old).
+- [ ] Species_Plant: Bait -> Grow a delicious-smelling fruit to lure hungry beasts into a trap.
+- [ ] Species_Plant: Barricade -> Lock your limbs together to create a wall of spikes. You provide Three-Quarters Cover to allies behind you.
+- [ ] Species_Plant: Camouflage -> Change leaf color to match the season/terrain. Gain Advantage on Stealth checks.
+- [ ] Species_Plant: Climb -> You gain a Climb Speed equal to your Walk Speed.
+- [ ] Species_Plant: Deterrent -> You have Advantage on Intimidation checks (you look painful to touch).
+- [ ] Species_Plant: Drift -> When falling, deploy seeds/fluff to float down safely (Feather Fall).
+- [ ] Species_Plant: Earth Glide -> Sink into the earth and move through soil/dirt (Burrow speed 15ft).
+- [ ] Species_Plant: Evergreen -> You remain conscious and active even in magical sleep or freezing temperatures.
+- [ ] Species_Plant: Goodberry -> Grow a magical fruit. Eating it restores 1d4 HP (Max 3 per day).
+- [ ] Species_Plant: Hardwood -> Your base Armor Class is 14 + Dexterity modifier (max +2).
+- [ ] Species_Plant: Latch -> Advantage on checks to maintain a Grapple (the thorns hook into the enemy).
+- [ ] Species_Plant: Reach -> Your melee reach increases by 5ft.
+- [ ] Species_Plant: Rooted -> Advantage on saving throws to resist being Shoved or knocked Prone.
+- [ ] Species_Plant: Scream -> Let the wind pass through you to create a terrifying shriek. Enemies save vs Fear.
+- [ ] Species_Plant: Signal -> Communicate with allies over long distances (1 mile) using wind sounds.
+- [ ] Species_Plant: Solar Beam -> Absorb light and fire a dazzling beam. Target must save or be Blinded.
+- [ ] Species_Plant: Spore Cloud -> Release a cloud adjacent to you. Enemies must save (Con) or be Poisoned for 1 minute.
+- [ ] Species_Plant: Stability -> You are immune to being pushed or pulled against your will while on soil.
+- [ ] Species_Plant: Sticky -> Advantage on checks to climb or hold onto objects (Velcro-like grip).
+- [ ] Species_Plant: Tremorsense -> You can detect the location of moving creatures on the ground within 20ft.
+- [ ] Species_Plant: Water Store -> You can survive for 7 days without water.
+- [ ] Species_Plant: Weatherproof -> You ignore penalties from extreme heat or extreme cold environments.
+- [ ] Species_Reptile: Active Camo -> Change your skin color to match the environment, gaining Advantage on Stealth checks.
+- [ ] Species_Reptile: Amphibious -> You can breathe air and water.
+- [ ] Species_Reptile: Breath Holder -> You can hold your breath for up to 1 hour.
+- [ ] Species_Reptile: Cold Sense -> You automatically detect sudden drops in temperature or the presence of undead (cold bodies).
+- [ ] Species_Reptile: Concealed -> You appear unarmed even when inspected. You have Advantage on Deception checks regarding your threat level.
+- [ ] Species_Reptile: Counter-Balance -> You have Advantage on Acrobatics checks to maintain balance on narrow ledges.
+- [ ] Species_Reptile: Dazzle -> Reflect light into an enemy's eyes. They must save or be Blinded for 1 turn.
+- [ ] Species_Reptile: Dig In -> You cannot be moved against your will (Shoved/Pulled) while you are conscious and on solid ground.
+- [ ] Species_Reptile: Drag -> If you have a creature Grappled in your mouth, you can move them up to 10ft without a check.
+- [ ] Species_Reptile: Feign Torpor -> Enter a state that perfectly mimics a statue or dead body. Perception checks to spot life have Disadvantage.
+- [ ] Species_Reptile: Filter Feeder -> Advantage on saving throws against inhaled poisons or gas clouds.
+- [ ] Species_Reptile: Frill Display -> Flair your crest. Make an Intimidation check against a target's Insight to stun them with fear.
+- [ ] Species_Reptile: Glide -> When falling, you can move 2ft horizontally for every 1ft you fall.
+- [ ] Species_Reptile: Grip -> Advantage on saving throws to resist being disarmed or knocked off a surface.
+- [ ] Species_Reptile: Lash -> Make a Grapple attempt or disarm attempt against a target 10ft away.
+- [ ] Species_Reptile: Nictitating Membrane -> You are immune to being Blinded by sand, dust, or bright light.
+- [ ] Species_Reptile: Night Vision -> You can see in Dim Light as if it were Bright Light.
+- [ ] Species_Reptile: No Escape -> Enemies have Disadvantage on checks to escape your Grapple (teeth hook inwards).
+- [ ] Species_Reptile: Peripheral Sight -> You can see 180 degrees. You cannot be Flanked.
+- [ ] Species_Reptile: Spiked Armor -> Your natural Armor Class increases by +1.
+- [ ] Species_Reptile: Swimmer -> You gain a Swim Speed equal to your Walk Speed.
+- [ ] Species_Reptile: Tail Sweep -> Spin in a circle. All creatures within 5ft must save (Reflex) or be knocked Prone.
+- [ ] Species_Reptile: Taste the Air -> Detect the presence of poisons, magic, or fresh blood within 60ft by tasting scent particles.
+- [ ] Species_Reptile: Thermal Sight -> Detect living creatures within 30ft even through darkness, fog, or invisibility.
+- [ ] Species_Reptile: Thermoregulation -> You recover from Exhaustion twice as fast during a Short Rest by regulating heat through your crest.
+- [ ] Species_Reptile: Tracker -> You gain Advantage on Survival checks to track a creature you have smelled before.
+- [ ] Species_Reptile: Wall Crawler -> You can walk on vertical surfaces and ceilings without needing to make ability checks.
+- [ ] Species_Reptile: Warning Shake -> Rattle loudly. Enemies within 15ft must save (Willpower) or be Frightened for 1 round.
+- [ ] Species_Reptile: Withdraw -> Pull your limbs and head inside your shell to gain +5 AC until the start of your next turn.
+

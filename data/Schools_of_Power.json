@@ -1,0 +1,2958 @@
+{
+    "magic_system_version": "5.0",
+    "philosophy": "12 Schools x 10 Tiers x 3 Types",
+    "schools": {
+        "Mass": {
+            "attribute": "Might",
+            "damage_type": "Force",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Push",
+                    "damage_type": "Force",
+                    "description": "Shove target away (Knockback).",
+                    "logic_tag": "OFFENSE:FORCE:PUSH"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Brace",
+                    "damage_type": "Force",
+                    "description": "Ignore Knockback or Prone effects.",
+                    "logic_tag": "DEFENSE:FORCE:BRACE"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Lift",
+                    "damage_type": "Force",
+                    "description": "Reduce the weight of an object.",
+                    "logic_tag": "UTILITY:FORCE:LIFT"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Pull",
+                    "damage_type": "Force",
+                    "description": "Drag target closer to you.",
+                    "logic_tag": "OFFENSE:FORCE:PULL"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Catch",
+                    "damage_type": "Force",
+                    "description": "Stop a physical projectile mid-air.",
+                    "logic_tag": "DEFENSE:FORCE:CATCH"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Jump",
+                    "damage_type": "Force",
+                    "description": "Boost jump height/distance significantly.",
+                    "logic_tag": "UTILITY:FORCE:JUMP"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Slam",
+                    "damage_type": "Force",
+                    "description": "Knock target Prone with heavy force.",
+                    "logic_tag": "OFFENSE:FORCE:SLAM"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Repel",
+                    "damage_type": "Force",
+                    "description": "Deflect arrows/bolts aimed at you.",
+                    "logic_tag": "DEFENSE:FORCE:REPEL"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Burden",
+                    "damage_type": "Force",
+                    "description": "Increase weight of target (Slow).",
+                    "logic_tag": "UTILITY:FORCE:BURDEN"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Crush",
+                    "damage_type": "Force",
+                    "description": "Constrict/Squeeze target (Grapple).",
+                    "logic_tag": "OFFENSE:FORCE:CRUSH"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Dense",
+                    "damage_type": "Force",
+                    "description": "Reduce incoming Physical Damage.",
+                    "logic_tag": "DEFENSE:FORCE:DENSE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Climb",
+                    "damage_type": "Force",
+                    "description": "Spider Climb (Shift gravity).",
+                    "logic_tag": "UTILITY:FORCE:CLIMB"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Launch",
+                    "damage_type": "Force",
+                    "description": "Fling enemy a long distance.",
+                    "logic_tag": "OFFENSE:FORCE:LAUNCH"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Orbit",
+                    "damage_type": "Force",
+                    "description": "Shield of debris circles you.",
+                    "logic_tag": "DEFENSE:FORCE:ORBIT"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Feather",
+                    "damage_type": "Force",
+                    "description": "Slow Fall / No fall damage.",
+                    "logic_tag": "UTILITY:FORCE:FEATHER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Breach",
+                    "damage_type": "Force",
+                    "description": "Destroy cover or walls instantly.",
+                    "logic_tag": "OFFENSE:FORCE:BREACH"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Heavy",
+                    "damage_type": "Force",
+                    "description": "You cannot be moved against your will.",
+                    "logic_tag": "DEFENSE:FORCE:HEAVY"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Float",
+                    "damage_type": "Force",
+                    "description": "Levitate self or object.",
+                    "logic_tag": "UTILITY:FORCE:FLOAT"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Flatten",
+                    "damage_type": "Force",
+                    "description": "Compress target into 2D space.",
+                    "logic_tag": "OFFENSE:FORCE:FLATTEN"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Nullify",
+                    "damage_type": "Force",
+                    "description": "Stop all momentum in an area.",
+                    "logic_tag": "DEFENSE:FORCE:NULLIFY"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Fly",
+                    "damage_type": "Force",
+                    "description": "True Flight (Control Gravity).",
+                    "logic_tag": "UTILITY:FORCE:FLY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Implode",
+                    "damage_type": "Force",
+                    "description": "Create a vacuum (Massive Damage).",
+                    "logic_tag": "OFFENSE:FORCE:IMPLODE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Field",
+                    "damage_type": "Force",
+                    "description": "Anti-Gravity Aura (Enemies float).",
+                    "logic_tag": "DEFENSE:FORCE:FIELD"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Reverse",
+                    "damage_type": "Force",
+                    "description": "Flip gravity (Ceiling is floor).",
+                    "logic_tag": "UTILITY:FORCE:REVERSE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Meteor",
+                    "damage_type": "Force",
+                    "description": "Orbital Strike from above.",
+                    "logic_tag": "OFFENSE:FORCE:METEOR"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Event Horizon",
+                    "damage_type": "Force",
+                    "description": "Absorb incoming magical projectiles.",
+                    "logic_tag": "DEFENSE:FORCE:EVENT_HORIZON"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Well",
+                    "damage_type": "Force",
+                    "description": "Create heavy Gravity Well.",
+                    "logic_tag": "UTILITY:FORCE:WELL"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Erase",
+                    "damage_type": "Force",
+                    "description": "Delete matter from existence.",
+                    "logic_tag": "OFFENSE:FORCE:ERASE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Invincible",
+                    "damage_type": "Force",
+                    "description": "Infinite Mass (Cannot be hurt).",
+                    "logic_tag": "DEFENSE:FORCE:INVINCIBLE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Black Hole",
+                    "damage_type": "Force",
+                    "description": "Consume light and matter.",
+                    "logic_tag": "UTILITY:FORCE:BLACK_HOLE"
+                }
+            ]
+        },
+        "Ordo": {
+            "attribute": "Endurance",
+            "damage_type": "Cold",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Halt",
+                    "damage_type": "Cold",
+                    "description": "Stop target movement completely.",
+                    "logic_tag": "OFFENSE:COLD:HALT"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Stand",
+                    "damage_type": "Cold",
+                    "description": "Stand up from Prone instantly.",
+                    "logic_tag": "DEFENSE:COLD:STAND"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Hold",
+                    "damage_type": "Cold",
+                    "description": "Keep a door or object shut.",
+                    "logic_tag": "UTILITY:COLD:HOLD"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Trip",
+                    "damage_type": "Cold",
+                    "description": "Create an obstacle to trip foes.",
+                    "logic_tag": "OFFENSE:COLD:TRIP"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Skin",
+                    "damage_type": "Cold",
+                    "description": "Natural Armor bonus.",
+                    "logic_tag": "DEFENSE:COLD:SKIN"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Sustain",
+                    "damage_type": "Cold",
+                    "description": "Ignore hunger/thirst/fatigue.",
+                    "logic_tag": "UTILITY:COLD:SUSTAIN"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Trap",
+                    "damage_type": "Cold",
+                    "description": "Bind target's legs/wheels.",
+                    "logic_tag": "OFFENSE:COLD:TRAP"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Anchor",
+                    "damage_type": "Cold",
+                    "description": "Become immovable.",
+                    "logic_tag": "DEFENSE:COLD:ANCHOR"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Bridge",
+                    "damage_type": "Cold",
+                    "description": "Create a temporary structure.",
+                    "logic_tag": "UTILITY:COLD:BRIDGE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Cage",
+                    "damage_type": "Cold",
+                    "description": "Create walls around target.",
+                    "logic_tag": "OFFENSE:COLD:CAGE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Barricade",
+                    "damage_type": "Cold",
+                    "description": "Create cover instantly.",
+                    "logic_tag": "DEFENSE:COLD:BARRICADE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Preserve",
+                    "damage_type": "Cold",
+                    "description": "Stop decay on object/body.",
+                    "logic_tag": "UTILITY:COLD:PRESERVE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Petrify",
+                    "damage_type": "Cold",
+                    "description": "Turn target to stone (Save).",
+                    "logic_tag": "OFFENSE:COLD:PETRIFY"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Reinforce",
+                    "damage_type": "Cold",
+                    "description": "Gain Temporary HP.",
+                    "logic_tag": "DEFENSE:COLD:REINFORCE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Shelter",
+                    "damage_type": "Cold",
+                    "description": "Create a safe hut/bunker.",
+                    "logic_tag": "UTILITY:COLD:SHELTER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Entomb",
+                    "damage_type": "Cold",
+                    "description": "Bury target under earth.",
+                    "logic_tag": "OFFENSE:COLD:ENTOMB"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Absorb",
+                    "damage_type": "Cold",
+                    "description": "Take damage meant for an ally.",
+                    "logic_tag": "DEFENSE:COLD:ABSORB"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Lock",
+                    "damage_type": "Cold",
+                    "description": "Arcane Lock (Unopenable).",
+                    "logic_tag": "UTILITY:COLD:LOCK"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Stasis",
+                    "damage_type": "Cold",
+                    "description": "Freeze target in time/space.",
+                    "logic_tag": "OFFENSE:COLD:STASIS"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Reflect",
+                    "damage_type": "Cold",
+                    "description": "Return damage to attacker.",
+                    "logic_tag": "DEFENSE:COLD:REFLECT"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Statue",
+                    "damage_type": "Cold",
+                    "description": "Feign Death (Indistinguishable).",
+                    "logic_tag": "UTILITY:COLD:STATUE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Arrest",
+                    "damage_type": "Cold",
+                    "description": "Stop target's heart (Save).",
+                    "logic_tag": "OFFENSE:COLD:ARREST"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Immunity",
+                    "damage_type": "Cold",
+                    "description": "Take 0 Damage for 1 round.",
+                    "logic_tag": "DEFENSE:COLD:IMMUNITY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Stamina",
+                    "damage_type": "Cold",
+                    "description": "Run forever without tiring.",
+                    "logic_tag": "UTILITY:COLD:STAMINA"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Crystallize",
+                    "damage_type": "Cold",
+                    "description": "Make target fragile (Shatter).",
+                    "logic_tag": "OFFENSE:COLD:CRYSTALLIZE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Fortress",
+                    "damage_type": "Cold",
+                    "description": "Invulnerable Structure.",
+                    "logic_tag": "DEFENSE:COLD:FORTRESS"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Monolith",
+                    "damage_type": "Cold",
+                    "description": "Create permanent wall/tower.",
+                    "logic_tag": "UTILITY:COLD:MONOLITH"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Stop",
+                    "damage_type": "Cold",
+                    "description": "End Time for target.",
+                    "logic_tag": "OFFENSE:COLD:STOP"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Eternal",
+                    "damage_type": "Cold",
+                    "description": "Cannot die this round.",
+                    "logic_tag": "DEFENSE:COLD:ETERNAL"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Foundation",
+                    "damage_type": "Cold",
+                    "description": "Create new land/island.",
+                    "logic_tag": "UTILITY:COLD:FOUNDATION"
+                }
+            ]
+        },
+        "Flux": {
+            "attribute": "Finesse",
+            "damage_type": "Acid",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Pierce",
+                    "damage_type": "Acid",
+                    "description": "Ignore Armor Rating (AR).",
+                    "logic_tag": "OFFENSE:ACID:PIERCE"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Dodge",
+                    "damage_type": "Acid",
+                    "description": "Bonus to AC vs one attack.",
+                    "logic_tag": "DEFENSE:ACID:DODGE"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Unlock",
+                    "damage_type": "Acid",
+                    "description": "Open simple mechanism.",
+                    "logic_tag": "UTILITY:ACID:UNLOCK"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Trip",
+                    "damage_type": "Acid",
+                    "description": "Precision hit to knock down.",
+                    "logic_tag": "OFFENSE:ACID:TRIP"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Parry",
+                    "damage_type": "Acid",
+                    "description": "Reduce incoming melee damage.",
+                    "logic_tag": "DEFENSE:ACID:PARRY"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Untie",
+                    "damage_type": "Acid",
+                    "description": "Escape bindings/grapple.",
+                    "logic_tag": "UTILITY:ACID:UNTIE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Disarm",
+                    "damage_type": "Acid",
+                    "description": "Force drop of held item.",
+                    "logic_tag": "OFFENSE:ACID:DISARM"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Catch",
+                    "damage_type": "Acid",
+                    "description": "Grab weapon/item thrown at you.",
+                    "logic_tag": "DEFENSE:ACID:CATCH"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Swap",
+                    "damage_type": "Acid",
+                    "description": "Switch held items instantly.",
+                    "logic_tag": "UTILITY:ACID:SWAP"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Bleed",
+                    "damage_type": "Acid",
+                    "description": "Deal Damage over Time.",
+                    "logic_tag": "OFFENSE:ACID:BLEED"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Deflect",
+                    "damage_type": "Acid",
+                    "description": "Redirect attack to adjacent.",
+                    "logic_tag": "DEFENSE:ACID:DEFLECT"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Guide",
+                    "damage_type": "Acid",
+                    "description": "Next attack is Auto-Hit.",
+                    "logic_tag": "UTILITY:ACID:GUIDE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Snatch",
+                    "damage_type": "Acid",
+                    "description": "Steal equipped item.",
+                    "logic_tag": "OFFENSE:ACID:SNATCH"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Blur",
+                    "damage_type": "Acid",
+                    "description": "Attacks have Disadvantage.",
+                    "logic_tag": "DEFENSE:ACID:BLUR"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Filter",
+                    "damage_type": "Acid",
+                    "description": "Clean poison/toxin from liquid.",
+                    "logic_tag": "UTILITY:ACID:FILTER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Sever",
+                    "damage_type": "Acid",
+                    "description": "Cut off a limb or appendage.",
+                    "logic_tag": "OFFENSE:ACID:SEVER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Flow",
+                    "damage_type": "Acid",
+                    "description": "Move 5ft when hit (Reaction).",
+                    "logic_tag": "DEFENSE:ACID:FLOW"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Phase",
+                    "damage_type": "Acid",
+                    "description": "Walk through solid wall.",
+                    "logic_tag": "UTILITY:ACID:PHASE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Needle",
+                    "damage_type": "Acid",
+                    "description": "Line attack through enemies.",
+                    "logic_tag": "OFFENSE:ACID:NEEDLE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Ghost",
+                    "damage_type": "Acid",
+                    "description": "Become Ethereal (No Phys Dmg).",
+                    "logic_tag": "DEFENSE:ACID:GHOST"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Pass",
+                    "damage_type": "Acid",
+                    "description": "Allow ally to phase.",
+                    "logic_tag": "UTILITY:ACID:PASS"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Ricochet",
+                    "damage_type": "Acid",
+                    "description": "Attack chains to new targets.",
+                    "logic_tag": "OFFENSE:ACID:RICOCHET"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Displace",
+                    "damage_type": "Acid",
+                    "description": "You appear 5ft from real spot.",
+                    "logic_tag": "DEFENSE:ACID:DISPLACE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Navigate",
+                    "damage_type": "Acid",
+                    "description": "Find path to any location.",
+                    "logic_tag": "UTILITY:ACID:NAVIGATE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Atomize",
+                    "damage_type": "Acid",
+                    "description": "Disintegrate target.",
+                    "logic_tag": "OFFENSE:ACID:ATOMIZE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Liquid",
+                    "damage_type": "Acid",
+                    "description": "Amorphous (Immune Crits/Grap).",
+                    "logic_tag": "DEFENSE:ACID:LIQUID"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Separate",
+                    "damage_type": "Acid",
+                    "description": "Un-mix a potion/compound.",
+                    "logic_tag": "UTILITY:ACID:SEPARATE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Perfect",
+                    "damage_type": "Acid",
+                    "description": "Auto-Critical Hit.",
+                    "logic_tag": "OFFENSE:ACID:PERFECT"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Intangible",
+                    "damage_type": "Acid",
+                    "description": "Permanent Phasing state.",
+                    "logic_tag": "DEFENSE:ACID:INTANGIBLE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Singularity",
+                    "damage_type": "Acid",
+                    "description": "Compress space to a point.",
+                    "logic_tag": "UTILITY:ACID:SINGULARITY"
+                }
+            ]
+        },
+        "Motus": {
+            "attribute": "Reflexes",
+            "damage_type": "Sonic",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Snap",
+                    "damage_type": "Sonic",
+                    "description": "Quick low-damage hit.",
+                    "logic_tag": "OFFENSE:SONIC:SNAP"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Duck",
+                    "damage_type": "Sonic",
+                    "description": "Reaction AC bonus.",
+                    "logic_tag": "DEFENSE:SONIC:DUCK"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Step",
+                    "damage_type": "Sonic",
+                    "description": "5ft Shift (No Opportunity).",
+                    "logic_tag": "UTILITY:SONIC:STEP"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Barrage",
+                    "damage_type": "Sonic",
+                    "description": "Multi-hit attack (Low Dmg).",
+                    "logic_tag": "OFFENSE:SONIC:BARRAGE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Weave",
+                    "damage_type": "Sonic",
+                    "description": "Move through enemy space.",
+                    "logic_tag": "DEFENSE:SONIC:WEAVE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Dash",
+                    "damage_type": "Sonic",
+                    "description": "Bonus Move action.",
+                    "logic_tag": "UTILITY:SONIC:DASH"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Spin",
+                    "damage_type": "Sonic",
+                    "description": "AOE hit around self.",
+                    "logic_tag": "OFFENSE:SONIC:SPIN"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Evasion",
+                    "damage_type": "Sonic",
+                    "description": "Dodge AOE effects (Save).",
+                    "logic_tag": "DEFENSE:SONIC:EVASION"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Leap",
+                    "damage_type": "Sonic",
+                    "description": "Teleport 10ft.",
+                    "logic_tag": "UTILITY:SONIC:LEAP"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Vibrate",
+                    "damage_type": "Sonic",
+                    "description": "Sonic Damage (Bypass Armor).",
+                    "logic_tag": "OFFENSE:SONIC:VIBRATE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Catch",
+                    "damage_type": "Sonic",
+                    "description": "Snatch arrow/bolt from air.",
+                    "logic_tag": "DEFENSE:SONIC:CATCH"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Haste",
+                    "damage_type": "Sonic",
+                    "description": "Increase Speed buff.",
+                    "logic_tag": "UTILITY:SONIC:HASTE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Blitz",
+                    "damage_type": "Sonic",
+                    "description": "Line Charge attack.",
+                    "logic_tag": "OFFENSE:SONIC:BLITZ"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Blink",
+                    "damage_type": "Sonic",
+                    "description": "Teleport Dodge (Reaction).",
+                    "logic_tag": "DEFENSE:SONIC:BLINK"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Warp",
+                    "damage_type": "Sonic",
+                    "description": "Teleport 60ft.",
+                    "logic_tag": "UTILITY:SONIC:WARP"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Impact",
+                    "damage_type": "Sonic",
+                    "description": "Damage scales with Speed.",
+                    "logic_tag": "OFFENSE:SONIC:IMPACT"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Afterimage",
+                    "damage_type": "Sonic",
+                    "description": "Create decoy clones.",
+                    "logic_tag": "DEFENSE:SONIC:AFTERIMAGE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Loop",
+                    "damage_type": "Sonic",
+                    "description": "Repeat last action.",
+                    "logic_tag": "UTILITY:SONIC:LOOP"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Age",
+                    "damage_type": "Sonic",
+                    "description": "Rapid aging attack.",
+                    "logic_tag": "OFFENSE:SONIC:AGE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Rewind",
+                    "damage_type": "Sonic",
+                    "description": "Undo recent damage taken.",
+                    "logic_tag": "DEFENSE:SONIC:REWIND"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Portal",
+                    "damage_type": "Sonic",
+                    "description": "Create travel gate.",
+                    "logic_tag": "UTILITY:SONIC:PORTAL"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Lag",
+                    "damage_type": "Sonic",
+                    "description": "Delay enemy turn/action.",
+                    "logic_tag": "OFFENSE:SONIC:LAG"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Stutter",
+                    "damage_type": "Sonic",
+                    "description": "Phase out of reality briefly.",
+                    "logic_tag": "DEFENSE:SONIC:STUTTER"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Stop",
+                    "damage_type": "Sonic",
+                    "description": "Time Stop (Short).",
+                    "logic_tag": "UTILITY:SONIC:STOP"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Paradox",
+                    "damage_type": "Sonic",
+                    "description": "Exist twice (Double turns).",
+                    "logic_tag": "OFFENSE:SONIC:PARADOX"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Reset",
+                    "damage_type": "Sonic",
+                    "description": "Restart the combat round.",
+                    "logic_tag": "DEFENSE:SONIC:RESET"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Timeline",
+                    "damage_type": "Sonic",
+                    "description": "Predict exact future.",
+                    "logic_tag": "UTILITY:SONIC:TIMELINE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Infinite",
+                    "damage_type": "Sonic",
+                    "description": "Attack every target instantly.",
+                    "logic_tag": "OFFENSE:SONIC:INFINITE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Gone",
+                    "damage_type": "Sonic",
+                    "description": "Non-Existence (Safe).",
+                    "logic_tag": "DEFENSE:SONIC:GONE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Reality",
+                    "damage_type": "Sonic",
+                    "description": "Reload Save / Retcon.",
+                    "logic_tag": "UTILITY:SONIC:REALITY"
+                }
+            ]
+        },
+        "Vita": {
+            "attribute": "Vitality",
+            "damage_type": "Poison",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Sting",
+                    "damage_type": "Poison",
+                    "description": "Minor Poison damage.",
+                    "logic_tag": "OFFENSE:POISON:STING"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Clot",
+                    "damage_type": "Poison",
+                    "description": "Stop Bleeding immediately.",
+                    "logic_tag": "DEFENSE:POISON:CLOT"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Mend",
+                    "damage_type": "Poison",
+                    "description": "Heal minor wounds.",
+                    "logic_tag": "UTILITY:POISON:MEND"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Tangle",
+                    "damage_type": "Poison",
+                    "description": "Vines restrict movement.",
+                    "logic_tag": "OFFENSE:POISON:TANGLE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Bark",
+                    "damage_type": "Poison",
+                    "description": "Natural Armor skin.",
+                    "logic_tag": "DEFENSE:POISON:BARK"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Purge",
+                    "damage_type": "Poison",
+                    "description": "Cure Poison/Toxin.",
+                    "logic_tag": "UTILITY:POISON:PURGE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Rot",
+                    "damage_type": "Poison",
+                    "description": "Necrotic damage.",
+                    "logic_tag": "OFFENSE:POISON:ROT"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Resist",
+                    "damage_type": "Poison",
+                    "description": "Resist Elemental damage.",
+                    "logic_tag": "DEFENSE:POISON:RESIST"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Grow",
+                    "damage_type": "Poison",
+                    "description": "Enlarge self or target.",
+                    "logic_tag": "UTILITY:POISON:GROW"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Drain",
+                    "damage_type": "Poison",
+                    "description": "Lifesteal (Heal for Dmg).",
+                    "logic_tag": "OFFENSE:POISON:DRAIN"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Adrenaline",
+                    "damage_type": "Poison",
+                    "description": "Gain Temporary HP.",
+                    "logic_tag": "DEFENSE:POISON:ADRENALINE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Adapt",
+                    "damage_type": "Poison",
+                    "description": "Grow Gills/Claws/Wings.",
+                    "logic_tag": "UTILITY:POISON:ADAPT"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Infect",
+                    "damage_type": "Poison",
+                    "description": "Inflict Disease.",
+                    "logic_tag": "OFFENSE:POISON:INFECT"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Regen",
+                    "damage_type": "Poison",
+                    "description": "Heal HP every turn.",
+                    "logic_tag": "DEFENSE:POISON:REGEN"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Sense",
+                    "damage_type": "Poison",
+                    "description": "Detect Life (Radar).",
+                    "logic_tag": "UTILITY:POISON:SENSE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Wither",
+                    "damage_type": "Poison",
+                    "description": "Drain Stat (Str/Dex).",
+                    "logic_tag": "OFFENSE:POISON:WITHER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Carapace",
+                    "damage_type": "Poison",
+                    "description": "Damage Reduction (Flat).",
+                    "logic_tag": "DEFENSE:POISON:CARAPACE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Awaken",
+                    "damage_type": "Poison",
+                    "description": "Animate Plant/Tree.",
+                    "logic_tag": "UTILITY:POISON:AWAKEN"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Devour",
+                    "damage_type": "Poison",
+                    "description": "Eat minion to heal full.",
+                    "logic_tag": "OFFENSE:POISON:DEVOUR"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Immune",
+                    "damage_type": "Poison",
+                    "description": "Cure Disease/Immunity.",
+                    "logic_tag": "DEFENSE:POISON:IMMUNE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Link",
+                    "damage_type": "Poison",
+                    "description": "Life Bond (Share HP).",
+                    "logic_tag": "UTILITY:POISON:LINK"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Plague",
+                    "damage_type": "Poison",
+                    "description": "Spreading DoT infection.",
+                    "logic_tag": "OFFENSE:POISON:PLAGUE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Cocoon",
+                    "damage_type": "Poison",
+                    "description": "Stasis Heal (Full recovery).",
+                    "logic_tag": "DEFENSE:POISON:COCOON"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Revive",
+                    "damage_type": "Poison",
+                    "description": "Resurrect dead.",
+                    "logic_tag": "UTILITY:POISON:REVIVE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Cancer",
+                    "damage_type": "Poison",
+                    "description": "Massive Rapid DoT.",
+                    "logic_tag": "OFFENSE:POISON:CANCER"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Swarm",
+                    "damage_type": "Poison",
+                    "description": "Turn into bugs (Immune).",
+                    "logic_tag": "DEFENSE:POISON:SWARM"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Clone",
+                    "damage_type": "Poison",
+                    "description": "Grow spare body.",
+                    "logic_tag": "UTILITY:POISON:CLONE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Extinct",
+                    "damage_type": "Poison",
+                    "description": "Kill creature type.",
+                    "logic_tag": "OFFENSE:POISON:EXTINCT"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Reborn",
+                    "damage_type": "Poison",
+                    "description": "Auto-Life on death.",
+                    "logic_tag": "DEFENSE:POISON:REBORN"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Genesis",
+                    "damage_type": "Poison",
+                    "description": "Create new Lifeform.",
+                    "logic_tag": "UTILITY:POISON:GENESIS"
+                }
+            ]
+        },
+        "Nexus": {
+            "attribute": "Fortitude",
+            "damage_type": "Fire",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Heat",
+                    "damage_type": "Fire",
+                    "description": "Deal Fire Damage.",
+                    "logic_tag": "OFFENSE:FIRE:HEAT"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Harden",
+                    "damage_type": "Fire",
+                    "description": "Bonus AC.",
+                    "logic_tag": "DEFENSE:FIRE:HARDEN"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Shape",
+                    "damage_type": "Fire",
+                    "description": "Mold clay/stone/wood.",
+                    "logic_tag": "UTILITY:FIRE:SHAPE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Chill",
+                    "damage_type": "Fire",
+                    "description": "Deal Cold Damage.",
+                    "logic_tag": "OFFENSE:FIRE:CHILL"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Insulate",
+                    "damage_type": "Fire",
+                    "description": "Resist Elements.",
+                    "logic_tag": "DEFENSE:FIRE:INSULATE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Fuse",
+                    "damage_type": "Fire",
+                    "description": "Weld metal/stone together.",
+                    "logic_tag": "UTILITY:FIRE:FUSE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Shock",
+                    "damage_type": "Fire",
+                    "description": "Deal Lightning Damage.",
+                    "logic_tag": "OFFENSE:FIRE:SHOCK"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Ground",
+                    "damage_type": "Fire",
+                    "description": "Absorb Shock/Electricity.",
+                    "logic_tag": "DEFENSE:FIRE:GROUND"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Rust",
+                    "damage_type": "Fire",
+                    "description": "Weaken metal item.",
+                    "logic_tag": "UTILITY:FIRE:RUST"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Burn",
+                    "damage_type": "Fire",
+                    "description": "Ignite target (DoT).",
+                    "logic_tag": "OFFENSE:FIRE:BURN"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Plate",
+                    "damage_type": "Fire",
+                    "description": "Skin becomes Iron.",
+                    "logic_tag": "DEFENSE:FIRE:PLATE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Repair",
+                    "damage_type": "Fire",
+                    "description": "Fix broken item.",
+                    "logic_tag": "UTILITY:FIRE:REPAIR"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Melt",
+                    "damage_type": "Fire",
+                    "description": "Deal Acid Damage.",
+                    "logic_tag": "OFFENSE:FIRE:MELT"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Cool",
+                    "damage_type": "Fire",
+                    "description": "Extinguish fires instantly.",
+                    "logic_tag": "DEFENSE:FIRE:COOL"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Forge",
+                    "damage_type": "Fire",
+                    "description": "Create weapon from raw mats.",
+                    "logic_tag": "UTILITY:FIRE:FORGE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Shatter",
+                    "damage_type": "Fire",
+                    "description": "Deal Sonic Damage.",
+                    "logic_tag": "OFFENSE:FIRE:SHATTER"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Diamond",
+                    "damage_type": "Fire",
+                    "description": "Skin becomes Diamond (High AC).",
+                    "logic_tag": "DEFENSE:FIRE:DIAMOND"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Transmute",
+                    "damage_type": "Fire",
+                    "description": "Change material type.",
+                    "logic_tag": "UTILITY:FIRE:TRANSMUTE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Explode",
+                    "damage_type": "Fire",
+                    "description": "Deal Force Damage.",
+                    "logic_tag": "OFFENSE:FIRE:EXPLODE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Rubber",
+                    "damage_type": "Fire",
+                    "description": "Bounce Physical Damage.",
+                    "logic_tag": "DEFENSE:FIRE:RUBBER"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Liquify",
+                    "damage_type": "Fire",
+                    "description": "Turn solid to liquid.",
+                    "logic_tag": "UTILITY:FIRE:LIQUIFY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Vaporize",
+                    "damage_type": "Fire",
+                    "description": "Turn solid to gas (Cloud).",
+                    "logic_tag": "OFFENSE:FIRE:VAPORIZE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Mirror",
+                    "damage_type": "Fire",
+                    "description": "Reflect Ray spells.",
+                    "logic_tag": "DEFENSE:FIRE:MIRROR"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Gas",
+                    "damage_type": "Fire",
+                    "description": "Turn self to Mist.",
+                    "logic_tag": "UTILITY:FIRE:GAS"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Fission",
+                    "damage_type": "Fire",
+                    "description": "Nuclear Damage (Nuke).",
+                    "logic_tag": "OFFENSE:FIRE:FISSION"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Void",
+                    "damage_type": "Fire",
+                    "description": "Absorb All Damage types.",
+                    "logic_tag": "DEFENSE:FIRE:VOID"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Gold",
+                    "damage_type": "Fire",
+                    "description": "Lead to Gold (Wealth).",
+                    "logic_tag": "UTILITY:FIRE:GOLD"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Unmake",
+                    "damage_type": "Fire",
+                    "description": "Disintegrate Matter.",
+                    "logic_tag": "OFFENSE:FIRE:UNMAKE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Indestructible",
+                    "damage_type": "Fire",
+                    "description": "God-like durability.",
+                    "logic_tag": "DEFENSE:FIRE:INDESTRUCTIBLE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Matter",
+                    "damage_type": "Fire",
+                    "description": "Create Matter from nothing.",
+                    "logic_tag": "UTILITY:FIRE:MATTER"
+                }
+            ]
+        },
+        "Anumis": {
+            "attribute": "Knowledge",
+            "damage_type": "Arcane",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Mark",
+                    "damage_type": "Arcane",
+                    "description": "Prevent Stealth.",
+                    "logic_tag": "OFFENSE:ARCANE:MARK"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Shield",
+                    "damage_type": "Arcane",
+                    "description": "Magic Armor (Temp AC).",
+                    "logic_tag": "DEFENSE:ARCANE:SHIELD"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Read",
+                    "damage_type": "Arcane",
+                    "description": "Decipher text/runes.",
+                    "logic_tag": "UTILITY:ARCANE:READ"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Bolt",
+                    "damage_type": "Arcane",
+                    "description": "Magic Missile (Auto hit).",
+                    "logic_tag": "OFFENSE:ARCANE:BOLT"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Mask",
+                    "damage_type": "Arcane",
+                    "description": "Nondetection (Anti-Scry).",
+                    "logic_tag": "DEFENSE:ARCANE:MASK"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Identify",
+                    "damage_type": "Arcane",
+                    "description": "Learn item properties.",
+                    "logic_tag": "UTILITY:ARCANE:IDENTIFY"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Bind",
+                    "damage_type": "Arcane",
+                    "description": "Hold Person (Paralyze).",
+                    "logic_tag": "OFFENSE:ARCANE:BIND"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Circle",
+                    "damage_type": "Arcane",
+                    "description": "Protect Area (Magic Circle).",
+                    "logic_tag": "DEFENSE:ARCANE:CIRCLE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Tongues",
+                    "damage_type": "Arcane",
+                    "description": "Speak any language.",
+                    "logic_tag": "UTILITY:ARCANE:TONGUES"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Silence",
+                    "damage_type": "Arcane",
+                    "description": "Prevent Casting/Sound.",
+                    "logic_tag": "OFFENSE:ARCANE:SILENCE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Dampen",
+                    "damage_type": "Arcane",
+                    "description": "Resist Magic Damage.",
+                    "logic_tag": "DEFENSE:ARCANE:DAMPEN"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Light",
+                    "damage_type": "Arcane",
+                    "description": "Create Illusion (Visual).",
+                    "logic_tag": "UTILITY:ARCANE:LIGHT"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Dispel",
+                    "damage_type": "Arcane",
+                    "description": "End active spell.",
+                    "logic_tag": "OFFENSE:ARCANE:DISPEL"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Counter",
+                    "damage_type": "Arcane",
+                    "description": "Stop spell being cast.",
+                    "logic_tag": "DEFENSE:ARCANE:COUNTER"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Summon",
+                    "damage_type": "Arcane",
+                    "description": "Call Ally/Monster.",
+                    "logic_tag": "UTILITY:ARCANE:SUMMON"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Banish",
+                    "damage_type": "Arcane",
+                    "description": "Send to another plane.",
+                    "logic_tag": "OFFENSE:ARCANE:BANISH"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Trap",
+                    "damage_type": "Arcane",
+                    "description": "Explosive Rune defense.",
+                    "logic_tag": "DEFENSE:ARCANE:TRAP"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Message",
+                    "damage_type": "Arcane",
+                    "description": "Long range comms.",
+                    "logic_tag": "UTILITY:ARCANE:MESSAGE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Anchor",
+                    "damage_type": "Arcane",
+                    "description": "Block Teleportation.",
+                    "logic_tag": "OFFENSE:ARCANE:ANCHOR"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Reflection",
+                    "damage_type": "Arcane",
+                    "description": "Return Spell to caster.",
+                    "logic_tag": "DEFENSE:ARCANE:REFLECTION"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Scry",
+                    "damage_type": "Arcane",
+                    "description": "Spy on location.",
+                    "logic_tag": "UTILITY:ARCANE:SCRY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Unbind",
+                    "damage_type": "Arcane",
+                    "description": "Destroy Magic Item.",
+                    "logic_tag": "OFFENSE:ARCANE:UNBIND"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Prism",
+                    "damage_type": "Arcane",
+                    "description": "Split incoming spell.",
+                    "logic_tag": "DEFENSE:ARCANE:PRISM"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Gate",
+                    "damage_type": "Arcane",
+                    "description": "Planar Travel.",
+                    "logic_tag": "UTILITY:ARCANE:GATE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Seal",
+                    "damage_type": "Arcane",
+                    "description": "Permanent Binding.",
+                    "logic_tag": "OFFENSE:ARCANE:SEAL"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Invulnerability",
+                    "damage_type": "Arcane",
+                    "description": "Immune to Magic.",
+                    "logic_tag": "DEFENSE:ARCANE:INVULNERABILITY"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Memory",
+                    "damage_type": "Arcane",
+                    "description": "Modify Memory.",
+                    "logic_tag": "UTILITY:ARCANE:MEMORY"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Source",
+                    "damage_type": "Arcane",
+                    "description": "Drain Magic slots.",
+                    "logic_tag": "OFFENSE:ARCANE:SOURCE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Antimagic",
+                    "damage_type": "Arcane",
+                    "description": "Create Dead Magic Zone.",
+                    "logic_tag": "DEFENSE:ARCANE:ANTIMAGIC"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Wish",
+                    "damage_type": "Arcane",
+                    "description": "Alter Reality.",
+                    "logic_tag": "UTILITY:ARCANE:WISH"
+                }
+            ]
+        },
+        "Ratio": {
+            "attribute": "Logic",
+            "damage_type": "Shock",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Angle",
+                    "damage_type": "Shock",
+                    "description": "Ignore Cover penalty.",
+                    "logic_tag": "OFFENSE:SHOCK:ANGLE"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Predict",
+                    "damage_type": "Shock",
+                    "description": "Small AC Bonus.",
+                    "logic_tag": "DEFENSE:SHOCK:PREDICT"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Count",
+                    "damage_type": "Shock",
+                    "description": "Know exact number of items.",
+                    "logic_tag": "UTILITY:SHOCK:COUNT"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Target",
+                    "damage_type": "Shock",
+                    "description": "True Strike (Bonus to Hit).",
+                    "logic_tag": "OFFENSE:SHOCK:TARGET"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Calculate",
+                    "damage_type": "Shock",
+                    "description": "Dodge action (Int based).",
+                    "logic_tag": "DEFENSE:SHOCK:CALCULATE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Scan",
+                    "damage_type": "Shock",
+                    "description": "See Enemy Stats/HP.",
+                    "logic_tag": "UTILITY:SHOCK:SCAN"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Fracture",
+                    "damage_type": "Shock",
+                    "description": "Hit Weak Point (Crit).",
+                    "logic_tag": "OFFENSE:SHOCK:FRACTURE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Pattern",
+                    "damage_type": "Shock",
+                    "description": "Avoid Traps automatically.",
+                    "logic_tag": "DEFENSE:SHOCK:PATTERN"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Solve",
+                    "damage_type": "Shock",
+                    "description": "Unlock Puzzle/Lock.",
+                    "logic_tag": "UTILITY:SHOCK:SOLVE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Deconstruct",
+                    "damage_type": "Shock",
+                    "description": "Debuff Enemy Armor.",
+                    "logic_tag": "OFFENSE:SHOCK:DECONSTRUCT"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Vector",
+                    "damage_type": "Shock",
+                    "description": "Deflect Ranged Attack.",
+                    "logic_tag": "DEFENSE:SHOCK:VECTOR"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Optimize",
+                    "damage_type": "Shock",
+                    "description": "Max Damage Roll.",
+                    "logic_tag": "UTILITY:SHOCK:OPTIMIZE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Grid",
+                    "damage_type": "Shock",
+                    "description": "Create Difficult Terrain.",
+                    "logic_tag": "OFFENSE:SHOCK:GRID"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Correction",
+                    "damage_type": "Shock",
+                    "description": "Bonus to Saving Throw.",
+                    "logic_tag": "DEFENSE:SHOCK:CORRECTION"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Analyze",
+                    "damage_type": "Shock",
+                    "description": "Learn Lore/History.",
+                    "logic_tag": "UTILITY:SHOCK:ANALYZE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Algorithm",
+                    "damage_type": "Shock",
+                    "description": "Auto-Damage (No Roll).",
+                    "logic_tag": "OFFENSE:SHOCK:ALGORITHM"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Loop",
+                    "damage_type": "Shock",
+                    "description": "Trap enemy in logic loop.",
+                    "logic_tag": "DEFENSE:SHOCK:LOOP"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Program",
+                    "damage_type": "Shock",
+                    "description": "Set Triggered Spell.",
+                    "logic_tag": "UTILITY:SHOCK:PROGRAM"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Divide",
+                    "damage_type": "Shock",
+                    "description": "Split Damage among foes.",
+                    "logic_tag": "OFFENSE:SHOCK:DIVIDE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Equilibrium",
+                    "damage_type": "Shock",
+                    "description": "Flatten Damage curve.",
+                    "logic_tag": "DEFENSE:SHOCK:EQUILIBRIUM"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Construct",
+                    "damage_type": "Shock",
+                    "description": "Create Automaton.",
+                    "logic_tag": "UTILITY:SHOCK:CONSTRUCT"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Error",
+                    "damage_type": "Shock",
+                    "description": "Psychic Stun.",
+                    "logic_tag": "OFFENSE:SHOCK:ERROR"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Axiom",
+                    "damage_type": "Shock",
+                    "description": "Impose Rule (No Flight).",
+                    "logic_tag": "DEFENSE:SHOCK:AXIOM"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Deduce",
+                    "damage_type": "Shock",
+                    "description": "Reconstruct Scene.",
+                    "logic_tag": "UTILITY:SHOCK:DEDUCE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Paradox",
+                    "damage_type": "Shock",
+                    "description": "Brain Melt (Int Dmg).",
+                    "logic_tag": "OFFENSE:SHOCK:PARADOX"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Null",
+                    "damage_type": "Shock",
+                    "description": "Negate Enemy Action.",
+                    "logic_tag": "DEFENSE:SHOCK:NULL"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Blueprint",
+                    "damage_type": "Shock",
+                    "description": "Invent new device.",
+                    "logic_tag": "UTILITY:SHOCK:BLUEPRINT"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Zero",
+                    "damage_type": "Shock",
+                    "description": "Delete Entity (Math).",
+                    "logic_tag": "OFFENSE:SHOCK:ZERO"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Absolute",
+                    "damage_type": "Shock",
+                    "description": "Cannot Fail rolls.",
+                    "logic_tag": "DEFENSE:SHOCK:ABSOLUTE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Rewrite",
+                    "damage_type": "Shock",
+                    "description": "Change Physics Constant.",
+                    "logic_tag": "UTILITY:SHOCK:REWRITE"
+                }
+            ]
+        },
+        "Lux": {
+            "attribute": "Awareness",
+            "damage_type": "Radiant",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Flare",
+                    "damage_type": "Radiant",
+                    "description": "Dazzle (-1 to Hit).",
+                    "logic_tag": "OFFENSE:RADIANT:FLARE"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Blur",
+                    "damage_type": "Radiant",
+                    "description": "Visual Noise (Def Bonus).",
+                    "logic_tag": "DEFENSE:RADIANT:BLUR"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Spot",
+                    "damage_type": "Radiant",
+                    "description": "Bonus Perception.",
+                    "logic_tag": "UTILITY:RADIANT:SPOT"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Beam",
+                    "damage_type": "Radiant",
+                    "description": "Laser Damage.",
+                    "logic_tag": "OFFENSE:RADIANT:BEAM"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Flash",
+                    "damage_type": "Radiant",
+                    "description": "Blind foe (1 Round).",
+                    "logic_tag": "DEFENSE:RADIANT:FLASH"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Darkvision",
+                    "damage_type": "Radiant",
+                    "description": "See in Darkness.",
+                    "logic_tag": "UTILITY:RADIANT:DARKVISION"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Searing",
+                    "damage_type": "Radiant",
+                    "description": "Burn Undead/Shadow.",
+                    "logic_tag": "OFFENSE:RADIANT:SEARING"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Mirror",
+                    "damage_type": "Radiant",
+                    "description": "Create Decoys.",
+                    "logic_tag": "DEFENSE:RADIANT:MIRROR"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Reveal",
+                    "damage_type": "Radiant",
+                    "description": "See Invisible.",
+                    "logic_tag": "UTILITY:RADIANT:REVEAL"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Focus",
+                    "damage_type": "Radiant",
+                    "description": "Heat Metal (Burn).",
+                    "logic_tag": "OFFENSE:RADIANT:FOCUS"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Invis",
+                    "damage_type": "Radiant",
+                    "description": "Turn Invisible.",
+                    "logic_tag": "DEFENSE:RADIANT:INVIS"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "X-Ray",
+                    "damage_type": "Radiant",
+                    "description": "See Through Walls.",
+                    "logic_tag": "UTILITY:RADIANT:X-RAY"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Prism",
+                    "damage_type": "Radiant",
+                    "description": "Split Beam (Multi-hit).",
+                    "logic_tag": "OFFENSE:RADIANT:PRISM"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Camouflage",
+                    "damage_type": "Radiant",
+                    "description": "Blend with surroundings.",
+                    "logic_tag": "DEFENSE:RADIANT:CAMOUFLAGE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Project",
+                    "damage_type": "Radiant",
+                    "description": "Hologram Illusion.",
+                    "logic_tag": "UTILITY:RADIANT:PROJECT"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Radiate",
+                    "damage_type": "Radiant",
+                    "description": "Aura Damage.",
+                    "logic_tag": "OFFENSE:RADIANT:RADIATE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Disguise",
+                    "damage_type": "Radiant",
+                    "description": "Alter Self Appearance.",
+                    "logic_tag": "DEFENSE:RADIANT:DISGUISE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "True Sight",
+                    "damage_type": "Radiant",
+                    "description": "Trueseeing (Perfect).",
+                    "logic_tag": "UTILITY:RADIANT:TRUE_SIGHT"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Sun",
+                    "damage_type": "Radiant",
+                    "description": "Massive Light Damage.",
+                    "logic_tag": "OFFENSE:RADIANT:SUN"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Darkness",
+                    "damage_type": "Radiant",
+                    "description": "Block Sight Line.",
+                    "logic_tag": "DEFENSE:RADIANT:DARKNESS"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Zone",
+                    "damage_type": "Radiant",
+                    "description": "Remote Viewing.",
+                    "logic_tag": "UTILITY:RADIANT:ZONE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Blind",
+                    "damage_type": "Radiant",
+                    "description": "Permanent Blindness.",
+                    "logic_tag": "OFFENSE:RADIANT:BLIND"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Phantom",
+                    "damage_type": "Radiant",
+                    "description": "Major Image (Real).",
+                    "logic_tag": "DEFENSE:RADIANT:PHANTOM"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "History",
+                    "damage_type": "Radiant",
+                    "description": "Postcognition (See Past).",
+                    "logic_tag": "UTILITY:RADIANT:HISTORY"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Nova",
+                    "damage_type": "Radiant",
+                    "description": "Explosion of Light.",
+                    "logic_tag": "OFFENSE:RADIANT:NOVA"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Mirage",
+                    "damage_type": "Radiant",
+                    "description": "Fake Terrain.",
+                    "logic_tag": "DEFENSE:RADIANT:MIRAGE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Map",
+                    "damage_type": "Radiant",
+                    "description": "Know Location (GPS).",
+                    "logic_tag": "UTILITY:RADIANT:MAP"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Supernova",
+                    "damage_type": "Radiant",
+                    "description": "Nuclear Light.",
+                    "logic_tag": "OFFENSE:RADIANT:SUPERNOVA"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Nonexistence",
+                    "damage_type": "Radiant",
+                    "description": "Hidden from Reality.",
+                    "logic_tag": "DEFENSE:RADIANT:NONEXISTENCE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Omniscience",
+                    "damage_type": "Radiant",
+                    "description": "Know Everything.",
+                    "logic_tag": "UTILITY:RADIANT:OMNISCIENCE"
+                }
+            ]
+        },
+        "Omen": {
+            "attribute": "Intuition",
+            "damage_type": "Necrotic",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Jinx",
+                    "damage_type": "Necrotic",
+                    "description": "-1d4 to Hit.",
+                    "logic_tag": "OFFENSE:NECROTIC:JINX"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Bless",
+                    "damage_type": "Necrotic",
+                    "description": "+1d4 to Hit.",
+                    "logic_tag": "DEFENSE:NECROTIC:BLESS"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Guess",
+                    "damage_type": "Necrotic",
+                    "description": "Coin Flip (50/50).",
+                    "logic_tag": "UTILITY:NECROTIC:GUESS"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Trip",
+                    "damage_type": "Necrotic",
+                    "description": "Cause Prone (Bad Luck).",
+                    "logic_tag": "OFFENSE:NECROTIC:TRIP"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Miss",
+                    "damage_type": "Necrotic",
+                    "description": "Force Reroll (Take Low).",
+                    "logic_tag": "DEFENSE:NECROTIC:MISS"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Find",
+                    "damage_type": "Necrotic",
+                    "description": "Locate Object.",
+                    "logic_tag": "UTILITY:NECROTIC:FIND"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Jam",
+                    "damage_type": "Necrotic",
+                    "description": "Weapon Failure.",
+                    "logic_tag": "OFFENSE:NECROTIC:JAM"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Dodge",
+                    "damage_type": "Necrotic",
+                    "description": "Uncanny Dodge.",
+                    "logic_tag": "DEFENSE:NECROTIC:DODGE"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Hunch",
+                    "damage_type": "Necrotic",
+                    "description": "Danger Sense.",
+                    "logic_tag": "UTILITY:NECROTIC:HUNCH"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Backfire",
+                    "damage_type": "Necrotic",
+                    "description": "Enemy hits self.",
+                    "logic_tag": "OFFENSE:NECROTIC:BACKFIRE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Lucky",
+                    "damage_type": "Necrotic",
+                    "description": "Reroll 1s.",
+                    "logic_tag": "DEFENSE:NECROTIC:LUCKY"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Path",
+                    "damage_type": "Necrotic",
+                    "description": "Best Route finding.",
+                    "logic_tag": "UTILITY:NECROTIC:PATH"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Curse",
+                    "damage_type": "Necrotic",
+                    "description": "Disadvantage on Rolls.",
+                    "logic_tag": "OFFENSE:NECROTIC:CURSE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Fate",
+                    "damage_type": "Necrotic",
+                    "description": "Advantage on Rolls.",
+                    "logic_tag": "DEFENSE:NECROTIC:FATE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Gamble",
+                    "damage_type": "Necrotic",
+                    "description": "Random Buff effect.",
+                    "logic_tag": "UTILITY:NECROTIC:GAMBLE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Fumble",
+                    "damage_type": "Necrotic",
+                    "description": "Enemy drops item.",
+                    "logic_tag": "OFFENSE:NECROTIC:FUMBLE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Serendipity",
+                    "damage_type": "Necrotic",
+                    "description": "Find Loot/Potion.",
+                    "logic_tag": "DEFENSE:NECROTIC:SERENDIPITY"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Spirit",
+                    "damage_type": "Necrotic",
+                    "description": "Talk to Dead.",
+                    "logic_tag": "UTILITY:NECROTIC:SPIRIT"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Ricochet",
+                    "damage_type": "Necrotic",
+                    "description": "Miss hits Ally.",
+                    "logic_tag": "OFFENSE:NECROTIC:RICOCHET"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Karma",
+                    "damage_type": "Necrotic",
+                    "description": "Reflect Hit to attacker.",
+                    "logic_tag": "DEFENSE:NECROTIC:KARMA"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Augury",
+                    "damage_type": "Necrotic",
+                    "description": "Hint of Future.",
+                    "logic_tag": "UTILITY:NECROTIC:AUGURY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Calamity",
+                    "damage_type": "Necrotic",
+                    "description": "Force Crit Fail.",
+                    "logic_tag": "OFFENSE:NECROTIC:CALAMITY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Miracle",
+                    "damage_type": "Necrotic",
+                    "description": "Survive with 1HP.",
+                    "logic_tag": "DEFENSE:NECROTIC:MIRACLE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Destiny",
+                    "damage_type": "Necrotic",
+                    "description": "Force specific Roll.",
+                    "logic_tag": "UTILITY:NECROTIC:DESTINY"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Doom",
+                    "damage_type": "Necrotic",
+                    "description": "Instant Kill.",
+                    "logic_tag": "OFFENSE:NECROTIC:DOOM"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Divine",
+                    "damage_type": "Necrotic",
+                    "description": "Auto-Save success.",
+                    "logic_tag": "DEFENSE:NECROTIC:DIVINE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Prophecy",
+                    "damage_type": "Necrotic",
+                    "description": "Narrative Truth.",
+                    "logic_tag": "UTILITY:NECROTIC:PROPHECY"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Ruin",
+                    "damage_type": "Necrotic",
+                    "description": "Total Loss/Destruction.",
+                    "logic_tag": "OFFENSE:NECROTIC:RUIN"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Favor",
+                    "damage_type": "Necrotic",
+                    "description": "Auto-Natural 20.",
+                    "logic_tag": "DEFENSE:NECROTIC:FAVOR"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Weave",
+                    "damage_type": "Necrotic",
+                    "description": "Retcon History.",
+                    "logic_tag": "UTILITY:NECROTIC:WEAVE"
+                }
+            ]
+        },
+        "Aura": {
+            "attribute": "Charm",
+            "damage_type": "Spirit",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Mock",
+                    "damage_type": "Spirit",
+                    "description": "Psychic Damage.",
+                    "logic_tag": "OFFENSE:SPIRIT:MOCK"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Friend",
+                    "damage_type": "Spirit",
+                    "description": "Sanctuary (No Attack).",
+                    "logic_tag": "DEFENSE:SPIRIT:FRIEND"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Chime",
+                    "damage_type": "Spirit",
+                    "description": "Attract attention.",
+                    "logic_tag": "UTILITY:SPIRIT:CHIME"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Taunt",
+                    "damage_type": "Spirit",
+                    "description": "Force Attack.",
+                    "logic_tag": "OFFENSE:SPIRIT:TAUNT"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Calm",
+                    "damage_type": "Spirit",
+                    "description": "End Rage/Hostility.",
+                    "logic_tag": "DEFENSE:SPIRIT:CALM"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Bond",
+                    "damage_type": "Spirit",
+                    "description": "Empathy Link.",
+                    "logic_tag": "UTILITY:SPIRIT:BOND"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Fear",
+                    "damage_type": "Spirit",
+                    "description": "Cause Fleeing.",
+                    "logic_tag": "OFFENSE:SPIRIT:FEAR"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Trust",
+                    "damage_type": "Spirit",
+                    "description": "Ally Help Action.",
+                    "logic_tag": "DEFENSE:SPIRIT:TRUST"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Whisper",
+                    "damage_type": "Spirit",
+                    "description": "Send Message.",
+                    "logic_tag": "UTILITY:SPIRIT:WHISPER"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Doubt",
+                    "damage_type": "Spirit",
+                    "description": "Hesitate (Skip Turn).",
+                    "logic_tag": "OFFENSE:SPIRIT:DOUBT"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Peace",
+                    "damage_type": "Spirit",
+                    "description": "Stop Fight (Calm).",
+                    "logic_tag": "DEFENSE:SPIRIT:PEACE"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Suggestion",
+                    "damage_type": "Spirit",
+                    "description": "Implant Idea.",
+                    "logic_tag": "UTILITY:SPIRIT:SUGGESTION"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Enrage",
+                    "damage_type": "Spirit",
+                    "description": "Berserk (Attack All).",
+                    "logic_tag": "OFFENSE:SPIRIT:ENRAGE"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Charm",
+                    "damage_type": "Spirit",
+                    "description": "Befriend Target.",
+                    "logic_tag": "DEFENSE:SPIRIT:CHARM"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Detect",
+                    "damage_type": "Spirit",
+                    "description": "Read Mood/Intent.",
+                    "logic_tag": "UTILITY:SPIRIT:DETECT"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Despair",
+                    "damage_type": "Spirit",
+                    "description": "Stun with Sadness.",
+                    "logic_tag": "OFFENSE:SPIRIT:DESPAIR"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Heroism",
+                    "damage_type": "Spirit",
+                    "description": "Buff HP/Morale.",
+                    "logic_tag": "DEFENSE:SPIRIT:HEROISM"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Inspire",
+                    "damage_type": "Spirit",
+                    "description": "Buff Skill check.",
+                    "logic_tag": "UTILITY:SPIRIT:INSPIRE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Terror",
+                    "damage_type": "Spirit",
+                    "description": "Paralyze with Fear.",
+                    "logic_tag": "OFFENSE:SPIRIT:TERROR"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Devotion",
+                    "damage_type": "Spirit",
+                    "description": "Gain Bodyguard.",
+                    "logic_tag": "DEFENSE:SPIRIT:DEVOTION"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Geas",
+                    "damage_type": "Spirit",
+                    "description": "Magical Mission.",
+                    "logic_tag": "UTILITY:SPIRIT:GEAS"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Betray",
+                    "damage_type": "Spirit",
+                    "description": "Attack own Ally.",
+                    "logic_tag": "OFFENSE:SPIRIT:BETRAY"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Love",
+                    "damage_type": "Spirit",
+                    "description": "Permanent Thrall.",
+                    "logic_tag": "DEFENSE:SPIRIT:LOVE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Memory",
+                    "damage_type": "Spirit",
+                    "description": "Modify Memory.",
+                    "logic_tag": "UTILITY:SPIRIT:MEMORY"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Shatter",
+                    "damage_type": "Spirit",
+                    "description": "Break Mind (Insanity).",
+                    "logic_tag": "OFFENSE:SPIRIT:SHATTER"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Sanctuary",
+                    "damage_type": "Spirit",
+                    "description": "Zone of Peace.",
+                    "logic_tag": "DEFENSE:SPIRIT:SANCTUARY"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Dream",
+                    "damage_type": "Spirit",
+                    "description": "Inception/Dreamwalk.",
+                    "logic_tag": "UTILITY:SPIRIT:DREAM"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Soul",
+                    "damage_type": "Spirit",
+                    "description": "Kill Spirit (Husk).",
+                    "logic_tag": "OFFENSE:SPIRIT:SOUL"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Worship",
+                    "damage_type": "Spirit",
+                    "description": "Gain Followers.",
+                    "logic_tag": "DEFENSE:SPIRIT:WORSHIP"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Identity",
+                    "damage_type": "Spirit",
+                    "description": "Rewrite Personality.",
+                    "logic_tag": "UTILITY:SPIRIT:IDENTITY"
+                }
+            ]
+        },
+        "Lex": {
+            "attribute": "Willpower",
+            "damage_type": "Psychic",
+            "spells": [
+                {
+                    "tier": 1,
+                    "type": "Offense",
+                    "name": "Halt",
+                    "damage_type": "Psychic",
+                    "description": "Stop movement.",
+                    "logic_tag": "OFFENSE:PSYCHIC:HALT"
+                },
+                {
+                    "tier": 1,
+                    "type": "Defense",
+                    "name": "Focus",
+                    "damage_type": "Psychic",
+                    "description": "Save Bonus.",
+                    "logic_tag": "DEFENSE:PSYCHIC:FOCUS"
+                },
+                {
+                    "tier": 1,
+                    "type": "Utility",
+                    "name": "Open",
+                    "damage_type": "Psychic",
+                    "description": "Unlock (Command).",
+                    "logic_tag": "UTILITY:PSYCHIC:OPEN"
+                },
+                {
+                    "tier": 2,
+                    "type": "Offense",
+                    "name": "Drop",
+                    "damage_type": "Psychic",
+                    "description": "Disarm target.",
+                    "logic_tag": "OFFENSE:PSYCHIC:DROP"
+                },
+                {
+                    "tier": 2,
+                    "type": "Defense",
+                    "name": "Ignore",
+                    "damage_type": "Psychic",
+                    "description": "Resist Pain/Wound.",
+                    "logic_tag": "DEFENSE:PSYCHIC:IGNORE"
+                },
+                {
+                    "tier": 2,
+                    "type": "Utility",
+                    "name": "Truth",
+                    "damage_type": "Psychic",
+                    "description": "Prevent Lying.",
+                    "logic_tag": "UTILITY:PSYCHIC:TRUTH"
+                },
+                {
+                    "tier": 3,
+                    "type": "Offense",
+                    "name": "Kneel",
+                    "damage_type": "Psychic",
+                    "description": "Force Prone.",
+                    "logic_tag": "OFFENSE:PSYCHIC:KNEEL"
+                },
+                {
+                    "tier": 3,
+                    "type": "Defense",
+                    "name": "Deny",
+                    "damage_type": "Psychic",
+                    "description": "Block Path (Mental).",
+                    "logic_tag": "DEFENSE:PSYCHIC:DENY"
+                },
+                {
+                    "tier": 3,
+                    "type": "Utility",
+                    "name": "Speak",
+                    "damage_type": "Psychic",
+                    "description": "Force Speech.",
+                    "logic_tag": "UTILITY:PSYCHIC:SPEAK"
+                },
+                {
+                    "tier": 4,
+                    "type": "Offense",
+                    "name": "Pain",
+                    "damage_type": "Psychic",
+                    "description": "Psychic Damage.",
+                    "logic_tag": "OFFENSE:PSYCHIC:PAIN"
+                },
+                {
+                    "tier": 4,
+                    "type": "Defense",
+                    "name": "Clear",
+                    "damage_type": "Psychic",
+                    "description": "Remove Fear/Charm.",
+                    "logic_tag": "DEFENSE:PSYCHIC:CLEAR"
+                },
+                {
+                    "tier": 4,
+                    "type": "Utility",
+                    "name": "Oath",
+                    "damage_type": "Psychic",
+                    "description": "Contract/Bond.",
+                    "logic_tag": "UTILITY:PSYCHIC:OATH"
+                },
+                {
+                    "tier": 5,
+                    "type": "Offense",
+                    "name": "Obey",
+                    "damage_type": "Psychic",
+                    "description": "Command 1 Action.",
+                    "logic_tag": "OFFENSE:PSYCHIC:OBEY"
+                },
+                {
+                    "tier": 5,
+                    "type": "Defense",
+                    "name": "Forbid",
+                    "damage_type": "Psychic",
+                    "description": "Block Action type.",
+                    "logic_tag": "DEFENSE:PSYCHIC:FORBID"
+                },
+                {
+                    "tier": 5,
+                    "type": "Utility",
+                    "name": "Detect",
+                    "damage_type": "Psychic",
+                    "description": "Know Alignment/Type.",
+                    "logic_tag": "UTILITY:PSYCHIC:DETECT"
+                },
+                {
+                    "tier": 6,
+                    "type": "Offense",
+                    "name": "Silence",
+                    "damage_type": "Psychic",
+                    "description": "Prevent Sound.",
+                    "logic_tag": "OFFENSE:PSYCHIC:SILENCE"
+                },
+                {
+                    "tier": 6,
+                    "type": "Defense",
+                    "name": "Shield",
+                    "damage_type": "Psychic",
+                    "description": "Mental Armor.",
+                    "logic_tag": "DEFENSE:PSYCHIC:SHIELD"
+                },
+                {
+                    "tier": 6,
+                    "type": "Utility",
+                    "name": "Zone",
+                    "damage_type": "Psychic",
+                    "description": "Zone of Truth.",
+                    "logic_tag": "UTILITY:PSYCHIC:ZONE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Offense",
+                    "name": "Dominate",
+                    "damage_type": "Psychic",
+                    "description": "Mind Control.",
+                    "logic_tag": "OFFENSE:PSYCHIC:DOMINATE"
+                },
+                {
+                    "tier": 7,
+                    "type": "Defense",
+                    "name": "Iron",
+                    "damage_type": "Psychic",
+                    "description": "Immune Charm/Fear.",
+                    "logic_tag": "DEFENSE:PSYCHIC:IRON"
+                },
+                {
+                    "tier": 7,
+                    "type": "Utility",
+                    "name": "Decree",
+                    "damage_type": "Psychic",
+                    "description": "Set Rule in area.",
+                    "logic_tag": "UTILITY:PSYCHIC:DECREE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Offense",
+                    "name": "Exile",
+                    "damage_type": "Psychic",
+                    "description": "Banishment.",
+                    "logic_tag": "OFFENSE:PSYCHIC:EXILE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Defense",
+                    "name": "Refuse",
+                    "damage_type": "Psychic",
+                    "description": "Immune Magic.",
+                    "logic_tag": "DEFENSE:PSYCHIC:REFUSE"
+                },
+                {
+                    "tier": 8,
+                    "type": "Utility",
+                    "name": "Title",
+                    "damage_type": "Psychic",
+                    "description": "Gain Rank/Status.",
+                    "logic_tag": "UTILITY:PSYCHIC:TITLE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Offense",
+                    "name": "Kill",
+                    "damage_type": "Psychic",
+                    "description": "Power Word Kill.",
+                    "logic_tag": "OFFENSE:PSYCHIC:KILL"
+                },
+                {
+                    "tier": 9,
+                    "type": "Defense",
+                    "name": "Unbreakable",
+                    "damage_type": "Psychic",
+                    "description": "Immune to All.",
+                    "logic_tag": "DEFENSE:PSYCHIC:UNBREAKABLE"
+                },
+                {
+                    "tier": 9,
+                    "type": "Utility",
+                    "name": "Legend",
+                    "damage_type": "Psychic",
+                    "description": "Mass Awe/Fear.",
+                    "logic_tag": "UTILITY:PSYCHIC:LEGEND"
+                },
+                {
+                    "tier": 10,
+                    "type": "Offense",
+                    "name": "Unmake",
+                    "damage_type": "Psychic",
+                    "description": "Erase from timeline.",
+                    "logic_tag": "OFFENSE:PSYCHIC:UNMAKE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Defense",
+                    "name": "Absolute",
+                    "damage_type": "Psychic",
+                    "description": "God-like Will.",
+                    "logic_tag": "DEFENSE:PSYCHIC:ABSOLUTE"
+                },
+                {
+                    "tier": 10,
+                    "type": "Utility",
+                    "name": "Law",
+                    "damage_type": "Psychic",
+                    "description": "New Physics Law.",
+                    "logic_tag": "UTILITY:PSYCHIC:LAW"
+                }
+            ]
+        }
+    }
+}

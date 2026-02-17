@@ -1,0 +1,36 @@
+{
+    "Name": "Burt",
+    "Species": "AQUATIC",
+    "Level": 1,
+    "Stats": {
+        "Might": 9,
+        "Endurance": 12,
+        "Finesse": 11,
+        "Reflexes": 10,
+        "Vitality": 9,
+        "Fortitude": 11,
+        "Knowledge": 9,
+        "Logic": 10,
+        "Awareness": 11,
+        "Intuition": 10,
+        "Willpower": 9,
+        "Charm": 9
+    },
+    "Loadout": {
+        "HEAD": "Shark Teeth",
+        "BODY": "Urchin Spines",
+        "ARMS": "Crab Pincer",
+        "LEGS": "Webbed Kick",
+        "SKIN": "Shark Skin",
+        "SPECIAL": "Ink Jet"
+    },
+    "Inventory": [
+        "Rusted Dagger",
+        "Canvas Tunic",
+        "Bread"
+    ],
+    "Gold": 10,
+    "HP": 19,
+    "Stamina": 10,
+    "Focus": 10
+}

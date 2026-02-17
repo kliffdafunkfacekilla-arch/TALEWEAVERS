@@ -1,0 +1,213 @@
+{
+    "skill_system_version": "2.0 (The Reynolds Cut)",
+    "philosophy": "Intent-Based Grouping",
+    "quadrant_1_violence": {
+        "description": "Inflicting Physical Harm & Breaking Things",
+        "skills": [
+            {
+                "name": "BREAKER (Siegecraft)",
+                "stats": [
+                    "Might",
+                    "Knowledge"
+                ],
+                "usage": "Breaking armor, shields, and structures.",
+                "tool": "Heavy Weapons (Maul/Greatsword)"
+            },
+            {
+                "name": "STRIKER (Anatomy)",
+                "stats": [
+                    "Reflexes",
+                    "Logic"
+                ],
+                "usage": "Critical hits, targeting vitals, bleeding.",
+                "tool": "Precision Weapons (Rapier/Dagger)"
+            },
+            {
+                "name": "TRICKSTER (Sleight)",
+                "stats": [
+                    "Finesse",
+                    "Intuition"
+                ],
+                "usage": "Feints, dirty fighting, bypassing guard.",
+                "tool": "Hidden Weapons / Sand in Pocket"
+            },
+            {
+                "name": "BRAWLER (Force)",
+                "stats": [
+                    "Might",
+                    "Endurance"
+                ],
+                "usage": "Grappling, shoving, unarmed damage.",
+                "tool": "Gauntlets / Cestus"
+            },
+            {
+                "name": "MARKSMAN (Ballistics)",
+                "stats": [
+                    "Awareness",
+                    "Logic"
+                ],
+                "usage": "Long-range accuracy, sniping, trajectory.",
+                "tool": "Bows / Rifles"
+            },
+            {
+                "name": "SKIRMISHER (Thrown)",
+                "stats": [
+                    "Finesse",
+                    "Reflexes"
+                ],
+                "usage": "Mid-range movement combat, throwing on the run.",
+                "tool": "Throwing Axes / Knives"
+            }
+        ]
+    },
+    "quadrant_2_survival": {
+        "description": "Staying Alive & Moving Freely",
+        "skills": [
+            {
+                "name": "VANGUARD (Fortification)",
+                "stats": [
+                    "Endurance",
+                    "Logic"
+                ],
+                "usage": "Passive defense, holding the line, using shields.",
+                "tool": "Shields / Heavy Armor"
+            },
+            {
+                "name": "DEFLECTOR (Metallurgy)",
+                "stats": [
+                    "Fortitude",
+                    "Knowledge"
+                ],
+                "usage": "Armor angling, reducing damage from hits.",
+                "tool": "Plate / Scale Armor"
+            },
+            {
+                "name": "DUELIST (Clash Mastery)",
+                "stats": [
+                    "Might",
+                    "Intuition"
+                ],
+                "usage": "Winning the 'Clash' (Deadlocks), parrying.",
+                "tool": "Main Weapon"
+            },
+            {
+                "name": "ATHLETE (Mobility)",
+                "stats": [
+                    "Reflexes",
+                    "Willpower"
+                ],
+                "usage": "Running, jumping, dodging AoE effects.",
+                "tool": "Light Armor / Boots"
+            },
+            {
+                "name": "SURVIVOR (Nature)",
+                "stats": [
+                    "Vitality",
+                    "Intuition"
+                ],
+                "usage": "Resisting poison, disease, and weather.",
+                "tool": "Survival Kit / Cloak"
+            },
+            {
+                "name": "GHOST (Stealth)",
+                "stats": [
+                    "Finesse",
+                    "Awareness"
+                ],
+                "usage": "Hiding, moving silently, camouflage.",
+                "tool": "Camo Cloak / Soft Boots"
+            }
+        ]
+    },
+    "quadrant_3_influence": {
+        "description": "Social Warfare & Manipulation",
+        "skills": [
+            {
+                "name": "TYRANT (Intimidation)",
+                "stats": [
+                    "Might",
+                    "Charm"
+                ],
+                "usage": "Terrifying enemies, forced compliance.",
+                "tool": "The Hammer (Threats)"
+            },
+            {
+                "name": "ORATOR (Rhetoric)",
+                "stats": [
+                    "Logic",
+                    "Charm"
+                ],
+                "usage": "Debating, lying logically, legal loopholes.",
+                "tool": "The Ledger (Facts/Laws)"
+            },
+            {
+                "name": "VIPER (Repartee)",
+                "stats": [
+                    "Finesse",
+                    "Willpower"
+                ],
+                "usage": "Insults, mocking, causing emotional damage.",
+                "tool": "The Quill (Wit)"
+            },
+            {
+                "name": "LEADER (Command)",
+                "stats": [
+                    "Willpower",
+                    "Might"
+                ],
+                "usage": "Rallying allies, giving orders, military authority.",
+                "tool": "Regalia (Badges/Flags)"
+            },
+            {
+                "name": "SPY (Deception)",
+                "stats": [
+                    "Intuition",
+                    "Charm"
+                ],
+                "usage": "Acting, disguise, blending in.",
+                "tool": "Makeup / Costumes"
+            }
+        ]
+    },
+    "quadrant_4_resolve": {
+        "description": "Sanity & Mental Defense",
+        "skills": [
+            {
+                "name": "ANCHOR (Discipline)",
+                "stats": [
+                    "Willpower",
+                    "Fortitude"
+                ],
+                "usage": "Resisting fear, mind control, and torture.",
+                "tool": "Holy Symbol / Memento"
+            },
+            {
+                "name": "WATCHER (Insight)",
+                "stats": [
+                    "Awareness",
+                    "Logic"
+                ],
+                "usage": "Detecting lies, spotting traps, reading intent.",
+                "tool": "Lens / Monocle"
+            },
+            {
+                "name": "MEDIC (Restoration)",
+                "stats": [
+                    "Vitality",
+                    "Knowledge"
+                ],
+                "usage": "Heal HP (Body) and CMP (Mind).",
+                "tool": "Medical Kit / Herbs"
+            },
+            {
+                "name": "SCHOLAR (Lore)",
+                "stats": [
+                    "Knowledge",
+                    "Logic"
+                ],
+                "usage": "Remembering facts, identifying monsters.",
+                "tool": "Books / Scrolls"
+            }
+        ]
+    }
+}

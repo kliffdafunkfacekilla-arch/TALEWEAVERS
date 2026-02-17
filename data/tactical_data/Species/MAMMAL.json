@@ -1,0 +1,367 @@
+{
+    "species": "Mammal",
+    "base_stats": {
+        "Might": 10,
+        "Endurance": 11,
+        "Finesse": 12,
+        "Reflexes": 9,
+        "Vitality": 10,
+        "Fortitude": 8,
+        "Knowledge": 12,
+        "Logic": 8,
+        "Awareness": 9,
+        "Intuition": 10,
+        "Willpower": 10,
+        "Charm": 11
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Wolf Jaws",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "BITE: Unarmed Strike (1d6). Deals max damage if target is Prone."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Ram Horns",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "COUNTER: Reaction. If missed by melee, Headbutt for 1d4 Dmg."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Lion Mane",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "ROAR: Action. Cone 15ft. Enemies must save vs Fear (CMP Damage)."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Elk Antlers",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "CROWN: Passive. Advantage on Focus checks to maintain spells."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Streamlined (Otter)",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DIVE: Hold breath 10 min. Swim Speed = Walk Speed."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Bat Ears",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "SONAR: Blindsight 30ft. Immune to Blindness."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Porcupine Quills",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "BARBED: Enemies that Grapple you take 1d4 Piercing/turn."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Thick Fur/Hide",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "INSULATION: Resistance to Cold. Ignore environmental weather."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Musk Glands",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "MARK: Spray scent. You have Advantage to track this target forever."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Ghost Fur",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "PHASE: Once per day, turn Invisible for 1 turn."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Loose Skin",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "SLIP: Advantage to escape Grapples. Fit through tight spaces."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Marsupial Pouch",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "CARRY: +2 Inventory Slots. Conceal small items perfectly."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Bear Claws",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "MAUL: Unarmed Strike (1d6 Slashing). 'Heavy' property."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Armored Forearms",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "BLOCK: Reaction. +2 Defense vs one melee attack."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Ape Arms",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "GRAPPLE: Reach +5ft. Advantage on checks to Shove."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Runic Paws",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "TOUCH: Unarmed attacks can deliver Touch-range spells."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Flying Squirrel Flaps",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "GLIDE: No falling damage. Travel horizontal distance = fall distance."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Opposable Thumbs",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "DEXTROUS: Advantage on Sleight of Hand and Tool use."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Hooves",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "KICK: Reaction. Attack enemy behind you (1d6 Bludgeoning)."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Plantigrade (Bear)",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "STANCE: Cannot be knocked Prone or Shoved."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Thumping Feet",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SIGNAL: Tap code on ground. Tremorsense communication 60ft."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Ley-Walker",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "GROUND: Restore 1 SP when standing on natural earth."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Digitigrade (Cat)",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "SPRINT: Base Speed +10ft. Jump height tripled."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Prehensile Feet",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "CLIMB: Climb Speed = Walk Speed. Hang upside down."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Rough Hide",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "GRIT: Unarmed strikes deal +1 Abrasion damage."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Wooly",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "PADDING: Reduce Bludgeoning damage by 1."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Warning Patterns",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "DAZZLE: Reaction. Flash colors/patterns to distract attacker."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Albino/Void",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "RESIST: Advantage on Saves vs Magic."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Oily Fur",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "WATERPROOF: Dry instantly. No penalty for wet/cold."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Camouflage",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "BLEND: Advantage Stealth in chosen biome."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Heavy Tail",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "SWEEP: Bonus Action. Trip target (Save vs Prone)."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Skunk Spray",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "STINK: Reaction. 10ft Cloud. Save vs Nausea (Stun)."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Puppy Eyes",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "CHARM: Reaction. Attacker must make Will save to hit you."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Unicorn Horn",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "PURIFY: Touch heals 5 HP or cures Poison (1/Day)."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Prehensile Tail",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "HANG: Use tail as third arm (cannot wield weapons)."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Beaver Tail",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "WORK: Use tail as hammer/paddle. Swim Speed +5ft."
+                }
+            ]
+        }
+    }
+}

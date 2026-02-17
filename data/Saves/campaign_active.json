@@ -1,0 +1,289 @@
+{
+    "campaign_id": "3984cc64-9358-4e8c-b43f-33a9c5cc7a7d",
+    "hero_name": "Alaric",
+    "campaign_theme": "Assassination Conspiracy",
+    "current_step_index": 0,
+    "plot_points": [
+        {
+            "id": "step_0",
+            "stage_name": "The Ordinary World",
+            "description": "Introduce the hero in their normal life.",
+            "x": 469,
+            "y": 811,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_0",
+                    "title": "The Ordinary World: Social Task",
+                    "description": "Introduce the hero in their normal life.",
+                    "type": "Social",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_1",
+            "stage_name": "The Call to Adventure",
+            "description": "Something disrupts the status quo.",
+            "x": 760,
+            "y": 303,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_1",
+                    "title": "The Call to Adventure: Hunt Task",
+                    "description": "Something disrupts the status quo.",
+                    "type": "Hunt",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_2",
+            "stage_name": "Refusal of the Call",
+            "description": "The hero hesitates or fears the unknown.",
+            "x": 469,
+            "y": 204,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_2",
+                    "title": "Refusal of the Call: Hunt Task",
+                    "description": "The hero hesitates or fears the unknown.",
+                    "type": "Hunt",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_3",
+            "stage_name": "Meeting the Mentor",
+            "description": "The hero receives guidance or a magical gift.",
+            "x": 878,
+            "y": 891,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_3",
+                    "title": "Meeting the Mentor: Social Task",
+                    "description": "The hero receives guidance or a magical gift.",
+                    "type": "Social",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_4",
+            "stage_name": "Crossing the Threshold",
+            "description": "The hero leaves the ordinary world for the special world.",
+            "x": 159,
+            "y": 455,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_4",
+                    "title": "Crossing the Threshold: Hunt Task",
+                    "description": "The hero leaves the ordinary world for the special world.",
+                    "type": "Hunt",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_5",
+            "stage_name": "Tests, Allies, Enemies",
+            "description": "The hero explores the new world, facing minor challenges.",
+            "x": 133,
+            "y": 753,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_5",
+                    "title": "Tests, Allies, Enemies: Hostile Task",
+                    "description": "The hero explores the new world, facing minor challenges.",
+                    "type": "Hostile",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_6",
+            "stage_name": "Approach to the Inmost Cave",
+            "description": "The hero prepares for the main danger.",
+            "x": 286,
+            "y": 432,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_6",
+                    "title": "Approach to the Inmost Cave: Exploration Task",
+                    "description": "The hero prepares for the main danger.",
+                    "type": "Exploration",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_7",
+            "stage_name": "The Ordeal",
+            "description": "The central life-or-death crisis.",
+            "x": 358,
+            "y": 406,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_7",
+                    "title": "The Ordeal: Hostile Task",
+                    "description": "The central life-or-death crisis.",
+                    "type": "Hostile",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_8",
+            "stage_name": "Reward (Seizing the Sword)",
+            "description": "The hero claims the prize of the ordeal.",
+            "x": 663,
+            "y": 825,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_8",
+                    "title": "Reward (Seizing the Sword): Puzzle Task",
+                    "description": "The hero claims the prize of the ordeal.",
+                    "type": "Puzzle",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_9",
+            "stage_name": "The Road Back",
+            "description": "The hero must return home, often chased.",
+            "x": 637,
+            "y": 708,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_9",
+                    "title": "The Road Back: Exploration Task",
+                    "description": "The hero must return home, often chased.",
+                    "type": "Exploration",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_10",
+            "stage_name": "The Resurrection",
+            "description": "The final test where the hero is reborn.",
+            "x": 158,
+            "y": 542,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_10",
+                    "title": "The Resurrection: Hostile Task",
+                    "description": "The final test where the hero is reborn.",
+                    "type": "Hostile",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        },
+        {
+            "id": "step_11",
+            "stage_name": "Return with the Elixir",
+            "description": "The hero returns home changed, bringing power/knowledge.",
+            "x": 793,
+            "y": 163,
+            "is_major": true,
+            "quests": [
+                {
+                    "step_id": "q_main_11",
+                    "title": "Return with the Elixir: Hunt Task",
+                    "description": "The hero returns home changed, bringing power/knowledge.",
+                    "type": "Hunt",
+                    "status": "active",
+                    "target_location_id": null,
+                    "target_npc_id": null
+                }
+            ],
+            "completed": false
+        }
+    ],
+    "world_seeds": [],
+    "pois": [
+        {
+            "id": "poi_path_496_675",
+            "type": "Ethereal Dream",
+            "description": "A Ethereal Dream found in the area.",
+            "location_id": null,
+            "x": 496,
+            "y": 675,
+            "discovered": false
+        },
+        {
+            "id": "poi_path_650_555",
+            "type": "Corpse",
+            "description": "A dead courier from the wildlands, their throat slit by a professional blade. A hidden message is clutched in their hand.",
+            "location_id": null,
+            "x": 650,
+            "y": 555,
+            "discovered": false
+        },
+        {
+            "id": "poi_path_724_466",
+            "type": "Minor Landmark",
+            "description": "A Minor Landmark found in the area.",
+            "location_id": null,
+            "x": 724,
+            "y": 466,
+            "discovered": false
+        }
+    ],
+    "global_meta": {
+        "lore_count": 194,
+        "faction_count": 76,
+        "node_count": 21,
+        "global_wealth": 15670.0,
+        "campaign_active": true,
+        "flags": {
+            "IS_FAMINE_ACTIVE": false,
+            "IS_WAR_ACTIVE": false
+        }
+    }
+}

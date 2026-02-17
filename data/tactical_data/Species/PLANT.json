@@ -1,0 +1,367 @@
+{
+    "species": "Plant",
+    "base_stats": {
+        "Might": 11,
+        "Endurance": 10,
+        "Finesse": 9,
+        "Reflexes": 8,
+        "Vitality": 12,
+        "Fortitude": 10,
+        "Knowledge": 8,
+        "Logic": 10,
+        "Awareness": 10,
+        "Intuition": 12,
+        "Willpower": 10,
+        "Charm": 10
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Flytrap Maw",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "EAT: Bite (1d8). Restrained on hit."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Ironbark Face",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "HARDEN: Immune to Crit to Head."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Pollen Sneeze",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "STUN: Cone 10ft. Save vs Stun."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Solar Petals",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "SUN: Restore Focus in sunlight."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Seed Pod",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DRIFT: Feather Fall. Wind travel."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Mushroom Cap",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "SPORE: Detect vibrations/decay."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Thorns",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "POKE: Melee attackers take 1 Piercing."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Thick Bark",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "ARMOR: Base AC 16. Flammable."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Sweet Scent",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "LURE: Adv on Charm vs Humanoids."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Heart-Wood",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "LIFE: +1 HP per Level."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Flexible Stem",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "REACH: Melee Reach +5ft."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Water Store",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "CACTUS: Survive 1 month no water."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Whip Vines",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "SLASH: Reach 10ft. 1d4 Slashing."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Log Arms",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "BLOCK: Shield Arm +2 AC."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Entangle",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "GRAPPLE: Adv on Grapple. Restrain."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Staff Hand",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "FOCUS: Hand counts as Druidic Focus."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Brachiation",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "SWING: Tree-climb speed = Walk speed."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Tendrils",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "PICK: Open locks with vines."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Root Stomp",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "QUAKE: 5ft Radius. Save vs Prone."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Rooted",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "STANCE: Cannot be Shoved."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Spreading",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "GROWTH: Create Difficult Terrain."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Taproot",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "MANA: Regain SP from soil."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Springy",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "BOUNCE: Jump distance doubled."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Wall-Creeper",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "CLIMB: Spider Climb."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Poison Ivy",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "RASH: Touch causes Itch (Disadvantage)."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Cork",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "ABSORB: Resist Bludgeoning."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Psychoactive",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "DAZE: Contact causes Hallucinations."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Glow-Moss",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "LIGHT: Shed Light 20ft."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Slippery Algae",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SLICK: Escape Grapple Adv."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Chameleon Leaf",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "HIDE: Invisible in forests."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Spore Cloud",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "POISON: Cloud 10ft. 1d6 Poison."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Regrowth",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "HEAL: Restore 1d8 HP (Action)."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Pheromones",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "CHARM: Charm Person spell (1/Day)."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Photosynthesis",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "REST: Short Rest max healing in sun."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Burrow",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DIG: Burrow speed 15ft."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Fruit",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "FEED: Grow 3 Goodberries/Day."
+                }
+            ]
+        }
+    }
+}

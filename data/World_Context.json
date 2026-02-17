@@ -1,0 +1,21 @@
+{
+    "rumors": [
+        "The Lich in the Shadowfall Tomb was once a hero of the Silver Wing.",
+        "A hidden passage exists behind the hearth in the Broken Barrel Tavern.",
+        "The swamp mists reflect your worst fears, turning them into phantoms.",
+        "The Iron Crown was stolen by a crow and taken to the Great Nest.",
+        "Drinking from the Blue Spring grants temporary foresight."
+    ],
+    "factions": {
+        "The Silver Wing": "Once-noble knights, now scattered and desperate.",
+        "The Void Chorus": "Cultists seeking to unravel the tapestry of reality.",
+        "The Merchant's Guild": "Greedy but essential for the survival of the borderlands.",
+        "The Wild-Kin": "A loose alliance of beast-folk protecting the deep woods."
+    },
+    "recent_events": [
+        "The Great Eclipse lasted three days, darkening the hearts of men.",
+        "The walls of the Manor began to bleed after the last ritual.",
+        "A shipment of 'Star-Glass' went missing near the Sunken Oasis.",
+        "The King has not been seen for a year, replaced by a silent regent."
+    ]
+}

@@ -1,0 +1,367 @@
+{
+    "species": "Reptile",
+    "base_stats": {
+        "Might": 10,
+        "Endurance": 9,
+        "Finesse": 8,
+        "Reflexes": 11,
+        "Vitality": 11,
+        "Fortitude": 9,
+        "Knowledge": 10,
+        "Logic": 12,
+        "Awareness": 8,
+        "Intuition": 8,
+        "Willpower": 12,
+        "Charm": 12
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Croc Maw",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SNAP: Unarmed Strike (1d8). Target is Grappled on hit."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Hooded Cobra",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "FLARE: Reaction. Impose Disadvantage on attack via intimidation."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Dilophosaur Frill",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "RATTLE: Action. Cone 15ft. Save vs Fear or Paralyzed."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Third Eye",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "TRUTH: Passive. See through Illusions and Shapechanges."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Aerodynamic Snout",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "SNAP-TURN: Change direction instantly while running."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Heat Pits",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "THERMAL: See living creatures through walls (5ft) or dark."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Spiked Ridge",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "THRASH: Deal 1d4 damage to anyone Grappling you."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Turtle Shell",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "WITHDRAW: Action. AC becomes 18. Speed 0. Cannot attack."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Bright Dewlap",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "DISPLAY: Advantage on Social checks vs Reptiles/Beasts."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Mana-Scales",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "ABSORB: When hit by Magic, gain 1 Focus Point."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Serpentine",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "SLITHER: Ignore Difficult Terrain."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Fat Tail",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "STORE: Go 1 month without food. Resist Starvation."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Raptor Talons",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "GUT: Unarmed Strike (1d6). Critical Hit causes Bleed."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Scaled Gauntlets",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "DEFLECT: Reaction. Reduce damage from Ranged Attacks by 1d6."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Constrictor Coils",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "CRUSH: Auto-deal damage to Grappled target at start of turn."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Chameleon Palms",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "HIDE: Sleight of Hand to hide items is invisible."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Webbed Claws",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "SWIM: Swim Speed = Walk Speed. Hold breath 1 hour."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Gecko Pads",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "CLIMB: Walk on walls/ceilings hands-free."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Theropod Legs",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "POUNCE: If you jump 10ft before attack, +2 Damage."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Low Center",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "STABLE: Advantage vs Shove/Trip."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Thunder Step",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "STOMP: Action. Adjacent creatures Save vs Prone."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Rooted Stance",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "CHANNEL: Cannot be moved while casting Rituals."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Spring Loaded",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "LEAP: Jump distance doubled. Always land on feet."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Gripping Toes",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "HANG: Can hang from ceiling by feet only."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Sandpaper Scales",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "RASP: Contact damages ropes/wood/cloth."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Heavy Scutes",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "ARMOR: Base AC = 13 + Logic Mod. (Natural Armor)."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Chromatophore",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "CHANGE: Action. Change skin color/pattern perfectly."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Gem Scales",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "REFLECT: Reaction. Reflect 'Ray' spells back at caster."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Shedding",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "ESCAPE: Reaction. Shed skin to auto-escape Grapple (1/Day)."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Photosynthetic",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "SUN: Regain HP during Short Rest in sun."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Tail Club",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "SMASH: Bonus Action. 1d4 Bludgeoning damage."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Blood Squirt",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "BLIND: Reaction. Blind attacker (5ft). Range 5ft."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Hypnotic Eyes",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "TRANCE: Action. Target Stunned while you maintain eye contact."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Regeneration",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "HEAL: Regain 1 HP per turn if below 50% HP."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Gliding Ribs",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DRIFT: Feather Fall at will. Glide speed 40ft."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Limb Regrowth",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "RESTORE: Regrow lost limbs over 1 week."
+                }
+            ]
+        }
+    }
+}

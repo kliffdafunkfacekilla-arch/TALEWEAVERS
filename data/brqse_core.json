@@ -1,0 +1,168 @@
+{
+    "system_identity": "BRQSE (Chaos Engine)",
+    "core_philosophy": "Margin-based Resolution over Binary Pass/Fail",
+    "attributes": {
+        "physical": [
+            "Might",
+            "Endurance",
+            "Finesse",
+            "Reflexes",
+            "Vitality",
+            "Fortitude"
+        ],
+        "mental": [
+            "Knowledge",
+            "Logic",
+            "Awareness",
+            "Intuition",
+            "Willpower",
+            "Charm"
+        ]
+    },
+    "resources": {
+        "HP": "Meat/Structural Integrity (Determines Physical Injury)",
+        "CMP": "Composure/Sanity (Determines Mental Trauma)",
+        "SP": "Stamina Points (Fuel for Physical Abilities & Defense)",
+        "FP": "Focus Points (Fuel for Spells & Mental Defense)"
+    },
+    "combat_resolution": {
+        "formula": "d20 + Skill_Rank + Attribute_Value",
+        "defense_calculation": "Armor_Value + Defensive_Skill_Rank + Attribute_Value",
+        "resolution_logic": "Attack_Total - Defense_Total = MARGIN",
+        "margin_table": [
+            {
+                "margin": ">= 10",
+                "result": "CRITICAL",
+                "effect": "Double Damage Multiplier + Automatic Injury Roll"
+            },
+            {
+                "margin": "5 to 9",
+                "result": "CRUSHING BLOW",
+                "effect": "Normal Damage + Target is STAGGERED (No Reactions)"
+            },
+            {
+                "margin": "1 to 4",
+                "result": "SOLID HIT",
+                "effect": "Normal Damage"
+            },
+            {
+                "margin": "0",
+                "result": "THE CLASH",
+                "effect": "Initiate Struggle Protocol (See below)"
+            },
+            {
+                "margin": "-1 to -5",
+                "result": "GLANCING MISS",
+                "effect": "No Damage"
+            },
+            {
+                "margin": "-6 to -10",
+                "result": "BAD MISS",
+                "effect": "Attacker is Off-Balance (Disadvantage on next Defense)"
+            },
+            {
+                "margin": "<= -11",
+                "result": "DISASTER",
+                "effect": "Attacker falls Prone or drops weapon"
+            }
+        ]
+    },
+    "the_clash_mechanic": {
+        "name": "The Struggle",
+        "trigger": "Margin of 0 (Tie)",
+        "phase_1_lock": {
+            "status": "Both combatants are LOCKED (Speed 0, Cannot Dodge)",
+            "setup": "Place a d10 (Struggle Die) at 0 for each combatant."
+        },
+        "phase_2_grind": {
+            "trigger": "End of EVERY turn (Friend or Foe)",
+            "action": "Both Locked combatants roll d10. Add to their Struggle Die total.",
+            "break_condition": "First to exceed Total of 10 wins.",
+            "tie_on_break": "If both exceed 10 on same turn: Highest Total wins. If Totals tied, RESET both to 0."
+        },
+        "phase_3_sudden_death": {
+            "trigger": "If Turn Order returns to a Locked Combatant with no winner",
+            "cost": "Both pay 1 SP + 1 FP (Exhaustion)",
+            "action": "Both roll d20. Highest wins."
+        },
+        "phase_4_outcome": {
+            "winner_choice": [
+                "DRIVE (Push 5ft)",
+                "TURN (Swap Places)",
+                "BREAK (Shove Away)"
+            ],
+            "loser_penalty": "Takes Minor Damage (1d4 HP + 1d4 CMP) + 1 Injury Check (Lowest Bar)"
+        }
+    },
+    "injury_system": {
+        "concept": "Death Spiral via Trauma, not HP ablation",
+        "trigger": "Damage taken while HP or CMP is below thresholds",
+        "roll": "d100 vs Injury Chance",
+        "tables": {
+            "physical_trauma": [
+                {
+                    "hp_threshold": "100-90%",
+                    "chance": "5%",
+                    "effect": "Bruising (Cosmetic)"
+                },
+                {
+                    "hp_threshold": "89-75%",
+                    "chance": "15%",
+                    "effect": "Minor Bleed (-1 HP/turn)"
+                },
+                {
+                    "hp_threshold": "74-50%",
+                    "chance": "30%",
+                    "effect": "Sprained Ankle (Half Speed)"
+                },
+                {
+                    "hp_threshold": "49-25%",
+                    "chance": "60%",
+                    "effect": "Broken Arm (Drop Item/Shield)"
+                },
+                {
+                    "hp_threshold": "24-10%",
+                    "chance": "85%",
+                    "effect": "Internal Bleeding (Doom Timer)"
+                },
+                {
+                    "hp_threshold": "<10%",
+                    "chance": "100%",
+                    "effect": "Mortal Wound (Coma/Death)"
+                }
+            ],
+            "mental_trauma": [
+                {
+                    "cmp_threshold": "100-90%",
+                    "chance": "5%",
+                    "effect": "Shaken (Cosmetic)"
+                },
+                {
+                    "cmp_threshold": "89-75%",
+                    "chance": "15%",
+                    "effect": "Hesitation (-2 Initiative)"
+                },
+                {
+                    "cmp_threshold": "74-50%",
+                    "chance": "30%",
+                    "effect": "Panic (Must move away from source)"
+                },
+                {
+                    "cmp_threshold": "49-25%",
+                    "chance": "60%",
+                    "effect": "Concussion (Cannot recover FP)"
+                },
+                {
+                    "cmp_threshold": "24-10%",
+                    "chance": "85%",
+                    "effect": "Mind Fracture (CMP set to 0)"
+                },
+                {
+                    "cmp_threshold": "<10%",
+                    "chance": "100%",
+                    "effect": "Catatonia/Permanent Insanity"
+                }
+            ]
+        }
+    }
+}

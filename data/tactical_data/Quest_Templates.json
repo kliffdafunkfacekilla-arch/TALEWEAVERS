@@ -1,0 +1,91 @@
+{
+    "quest_system_v1": {
+        "archetypes": [
+            {
+                "type": "SLAY",
+                "subtypes": [
+                    "Cull (Mass)",
+                    "Bounty (Unique)",
+                    "Mystery (Investigation)"
+                ]
+            },
+            {
+                "type": "FETCH",
+                "subtypes": [
+                    "Courier (Delivery)",
+                    "Heist (Stealth)",
+                    "Harvest (Survival)"
+                ]
+            },
+            {
+                "type": "ESCORT",
+                "subtypes": [
+                    "Caravan (Defense)",
+                    "VIP (Social)",
+                    "Smuggle (Stealth)"
+                ]
+            },
+            {
+                "type": "DEFEND",
+                "subtypes": [
+                    "Siege (Combat)",
+                    "Ritual (Magic)",
+                    "Sanctuary (Secrecy)"
+                ]
+            },
+            {
+                "type": "NEGOTIATE",
+                "subtypes": [
+                    "Treaty (Diplomacy)",
+                    "Intimidate (Force)",
+                    "Infiltrate (Spy)"
+                ]
+            },
+            {
+                "type": "EXPLORE",
+                "subtypes": [
+                    "Survey (Nature)",
+                    "Delve (Dungeon)",
+                    "Investigate (Lore)"
+                ]
+            }
+        ],
+        "structures": {
+            "STRAIGHT_SHOT": [
+                "Hook",
+                "Obstacle_Minor",
+                "Climax_Major",
+                "Reward"
+            ],
+            "INVESTIGATION": [
+                "Scene_Crime",
+                "Scene_Lead",
+                "Trap_FalseLead",
+                "Puzzle_Logic",
+                "Climax_Complex"
+            ],
+            "DISASTER": [
+                "Scene_Start",
+                "Combat_Ambush",
+                "Event_Setback",
+                "Challenge_Survival",
+                "Climax_LastStand"
+            ],
+            "GAUNTLET": [
+                "Combat_Wave1",
+                "Rest_Short",
+                "Combat_Wave2",
+                "Hazard_Environment",
+                "Combat_Boss"
+            ]
+        },
+        "twists": [
+            "Betrayal (Ally turns hostile)",
+            "Third Party (Rivals appear)",
+            "Escalation (Boss Phase 2)",
+            "Moral Dilemma (Target is sympathetic)",
+            "Collapse (Escape Timer)",
+            "Decoy (Objective is fake)"
+        ]
+    }
+}

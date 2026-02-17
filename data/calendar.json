@@ -1,0 +1,114 @@
+{
+    "current": [
+        1,
+        1,
+        1
+    ],
+    "eras": [],
+    "hoursPerDay": 24,
+    "minutesPerHour": 60,
+    "monthLens": [
+        35,
+        28,
+        21,
+        42,
+        49,
+        28,
+        28,
+        28,
+        49,
+        63,
+        35,
+        42,
+        91
+    ],
+    "months": [
+        "Nexar",
+        "Massis",
+        "Motem",
+        "Fluxen",
+        "Vitan",
+        "Lexis",
+        "Ration",
+        "Ordis",
+        "Luxen",
+        "Omin",
+        "Aurum",
+        "Anum",
+        "Malen"
+    ],
+    "moons": [
+        {
+            "c": 62.040000915527344,
+            "col": [
+                0.6745098233222961,
+                0.0,
+                0.9960784316062927
+            ],
+            "n": "Crourbus",
+            "s": 0.0
+        },
+        {
+            "c": 1000.0,
+            "col": [
+                0.9921568632125854,
+                0.4470588266849518,
+                0.5921568870544434
+            ],
+            "n": "Errith",
+            "s": 1000.0
+        }
+    ],
+    "name": "A.W.",
+    "seasons": [
+        {
+            "d": 1,
+            "m": 1,
+            "n": "Shadowburn"
+        },
+        {
+            "d": 1,
+            "m": 4,
+            "n": "Dryspell"
+        },
+        {
+            "d": 1,
+            "m": 5,
+            "n": "Frostin"
+        },
+        {
+            "d": 1,
+            "m": 6,
+            "n": "Greenspan"
+        },
+        {
+            "d": 1,
+            "m": 9,
+            "n": "Highreach"
+        },
+        {
+            "d": 1,
+            "m": 10,
+            "n": "Spurium"
+        },
+        {
+            "d": 1,
+            "m": 12,
+            "n": "Dimfreeze"
+        },
+        {
+            "d": 1,
+            "m": 13,
+            "n": "Shadowfall"
+        }
+    ],
+    "weekdays": [
+        "Spireday",
+        "Ironday",
+        "Whispday",
+        "Heartday",
+        "Minday",
+        "Razoday",
+        "Voiday"
+    ]
+}

@@ -1,0 +1,367 @@
+{
+    "species": "Insect",
+    "base_stats": {
+        "Might": 12,
+        "Endurance": 8,
+        "Finesse": 10,
+        "Reflexes": 10,
+        "Vitality": 10,
+        "Fortitude": 12,
+        "Knowledge": 10,
+        "Logic": 11,
+        "Awareness": 10,
+        "Intuition": 11,
+        "Willpower": 8,
+        "Charm": 8
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Mandibles",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "CRUSH: Bite (1d6). Sunder Armor (-1 AC) on Crit."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Beetle Horn",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "PARRY: +2 AC vs Melee from front."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Clicking Maw",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "NOISE: Prevent verbal spellcasting within 5ft."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Antennae",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "SENSE: Tremorsense 30ft. Detect magic."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Streamlined",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DASH: Bonus Action Dash."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Compound Eyes",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "OMNI: 360 Vision. Cannot be Flanked."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Spiked Carapace",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "RETURN: Melee attackers take 1 Piercing dmg."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Heavy Chitin",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "ARMOR: Base AC = 15. Cannot wear armor."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Pheromone Vents",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "RALLY: Allies within 10ft gain +1 to Hit."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Hive Node",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "LINK: Telepathy with party members 60ft."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Segmented",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "SQUEEZE: Fit through 1-inch gaps."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Extra Limbs",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "TASK: Use 4 arms. Swap weapons as Free Action."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Mantis Scythes",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "SLICE: Unarmed (1d8). Finesse. Cannot hold items."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Shield Plates",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "WALL: Total Cover if you go Prone."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Crusher Claws",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "PIN: Grappled targets are Restrained."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Glow-Hands",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "LIGHT: Cast Light cantrip at will. Blind on touch."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Winged Arms",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "BUZZ: Fly Speed 30ft. Loud."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Fine Manipulators",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "CRAFT: Advantage on Crafting/Repair."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Spear Legs",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "IMPALE: Drop attack deals double damage."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Anchored",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "STANCE: Impossible to Trip/Shove."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Stridulation",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SONG: Rub legs to create loud distraction."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Earth-Connect",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "RECHARGE: Regain Stamina when burrowed."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Grasshopper",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "JUMP: Jump 30ft in any direction."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Hooked Feet",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "WALK: Spider Climb (Walls/Ceilings)."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Acid Blood",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "BURN: Melee attacker takes 1d4 Acid dmg."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Waxy Shell",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "RESIST: Immune to Poison damage."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Eye Spots",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "FEAR: Reaction. Flash wings to frighten attacker."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Spell-Eater",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "EAT: Advantage vs Spells. Healing magic fails."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Slick",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SLIP: Cannot be Grappled."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Mimic Shell",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "HIDE: Look exactly like a rock/stick."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Stinger",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "STING: 1d4 Dmg + Poison (Save or Stun)."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Web Spinner",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "NET: Action. Restrain target 30ft."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Drone Hum",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "SLEEP: Aura 10ft. Enemies fatigued."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Biolum",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "FLASH: Blind all targets 10ft radius."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Hover Wings",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "HOVER: Fly in place. Fine manipulation."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Silk Gland",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "ROPE: Create 50ft silk rope/day."
+                }
+            ]
+        }
+    }
+}

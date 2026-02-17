@@ -1,0 +1,367 @@
+{
+    "species": "Aquatic",
+    "base_stats": {
+        "Might": 9,
+        "Endurance": 12,
+        "Finesse": 11,
+        "Reflexes": 10,
+        "Vitality": 9,
+        "Fortitude": 11,
+        "Knowledge": 9,
+        "Logic": 10,
+        "Awareness": 11,
+        "Intuition": 10,
+        "Willpower": 9,
+        "Charm": 9
+    },
+    "slots": {
+        "HEAD": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Shark Teeth",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "SHRED: Bite (1d6). Adv vs Bleeding targets."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Hammerhead",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "VISION: 360 Vision. Cannot be Surprised."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Angler Light",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "LURE: Charm target to approach you."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Jelly-Mind",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ],
+                    "mechanic": "FLUID: Immune to Psychic Damage."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Needle Nose",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "PIERCE: Swim speed doubled in bursts."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Sonar Pits",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ],
+                    "mechanic": "ECHO: Blindsight 60ft underwater."
+                }
+            ]
+        },
+        "BODY": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Urchin Spines",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "POKE: Grapplers take 1d4 Poison dmg."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Crab Shell",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "ARMOR: Base AC = 14 + Dex (Max 2)."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Puffer Inflation",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SIZE: Reaction. Become Large. Adv on Intimidate."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Electric Eel",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ],
+                    "mechanic": "SHOCK: Touch deals 1d8 Lightning."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Eel Body",
+                    "stats": [
+                        "Finesse",
+                        "Awareness"
+                    ],
+                    "mechanic": "WRIGGLE: Squeeze through small holes."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Gills & Lungs",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "AMPHIB: Breathe Air and Water perfectly."
+                }
+            ]
+        },
+        "ARMS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Crab Pincer",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "SNIP: Unarmed (1d6). Sever limbs on Crit."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Shell Shield",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ],
+                    "mechanic": "BLOCK: Arm counts as Shield (+2 AC)."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Tentacles",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ],
+                    "mechanic": "GRAB: Reach 10ft. Grapple with Adv."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Coral Growth",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "WAND: Arms are natural wands."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Fins",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ],
+                    "mechanic": "SWIM: Swim Speed = 40ft."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Multi-Arm",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "OCTOPUS: Hold 4 items."
+                }
+            ]
+        },
+        "LEGS": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Webbed Kick",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ],
+                    "mechanic": "STRIKE: Kick deals 1d6. Knockback 5ft underwater."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Tail Fluke",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ],
+                    "mechanic": "BALANCE: Adv vs Prone/Trip."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Tripod",
+                    "stats": [
+                        "Endurance",
+                        "Knowledge"
+                    ],
+                    "mechanic": "STABLE: Adv vs Shove."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Water-Walk",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "SURFACE: Walk on water."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Frog Legs",
+                    "stats": [
+                        "Vitality",
+                        "Reflexes"
+                    ],
+                    "mechanic": "JUMP: Jump distance tripled."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Suction Cups",
+                    "stats": [
+                        "Reflexes",
+                        "Charm"
+                    ],
+                    "mechanic": "CLIMB: Climb wet surfaces."
+                }
+            ]
+        },
+        "SKIN": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Shark Skin",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "RASP: Damage on Grapple."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Blubber",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ],
+                    "mechanic": "INSULATE: Resist Cold. Float."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Biolum Patterns",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "HYPNO: Adv on Charm vs Beasts."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Mirror Scales",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ],
+                    "mechanic": "REFLECT: Adv vs Light magic."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Mucus",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SLIP: Immune to Grapple."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Color Shift",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ],
+                    "mechanic": "HIDE: Invisible underwater."
+                }
+            ]
+        },
+        "SPECIAL": {
+            "options": [
+                {
+                    "pillar": "VIOLENCE",
+                    "name": "Ink Jet",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ],
+                    "mechanic": "BLIND: Cone 15ft. Blindness."
+                },
+                {
+                    "pillar": "PROTECTION",
+                    "name": "Regeneration",
+                    "stats": [
+                        "Might",
+                        "Charm"
+                    ],
+                    "mechanic": "HEAL: Regain 1d4 HP in water."
+                },
+                {
+                    "pillar": "CONTROL",
+                    "name": "Siren Song",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "LURE: Voice Charms targets."
+                },
+                {
+                    "pillar": "MAGIC",
+                    "name": "Water Control",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ],
+                    "mechanic": "SHAPE: Shape Water cantrip at will."
+                },
+                {
+                    "pillar": "MOTION",
+                    "name": "Jet Propel",
+                    "stats": [
+                        "Reflexes",
+                        "Intuition"
+                    ],
+                    "mechanic": "DASH: Bonus Action Swim Dash."
+                },
+                {
+                    "pillar": "UTILITY",
+                    "name": "Pearl Maker",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ],
+                    "mechanic": "VALUE: Create pearls (money) daily."
+                }
+            ]
+        }
+    }
+}

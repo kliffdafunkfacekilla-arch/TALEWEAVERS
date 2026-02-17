@@ -1,0 +1,441 @@
+{
+  "system_name": "Tactical Triad System",
+  "core_rules": {
+    "action_loop": [
+      "1. Select Intent (Group)",
+      "2. Pick Method (Skill/Pair)",
+      "3. Choose Lead Stat (Sets Bonus & Resource Cost)",
+      "4. Set Trail Stat (Sets Defense Modifier until next turn)"
+    ],
+    "resource_logic": {
+      "lead_body_stat": "Cost: Stamina (SP)",
+      "lead_mind_stat": "Cost: Focus (FP)"
+    },
+    "dice_mechanic": {
+      "standard": "1d20 + Lead Stat Bonus",
+      "advantage": "2d20 (Keep High) - Triggered by Mastery or Tactical Edge",
+      "disadvantage": "2d20 (Keep Low) - Triggered by <50% Health/Sanity (Death Spiral)"
+    }
+  },
+  "injury_system": {
+    "thresholds": {
+      "HP": {
+        "name": "Body Health (Meat)",
+        "description": "Physical health representing muscle, bone, and blood. Structural integrity."
+      },
+      "CMP": {
+        "name": "Mind Health (Composure)",
+        "description": "Mental health representing sanity, fear, and focus under pressure. Mental stability."
+      }
+    },
+    "injury_table": [
+      {
+        "health_range": "100-90%",
+        "injury_chance": "5%",
+        "severity": "Minor",
+        "consequences": "Cosmetic scar, light bruising, momentary shock."
+      },
+      {
+        "health_range": "89-75%",
+        "injury_chance": "15%",
+        "severity": "Minor",
+        "consequences": "Staggered for 1 round, minor bleed (-1 HP/turn)."
+      },
+      {
+        "health_range": "74-50%",
+        "injury_chance": "30%",
+        "severity": "Moderate",
+        "consequences": "Broken finger/rib, Sprained ankle (-SPD), Shaken."
+      },
+      {
+        "health_range": "49-25%",
+        "injury_chance": "60%",
+        "severity": "Severe",
+        "consequences": "Broken Arm (cannot use 2H weapons), Concussion."
+      },
+      {
+        "health_range": "24-10%",
+        "injury_chance": "85%",
+        "severity": "Critical",
+        "consequences": "Severed Limb, Internal Bleeding, Mind Fracture."
+      },
+      {
+        "health_range": "<10%",
+        "injury_chance": "100%",
+        "severity": "Fatal/Permanent",
+        "consequences": "Coma, Death, or Permanent Insanity."
+      }
+    ],
+    "trauma_categories": {
+      "physical_causes": "HP Damage. Fatigue, hunger, blunt force, muscle tears.",
+      "mental_causes": "CMP Damage. Horrifying sights, stress/fear, social defeat."
+    }
+  },
+  "economy_rules": {
+    "loadout_capacity": "SP (Stamina) and FP (Focus) act as active Loadout Capacity and Action Currency.",
+    "maintenance_cost": "Weapons, Armor, and modular Spells have a Maintenance Cost that reduces maximum SP/FP while equipped.",
+    "debt_mechanic": "If you perform an action that costs more SP/FP than you have, you automatically take the difference as Direct HP/CMP Damage (overexertion/burnout) and must roll for an injury immediately."
+  },
+  "command_grid": {
+    "offensive_conflict": {
+      "assault_physical": {
+        "group_intent": "Deal HP Damage / Physical Trauma",
+        "skills": [
+          {
+            "name": "Aggressive",
+            "pair": [
+              "Might",
+              "Knowledge"
+            ],
+            "effect": "Advantage on damage vs Shields/Heavy Armor."
+          },
+          {
+            "name": "Calculated",
+            "pair": [
+              "Reflexes",
+              "Logic"
+            ],
+            "effect": "On Advantage hit, attacker chooses enemy's Injury Resistance stat."
+          },
+          {
+            "name": "Patient",
+            "pair": [
+              "Finesse",
+              "Intuition"
+            ],
+            "effect": "Advantage on hit if user Defended/Yielded last turn."
+          }
+        ]
+      },
+      "coercion_mental": {
+        "group_intent": "Deal CMP Damage / Break Will",
+        "skills": [
+          {
+            "name": "Intimidating",
+            "pair": [
+              "Vitality",
+              "Charm"
+            ],
+            "effect": "Solid Hit forces Disadvantage on target's next Social/Resolve action."
+          },
+          {
+            "name": "Deception",
+            "pair": [
+              "Endurance",
+              "Willpower"
+            ],
+            "effect": "Deals minor chip CMP damage even on a Miss."
+          },
+          {
+            "name": "Relentless",
+            "pair": [
+              "Fortitude",
+              "Awareness"
+            ],
+            "effect": "Advantage on Coercion rolls vs already Broken/Shaken targets."
+          }
+        ]
+      }
+    },
+    "defensive_protection": {
+      "fortify_physical": {
+        "group_intent": "Reduce HP Damage / Prevent Physical Injury",
+        "skills": [
+          {
+            "name": "Rooted",
+            "pair": [
+              "Endurance",
+              "Logic"
+            ],
+            "effect": "Immune to Prone/Forced Move; Advantage vs Disarm."
+          },
+          {
+            "name": "Fluid",
+            "pair": [
+              "Fortitude",
+              "Knowledge"
+            ],
+            "effect": "Successful defense converts Solid Hit into a Graze."
+          },
+          {
+            "name": "Dueling",
+            "pair": [
+              "Might",
+              "Intuition"
+            ],
+            "effect": "Winning a Clash grants Advantage on next Assault action."
+          }
+        ]
+      },
+      "resolve_mental": {
+        "group_intent": "Reduce CMP Damage / Resist Fear",
+        "skills": [
+          {
+            "name": "Confidence",
+            "pair": [
+              "Vitality",
+              "Willpower"
+            ],
+            "effect": "Advantage on Social defense rolls while at Max CMP."
+          },
+          {
+            "name": "Reasoning",
+            "pair": [
+              "Reflexes",
+              "Awareness"
+            ],
+            "effect": "Use Logic for Horrifying Sight defense instead of Willpower."
+          },
+          {
+            "name": "Cavalier",
+            "pair": [
+              "Finesse",
+              "Charm"
+            ],
+            "effect": "Nat 20 Defense deals 1d4 CMP damage to attacker."
+          }
+        ]
+      }
+    },
+    "ranged_distance": {
+      "ballistics_physical": {
+        "group_intent": "Deal HP Damage from range",
+        "skills": [
+          {
+            "name": "Skirmish",
+            "pair": [
+              "Reflexes",
+              "Knowledge"
+            ],
+            "effect": "Removes Disadvantage for firing within 5ft of enemies."
+          },
+          {
+            "name": "Precise",
+            "pair": [
+              "Finesse",
+              "Logic"
+            ],
+            "effect": "Spend 1 FP for Advantage on Critical Injury rolls."
+          },
+          {
+            "name": "Thrown/Tossed",
+            "pair": [
+              "Might",
+              "Awareness"
+            ],
+            "effect": "On hit, target rolls vs Staggered status."
+          }
+        ]
+      },
+      "suppression_mental": {
+        "group_intent": "Deal CMP Damage / Area Control from range",
+        "skills": [
+          {
+            "name": "Predict",
+            "pair": [
+              "Vitality",
+              "Intuition"
+            ],
+            "effect": "Declare hex; enemy entering must roll CMP or stop moving."
+          },
+          {
+            "name": "Impose",
+            "pair": [
+              "Fortitude",
+              "Willpower"
+            ],
+            "effect": "Enemies in range suffer Disadvantage on Initiative actions."
+          },
+          {
+            "name": "Imply",
+            "pair": [
+              "Endurance",
+              "Charm"
+            ],
+            "effect": "Target has Disadvantage on Offense if they don't move out of LoS."
+          }
+        ]
+      }
+    },
+    "strategy_control": {
+      "operations_physical": {
+        "group_intent": "Manipulate Terrain / Destroy Obstacles",
+        "skills": [
+          {
+            "name": "Alter",
+            "pair": [
+              "Might",
+              "Logic"
+            ],
+            "effect": "Advantage on rolls to destroy cover or create Difficult Terrain."
+          },
+          {
+            "name": "Utilize",
+            "pair": [
+              "Fortitude",
+              "Willpower"
+            ],
+            "effect": "Use environment to gain Advantage on next Fortify action."
+          },
+          {
+            "name": "Introduce",
+            "pair": [
+              "Endurance",
+              "Awareness"
+            ],
+            "effect": "Spend 1 SP to give ally shield/cover +1 Durability."
+          }
+        ]
+      },
+      "tactics_mental": {
+        "group_intent": "Manipulate Initiative / Timing",
+        "skills": [
+          {
+            "name": "Command",
+            "pair": [
+              "Fortitude",
+              "Charm"
+            ],
+            "effect": "Ally may swap their Lead/Trail stats immediately for free."
+          },
+          {
+            "name": "Exploit",
+            "pair": [
+              "Finesse",
+              "Intuition"
+            ],
+            "effect": "If enemy is Staggered, user may move turn order to act next."
+          },
+          {
+            "name": "Tactics",
+            "pair": [
+              "Might",
+              "Knowledge"
+            ],
+            "effect": "If top of turn order, all allies gain +5ft Move Speed."
+          }
+        ]
+      }
+    },
+    "restoration_healing": {
+      "stabilize_physical": {
+        "group_intent": "Heal HP / Treat Physical Injury",
+        "skills": [
+          {
+            "name": "First Aid",
+            "pair": [
+              "Endurance",
+              "Charm"
+            ],
+            "effect": "Stitch wound as Move Action (Disadvantage) instead of Main."
+          },
+          {
+            "name": "Medicine",
+            "pair": [
+              "Vitality",
+              "Knowledge"
+            ],
+            "effect": "Advantage on rolls to remove Bleeding or Poison status."
+          },
+          {
+            "name": "Surgery",
+            "pair": [
+              "Fortitude",
+              "Intuition"
+            ],
+            "effect": "Only skill capable of removing Severe Injury scars."
+          }
+        ]
+      },
+      "rally_mental": {
+        "group_intent": "Heal CMP / Rally from Panic",
+        "skills": [
+          {
+            "name": "Self-Awareness",
+            "pair": [
+              "Intuition",
+              "Vitality"
+            ],
+            "effect": "Spend 1 FP for Advantage to resist Mental Fractures."
+          },
+          {
+            "name": "Detached",
+            "pair": [
+              "Willpower",
+              "Logic"
+            ],
+            "effect": "Ignore Disadvantage penalty for low CMP (<50%) for 1 turn."
+          },
+          {
+            "name": "Mindfulness",
+            "pair": [
+              "Awareness",
+              "Fortitude"
+            ],
+            "effect": "Can perform Rally action on allies at range (15ft)."
+          }
+        ]
+      }
+    },
+    "mobility_flow": {
+      "prowess_physical": {
+        "group_intent": "Physical Movement / Speed",
+        "skills": [
+          {
+            "name": "Charge",
+            "pair": [
+              "Reflexes",
+              "Willpower"
+            ],
+            "effect": "Move 15ft in straight line for Advantage on next Assault."
+          },
+          {
+            "name": "Flanking",
+            "pair": [
+              "Vitality",
+              "Awareness"
+            ],
+            "effect": "No Free Attacks provoked when moving adjacent to enemies."
+          },
+          {
+            "name": "Speed",
+            "pair": [
+              "Endurance",
+              "Logic"
+            ],
+            "effect": "Moving 2 turns in a row increases SPD by +10ft."
+          }
+        ]
+      },
+      "bravery_mental": {
+        "group_intent": "Mental Morale / Vibe",
+        "skills": [
+          {
+            "name": "Commitment",
+            "pair": [
+              "Finesse",
+              "Intuition"
+            ],
+            "effect": "Advantage on Resolve rolls while adjacent to an enemy."
+          },
+          {
+            "name": "Determined",
+            "pair": [
+              "Might",
+              "Awareness"
+            ],
+            "effect": "Allies moving toward the user gain +5ft Move Speed."
+          },
+          {
+            "name": "Outsmart",
+            "pair": [
+              "Reflexes",
+              "Finesse"
+            ],
+            "effect": "Retreat without losing Initiative on next round."
+          }
+        ]
+      }
+    }
+  }
+}

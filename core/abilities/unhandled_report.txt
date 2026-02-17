@@ -1,0 +1,342 @@
+[ON_ATTACK (80)] Rapid aging attack.
+[ON_ATTACK (80)] Deflect Ranged Attack.
+[ON_ATTACK (80)] You suffer no penalties to Perception or Ranged Attacks while moving at full speed.
+[ON_ATTACK (80)] Release a cloud. Enemies within 10ft must save or attack a random target next turn.
+[ON_ATTACK (80)] When attacked, flare your colors. The attacker must save (Will) or choose a new target.
+[ON_ATTACK (80)] Bellow to give allies within 30ft a +1 bonus to Attack Rolls for the next round.
+[ON_HIT (90)] Split Beam (Multi-hit).
+[ON_HIT (90)] AOE hit around self.
+[ON_HIT (90)] Damage scales with Speed.
+[ON_HIT (90)] Damage Reduction (Flat).
+[ON_HIT (90)] Mastery of full plate and heavy chitin armor. You are the anvil.
+[ON_HIT (90)] Your base Armor Class is 13 + Dexterity modifier (max +2).
+[ON_DEFEND (5)] Dodge AOE effects (Save).
+[ON_DEFEND (5)] Teleport Dodge (Reaction).
+[ON_DEFEND (5)] Uncanny Dodge.
+[ON_DEFEND (5)] Dodge action (Int based).
+[ON_DEFEND (5)] You gain +2 to Reflex saves against Area of Effect spells (you see it coming).
+[ACTIVE (31)] Prevent Casting/Sound.
+[ACTIVE (31)] Return Spell to caster.
+[ACTIVE (31)] Stop spell being cast.
+[ACTIVE (31)] Ally Help Action.
+[ACTIVE (31)] Block Action type.
+[ACTIVE (31)] Command 1 Action.
+[ACTIVE (31)] Bonus Move action.
+[ACTIVE (31)] Delay enemy turn/action.
+[ACTIVE (31)] Reaction AC bonus.
+[ACTIVE (31)] Repeat last action.
+[ACTIVE (31)] Negate Enemy Action.
+[ACTIVE (31)] Action: Researching libraries. Lore: History, languages, and heraldry.
+[ACTIVE (31)] Action: Solving puzzles, deduction. Lore: Math, engineering, and chemistry.
+[ACTIVE (31)] Action: Swimming, climbing, breaking objects. Lore: War tactics and sieges.
+[ACTIVE (31)] Action: Leadership, interrogation. Lore: Religion, theology, and cults.
+[ACTIVE (31)] Action: Repairing gear, smithing, hardening. Lore: Physiology and metallurgy.
+[ACTIVE (31)] Action: Sustained heavy work, carrying loads. Lore: Structure and masonry.
+[ACTIVE (31)] Action: Acrobatics, stealth, balancing. Lore: Ballistics and physics of speed.
+[ACTIVE (31)] Action: Survival, handling animals. Lore: Biology, ecology, and healing.
+[ACTIVE (31)] Action: Acting, disguise. Lore: Art, culture, and high fashion.
+[ACTIVE (31)] Action: Tracking, spotting danger. Lore: Forensics and investigation.
+[ACTIVE (31)] You can turn a 5ft square of ground into Difficult Terrain (rubble) as an Action.
+[ACTIVE (31)] Stare at a target. They must save (Will) or hesitate, losing their Reaction for the round.
+[ACTIVE (31)] You can use the Help action as a Bonus Action by catching an enemy's gaze.
+[ACTIVE (31)] While swimming, you can Dash as a Bonus Action.
+[OTHER (477)] Alter Reality.
+[OTHER (477)] Block Teleportation.
+[OTHER (477)] Create Dead Magic Zone.
+[OTHER (477)] Create Illusion (Visual).
+[OTHER (477)] Decipher text/runes.
+[OTHER (477)] Destroy Magic Item.
+[OTHER (477)] Drain Magic slots.
+[OTHER (477)] End active spell.
+[OTHER (477)] Explosive Rune defense.
+[OTHER (477)] Learn item properties.
+[OTHER (477)] Long range comms.
+[OTHER (477)] Magic Armor (Temp AC).
+[OTHER (477)] Modify Memory.
+[OTHER (477)] Nondetection (Anti-Scry).
+[OTHER (477)] Permanent Binding.
+[OTHER (477)] Planar Travel.
+[OTHER (477)] Prevent Stealth.
+[OTHER (477)] Protect Area (Magic Circle).
+[OTHER (477)] Send to another plane.
+[OTHER (477)] Speak any language.
+[OTHER (477)] Split incoming spell.
+[OTHER (477)] Spy on location.
+[OTHER (477)] Attract attention.
+[OTHER (477)] Befriend Target.
+[OTHER (477)] Break Mind (Insanity).
+[OTHER (477)] Buff HP/Morale.
+[OTHER (477)] Buff Skill check.
+[OTHER (477)] Cause Fleeing.
+[OTHER (477)] Empathy Link.
+[OTHER (477)] End Rage/Hostility.
+[OTHER (477)] Gain Bodyguard.
+[OTHER (477)] Gain Followers.
+[OTHER (477)] Hesitate (Skip Turn).
+[OTHER (477)] Implant Idea.
+[OTHER (477)] Inception/Dreamwalk.
+[OTHER (477)] Kill Spirit (Husk).
+[OTHER (477)] Magical Mission.
+[OTHER (477)] Modify Memory.
+[OTHER (477)] Permanent Thrall.
+[OTHER (477)] Read Mood/Intent.
+[OTHER (477)] Rewrite Personality.
+[OTHER (477)] Send Message.
+[OTHER (477)] Stop Fight (Calm).
+[OTHER (477)] Zone of Peace.
+[OTHER (477)] Banishment.
+[OTHER (477)] Block Path (Mental).
+[OTHER (477)] Contract/Bond.
+[OTHER (477)] Erase from timeline.
+[OTHER (477)] Force Speech.
+[OTHER (477)] Gain Rank/Status.
+[OTHER (477)] God-like Will.
+[OTHER (477)] Immune Magic.
+[OTHER (477)] Know Alignment/Type.
+[OTHER (477)] Mental Armor.
+[OTHER (477)] Mind Control.
+[OTHER (477)] New Physics Law.
+[OTHER (477)] Power Word Kill.
+[OTHER (477)] Prevent Lying.
+[OTHER (477)] Prevent Sound.
+[OTHER (477)] Resist Pain/Wound.
+[OTHER (477)] Save Bonus.
+[OTHER (477)] Set Rule in area.
+[OTHER (477)] Stop movement.
+[OTHER (477)] Zone of Truth.
+[OTHER (477)] Alter Self Appearance.
+[OTHER (477)] Blend with surroundings.
+[OTHER (477)] Block Sight Line.
+[OTHER (477)] Bonus Perception.
+[OTHER (477)] Burn Undead/Shadow.
+[OTHER (477)] Create Decoys.
+[OTHER (477)] Fake Terrain.
+[OTHER (477)] Heat Metal (Burn).
+[OTHER (477)] Hidden from Reality.
+[OTHER (477)] Hologram Illusion.
+[OTHER (477)] Know Everything.
+[OTHER (477)] Know Location (GPS).
+[OTHER (477)] Major Image (Real).
+[OTHER (477)] Postcognition (See Past).
+[OTHER (477)] Remote Viewing.
+[OTHER (477)] See Through Walls.
+[OTHER (477)] Trueseeing (Perfect).
+[OTHER (477)] Visual Noise (Def Bonus).
+[OTHER (477)] Absorb incoming magical projectiles.
+[OTHER (477)] Anti-Gravity Aura (Enemies float).
+[OTHER (477)] Boost jump height/distance significantly.
+[OTHER (477)] Deflect arrows/bolts aimed at you.
+[OTHER (477)] Delete matter from existence.
+[OTHER (477)] Destroy cover or walls instantly.
+[OTHER (477)] Drag target closer to you.
+[OTHER (477)] Fling enemy a long distance.
+[OTHER (477)] Flip gravity (Ceiling is floor).
+[OTHER (477)] Increase weight of target (Slow).
+[OTHER (477)] Infinite Mass (Cannot be hurt).
+[OTHER (477)] Levitate self or object.
+[OTHER (477)] Orbital Strike from above.
+[OTHER (477)] Reduce the weight of an object.
+[OTHER (477)] Shield of debris circles you.
+[OTHER (477)] Shove target away (Knockback).
+[OTHER (477)] Spider Climb (Shift gravity).
+[OTHER (477)] Stop a physical projectile mid-air.
+[OTHER (477)] Stop all momentum in an area.
+[OTHER (477)] You cannot be moved against your will.
+[OTHER (477)] 5ft Shift (No Opportunity).
+[OTHER (477)] Create decoy clones.
+[OTHER (477)] Create travel gate.
+[OTHER (477)] Exist twice (Double turns).
+[OTHER (477)] Increase Speed buff.
+[OTHER (477)] Move through enemy space.
+[OTHER (477)] Non-Existence (Safe).
+[OTHER (477)] Predict exact future.
+[OTHER (477)] Reload Save / Retcon.
+[OTHER (477)] Restart the combat round.
+[OTHER (477)] Time Stop (Short).
+[OTHER (477)] Absorb Shock/Electricity.
+[OTHER (477)] Bonus AC.
+[OTHER (477)] Change material type.
+[OTHER (477)] Create Matter from nothing.
+[OTHER (477)] Create weapon from raw mats.
+[OTHER (477)] Extinguish fires instantly.
+[OTHER (477)] Fix broken item.
+[OTHER (477)] God-like durability.
+[OTHER (477)] Lead to Gold (Wealth).
+[OTHER (477)] Mold clay/stone/wood.
+[OTHER (477)] Reflect Ray spells.
+[OTHER (477)] Resist Elements.
+[OTHER (477)] Skin becomes Diamond (High AC).
+[OTHER (477)] Skin becomes Iron.
+[OTHER (477)] Turn self to Mist.
+[OTHER (477)] Turn solid to gas (Cloud).
+[OTHER (477)] Turn solid to liquid.
+[OTHER (477)] Weaken metal item.
+[OTHER (477)] Weld metal/stone together.
+[OTHER (477)] Auto-Natural 20.
+[OTHER (477)] Auto-Save success.
+[OTHER (477)] Best Route finding.
+[OTHER (477)] Coin Flip (50/50).
+[OTHER (477)] Danger Sense.
+[OTHER (477)] Enemy drops item.
+[OTHER (477)] Find Loot/Potion.
+[OTHER (477)] Force Crit Fail.
+[OTHER (477)] Force Reroll (Take Low).
+[OTHER (477)] Force specific Roll.
+[OTHER (477)] Hint of Future.
+[OTHER (477)] Instant Kill.
+[OTHER (477)] Locate Object.
+[OTHER (477)] Narrative Truth.
+[OTHER (477)] Random Buff effect.
+[OTHER (477)] Reroll 1s.
+[OTHER (477)] Retcon History.
+[OTHER (477)] Survive with 1HP.
+[OTHER (477)] Talk to Dead.
+[OTHER (477)] Total Loss/Destruction.
+[OTHER (477)] Weapon Failure.
+[OTHER (477)] Arcane Lock (Unopenable).
+[OTHER (477)] Become immovable.
+[OTHER (477)] Bind target's legs/wheels.
+[OTHER (477)] Bury target under earth.
+[OTHER (477)] Cannot die this round.
+[OTHER (477)] Create a safe hut/bunker.
+[OTHER (477)] Create a temporary structure.
+[OTHER (477)] Create an obstacle to trip foes.
+[OTHER (477)] Create new land/island.
+[OTHER (477)] Create permanent wall/tower.
+[OTHER (477)] End Time for target.
+[OTHER (477)] Feign Death (Indistinguishable).
+[OTHER (477)] Freeze target in time/space.
+[OTHER (477)] Ignore hunger/thirst/fatigue.
+[OTHER (477)] Invulnerable Structure.
+[OTHER (477)] Keep a door or object shut.
+[OTHER (477)] Make target fragile (Shatter).
+[OTHER (477)] Natural Armor bonus.
+[OTHER (477)] Run forever without tiring.
+[OTHER (477)] Stop decay on object/body.
+[OTHER (477)] Stop target movement completely.
+[OTHER (477)] Stop target's heart (Save).
+[OTHER (477)] Turn target to stone (Save).
+[OTHER (477)] Bonus to Saving Throw.
+[OTHER (477)] Brain Melt (Int Dmg).
+[OTHER (477)] Cannot Fail rolls.
+[OTHER (477)] Change Physics Constant.
+[OTHER (477)] Create Automaton.
+[OTHER (477)] Create Difficult Terrain.
+[OTHER (477)] Debuff Enemy Armor.
+[OTHER (477)] Delete Entity (Math).
+[OTHER (477)] Invent new device.
+[OTHER (477)] Know exact number of items.
+[OTHER (477)] Learn Lore/History.
+[OTHER (477)] Reconstruct Scene.
+[OTHER (477)] See Enemy Stats/HP.
+[OTHER (477)] Set Triggered Spell.
+[OTHER (477)] Small AC Bonus.
+[OTHER (477)] Trap enemy in logic loop.
+[OTHER (477)] Animate Plant/Tree.
+[OTHER (477)] Auto-Life on death.
+[OTHER (477)] Create new Lifeform.
+[OTHER (477)] Cure Disease/Immunity.
+[OTHER (477)] Detect Life (Radar).
+[OTHER (477)] Drain Stat (Str/Dex).
+[OTHER (477)] Enlarge self or target.
+[OTHER (477)] Grow Gills/Claws/Wings.
+[OTHER (477)] Grow spare body.
+[OTHER (477)] Inflict Disease.
+[OTHER (477)] Kill creature type.
+[OTHER (477)] Life Bond (Share HP).
+[OTHER (477)] Natural Armor skin.
+[OTHER (477)] Resurrect dead.
+[OTHER (477)] Turn into bugs (Immune).
+[OTHER (477)] Vines restrict movement.
+[OTHER (477)] Mastery of armor made from once-living things (furs, bone, wood).
+[OTHER (477)] Mastery of items that channel magic, such as scrolls, wands, and staves.
+[OTHER (477)] Using relentless pressure and "The Gaze" to corner an opponent.
+[OTHER (477)] Mastery of gaming sets, dice, tarot, and tokens of luck/fate.
+[OTHER (477)] Sensing the "vibe," emotional intent, and defusing anger.
+[OTHER (477)] Using rank, protocol, and proper titles as a social shield.
+[OTHER (477)] Mastery of heavy impact weapons like greatswords and mauls.
+[OTHER (477)] Feigning ignorance, hiding emotions, and deceiving others.
+[OTHER (477)] Using cold reading to detect lies and expose secrets.
+[OTHER (477)] Using physical presence and threats of violence to force compliance.
+[OTHER (477)] Mastery of chain and scale. Relying on reliability and faith.
+[OTHER (477)] Mastery of performance weapons like whips and nunchaku. Flow and style.
+[OTHER (477)] Using allure and inspiration to seduce or motivate others.
+[OTHER (477)] Being naturally radiant, likable, and projecting health/status.
+[OTHER (477)] Mastery of tricky tools like bolas and blowguns.
+[OTHER (477)] Mastery of banners, warhorns, and badges to signal and rally troops.
+[OTHER (477)] Using wit, mockery, and stinging insults to fluster an opponent.
+[OTHER (477)] Using facts, logic, and debate to dismantle arguments.
+[OTHER (477)] Mastery of utility vests, ghillie suits, and "deep pockets" preparation.
+[OTHER (477)] Mastery of runed cloth and woven wards that require academic understanding.
+[OTHER (477)] Mastery of caltrops, tripwires, and smoke bombs to control the ground.
+[OTHER (477)] Mastery of high-draw-weight ranged weapons like warbows and ballistae.
+[OTHER (477)] Mastery of precision weapons like rapiers, shivs, and stilettos.
+[OTHER (477)] Mastery of chemical weapons, grenades, scatterguns, and fuse times.
+[OTHER (477)] Mastery of unarmed strikes, cestus, and claws. Clinch fighting.
+[OTHER (477)] Mastery of technical swordsmanship like katanas and arming swords.
+[OTHER (477)] Mastery of sniper rifles, crossbows, and flintlocks. Lining up the shot.
+[OTHER (477)] Mastery of spears and halberds. Keeping enemies at exact range.
+[OTHER (477)] Mastery of bucklers, heaters, and tower shields for active cover and bashing.
+[OTHER (477)] Mastery of simple kinetic weapons like slings and shortbows.
+[OTHER (477)] Mastery of balanced throwing weapons like knives, axes, and kunai.
+[OTHER (477)] Mastery of non-magical aids like herbal salves, bandages, and stimulants.
+[OTHER (477)] Detect the heartbeat (electricity) of living creatures within 10ft, even through walls.
+[OTHER (477)] Fold your limbs tight against your body to fit into spaces one size smaller than you.
+[OTHER (477)] You can hold your breath for 1 hour.
+[OTHER (477)] You have no penalty to Perception (Hearing) while underwater.
+[OTHER (477)] If you lose teeth (or break them on armor), they grow back fully after a Long Rest.
+[OTHER (477)] Your skin acts as a grinding tool; you can wear through ropes or wood over time.
+[OTHER (477)] You can move sideways or backwards at full speed without penalty.
+[OTHER (477)] Catch a small moving object (fish, arrow, coin) out of the air/water.
+[OTHER (477)] Move through any opening large enough for your beak/head without slowing down.
+[OTHER (477)] Swallow an object size Small or smaller to carry it safely in your pouch.
+[OTHER (477)] You can adhere to smooth surfaces (glass, wet stone) and climb without checks.
+[OTHER (477)] You gain a +2 bonus to Initiative rolls.
+[OTHER (477)] You can drill a small hole through wood or stone (1 inch/minute) to spy or create a peephole.
+[OTHER (477)] You can hold your breath for 15 minutes (high altitude adaptation).
+[OTHER (477)] You can produce two distinct sounds at once (e.g., speaking while whistling a signal).
+[OTHER (477)] You can swallow an item up to the size of a potion bottle and hold it safely in your crop.
+[OTHER (477)] Sing a chord to give one ally a d6 Inspiration Die to use on their next roll.
+[OTHER (477)] Perfectly imitate a voice or sound you have heard (e.g., a baby crying, a guard captain's order).
+[OTHER (477)] If you swallow a creature (Small or Tiny), they cannot escape your stomach.
+[OTHER (477)] You can sleep comfortably on narrow branches or ropes without falling.
+[OTHER (477)] Your voice carries clearly over loud noises (storms, battle) up to 300ft.
+[OTHER (477)] Raise/Lower crest to send a silent coded message to allies within sight.
+[OTHER (477)] You can fly for hours without exhaustion if you are high enough to catch thermals.
+[OTHER (477)] Strike an object or armor. Reduce the target's Armor Class (AC) by 1 until repaired.
+[OTHER (477)] You can run across the surface of water for one turn without sinking.
+[OTHER (477)] You suffer no penalties on Perception checks due to distance. You can read lips from 100ft.
+[OTHER (477)] You can trap air in your shell, allowing you to function underwater for 1 hour.
+[OTHER (477)] You cannot be moved against your will while standing on natural earth/stone.
+[OTHER (477)] You can squeeze through gaps as small as 1 inch wide without slowing down.
+[OTHER (477)] Dig a foxhole in 1 round. You gain Half-Cover while standing in that spot.
+[OTHER (477)] Use an object, reload a weapon, or open a door while keeping your main hands full.
+[OTHER (477)] You can see in all directions at once. You cannot be Flanked.
+[OTHER (477)] Produce up to 50ft of silk rope per day. It is strong enough to hold your weight.
+[OTHER (477)] When an enemy misses you, you can jump over them to the opposite side (flanking position).
+[OTHER (477)] You can bite through inanimate objects (wood, bone, soft metal) to sunder items.
+[OTHER (477)] You suffer no penalties to Perception when listening through doors or thin walls.
+[OTHER (477)] Clean self or ally to remove smells and dirt, curing minor diseases or parasites.
+[OTHER (477)] Swallow a small object (key/ring) instantly to hide it, regurgitating it later safely.
+[OTHER (477)] Your melee reach increases by +5 feet on your turn.
+[OTHER (477)] When targeted by a humanoid, force a Will save. On fail, they must choose a different target.
+[OTHER (477)] Listen to a door to identify exactly how many creatures are in the next room.
+[OTHER (477)] Moving at normal speed does not impose penalties on Stealth checks.
+[OTHER (477)] You ignore Difficult Terrain caused by snow, mud, or sand.
+[OTHER (477)] You can move through trees, rafters, or hanging ropes at full speed without checks.
+[OTHER (477)] You dry off instantly and never suffer penalties from being wet or cold due to water.
+[OTHER (477)] Grow a delicious-smelling fruit to lure hungry beasts into a trap.
+[OTHER (477)] Lock your limbs together to create a wall of spikes. You provide Three-Quarters Cover to allies behind you.
+[OTHER (477)] When falling, deploy seeds/fluff to float down safely (Feather Fall).
+[OTHER (477)] You remain conscious and active even in magical sleep or freezing temperatures.
+[OTHER (477)] Your base Armor Class is 14 + Dexterity modifier (max +2).
+[OTHER (477)] Communicate with allies over long distances (1 mile) using wind sounds.
+[OTHER (477)] You can survive for 7 days without water.
+[OTHER (477)] You ignore penalties from extreme heat or extreme cold environments.
+[OTHER (477)] You can breathe air and water.
+[OTHER (477)] You can hold your breath for up to 1 hour.
+[OTHER (477)] You cannot be moved against your will (Shoved/Pulled) while you are conscious and on solid ground.
+[OTHER (477)] When falling, you can move 2ft horizontally for every 1ft you fall.
+[OTHER (477)] You can see 180 degrees. You cannot be Flanked.
+[OTHER (477)] You recover from Exhaustion twice as fast during a Short Rest by regulating heat through your crest.
+[OTHER (477)] You can walk on vertical surfaces and ceilings without needing to make ability checks.

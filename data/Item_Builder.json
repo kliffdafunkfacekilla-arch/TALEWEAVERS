@@ -1,0 +1,153 @@
+{
+    "item_system_v1": {
+        "philosophy": "Gear costs Attributes (Stamina/Focus) to equip.",
+        "categories": {
+            "WEAPON": {
+                "logic": "Base_Dmg + Material_Mod + Rune_Effect",
+                "types": {
+                    "Light Blade": {
+                        "dmg": "1d6",
+                        "prop": "Finesse",
+                        "cost": "1 SP",
+                        "slots": 1
+                    },
+                    "Heavy Cleaver": {
+                        "dmg": "1d10",
+                        "prop": "Heavy",
+                        "cost": "3 SP",
+                        "slots": 2
+                    },
+                    "Polearm": {
+                        "dmg": "1d8",
+                        "prop": "Reach",
+                        "cost": "2 SP",
+                        "slots": 1
+                    },
+                    "Bow": {
+                        "dmg": "1d8",
+                        "prop": "Ranged (100ft)",
+                        "cost": "2 SP",
+                        "slots": 1
+                    },
+                    "Catalyst": {
+                        "dmg": "1d4",
+                        "prop": "Magic (Focus)",
+                        "cost": "2 FP",
+                        "slots": 3
+                    }
+                }
+            },
+            "ARMOR": {
+                "logic": "Protection (Subtracted from incoming Dmg) vs Loadout Cost",
+                "types": {
+                    "Robes": {
+                        "prot": 0,
+                        "cost": "0 SP",
+                        "trait": "Comfort (Regain FP faster)"
+                    },
+                    "Light Leather": {
+                        "prot": 1,
+                        "cost": "1 SP",
+                        "trait": "Silent (No Stealth Penalty)"
+                    },
+                    "Chainmail": {
+                        "prot": 2,
+                        "cost": "3 SP",
+                        "trait": "Reliable (Cannot be broken)"
+                    },
+                    "Plate": {
+                        "prot": 4,
+                        "cost": "5 SP",
+                        "trait": "Bulky (Disadvantage Stealth)"
+                    },
+                    "Shield": {
+                        "prot": 2,
+                        "cost": "2 SP",
+                        "trait": "Block (Active Defense)"
+                    }
+                }
+            },
+            "CONSUMABLE": {
+                "types": {
+                    "Potion": {
+                        "desc": "Alchemy based. Physical healing/buffs.",
+                        "cost": "0"
+                    },
+                    "Totem": {
+                        "desc": "One-use Spell (Scroll). Breaks on use.",
+                        "cost": "0"
+                    },
+                    "Food": {
+                        "desc": "Long rest recovery bonus.",
+                        "cost": "0"
+                    }
+                }
+            },
+            "LORE": {
+                "types": {
+                    "Journal": "Contains plot hook or password.",
+                    "Curio": "Strange object with no function but high value.",
+                    "Trophy": "Body part of a rare beast."
+                }
+            }
+        },
+        "materials": {
+            "Tier 1": {
+                "name": "Iron/Hide",
+                "dmg_mod": "+0",
+                "price_mult": 1.0
+            },
+            "Tier 2": {
+                "name": "Steel/Reinforced",
+                "dmg_mod": "+1",
+                "price_mult": 2.5
+            },
+            "Tier 3": {
+                "name": "Mithril/Chitin",
+                "dmg_mod": "+2",
+                "loadout_discount": "-1 SP",
+                "price_mult": 5.0
+            },
+            "Tier 4": {
+                "name": "Void-Glass",
+                "dmg_mod": "+3",
+                "prop_add": "Ignores Armor",
+                "price_mult": 10.0
+            }
+        },
+        "enchantments": {
+            "prefix": {
+                "Serrated": {
+                    "effect": "Causes Bleed on Crit",
+                    "cost_add": 0
+                },
+                "Weighted": {
+                    "effect": "+1 Dmg, +1 Loadout Cost",
+                    "cost_add": 1
+                },
+                "Balanced": {
+                    "effect": "+1 to Hit",
+                    "cost_add": 0
+                }
+            },
+            "suffix": {
+                "of Embers": {
+                    "effect": "+1d4 Fire Dmg",
+                    "slot_cost": 1
+                },
+                "of Ice": {
+                    "effect": "Slows target 10ft",
+                    "slot_cost": 1
+                },
+                "of the Bear": {
+                    "effect": "+2 Max HP while equipped",
+                    "slot_cost": 1
+                },
+                "of the Owl": {
+                    "effect": "Darkvision 30ft",
+                    "slot_cost": 1
+                }
+            }
+        }
+    }
+}
