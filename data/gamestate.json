@@ -458,13 +458,13 @@
         }
     ],
     "meta": {
-        "epoch": 100,
+        "epoch": 101,
         "flags": {
             "IS_FAMINE_ACTIVE": false,
             "IS_WAR_ACTIVE": false
         },
-        "global_pop": 194014.0,
-        "global_wealth": 15670.0
+        "global_pop": 195954.14,
+        "global_wealth": 15680.0
     },
     "nodes": [
         {

@@ -21,6 +21,7 @@ interface GameState extends SessionData {
     setInventoryOpen: (open: boolean) => void;
     isQuestLogOpen: boolean;
     setQuestLogOpen: (open: boolean) => void;
+    syncTacticalState: () => Promise<void>;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -209,5 +210,43 @@ export const useGameStore = create<GameState>((set, get) => ({
     equipItem: async (itemId: string, slot: string) => {
         const { dmChat } = get();
         await dmChat(`I want to equip my ${itemId} to my ${slot} slot.`);
+    },
+
+    syncTacticalState: async () => {
+        try {
+            const response = await fetch('/api/tactical/state');
+            if (response.status === 404) return; // No active combat
+            if (!response.ok) throw new Error('State fetch failed');
+
+            const data = await response.json();
+
+            // Map TacticalStateResponse to SessionData
+            set((state) => ({
+                round: data.round,
+                turn_order: data.turn_order,
+                active_combatant: data.active_combatant,
+                entities: state.entities.map(e => {
+                    if (e.type === 'player' && e.name === data.player_stats.name) {
+                        return {
+                            ...e,
+                            hp: data.player_stats.health.current,
+                            pos: [data.player_stats.coordinates.x, data.player_stats.coordinates.y],
+                            stats: data.player_stats.attributes
+                        };
+                    }
+                    const enemy = data.enemy_list.find((en: any) => en.id === e.id);
+                    if (enemy) {
+                        return {
+                            ...e,
+                            hp: enemy.health.current,
+                            pos: [enemy.coordinates.x, enemy.coordinates.y]
+                        };
+                    }
+                    return e;
+                })
+            }));
+        } catch (e) {
+            console.error("Failed to sync tactical state", e);
+        }
     }
 }));

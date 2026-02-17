@@ -16,6 +16,10 @@ function App() {
 
     useEffect(() => {
         fetchNewSession();
+        const interval = setInterval(() => {
+            useGameStore.getState().syncTacticalState();
+        }, 2000);
+        return () => clearInterval(interval);
     }, []);
 
     const handleDmSubmit = (e: React.FormEvent) => {
@@ -139,7 +143,10 @@ function App() {
                         </div>
                         <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-300">Chronicle</h2>
                     </div>
-                    <div className="text-[10px] font-bold text-slate-600 bg-white/5 px-2 py-0.5 rounded border border-white/5">Turn {meta.turn}</div>
+                    <div className="text-[10px] font-bold text-slate-600 bg-white/5 px-2 py-0.5 rounded border border-white/5 uppercase tracking-tighter flex items-center gap-2">
+                        {useGameStore.getState().round ? <span>RD {useGameStore.getState().round}</span> : <span>Turn {meta.turn}</span>}
+                        {useGameStore.getState().active_combatant && <span className="text-yellow-500/80 ml-2">Active: {useGameStore.getState().active_combatant}</span>}
+                    </div>
                 </div>
 
                 <div className="flex-grow p-6 overflow-y-auto space-y-4 font-mono text-[11px] custom-scrollbar">

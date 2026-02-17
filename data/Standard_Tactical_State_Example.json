@@ -1,0 +1,52 @@
+{
+    "player_stats": {
+        "name": "Burt",
+        "health": {
+            "current": 40,
+            "max": 40
+        },
+        "stamina": {
+            "current": 10,
+            "max": 10
+        },
+        "focus": {
+            "current": 10,
+            "max": 10
+        },
+        "coordinates": {
+            "x": 2,
+            "y": 2
+        },
+        "attributes": {
+            "Might": 9,
+            "Reflexes": 10,
+            "Endurance": 12,
+            "Vitality": 9,
+            "Fortitude": 11,
+            "Knowledge": 9,
+            "Logic": 10,
+            "Awareness": 11,
+            "Intuition": 10,
+            "Willpower": 9,
+            "Charm": 9,
+            "Finesse": 11
+        }
+    },
+    "enemy_list": [
+        {
+            "id": "enemy_0",
+            "name": "Bandit",
+            "type": "Unknown",
+            "health": {
+                "current": 40,
+                "max": 40
+            },
+            "coordinates": {
+                "x": 10,
+                "y": 10
+            },
+            "active_effects": []
+        }
+    ],
+    "active_effects": []
+}

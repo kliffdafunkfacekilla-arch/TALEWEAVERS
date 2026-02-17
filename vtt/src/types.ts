@@ -37,6 +37,9 @@ export interface SessionData {
     map: MapData;
     entities: Entity[];
     log: string[];
+    round?: number;
+    turn_order?: string[];
+    active_combatant?: string | null;
 }
 
 export interface QuestObjective {

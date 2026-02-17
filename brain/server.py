@@ -28,6 +28,7 @@ try:
     from core.char_creator import CharacterBuilder
     from core.item_generator import ItemGenerator
     from core.quest_manager import QuestManager
+    from world.sim_manager import SimulationManager
 except ImportError as e:
     print(f"[ERROR] Failed to import internal Core components: {e}")
     CampaignGenerator = None
@@ -57,6 +58,7 @@ class WorldDatabase:
         self.item_gen = ItemGenerator(os.path.join(DATA_DIR, "Item_Builder.json")) if ItemGenerator else None
         self.quests = QuestManager(os.path.join(DATA_DIR, "quests.json")) if QuestManager else None
         self.active_combat = None
+        self.sim = None
     
     def load(self):
         # Load Lore (Static)
@@ -67,6 +69,8 @@ class WorldDatabase:
                 print(f"[DATA] Loaded {len(self.lore)} lore entries.")
         except Exception as e:
             print(f"[ERROR] Failed to load lore.json: {e}")
+            import traceback
+            traceback.print_exc()
 
         # Load Gamestate (Dynamic)
         try:
@@ -79,13 +83,21 @@ class WorldDatabase:
                 
                 meta = self.gamestate.get('meta', {})
                 print(f"[DATA] Loaded Gamestate (Epoch: {meta.get('epoch', 0)})")
+                print(f"[DATA] Factions: {len(self.factions)} | Nodes: {len(self.nodes)}")
                 
                 if self.quests:
                     self.quests.load()
                     print(f"[DATA] Loaded {len(self.quests.quests)} quests.")
+                
+                # Initialize Simulation Manager with loaded state
+                if SimulationManager:
+                    self.sim = SimulationManager(self.gamestate)
+                    print("[DATA] Simulation Manager Initialized (LOD Ready).")
             
         except Exception as e:
             print(f"[ERROR] Failed to load gamestate.json: {e}")
+            import traceback
+            traceback.print_exc()
 
 db = WorldDatabase()
 db.load()
@@ -114,6 +126,39 @@ class CharCreateRequest(BaseModel):
 class DMActionRequest(BaseModel):
     message: str
     context: Dict[str, Any] = {}
+
+# --- TACTICAL STATE MODELS ---
+class TacticalHealth(BaseModel):
+    current: int
+    max: int
+
+class TacticalCoords(BaseModel):
+    x: int
+    y: int
+
+class EnemyState(BaseModel):
+    id: str
+    name: str
+    type: str
+    health: TacticalHealth
+    coordinates: TacticalCoords
+    active_effects: List[Dict[str, Any]] = []
+
+class PlayerTacticalStats(BaseModel):
+    name: str
+    health: TacticalHealth
+    stamina: TacticalHealth
+    focus: TacticalHealth
+    coordinates: TacticalCoords
+    attributes: Dict[str, int]
+
+class TacticalStateResponse(BaseModel):
+    round: int = 1
+    turn_order: List[str] = []
+    active_combatant: Optional[str] = None
+    player_stats: PlayerTacticalStats
+    enemy_list: List[EnemyState]
+    active_effects: List[Dict[str, Any]]
 
 # --- HELPER FUNCTIONS ---
 def get_distance(x1, y1, x2, y2):
@@ -158,7 +203,7 @@ def resolve_mechanical_interaction(action: str, intent: Dict, player_name: str =
                     
                     # Update Quest Objectives if relevant
                     if db.quests:
-                        db.quests.update_objective("locate_chest", 1)
+                        db.quests.update_objective("open_chest", 1)
                 except Exception as e:
                     print(f"[ERROR] Interaction save failed: {e}")
                     res = "You find something, but can't seem to carry it."
@@ -320,6 +365,89 @@ def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
 @app.get("/campaign/quests")
 async def get_quests():
     return db.quests.get_active_quests() if db.quests else []
+
+@app.post("/world/advance_time")
+def advance_world_time(hours: int = Query(1), x: int = Query(500), y: int = Query(500)):
+    """
+    Advances world time and triggers hierarchical simulation ticks (LOD-aware).
+    """
+    if not db.sim:
+        raise HTTPException(status_code=503, detail="Simulation Engine Offline.")
+    
+    db.sim.advance_time(hours, player_pos=(x, y))
+    
+    # Save updated gamestate
+    try:
+        with open(GAMESTATE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(db.gamestate, f, indent=4)
+    except Exception as e:
+        print(f"[ERROR] Failed to save updated gamestate: {e}")
+
+    return {
+        "status": "Time Advanced",
+        "new_time": db.sim.get_time_string(),
+        "epoch": db.gamestate.get('meta', {}).get('epoch', 0),
+        "global_wealth": db.gamestate.get('meta', {}).get('global_wealth', 0)
+    }
+
+@app.get("/tactical/state", response_model=TacticalStateResponse)
+def get_tactical_state():
+    """
+    Returns the current tactical state in the standardized JSON format.
+    """
+    if not db.active_combat:
+        raise HTTPException(status_code=404, detail="No active tactical session found.")
+    
+    # 1. Map Player
+    player_c = next((c for c in db.active_combat.combatants if c.name == "player_burt"), None)
+    if not player_c:
+        raise HTTPException(status_code=404, detail="Player not found in active combat.")
+    
+    player_stats = PlayerTacticalStats(
+        name=player_c.data.get("Name", "Burt"),
+        health=TacticalHealth(current=getattr(player_c, 'hp', 10), max=getattr(player_c, 'max_hp', 10)),
+        stamina=TacticalHealth(current=getattr(player_c, 'sp', 10), max=getattr(player_c, 'max_sp', 10)),
+        focus=TacticalHealth(current=getattr(player_c, 'fp', 10), max=getattr(player_c, 'max_fp', 10)),
+        coordinates=TacticalCoords(x=player_c.x, y=player_c.y),
+        attributes=player_c.stats
+    )
+    
+    # 2. Map Enemies
+    enemy_list = []
+    for c in db.active_combat.combatants:
+        if c.team == "Enemy":
+            # Extract active effects for this enemy
+            effects = []
+            status_flags = ["is_staggered", "is_shaken", "is_blinded", "is_stunned", "is_burning", "is_bleeding"]
+            for flag in status_flags:
+                if getattr(c, flag, False):
+                    effects.append({"name": flag.replace("is_", "").title(), "type": "Condition"})
+            
+            enemy_list.append(EnemyState(
+                id=c.name,
+                name=c.data.get("Name", "Enemy"),
+                type=c.data.get("Type", "Unknown"),
+                health=TacticalHealth(current=getattr(c, 'hp', 10), max=getattr(c, 'max_hp', 10)),
+                coordinates=TacticalCoords(x=c.x, y=c.y),
+                active_effects=effects
+            ))
+            
+    # 3. Global Effects
+    active_effects = [] # Placeholder for global environmental effects
+    
+    # 4. Turn Order
+    turn_order = [c.name for c in db.active_combat.turn_order] if hasattr(db.active_combat, 'turn_order') and db.active_combat.turn_order else []
+    active_char = db.active_combat.get_active_char()
+    active_name = active_char.name if active_char else None
+
+    return TacticalStateResponse(
+        round=getattr(db.active_combat, 'round_count', 1),
+        turn_order=turn_order,
+        active_combatant=active_name,
+        player_stats=player_stats,
+        enemy_list=enemy_list,
+        active_effects=active_effects
+    )
 
 @app.post("/refresh")
 def refresh_data():
