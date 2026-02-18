@@ -340,7 +340,7 @@ def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
                 "pos": [c.x, c.y],
                 "hp": getattr(c, 'hp', 20),
                 "maxHp": getattr(c, 'max_hp', 20),
-                "icon": "icons/race/aquatic_male.png" if c.team == 'Neutral' else "icons/race/human_male.png",
+                "icon": "sheet:0" if c.team == 'Neutral' else "sheet:1",
                 "tags": ["hero"] if c.team == 'Neutral' else ["hostile"]
             }
             for c in db.active_combat.combatants
@@ -348,7 +348,7 @@ def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
 
     # Add Objects
     world_objects = [
-        {"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "icons/object/chest_closed.png", "tags": ["lootable"]},
+        {"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:10", "tags": ["lootable"]},
     ]
     if db.active_combat:
         db.active_combat.world_objects = world_objects

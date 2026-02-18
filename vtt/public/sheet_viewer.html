@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Taleweavers Sheet Viewer</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1e293b;
+            padding: 10px;
+            z-index: 100;
+            border-bottom: 2px solid #334155;
+        }
+
+        .sheet-container {
+            position: relative;
+            margin-top: 60px;
+            display: inline-block;
+        }
+
+        canvas {
+            image-rendering: pixelated;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        Grid Size: <input type="number" id="gridSize" value="32" onchange="drawGrid()"> px
+        | <span id="info">Loading sheet...</span>
+    </div>
+    <div class="sheet-container">
+        <canvas id="sheetCanvas"></canvas>
+        <canvas id="overlayCanvas" class="overlay"></canvas>
+    </div>
+
+    <script>
+        const img = new Image();
+        img.src = '/spritesheet.png';
+        const canvas = document.getElementById('sheetCanvas');
+        const overlay = document.getElementById('overlayCanvas');
+        const ctx = canvas.getContext('2d');
+        const octx = overlay.getContext('2d');
+
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            overlay.width = img.width;
+            overlay.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            drawGrid();
+        };
+
+        function drawGrid() {
+            const size = parseInt(document.getElementById('gridSize').value);
+            octx.clearRect(0, 0, overlay.width, overlay.height);
+            octx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            octx.lineWidth = 1;
+
+            const cols = Math.floor(img.width / size);
+            const rows = Math.floor(img.height / size);
+
+            document.getElementById('info').innerText = `${cols} x ${rows} grid (${cols * rows} sprites total).`;
+
+            octx.font = '8px Arial';
+            octx.fillStyle = 'white';
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const id = r * cols + c;
+                    const x = c * size;
+                    const y = r * size;
+
+                    octx.strokeRect(x, y, size, size);
+                    octx.fillText(id, x + 2, y + 10);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
