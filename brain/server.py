@@ -43,6 +43,12 @@ except ImportError as e:
     CharacterBuilder = None
     ItemGenerator = None
     QuestManager = None
+    PersistenceLayer = None
+    MemoryManager = None
+    WorldGraph = None
+    SimpleRAG = None
+    SagaGameLoop = None
+    SimulationManager = None
 
 LORE_PATH = os.path.join(DATA_DIR, "lore.json")
 GAMESTATE_PATH = os.path.join(DATA_DIR, "gamestate.json")
@@ -66,7 +72,7 @@ class WorldDatabase:
         self.sim = None
         self.memory = None
         self.graph = None
-        self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db"))
+        self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db")) if PersistenceLayer else None
         self.rag = None
         self.loop = None
     
@@ -118,7 +124,8 @@ class WorldDatabase:
                     print(f"[DATA] World Graph built with {len(self.nodes)} nodes.")
                 
                 # Setup SQLite Persistence
-                self.db.sync_nodes(self.nodes)
+                if self.db:
+                    self.db.sync_nodes(self.nodes)
 
                 # Initialize Game Loop (LangGraph Logic)
                 if SagaGameLoop and self.sensory:

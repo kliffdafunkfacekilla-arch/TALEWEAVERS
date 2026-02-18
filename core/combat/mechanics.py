@@ -28,15 +28,22 @@ except ImportError:
 
 # Ensure we can import abilities module if it's in a subfolder relative to this script
 # sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from abilities import engine_hooks
+try:
+    from core.abilities import engine_hooks
+except ImportError:
+    from abilities import engine_hooks
 
 try:
-    from core.stubs import Stats, Conditions, StatusManager
+    try:
+        from core.core.stubs import Stats, Conditions, StatusManager
+    except ImportError:
+        from core.stubs import Stats, Conditions, StatusManager
 except ImportError as e:
     # Fallback to local placeholders if stubs missing
     class Conditions:
         STAGGERED = "Staggered"
     StatusManager = None
+    print(f"[Mechanics] Warning: Could not import StatusManager: {e}")
 
 # --- CONSTANTS ---
 STAT_BLOCK = ["Might", "Reflexes", "Endurance", "Vitality", "Fortitude", "Knowledge", "Logic", "Awareness", "Intuition", "Charm", "Willpower", "Finesse"]
@@ -77,21 +84,28 @@ class Tile:
         self.hazards = []
 
 
-class LegacyCombatant:
+from .ecs_adapter import CombatEntity
+
+class LegacyCombatant(CombatEntity):
     def __init__(self, filepath=None, data=None):
         self.filepath = filepath
+        # Load Data
         if data:
             self.data = data
         else:
             self.data = self._load_data(filepath)
+            
+        # Initialize ECS Components (Name, Stats, Vitals, Inventory)
+        super().__init__(name=self.data.get("Name", "Unknown"), data=self.data)
         
-        self.name = self.data.get("Name", "Unknown")
         self.species = self.data.get("Species", "Unknown")
         
-        self.stats = self.data.get("Stats", {})
-        self.derived = self.data.get("Derived", {})
+        # The following properties (hp, sp, fp) are now handled by CombatEntity components via setters
+        # We re-set them here to ensure any custom logic in _load_data is respected, 
+        # but the storage is now in self.components[Vitals]
         
-        # Skills: Normalize to Dict {Name: Rank}
+        # Skills: Maintain local cache for speed or move to Component?
+        # For now, keep as attribute to avoid breaking get_skill_rank
         raw_skills = self.data.get("Skills", [])
         if isinstance(raw_skills, list):
             self.skills = {s: 1 for s in raw_skills}
@@ -134,7 +148,7 @@ class LegacyCombatant:
         self.xp = self.data.get("XP", 0) # Load XP, default 0
         
         # STATUS MANAGER
-        if 'StatusManager' in globals():
+        if StatusManager:
             self.status = StatusManager(self)
         else:
             self.status = None

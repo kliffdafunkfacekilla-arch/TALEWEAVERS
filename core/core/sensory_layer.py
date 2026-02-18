@@ -84,11 +84,14 @@ class SensoryLayer:
         
         response = self.chat(prompt, system_prompt=system_prompt)
         try:
+            # Strip markdown code blocks if present
+            clean_response = response.replace("```json", "").replace("```", "").strip()
+            
             # Attempt to extract JSON from response
-            start = response.find("{")
-            end = response.rfind("}") + 1
+            start = clean_response.find("{")
+            end = clean_response.rfind("}") + 1
             if start != -1 and end != 0:
-                return json.loads(response[start:end])
+                return json.loads(clean_response[start:end])
             return {"action": "TALK", "text": response} # Fallback to just talking
         except:
             return {"action": "TALK", "text": response}
