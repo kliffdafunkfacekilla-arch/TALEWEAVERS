@@ -40,7 +40,9 @@ class SensoryLayer:
 
     def _load_prompt(self, filename, fallback=""):
         try:
-            path = os.path.join(os.path.dirname(__file__), "..", "prompts", filename)
+            # path = os.path.join(os.path.dirname(__file__), "..", "prompts", filename)
+            # Since sensory_layer is now in core/, we look for prompts/ in core/prompts
+            path = os.path.join(os.path.dirname(__file__), "prompts", filename)
             if os.path.exists(path):
                 with open(path, 'r', encoding='utf-8') as f:
                     return f.read().strip()

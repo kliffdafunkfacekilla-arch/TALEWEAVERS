@@ -6,7 +6,7 @@ class SagaGameLoop:
     The orchestrator that wires together the SAGA Brain workflow.
     Uses the LangGraph pattern: Input -> Intent -> Lore -> Sim -> Narrative -> Output.
     """
-    def __init__(self, sensory_layer, combat_engine, rag_engine, memory_manager):
+    def __init__(self, sensory_layer, combat_engine, rag_engine, memory_manager, simulation_manager=None, quest_manager=None):
         self.runtime = GraphRuntime()
         
         # 1. Parse Node
@@ -16,11 +16,10 @@ class SagaGameLoop:
         self.runtime.add_node("lore", LoreNode(rag_engine, memory_manager))
         
         # 3. Simulation Logic Node
-        # TODO: Pass the full SimulationManager here for world-level updates
-        self.runtime.add_node("simulation", SimNode(combat_engine))
+        self.runtime.add_node("simulation", SimNode(combat_engine, simulation_manager, quest_manager))
         
         # 4. DM Narrative Node
-        self.runtime.add_node("narrative", NarrativeNode(sensory_layer))
+        self.runtime.add_node("narrative", NarrativeNode(sensory_layer, quest_manager))
 
     def process_turn(self, user_input, context):
         """

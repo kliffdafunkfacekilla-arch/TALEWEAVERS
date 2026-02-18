@@ -145,7 +145,9 @@ class WorldDatabase:
                     self.sensory, 
                     lambda: self.active_combat, # Dynamic Combat Provider 
                     self.rag, 
-                    self.memory
+                    self.memory,
+                    self.sim,
+                    self.quests
                 )
                 print("[DATA] SAGA Game Loop Initialized (LangGraph Pattern).")
             else:

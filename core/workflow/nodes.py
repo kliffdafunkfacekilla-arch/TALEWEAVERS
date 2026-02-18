@@ -39,9 +39,10 @@ class SimNode(WorkflowNode):
     """
     Step 3: Execute mechanical logic (Movement, Combat, etc).
     """
-    def __init__(self, combat_provider=None, simulation_manager=None):
+    def __init__(self, combat_provider=None, simulation_manager=None, quest_manager=None):
         self.get_combat = combat_provider if callable(combat_provider) else (lambda: combat_provider)
         self.sim = simulation_manager
+        self.quests = quest_manager
 
     def run(self, state: GraphState) -> GraphState:
         combat_engine = self.get_combat()
@@ -51,6 +52,13 @@ class SimNode(WorkflowNode):
         
         updates: List[Dict[str, Any]] = []
         result = "Nothing happens."
+
+        player_pos = state.player_data.get('pos', (500, 500))
+
+        # ADVANCE WORLD TIME (1 hour per action)
+        if self.sim:
+            self.sim.advance_time(1, player_pos)
+            print(f"[NODE] World Time: {self.sim.get_time_string()}")
 
         # COMBAT LOGIC (Grid Mode)
         if combat_engine and combat_engine.active:
@@ -75,8 +83,22 @@ class SimNode(WorkflowNode):
 
         # WORLD LOGIC (Graph Mode)
         elif self.sim:
-            # Fallback to narrative simulation
-            result = f"You traverse the world. {action} executed."
+            if action in ['MOVE', 'TRAVEL']:
+                dx, dy = cmd.get('dx', 0), cmd.get('dy', 0)
+                new_x = player_pos[0] + dx
+                new_y = player_pos[1] + dy
+                state.player_data['pos'] = (new_x, new_y)
+                result = f"You travel through the wilds towards ({new_x}, {new_y})."
+                updates.append({'type': 'MOVE_PLAYER', 'pos': [new_x, new_y]})
+            else:
+                result = f"Action {action} performed. The world continues to turn."
+
+        # QUEST TRACKING
+        if self.quests and action:
+            # Simple slug matching: if player performs 'SEARCH', check for search objectives
+            quest_updates = self.quests.update_objective(action.lower(), 1)
+            if quest_updates:
+                result += " " + " ".join(quest_updates)
 
         state.mechanical_result = result
         state.visual_updates = updates
@@ -86,8 +108,9 @@ class NarrativeNode(WorkflowNode):
     """
     Step 4: Generate the DM's response.
     """
-    def __init__(self, sensory_layer):
+    def __init__(self, sensory_layer, quest_manager=None):
         self.sensory = sensory_layer
+        self.quests = quest_manager
 
     def run(self, state: GraphState) -> GraphState:
         # Construct context object for the sensory layer
@@ -97,7 +120,7 @@ class NarrativeNode(WorkflowNode):
             "intent": state.intent,
             "lore": state.lore_context,
             "history": state.history_context,
-            "active_quests": []  # Placeholder
+            "active_quests": self.quests.get_active_quests() if self.quests else []
         }
         
         print(f"[NODE] Generating Narrative based on result: '{state.mechanical_result}'")
