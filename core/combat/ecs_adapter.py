@@ -1,4 +1,4 @@
-from core.core.ecs import Entity, Position, Vitals, Stats, Renderable, Inventory, Equipment, StatusEffects, FactionMember
+from core.ecs import Entity, Position, Vitals, Stats, Renderable, Inventory, Equipment, StatusEffects, FactionMember
 
 class CombatEntity(Entity):
     """

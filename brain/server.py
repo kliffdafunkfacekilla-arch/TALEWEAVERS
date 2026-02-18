@@ -16,6 +16,8 @@ DATA_DIR = os.path.join(TALEWEAVERS_ROOT, "data")
 CORE_DIR = os.path.join(TALEWEAVERS_ROOT, "core")
 
 # Bring in Core Rules Engine
+if TALEWEAVERS_ROOT not in sys.path:
+    sys.path.append(TALEWEAVERS_ROOT)
 if CORE_DIR not in sys.path:
     sys.path.append(CORE_DIR)
 if BRAIN_DIR not in sys.path:
@@ -56,6 +58,11 @@ GAMESTATE_PATH = os.path.join(DATA_DIR, "gamestate.json")
 print(f"[BOOT] Taleweavers Brain initializing...")
 print(f"[BOOT] Root: {TALEWEAVERS_ROOT}")
 print(f"[BOOT] Data: {DATA_DIR}")
+print(f"[DEBUG] Components Status:")
+print(f"  - SensoryLayer: {'OK' if SensoryLayer else 'FAILED'}")
+print(f"  - SagaGameLoop: {'OK' if SagaGameLoop else 'FAILED'}")
+print(f"  - PersistenceLayer: {'OK' if PersistenceLayer else 'FAILED'}")
+print(f"  - WorldGraph: {'OK' if WorldGraph else 'FAILED'}")
 
 # --- DATA LOADER ---
 class WorldDatabase:
@@ -103,42 +110,49 @@ class WorldDatabase:
                 meta = self.gamestate.get('meta', {})
                 print(f"[DATA] Loaded Gamestate (Epoch: {meta.get('epoch', 0)})")
                 print(f"[DATA] Factions: {len(self.factions)} | Nodes: {len(self.nodes)}")
-                
-                if self.quests:
-                    self.quests.load()
-                    print(f"[DATA] Loaded {len(self.quests.quests)} quests.")
-                
-                # Initialize Simulation Manager with loaded state
-                if SimulationManager:
-                    self.sim = SimulationManager(self.gamestate)
-                    print("[DATA] Simulation Manager Initialized (LOD Ready).")
-                
-                # Initialize Memory Manager
-                if MemoryManager and self.sensory:
-                    self.memory = MemoryManager(self.sensory)
-                    print("[DATA] Memory Manager Initialized.")
-                
-                # Initialize World Graph
-                if WorldGraph:
-                    self.graph = WorldGraph(self.nodes)
-                    print(f"[DATA] World Graph built with {len(self.nodes)} nodes.")
-                
-                # Setup SQLite Persistence
-                if self.db:
-                    self.db.sync_nodes(self.nodes)
+            else:
+                print("[DATA] No gamestate.json found. Starting fresh.")
+                self.nodes = []
+                self.gamestate = {}
 
-                # Initialize Game Loop (LangGraph Logic)
-                if SagaGameLoop and self.sensory:
-                    self.loop = SagaGameLoop(
-                        self.sensory, 
-                        lambda: self.active_combat, # Dynamic Combat Provider 
-                        self.rag, 
-                        self.memory
-                    )
-                    print("[DATA] SAGA Game Loop Initialized (LangGraph Pattern).")
+            if self.quests:
+                self.quests.load()
+                # print(f"[DATA] Loaded {len(self.quests.quests)} quests.")
             
+            # Initialize Simulation Manager with loaded state
+            if SimulationManager:
+                self.sim = SimulationManager(self.gamestate)
+                print(f"[DATA] Simulation Manager Active.")
+            
+            # Initialize Memory Manager
+            if MemoryManager and self.sensory:
+                self.memory = MemoryManager(self.sensory)
+                print("[DATA] Memory Manager Initialized.")
+            
+            # Initialize World Graph
+            if WorldGraph:
+                self.graph = WorldGraph(self.nodes)
+                print(f"[DATA] World Graph built with {len(self.nodes)} nodes.")
+            
+            # Setup SQLite Persistence
+            if self.db:
+                self.db.sync_nodes(self.nodes)
+
+            # Initialize Game Loop (LangGraph Logic)
+            print(f"[DEBUG] Checking Game Loop Init: Saga={bool(SagaGameLoop)}, Sensory={bool(self.sensory)}")
+            if SagaGameLoop and self.sensory:
+                self.loop = SagaGameLoop(
+                    self.sensory, 
+                    lambda: self.active_combat, # Dynamic Combat Provider 
+                    self.rag, 
+                    self.memory
+                )
+                print("[DATA] SAGA Game Loop Initialized (LangGraph Pattern).")
+            else:
+                print("[ERROR] Game Loop prereqs failed.")
+        
         except Exception as e:
-            print(f"[ERROR] Failed to load gamestate.json: {e}")
+            print(f"[ERROR] Failed to load gamestate/init components: {e}")
             import traceback
             traceback.print_exc()
 

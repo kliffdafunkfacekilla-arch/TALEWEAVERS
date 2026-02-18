@@ -34,10 +34,7 @@ except ImportError:
     from abilities import engine_hooks
 
 try:
-    try:
-        from core.core.stubs import Stats, Conditions, StatusManager
-    except ImportError:
-        from core.stubs import Stats, Conditions, StatusManager
+    from core.stubs import Stats, Conditions, StatusManager
 except ImportError as e:
     # Fallback to local placeholders if stubs missing
     class Conditions:
