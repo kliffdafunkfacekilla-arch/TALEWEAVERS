@@ -72,48 +72,6 @@ class Entity:
         return c.max_hp if c else 0
 
     @property
-    def sp(self):
-        c = self.get_component(Vitals)
-        return c.sp if c else 0
-    @sp.setter
-    def sp(self, val):
-        c = self.get_component(Vitals)
-        if c: c.sp = val
-
-    @property
-    def max_sp(self):
-        c = self.get_component(Vitals)
-        return c.max_sp if c else 0
-
-    @property
-    def fp(self):
-        c = self.get_component(Vitals)
-        return c.fp if c else 0
-    @fp.setter
-    def fp(self, val):
-        c = self.get_component(Vitals)
-        if c: c.fp = val
-
-    @property
-    def max_fp(self):
-        c = self.get_component(Vitals)
-        return c.max_fp if c else 0
-
-    @property
-    def cmp(self):
-        c = self.get_component(Vitals)
-        return c.cmp if c else 0
-    @cmp.setter
-    def cmp(self, val):
-        c = self.get_component(Vitals)
-        if c: c.cmp = val
-
-    @property
-    def max_cmp(self):
-        c = self.get_component(Vitals)
-        return c.max_cmp if c else 0
-
-    @property
     def team(self):
         c = self.get_component(FactionMember)
         return c.faction_name if c else "Neutral"
@@ -148,23 +106,21 @@ class Stats:
     def __init__(self, stats_dict: Dict[str, int] = None):
         self.attrs = stats_dict or {}
 
-    def get(self, stat_name, default=10):
+    def get(self, stat_name, default=0):
         return self.attrs.get(stat_name, default)
 
     def set(self, stat_name, value):
         self.attrs[stat_name] = value
 
 class Vitals:
-    """Dynamic survival resources (HP, SP, FP, CMP)."""
-    def __init__(self, hp=10, max_hp=10, sp=10, max_sp=10, fp=10, max_fp=10, cmp=10, max_cmp=10):
+    """Dynamic survival resources (HP, SP, FP)."""
+    def __init__(self, hp=10, max_hp=10, sp=10, max_sp=10, fp=10, max_fp=10):
         self.hp = hp
         self.max_hp = max_hp
         self.sp = sp
         self.max_sp = max_sp
         self.fp = fp
         self.max_fp = max_fp
-        self.cmp = cmp
-        self.max_cmp = max_cmp
 
 class Inventory:
     """Carried items."""

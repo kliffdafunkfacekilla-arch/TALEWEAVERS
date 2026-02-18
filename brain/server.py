@@ -27,7 +27,7 @@ try:
     from campaign_system import CampaignGenerator, POIType, QuestType, CampaignState
     from combat.mechanics import CombatEngine, LegacyCombatant
     from core.sensory_layer import SensoryLayer
-    from core.char_creator import CharacterBuilder
+    from core.models.character import Character
     from core.item_generator import ItemGenerator
     from core.quest_manager import QuestManager
     from world.sim_manager import SimulationManager
@@ -91,8 +91,8 @@ class WorldDatabase:
                     self.lore = json.load(f)
                 print(f"[DATA] Loaded {len(self.lore)} lore entries.")
                 if SimpleRAG:
-                    self.rag = SimpleRAG(self.lore)
-                    print("[DATA] RAG Engine Initialized (TF-IDF Index Built).")
+                    self.rag = SimpleRAG(self.lore, async_init=True)
+                    print("[DATA] RAG Engine Initialized (Async Indexing Started).")
         except Exception as e:
             print(f"[ERROR] Failed to load lore.json: {e}")
             import traceback
@@ -305,50 +305,60 @@ async def dm_action(req: DMActionRequest):
 def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
     # Simple procedural grid (20x20)
     width, height = 20, 20
-    grid = [[1 if (gx == 0 or gx == width-1 or gy == 0 or gy == height-1 or random.random() < 0.1) else 0 for gx in range(width)] for gy in range(height)]
+    # Floor: 128, Wall: 896
+    grid = [[896 if (gx == 0 or gx == width-1 or gy == 0 or gy == height-1 or random.random() < 0.1) else 128 for gx in range(width)] for gy in range(height)]
     
     vtt_entities = []
     
     # Initialize Mechanical Rules Engine
     if CombatEngine:
         db.active_combat = CombatEngine(cols=width, rows=height)
-        db.active_combat.walls = {(gx, gy) for gy in range(height) for gx in range(width) if grid[gy][gx] == 1}
+        db.active_combat.walls = {(gx, gy) for gy in range(height) for gx in range(width) if grid[gy][gx] == 896}
         
         # Load Player
         burt_path = os.path.join(DATA_DIR, "Saves", "Burt.json")
         if os.path.exists(burt_path):
             with open(burt_path, 'r') as f:
                 char_data = json.load(f)
-                player_c = LegacyCombatant(data=char_data)
+                player_c = Character.create(char_data)
                 player_c.name = "player_burt"
-                player_c.x, player_c.y = 2, 2
-                player_c.team = "Neutral"
                 db.active_combat.combatants.append(player_c)
         
-        # Add a test enemy
-        enemy_c = LegacyCombatant(data={"Name": "Bandit", "Stats": {"Reflexes": 10, "Might": 10, "Vitality": 10}})
-        enemy_c.name = "enemy_0"
-        enemy_c.x, enemy_c.y = 10, 10
-        enemy_c.team = "Enemy"
-        db.active_combat.combatants.append(enemy_c)
+        # P1 (Burt) - PC index 5074
+        p1 = next((c for c in db.active_combat.combatants if c.name == "player_burt"), None)
+        if p1:
+            p1.x, p1.y = 5, 5
+            p1.team = "Neutral"
+        
+        # Enemy (Sample Monster 3778)
+        enemy_c = next((c for c in db.active_combat.combatants if "enemy" in c.name), None)
+        if not enemy_c and db.active_combat.combatants:
+            # Fallback: create a mock enemy if none exists
+            enemy_c = Character.create({"Name": "Orc Grunt", "Team": "Enemy", "Stats": {"Might": 14, "Vitality": 12}})
+            db.active_combat.combatants.append(enemy_c)
+        
+        if enemy_c:
+            enemy_c.name = "enemy_0"
+            enemy_c.x, enemy_c.y = 10, 10
+            enemy_c.team = "Enemy"
 
         vtt_entities = [
             {
-                "id": c.name,
-                "name": c.data.get("Name", c.name).title(),
+                "id": c.id,
+                "name": c.name.title(),
                 "type": 'player' if c.team == 'Neutral' else 'enemy',
                 "pos": [c.x, c.y],
-                "hp": getattr(c, 'hp', 20),
-                "maxHp": getattr(c, 'max_hp', 20),
-                "icon": "sheet:0" if c.team == 'Neutral' else "sheet:1",
+                "hp": c.hp,
+                "maxHp": c.max_hp,
+                "icon": c.get_component(Renderable).icon if c.has_component(Renderable) else "sheet:5074",
                 "tags": ["hero"] if c.team == 'Neutral' else ["hostile"]
             }
             for c in db.active_combat.combatants
         ]
 
-    # Add Objects
+    # Add Objects (Chest index 6)
     world_objects = [
-        {"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:10", "tags": ["lootable"]},
+        {"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable"]},
     ]
     if db.active_combat:
         db.active_combat.world_objects = world_objects

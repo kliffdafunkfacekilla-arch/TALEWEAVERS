@@ -1,31 +1,33 @@
 from typing import Dict, Any, List
+from core.ecs import Entity, Stats
 
 class Item:
     """
-    Represents a Game Item (Weapon, Armor, or Consumable).
-    Strictly maps to the schema found in Gear.json.
+    Factory for Item Entities.
     """
-    def __init__(self, data: Dict[str, Any]):
-        self.data = data  # Store raw data for compatibility
-        self.name = data.get("Name", "Unknown")
-        self.type = data.get("Type", "Misc")
-        self.cost = int(data.get("Cost", 0))
-        self.related_skill = data.get("Related_Skill", data.get("Skill", ""))  # Support both keys
-        self.skill = data.get("Skill", data.get("Related_Skill", ""))  # Weapon skill for mastery
-        self.description = data.get("Description", "")
-        self.effect_text = data.get("Effect", "")
-        self.logic_tags = self._parse_tags(data.get("Logic_Tags", ""))
-        self.is_equipped = data.get("is_equipped", False)
+    @staticmethod
+    def create(data: Dict[str, Any]) -> Entity:
+        name = data.get("Name", "Unknown")
+        entity = Entity(name)
         
-        # Helper properties derived from tags
-        self.is_weapon = self.type == "Weapon"
-        self.is_armor = self.type == "Armor"
-        self.is_consumable = self.type == "Consumable" # Logic tag based if needed
+        # Add Item Components
+        entity.add_component(Stats(data.get("Stats", {})))
+        
+        # Metadata logic from the old class
+        entity.metadata.update({
+            "type": data.get("Type", "Misc"),
+            "cost": int(data.get("Cost", 0)),
+            "description": data.get("Description", ""),
+            "effect_text": data.get("Effect", ""),
+            "logic_tags": Item._parse_tags(data.get("Logic_Tags", "")),
+            "skill": data.get("Skill", data.get("Related_Skill", ""))
+        })
+        
+        return entity
 
-    def _parse_tags(self, tag_str: str) -> Dict[str, Any]:
-        """
-        Parses 'DMG:2d6:Slash|PROP:Heavy' into a dict.
-        """
+    @staticmethod
+    def _parse_tags(tag_str: str) -> Dict[str, Any]:
+        """Parses 'DMG:2d6:Slash|PROP:Heavy' into a dict."""
         tags = {}
         if not tag_str: return tags
         
@@ -50,18 +52,16 @@ class Item:
                  tags[key] = val
         return tags
 
-    def get_tag(self, key: str, default=None):
-        """Safe accessor for logic tags."""
-        return self.logic_tags.get(key, default)
-
-    def to_dict(self) -> Dict[str, Any]:
-        """Returns JSON-serializable dict representation."""
+    @staticmethod
+    def to_dict(entity: Entity) -> Dict[str, Any]:
+        """Returns JSON-serializable dict representation from an Item Entity."""
+        m = entity.metadata
         return {
-            "Name": self.name,
-            "Type": self.type,
-            "Cost": self.cost,
-            "Related_Skill": self.related_skill,
-            "Description": self.description,
-            "Effect": self.effect_text,
-            "Logic_Tags": self.logic_tags # Note: we return parsed tags for internal use
+            "Name": entity.name,
+            "Type": m.get("type"),
+            "Cost": m.get("cost"),
+            "Skill": m.get("skill"),
+            "Description": m.get("description"),
+            "Effect": m.get("effect_text"),
+            "Logic_Tags": m.get("logic_tags")
         }

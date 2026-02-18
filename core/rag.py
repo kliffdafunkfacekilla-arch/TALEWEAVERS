@@ -8,9 +8,23 @@ class SimpleRAG:
     Currently uses an optimized keyword-weighting index while 
     preparing for a full vector embedding migration.
     """
-    def __init__(self, lore_data):
+    def __init__(self, lore_data, async_init=False):
         self.lore = lore_data
+        self.index = {}
+        self.is_ready = False
+        
+        if async_init:
+            import threading
+            threading.Thread(target=self._initialize, daemon=True).start()
+        else:
+            self._initialize()
+
+    def _initialize(self):
+        """Builds the index and marks the engine as ready."""
+        print("[RAG] Indexing Lore data...")
         self.index = self._build_index()
+        self.is_ready = True
+        print(f"[RAG] Indexing complete. {len(self.index)} terms mapped.")
 
     def _build_index(self):
         index = {}
@@ -32,6 +46,9 @@ class SimpleRAG:
 
     def search(self, query, top_k=3):
         """Finds most relevant lore entries for a query."""
+        if not self.is_ready:
+            return "Lore database is currently indexing... please wait a moment."
+            
         query_words = re.findall(r'\w+', query.lower())
         scores = {}
         

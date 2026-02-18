@@ -98,30 +98,41 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
         app.stage.addChild(gridContainer);
 
         // 1. Draw Grid
-        const gridGraphics = new Graphics();
+        const gridContainerInternal = new Container();
 
         mapData.grid.forEach((row, y) => {
             row.forEach((cell, x) => {
-                const isWall = cell === 1;
+                // If cell index looks like a sprite index (e.g. 128, 896)
+                const tex = getTexture(cell);
+                let tile;
 
-                // If we have a spritesheet, we could use indices for walls (e.g., index 1) and floors (index 0)
-                // For now, let's stick to colored rectangles but enable sprite support easily
-                const color = isWall ? 0x2a2b36 : 0x1a1b26;
-                gridGraphics.rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                gridGraphics.fill(color);
-                gridGraphics.stroke({ width: 0.5, color: 0x333344 });
+                if (tex && isLoaded) {
+                    tile = new Sprite(tex);
+                    tile.width = TILE_SIZE;
+                    tile.height = TILE_SIZE;
+                    tile.x = x * TILE_SIZE;
+                    tile.y = y * TILE_SIZE;
+                } else {
+                    const graphics = new Graphics();
+                    const color = cell === 896 ? 0x2a2b36 : 0x1a1b26;
+                    graphics.rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                    graphics.fill(color);
+                    graphics.stroke({ width: 0.5, color: 0x333344 });
+                    tile = graphics;
+                }
+                gridContainerInternal.addChild(tile);
             });
         });
 
-        gridGraphics.interactive = true;
-        gridGraphics.on('pointerdown', (e) => {
+        gridContainerInternal.interactive = true;
+        gridContainerInternal.on('pointerdown', (e) => {
             const localPos = e.getLocalPosition(gridContainer);
             const gx = Math.floor(localPos.x / TILE_SIZE);
             const gy = Math.floor(localPos.y / TILE_SIZE);
             if (gx >= 0 && gy >= 0) onCellClick(gx, gy);
         });
 
-        gridContainer.addChild(gridGraphics);
+        gridContainer.addChild(gridContainerInternal);
 
         // 2. Draw Entities
         entities.forEach(ent => {

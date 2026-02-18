@@ -33,23 +33,15 @@ class Character:
             "Intuition": 10, "Charm": 10, "Willpower": 10, "Finesse": 10
         }))
         
-        # 3. Hydrate Vitals (Using Project-Specific TTS Formulas)
-        # HP: Vitality + Fortitude + (Endurance / 2)
-        # SP: Endurance + Might + (Reflexes / 2)
-        # FP: Knowledge + Logic + (Willpower / 2)
-        # CMP: Willpower + Intuition + (Awareness / 2)
+        # 3. Hydrate Vitals (Derived from Stats)
         vitals = entity.get_component(Vitals)
+        vitals.max_hp = 10 + stats.get("Might") + stats.get("Vitality") + stats.get("Reflexes")
+        vitals.max_sp = stats.get("Endurance") + stats.get("Finesse") + stats.get("Fortitude")
+        vitals.max_fp = stats.get("Knowledge") + stats.get("Charm") + stats.get("Intuition")
         
-        s = stats
-        vitals.max_hp = int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2))
-        vitals.max_sp = int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2))
-        vitals.max_fp = int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2))
-        vitals.max_cmp = int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2))
-        
-        vitals.hp = data.get("Current_HP", data.get("current_hp", data.get("HP", vitals.max_hp)))
-        vitals.sp = data.get("Current_SP", data.get("sp", data.get("current_sp", data.get("SP", vitals.max_sp))))
-        vitals.fp = data.get("Current_FP", data.get("fp", data.get("current_fp", data.get("FP", vitals.max_fp))))
-        vitals.cmp = data.get("Current_CMP", data.get("cmp", data.get("current_cmp", data.get("CMP", vitals.max_cmp))))
+        vitals.hp = data.get("Current_HP", data.get("current_hp", vitals.max_hp))
+        vitals.sp = data.get("Current_SP", data.get("sp", data.get("current_sp", vitals.max_sp)))
+        vitals.fp = data.get("Current_FP", data.get("fp", data.get("current_fp", vitals.max_fp)))
         
         # Metadata Passthrough
         entity.metadata.update({
@@ -78,6 +70,8 @@ class Character:
         inv = entity.get_component(Inventory)
         raw_inv = data.get("Inventory", data.get("inventory", []))
         for item_entry in raw_inv:
+            # For simplicity in the factory, we just store indices/names
+            # A specialized system should handle Item Entity resolution
             inv.items.append(item_entry)
 
         return entity
@@ -90,13 +84,11 @@ class Character:
         r = entity.get_component(Renderable)
         p = entity.get_component(Position)
         m = entity.metadata
-        f = entity.get_component(FactionMember)
         
         return {
             "Name": entity.name,
             "Species": m.get("species"),
             "Level": m.get("level"),
-            "Team": f.faction_name,
             "Stats": s.attrs,
             "Current_HP": v.hp,
             "Max_HP": v.max_hp,
@@ -104,8 +96,6 @@ class Character:
             "Max_SP": v.max_sp,
             "Current_FP": v.fp,
             "Max_FP": v.max_fp,
-            "Current_CMP": v.cmp,
-            "Max_CMP": v.max_cmp,
             "Inventory": entity.get_component(Inventory).items,
             "Sprite": r.icon,
             "Color": r.color,
