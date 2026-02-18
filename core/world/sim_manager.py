@@ -1,4 +1,6 @@
 import math
+import random
+from core.ecs import world_ecs, Logistics
 
 class SimulationManager:
     """
@@ -20,7 +22,6 @@ class SimulationManager:
         self.narrative_hours += hours
         
         # 0. Catch-up Logic for Nearby Nodes
-        # If a node was outside simulation but just entered, calculate what it missed.
         self._check_for_catchups(player_pos)
 
         # 1. Player Level: Always High Detail (Hourly)
@@ -38,8 +39,43 @@ class SimulationManager:
         if self.narrative_hours % 672 == 0:
             self.tick_global_sim()
             
+        # 5. ECS LOGISTICS BATCH SIM
+        self.batch_logistic_tick(hours)
+            
     def _get_dist(self, pos1, pos2):
         return math.sqrt((pos1[0]-pos2[0])**2 + (pos1[1]-pos2[1])**2)
+
+    def batch_logistic_tick(self, delta_hours: int):
+        """
+        Iterates over all ECS entities with Logistics components and 
+        processes resource depletion, production, and population shifts.
+        """
+        print(f"[SIM-BATCH] Processing Logistics for {delta_hours} hours...")
+        
+        for entity in world_ecs.get_entities_with(Logistics):
+            log = entity.get_component(Logistics)
+            
+            # Resource Depletion (Consumption)
+            for res, rate in log.needs.items():
+                if res in log.resources:
+                    consumption = rate * log.population * delta_hours
+                    log.resources[res] -= consumption
+                    
+                    # Population Famine Check
+                    if log.resources[res] < 0:
+                        log.resources[res] = 0
+                        # Statistically kill off some pop due to famine
+                        famine_deaths = int(log.population * 0.05 * (delta_hours / 24))
+                        log.population = max(0, log.population - famine_deaths)
+                        print(f"  -> FAMINE alert in {entity.name}: {famine_deaths} deaths.")
+
+            # Production (Simplified)
+            # If they have food, they grow.
+            if log.resources.get("Food", 0) > log.population:
+                growth = int(log.population * 0.001 * delta_hours)
+                log.population += growth
+
+            log.last_tick = self.narrative_hours
 
     def _check_for_catchups(self, player_pos):
         """Finds nodes that just entered the simulation zone and fast-forwards them."""
@@ -57,70 +93,49 @@ class SimulationManager:
         days_missed = delta // 24
         
         if days_missed > 0:
-            # Wealth/Pop variance based on missing time
             node['stats'] = node.get('stats', {'wealth': 100, 'pop': 50})
             node['stats']['wealth'] += days_missed * 1.5
-            node['stats']['pop'] *= (1.001 ** days_missed) # 0.1% daily growth
+            node['stats']['pop'] *= (1.001 ** days_missed) 
             
             node['last_tick'] = current_hours
-            print(f"[SIM-LOD] Caught up {node.get('name')} (ID:{node.get('id')}) over {days_missed} missed days.")
+            print(f"[SIM-LOD] Caught up {node.get('name')} over {days_missed} missed days.")
 
     def tick_player_sim(self, hours, player_pos):
-        """High-detail tactical updates for the immediate vicinity."""
-        # Only simulate entities/nodes within DEPTH_TACTICAL
         active_nodes = [n for n in self.state.get('nodes', []) 
                        if self._get_dist(player_pos, (n.get('x',0), n.get('y',0))) < self.DEPTH_TACTICAL]
-        
         for node in active_nodes:
-            # Reset their local tick to now so they don't catch up again immediately
             node['last_tick'] = self.narrative_hours
-            print(f"[SIM-LOD] Ticking Active Node: {node.get('name')}")
 
     def tick_local_sim(self, player_pos):
-        """Mid-detail updates for the surrounding region."""
-        # Nodes within DEPTH_LOCAL get moderate simulation
         local_nodes = [n for n in self.state.get('nodes', []) 
                       if self._get_dist(player_pos, (n.get('x',0), n.get('y',0))) < self.DEPTH_LOCAL]
-        
         for node in local_nodes:
-            # Simulate trade, local growth
             node['last_tick'] = self.narrative_hours
             node['stats'] = node.get('stats', {'wealth': 100, 'pop': 50})
             node['stats']['wealth'] += 10
-            print(f"[SIM-LOD] Daily Economic Shift: {node.get('name')} (Wealth: {node['stats']['wealth']})")
 
     def tick_regional_sim(self, player_pos):
-        """Strategic updates; factions expand influence."""
         if 'meta' in self.state:
-            # Abstracted global growth
             self.state['meta']['global_wealth'] += 10 
             
         factions = self.state.get('factions', [])
         nodes = self.state.get('nodes', [])
         
-        # 1. Simple Faction Growth
-        import random
         for faction in factions:
             faction['power'] = faction.get('power', 0) + random.randint(1, 5)
-            
-            # 2. Expansion Logic (If powerful enough)
             if faction['power'] > 50:
                 neutral_nodes = [n for n in nodes if n.get('faction_id') is None]
                 if neutral_nodes:
                     target = random.choice(neutral_nodes)
                     target['faction_id'] = faction['id']
                     target['faction_name'] = faction['name']
+                    # Link to ECS also?
                     faction['power'] -= 30
-                    print(f"[SIM-LOD] Faction Expansion: {faction['name']} claimed {target.get('name', 'Unknown Node')}")
-
-        print(f"[SIM-LOD] Strategic Faction Sync around {player_pos}")
 
     def tick_global_sim(self):
-        """Macro-level updates (World trends). Unaffected by player position."""
         if 'meta' in self.state:
             self.state['meta']['epoch'] += 1
             self.state['meta']['global_pop'] *= 1.01
-            print(f"[SIM-LOD] World Epoch Change: {self.state['meta']['epoch']}")
 
     def get_time_string(self):
         days = self.narrative_hours // 24

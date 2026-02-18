@@ -47,8 +47,6 @@ class SimNode(WorkflowNode):
     def run(self, state: GraphState) -> GraphState:
         combat_engine = self.get_combat()
         action = state.intent.get('action', 'TALK')
-        cmd = state.intent.get('parameters', {})
-        target_name = state.intent.get('target', '')
         
         updates: List[Dict[str, Any]] = []
         result = "Nothing happens."
@@ -60,30 +58,16 @@ class SimNode(WorkflowNode):
             self.sim.advance_time(1, player_pos)
             print(f"[NODE] World Time: {self.sim.get_time_string()}")
 
-        # COMBAT LOGIC (Grid Mode)
+        # MECHANICS ROUTING
+        # If combat is active, route the intent through the specialized CombatEngine
         if combat_engine and combat_engine.active:
-            player = next((c for c in combat_engine.combatants if c.name == "player_burt"), None)
-            
-            if action == 'MOVE' and player:
-                dx, dy = cmd.get('dx', 0), cmd.get('dy', 0)
-                ok, msg = combat_engine.move_char(player, player.x + dx, player.y + dy)
-                result = msg
-                if ok:
-                    updates.append({'type': 'MOVE_TOKEN', 'id': player.name, 'pos': [player.x, player.y]})
-            
-            elif action == 'ATTACK' and player:
-                target = next((c for c in combat_engine.combatants if target_name.lower() in c.name.lower()), None)
-                if target:
-                    log = combat_engine.attack_target(player, target)
-                    result = " ".join(log)
-                    updates.append({'type': 'PLAY_ANIMATION', 'name': 'MELEE', 'target': target.name})
-                    updates.append({'type': 'UPDATE_HP', 'id': target.name, 'hp': target.hp})
-                else:
-                    result = "You swing at the air."
-
-        # WORLD LOGIC (Graph Mode)
+            print(f"[NODE] Routing Intent '{action}' to CombatEngine")
+            result, updates = combat_engine.process_intent(state.intent)
+        
+        # WORLD LOGIC fallback (Graph/Regional Mode)
         elif self.sim:
             if action in ['MOVE', 'TRAVEL']:
+                cmd = state.intent.get('parameters', {})
                 dx, dy = cmd.get('dx', 0), cmd.get('dy', 0)
                 new_x = player_pos[0] + dx
                 new_y = player_pos[1] + dy
@@ -95,7 +79,6 @@ class SimNode(WorkflowNode):
 
         # QUEST TRACKING
         if self.quests and action:
-            # Simple slug matching: if player performs 'SEARCH', check for search objectives
             quest_updates = self.quests.update_objective(action.lower(), 1)
             if quest_updates:
                 result += " " + " ".join(quest_updates)

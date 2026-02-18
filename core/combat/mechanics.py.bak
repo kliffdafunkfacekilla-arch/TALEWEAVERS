@@ -2050,32 +2050,3 @@ class CombatEngine:
         self.clash_active = False
         self.clash_participants = (None, None)
         return log
-
-    def process_intent(self, intent_json):
-        \"\"\"Routes structured Intent JSON into mechanical CombatEngine calls.\"\"\"
-        action = intent_json.get(\"action\", \"TALK\").upper()
-        target_name = intent_json.get(\"target\", \"\")
-        params = intent_json.get(\"parameters\", {})
-        
-        player = next((c for c in self.combatants if \"player\" in c.name), None)
-        if not player: return \"No player found to execute action.\", []
-
-        updates = []; result = \"Nothing happens.\"
-
-        if action == \"ATTACK\":
-            target = next((c for c in self.combatants if target_name.lower() in c.name.lower() and c != player), None)
-            if target:
-                log = self.attack_target(player, target)
-                result = \" \".join(log)
-                updates.append({\"type\": \"PLAY_ANIMATION\", \"name\": \"MELEE\", \"target\": target.name})
-                updates.append({\"type\": \"UPDATE_HP\", \"id\": target.name, \"hp\": target.hp})
-            else:
-                result = f\"No target found matching {target_name}.\"
-
-        elif action == \"MOVE\":
-            dx = params.get(\"dx\", 0); dy = params.get(\"dy\", 0)
-            ok, msg = self.move_char(player, int(player.x + dx), int(player.y + dy))
-            result = msg
-            if ok: updates.append({\"type\": \"MOVE_TOKEN\", \"id\": player.name, \"pos\": [player.x, player.y]})
-
-        return result, updates

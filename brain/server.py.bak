@@ -36,14 +36,13 @@ try:
     from core.database import PersistenceLayer
     from core.rag import SimpleRAG
     from workflow.gamestate_machine import SagaGameLoop
-    from core.ecs import Renderable, Vitals # For index lookups
 except ImportError as e:
     print(f"[ERROR] Failed to import internal Core components: {e}")
     CampaignGenerator = None
     CombatEngine = None
     LegacyCombatant = None
     SensoryLayer = None
-    Character = None
+    CharacterBuilder = None
     ItemGenerator = None
     QuestManager = None
     PersistenceLayer = None
@@ -209,7 +208,6 @@ class PlayerTacticalStats(BaseModel):
     health: TacticalHealth
     stamina: TacticalHealth
     focus: TacticalHealth
-    composure: TacticalHealth
     coordinates: TacticalCoords
     attributes: Dict[str, int]
 
@@ -410,21 +408,17 @@ def get_tactical_state():
         raise HTTPException(status_code=404, detail="No active tactical session found.")
     
     # 1. Map Player
-    player_c = next((c for c in db.active_combat.combatants if "player" in c.name), None)
+    player_c = next((c for c in db.active_combat.combatants if c.name == "player_burt"), None)
     if not player_c:
         raise HTTPException(status_code=404, detail="Player not found in active combat.")
     
-    v = player_c.get_component(Vitals)
-    stats_raw = player_c.get_component(Stats).attrs if player_c.has_component(Stats) else {}
-
     player_stats = PlayerTacticalStats(
-        name=player_c.name.title(),
-        health=TacticalHealth(current=player_c.hp, max=player_c.max_hp),
-        stamina=TacticalHealth(current=player_c.sp, max=player_c.max_sp),
-        focus=TacticalHealth(current=player_c.fp, max=player_c.max_fp),
-        composure=TacticalHealth(current=player_c.cmp, max=player_c.max_cmp),
+        name=player_c.data.get("Name", "Burt"),
+        health=TacticalHealth(current=getattr(player_c, 'hp', 10), max=getattr(player_c, 'max_hp', 10)),
+        stamina=TacticalHealth(current=getattr(player_c, 'sp', 10), max=getattr(player_c, 'max_sp', 10)),
+        focus=TacticalHealth(current=getattr(player_c, 'fp', 10), max=getattr(player_c, 'max_fp', 10)),
         coordinates=TacticalCoords(x=player_c.x, y=player_c.y),
-        attributes=stats_raw
+        attributes=player_c.stats
     )
     
     # 2. Map Enemies
@@ -439,10 +433,10 @@ def get_tactical_state():
                     effects.append({"name": flag.replace("is_", "").title(), "type": "Condition"})
             
             enemy_list.append(EnemyState(
-                id=c.id,
-                name=c.name.title(),
-                type="Enemy",
-                health=TacticalHealth(current=c.hp, max=c.max_hp),
+                id=c.name,
+                name=c.data.get("Name", "Enemy"),
+                type=c.data.get("Type", "Unknown"),
+                health=TacticalHealth(current=getattr(c, 'hp', 10), max=getattr(c, 'max_hp', 10)),
                 coordinates=TacticalCoords(x=c.x, y=c.y),
                 active_effects=effects
             ))
@@ -452,7 +446,7 @@ def get_tactical_state():
     
     # 4. Turn Order
     turn_order = [c.name for c in db.active_combat.turn_order] if hasattr(db.active_combat, 'turn_order') and db.active_combat.turn_order else []
-    active_char = db.active_combat.get_active_char() if hasattr(db.active_combat, 'get_active_char') else None
+    active_char = db.active_combat.get_active_char()
     active_name = active_char.name if active_char else None
 
     return TacticalStateResponse(

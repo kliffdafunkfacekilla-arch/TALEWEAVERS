@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Application, Container, Graphics, Text, Assets, Sprite, Texture, Rectangle } from 'pixi.js';
+import { Application, Container, Graphics, Text, Assets, Sprite, Texture, Rectangle, SCALE_MODES } from 'pixi.js';
 import { Entity, MapData } from '../types';
 
 interface MapCanvasProps {
@@ -30,9 +30,9 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
 
         const initApp = async () => {
             await app.init({
-                background: '#0f0f13',
+                background: '#09090b', // Deep Onyx
                 resizeTo: containerRef.current!,
-                antialias: true,
+                antialias: false, // Better for pixel art
                 resolution: window.devicePixelRatio || 1,
             });
 
@@ -41,13 +41,15 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
                 appRef.current = app;
             }
 
-            // Load Sprite Sheet
+            // Load Sprite Sheet with Pixel Filtering
             try {
-                await Assets.load(SHEET_CONFIG.url);
+                const sheet = await Assets.load(SHEET_CONFIG.url);
+                if (sheet.source) {
+                    sheet.source.scaleMode = 'nearest'; // ENSURE PIXEL ART CRISPNESS
+                }
                 setIsLoaded(true);
             } catch (e) {
                 console.error("Failed to load spritesheet:", e);
-                // Fallback to graphics if sheet is missing
                 setIsLoaded(true);
             }
         };
@@ -91,22 +93,21 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
         const app = appRef.current;
         if (!app || !app.stage || !isLoaded) return;
 
+        // Clear stage for fresh redraw
         app.stage.removeChildren();
 
-        const TILE_SIZE = 40;
-        const gridContainer = new Container();
-        app.stage.addChild(gridContainer);
+        const TILE_SIZE = 48; // Scaled up for better visibility
+        const worldContainer = new Container();
+        app.stage.addChild(worldContainer);
 
-        // 1. Draw Grid
-        const gridContainerInternal = new Container();
-
+        // 1. Draw Map Layer
+        const floorContainer = new Container();
         mapData.grid.forEach((row, y) => {
             row.forEach((cell, x) => {
-                // If cell index looks like a sprite index (e.g. 128, 896)
                 const tex = getTexture(cell);
                 let tile;
 
-                if (tex && isLoaded) {
+                if (tex) {
                     tile = new Sprite(tex);
                     tile.width = TILE_SIZE;
                     tile.height = TILE_SIZE;
@@ -114,36 +115,36 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
                     tile.y = y * TILE_SIZE;
                 } else {
                     const graphics = new Graphics();
-                    const color = cell === 896 ? 0x2a2b36 : 0x1a1b26;
+                    const color = cell === 896 ? 0x18181b : 0x09090b;
                     graphics.rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                     graphics.fill(color);
-                    graphics.stroke({ width: 0.5, color: 0x333344 });
+                    graphics.stroke({ width: 0.5, color: 0x27272a });
                     tile = graphics;
                 }
-                gridContainerInternal.addChild(tile);
+                floorContainer.addChild(tile);
             });
         });
 
-        gridContainerInternal.interactive = true;
-        gridContainerInternal.on('pointerdown', (e) => {
-            const localPos = e.getLocalPosition(gridContainer);
+        floorContainer.interactive = true;
+        floorContainer.on('pointerdown', (e) => {
+            const localPos = e.getLocalPosition(worldContainer);
             const gx = Math.floor(localPos.x / TILE_SIZE);
             const gy = Math.floor(localPos.y / TILE_SIZE);
             if (gx >= 0 && gy >= 0) onCellClick(gx, gy);
         });
 
-        gridContainer.addChild(gridContainerInternal);
+        worldContainer.addChild(floorContainer);
 
-        // 2. Draw Entities
+        // 2. Draw Entities Layer
         entities.forEach(ent => {
-            const entityContainer = new Container();
+            const entGroup = new Container();
             const [ex, ey] = ent.pos;
 
-            // TRY LOAD FROM SHEET
+            // UV Sprite Selection
             let visual;
             const sheetMatch = ent.icon?.match(/sheet:(\d+)/);
 
-            if (sheetMatch && isLoaded) {
+            if (sheetMatch) {
                 const index = parseInt(sheetMatch[1]);
                 const tex = getTexture(index);
                 if (tex) {
@@ -154,66 +155,103 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
                 }
             }
 
-            // FALLBACK TO CIRCLE
+            // Fallback High-Quality Placeholder
             if (!visual) {
-                const circle = new Graphics();
-                const color = ent.type === 'player' ? 0x60a5fa : (ent.type === 'enemy' ? 0xef4444 : 0x10b981);
-                circle.circle(0, 0, TILE_SIZE * 0.4);
-                circle.fill(color);
-                circle.stroke({ width: 2, color: 0xffffff });
-                visual = circle;
+                const fallback = new Graphics();
+                const color = ent.type === 'player' ? 0x22d3ee : (ent.type === 'enemy' ? 0xf43f5e : 0x10b981);
+                fallback.circle(0, 0, TILE_SIZE * 0.4);
+                fallback.fill({ color, alpha: 0.8 });
+                fallback.stroke({ width: 2, color: 0xffffff });
+                visual = fallback;
             }
 
-            entityContainer.addChild(visual);
-            entityContainer.x = ex * TILE_SIZE + TILE_SIZE / 2;
-            entityContainer.y = ey * TILE_SIZE + TILE_SIZE / 2;
+            // Micro-animation: Hover "Breathing"
+            let tick = Math.random() * 100;
+            app.ticker.add((delta) => {
+                tick += 0.05 * delta.deltaTime;
+                entGroup.scale.set(1 + Math.sin(tick) * 0.02);
+            });
 
-            // HP Bar
+            entGroup.addChild(visual);
+            entGroup.x = ex * TILE_SIZE + TILE_SIZE / 2;
+            entGroup.y = ey * TILE_SIZE + TILE_SIZE / 2;
+
+            // Premium Vital Bars
             if (ent.hp !== undefined && ent.maxHp) {
-                const hpPercent = ent.hp / ent.maxHp;
+                const hpPct = Math.max(0, Math.min(1, ent.hp / ent.maxHp));
                 const bar = new Graphics();
-                const pct = Math.max(0, Math.min(1, hpPercent));
 
-                bar.rect(-15, 18, 30, 4);
-                bar.fill(0x333333);
-                bar.rect(-15, 18, 30 * pct, 4);
-                bar.fill(evtColorResponse(pct));
-                entityContainer.addChild(bar);
+                // Background
+                bar.rect(-18, 20, 36, 6);
+                bar.fill(0x18181b);
+
+                // Progress
+                bar.rect(-18, 20, 36 * hpPct, 6);
+                const barColor = hpPct > 0.6 ? 0x22c55e : (hpPct > 0.3 ? 0xeab308 : 0xef4444);
+                bar.fill(barColor);
+
+                // Border
+                bar.stroke({ width: 1, color: 0x3f3f46 });
+                entGroup.addChild(bar);
             }
 
-            // Name Tag
+            // Glowing Tint for Active/Selected?
+            if (ent.type === 'player') {
+                const glow = new Graphics();
+                glow.circle(0, 0, TILE_SIZE * 0.45);
+                glow.stroke({ width: 4, color: 0x22d3ee, alpha: 0.3 });
+                entGroup.addChildAt(glow, 0);
+            }
+
+            // Stylized Name Tag
             if (ent.name) {
-                const text = new Text({
-                    text: ent.name,
+                const label = new Text({
+                    text: ent.name.split(' ')[0], // First name only for brevity
                     style: {
-                        fontFamily: 'Arial',
-                        fontSize: 10,
+                        fontFamily: 'Inter, system-ui, sans-serif',
+                        fontSize: 11,
+                        fontWeight: 'bold',
                         fill: 0xffffff,
-                        stroke: { color: 0x000000, width: 2 },
-                        align: 'center'
+                        stroke: { color: 0x000000, width: 3 },
+                        dropShadow: { color: 0x000000, alpha: 0.5, blur: 2, distance: 1 }
                     }
                 });
-                text.anchor.set(0.5, 1);
-                text.y = -18;
-                entityContainer.addChild(text);
+                label.anchor.set(0.5, 1);
+                label.y = -20;
+                entGroup.addChild(label);
             }
 
-            gridContainer.addChild(entityContainer);
+            worldContainer.addChild(entGroup);
         });
 
-        // Center View
-        const gridSizeX = (mapData.width || 20) * TILE_SIZE;
-        const gridSizeY = (mapData.height || 20) * TILE_SIZE;
-        gridContainer.x = (app.screen.width - gridSizeX) / 2;
-        gridContainer.y = (app.screen.height - gridSizeY) / 2;
+        // 3. Dynamic Camera Management
+        const padding = 100;
+        const availableWidth = app.screen.width - padding;
+        const availableHeight = app.screen.height - padding;
+        const worldWidth = (mapData.width || 12) * TILE_SIZE;
+        const worldHeight = (mapData.height || 12) * TILE_SIZE;
+
+        const scaleX = availableWidth / worldWidth;
+        const scaleY = availableHeight / worldHeight;
+        const finalScale = Math.min(1, scaleX, scaleY); // Don't zoom in past 1:1
+
+        worldContainer.scale.set(finalScale);
+        worldContainer.x = (app.screen.width - worldWidth * finalScale) / 2;
+        worldContainer.y = (app.screen.height - worldHeight * finalScale) / 2;
 
     }, [mapData, entities, isLoaded, appRef.current]);
 
-    return <div ref={containerRef} className="w-full h-full bg-[#0f0f13] overflow-hidden" />;
-}
-
-function evtColorResponse(pct: number) {
-    if (pct > 0.6) return 0x22c55e;
-    if (pct > 0.3) return 0xeab308;
-    return 0xef4444;
+    return (
+        <div
+            ref={containerRef}
+            className="w-full h-full bg-[#09090b] rounded-xl border border-zinc-800 shadow-2xl overflow-hidden relative"
+        >
+            {/* Ambient UI Overlay */}
+            <div className="absolute top-4 left-4 pointer-events-none">
+                <div className="bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-700 text-xs text-zinc-400 font-mono">
+                    TACTICAL GRID: {mapData.width}x{mapData.height}
+                </div>
+            </div>
+        </div>
+    );
 }

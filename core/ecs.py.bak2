@@ -1,5 +1,4 @@
 import uuid
-import json
 from typing import Dict, List, Any, Optional
 
 class Entity:
@@ -208,102 +207,25 @@ class FactionMember:
         self.faction_name = faction_name
         self.rank = rank
 
-class Logistics:
-    """Simulation data for trade, resources, and population."""
-    def __init__(self, resources: Dict[str, float] = None, population: int = 0):
-        self.resources = resources or {"Food": 100.0, "Gold": 100.0, "Materials": 50.0}
-        self.population = population
-        self.last_tick = 0.0 # Narrative hour mark
-        self.needs = {"Food": 1.0} # Consumption per tick per population unit
-
-# --- REGISTRY & FACTORIES ---
+# --- SYSTEMS (Micro-Managers) ---
+"""
+Systems in ECS typically iterate over entities with specific components.
+In Python, we can define them as functions or classes that take a list of entities.
+"""
 
 class ECSRegistry:
-    """Central store for all entities and factory methods."""
+    """target for all entities"""
     def __init__(self):
         self.entities: Dict[str, Entity] = {}
 
     def add_entity(self, entity: Entity):
         self.entities[entity.id] = entity
-        return entity
-
-    def get_entity(self, entity_id: str) -> Optional[Entity]:
-        return self.entities.get(entity_id)
 
     def get_entities_with(self, *component_types):
-        """Returns a generator of entities that have ALL specified components."""
+        """
+        Returns a generator of entities that have ALL specified components.
+        Example: registry.get_entities_with(Position, Renderable)
+        """
         for entity in self.entities.values():
             if all(entity.has_component(c) for c in component_types):
                 yield entity
-
-    # --- FACTORY METHODS (Replacing Models folder) ---
-
-    def create_character(self, data: Any) -> Entity:
-        """Hydrates a full character entity into the ECS."""
-        if isinstance(data, str):
-            data = {"Name": data}
-        
-        name = data.get("Name", data.get("name", "Unnamed"))
-        entity = Entity(name)
-        
-        # Add Components
-        entity.add_component(Position())
-        entity.add_component(Renderable())
-        entity.add_component(Stats())
-        entity.add_component(Vitals())
-        entity.add_component(Inventory())
-        entity.add_component(Equipment())
-        entity.add_component(StatusEffects())
-        entity.add_component(FactionMember())
-        
-        # Hydrate Stats
-        stats = entity.get_component(Stats)
-        stats.attrs = data.get("Stats", data.get("stats", {
-            "Might": 10, "Reflexes": 10, "Endurance": 10, "Vitality": 10,
-            "Fortitude": 10, "Knowledge": 10, "Logic": 10, "Awareness": 10,
-            "Intuition": 10, "Charm": 10, "Willpower": 10, "Finesse": 10
-        }))
-        
-        # Derived TTS Vitals
-        vitals = entity.get_component(Vitals)
-        s = stats
-        vitals.max_hp = int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2))
-        vitals.max_sp = int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2))
-        vitals.max_fp = int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2))
-        vitals.max_cmp = int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2))
-        
-        vitals.hp = data.get("Current_HP", data.get("HP", vitals.max_hp))
-        vitals.sp = data.get("Current_SP", data.get("SP", vitals.max_sp))
-        vitals.fp = data.get("Current_FP", data.get("FP", vitals.max_fp))
-        vitals.cmp = data.get("Current_CMP", data.get("CMP", vitals.max_cmp))
-        
-        # Metadata Passthrough
-        entity.metadata.update({
-            "species": data.get("Species", "Unknown"),
-            "level": data.get("Level", 1),
-            "traits": data.get("Traits", []),
-            "skills": data.get("Skills", [])
-        })
-
-        # Renderable
-        render = entity.get_component(Renderable)
-        sprite = data.get("Sprite", data.get("Portrait", "sheet:5074"))
-        render.icon = sprite
-        
-        # Add to self
-        return self.add_entity(entity)
-
-    def create_item(self, data: Dict[str, Any]) -> Entity:
-        """Creates an Item entity."""
-        name = data.get("Name", "Unknown")
-        entity = Entity(name)
-        entity.add_component(Stats(data.get("Stats", {})))
-        entity.metadata.update({
-            "type": data.get("Type", "Misc"),
-            "cost": int(data.get("Cost", 0)),
-            "logic_tags": data.get("Logic_Tags", "")
-        })
-        return self.add_entity(entity)
-
-# Singleton Instance
-world_ecs = ECSRegistry()
