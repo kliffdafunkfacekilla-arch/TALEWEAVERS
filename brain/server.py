@@ -29,6 +29,11 @@ try:
     from core.item_generator import ItemGenerator
     from core.quest_manager import QuestManager
     from world.sim_manager import SimulationManager
+    from core.memory import MemoryManager
+    from world.graph_manager import WorldGraph
+    from core.database import PersistenceLayer
+    from core.rag import SimpleRAG
+    from workflow.gamestate_machine import SagaGameLoop
 except ImportError as e:
     print(f"[ERROR] Failed to import internal Core components: {e}")
     CampaignGenerator = None
@@ -59,6 +64,11 @@ class WorldDatabase:
         self.quests = QuestManager(os.path.join(DATA_DIR, "quests.json")) if QuestManager else None
         self.active_combat = None
         self.sim = None
+        self.memory = None
+        self.graph = None
+        self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db"))
+        self.rag = None
+        self.loop = None
     
     def load(self):
         # Load Lore (Static)
@@ -67,6 +77,9 @@ class WorldDatabase:
                 with open(LORE_PATH, 'r', encoding='utf-8') as f:
                     self.lore = json.load(f)
                 print(f"[DATA] Loaded {len(self.lore)} lore entries.")
+                if SimpleRAG:
+                    self.rag = SimpleRAG(self.lore)
+                    print("[DATA] RAG Engine Initialized (TF-IDF Index Built).")
         except Exception as e:
             print(f"[ERROR] Failed to load lore.json: {e}")
             import traceback
@@ -93,6 +106,29 @@ class WorldDatabase:
                 if SimulationManager:
                     self.sim = SimulationManager(self.gamestate)
                     print("[DATA] Simulation Manager Initialized (LOD Ready).")
+                
+                # Initialize Memory Manager
+                if MemoryManager and self.sensory:
+                    self.memory = MemoryManager(self.sensory)
+                    print("[DATA] Memory Manager Initialized.")
+                
+                # Initialize World Graph
+                if WorldGraph:
+                    self.graph = WorldGraph(self.nodes)
+                    print(f"[DATA] World Graph built with {len(self.nodes)} nodes.")
+                
+                # Setup SQLite Persistence
+                self.db.sync_nodes(self.nodes)
+
+                # Initialize Game Loop (LangGraph Logic)
+                if SagaGameLoop and self.sensory:
+                    self.loop = SagaGameLoop(
+                        self.sensory, 
+                        lambda: self.active_combat, # Dynamic Combat Provider 
+                        self.rag, 
+                        self.memory
+                    )
+                    print("[DATA] SAGA Game Loop Initialized (LangGraph Pattern).")
             
         except Exception as e:
             print(f"[ERROR] Failed to load gamestate.json: {e}")
@@ -227,75 +263,15 @@ def health_check():
 @app.post("/dm/action")
 async def dm_action(req: DMActionRequest):
     print(f"[DEBUG] dm_action start: {req.message}")
+    if not db.loop:
+        raise HTTPException(status_code=503, detail="Game Loop Offline.")
+    
     try:
-        if not db.sensory:
-            raise HTTPException(status_code=503, detail="AI Sensory Layer (Ollama) is offline.")
+        # Execute the Graph Workflow
+        result = db.loop.process_turn(req.message, req.context)
         
-        # 1. Resolve Intent
-        player_vtt = req.context.get('player', {})
-        print(f"[DEBUG] Resolving intent...")
-        intent = db.sensory.resolve_intent(req.message, player_vtt)
-        action = intent.get("action", "TALK")
-        print(f"[DEBUG] Action: {action} | Intent: {intent}")
-        
-        # 2. Rules Engine Resolution
-        visual_updates = []
-        mechanical_result = "The world remains still."
-        
-        if action == "SEARCH":
-            print(f"[DEBUG] Executing SEARCH interaction...")
-            mechanical_result, v_updates = resolve_mechanical_interaction(action, intent)
-            visual_updates.extend(v_updates)
-        
-        elif db.active_combat:
-            player_c = next((c for c in db.active_combat.combatants if c.name == "player_burt"), None)
-            
-            if action == "MOVE" and player_c:
-                params = intent.get("parameters", {})
-                dx, dy = params.get("dx", 0), params.get("dy", 0)
-                target_x, target_y = player_c.x + dx, player_c.y + dy
-                ok, msg = db.active_combat.move_char(player_c, target_x, target_y)
-                mechanical_result = msg if isinstance(msg, str) else " ".join(msg)
-                if ok:
-                    visual_updates.append({"type": "MOVE_TOKEN", "id": "player_burt", "pos": [player_c.x, player_c.y]})
-            
-            elif action == "ATTACK" and player_c:
-                target_id = intent.get("target", "Enemy")
-                target_c = next((c for c in db.active_combat.combatants if target_id.lower() in c.name.lower() or target_id.lower() in str(c.data.get("Name","")).lower()), None)
-                
-                if target_c:
-                    res_log = db.active_combat.attack_target(player_c, target_c)
-                    mechanical_result = " ".join(res_log)
-                    visual_updates.append({"type": "PLAY_ANIMATION", "name": "MELEE_SLASH", "target": target_c.name})
-                    visual_updates.append({"type": "UPDATE_HP", "id": target_c.name, "hp": target_c.hp})
-                else:
-                    mechanical_result = f"You swing at shadows; {target_id} is nowhere to be found."
-
-        # 3. Generate Narrative Response
-        print(f"[DEBUG] Generating narrative with result: {mechanical_result}")
-        try:
-            response = db.sensory.generate_narrative(
-                action_result=mechanical_result,
-                world_context={
-                    "chaos": db.gamestate.get('meta', {}).get('chaos_level', 0.5),
-                    "position": req.context.get('world_pos', [500, 500]),
-                    "intent": intent,
-                    "visible_objects": getattr(db.active_combat, 'world_objects', []) if db.active_combat else [],
-                    "active_quests": db.quests.get_active_quests() if db.quests else []
-                },
-                persona="The Oracle: Visceral and Direct"
-            )
-        except Exception as e:
-            print(f"[ERROR] Narrative generation failed: {e}")
-            response = f"The World Oracle remains silent, but the resonance of your action lingers: {mechanical_result}"
-        
-        print(f"[DEBUG] dm_action success")
-        return {
-            "intent": intent,
-            "narrative": response,
-            "visual_updates": visual_updates,
-            "mechanical_log": mechanical_result
-        }
+        print(f"[DEBUG] Workflow Complete. Intent: {result['intent']}")
+        return result
     except Exception as e:
         import traceback
         error_msg = f"[CRITICAL ERROR] dm_action failed: {e}\n{traceback.format_exc()}"

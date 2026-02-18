@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapGrid } from './components/MapGrid';
+import { MapCanvas } from './components/MapCanvas';
 import { InventoryDrawer } from './components/InventoryDrawer';
 import { QuestLog } from './components/QuestLog';
 import { useGameStore } from './store';
@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 
 function App() {
     const {
-        meta, log, fetchNewSession, submitResult, entities, dmChat, isDMThinking,
+        meta, map, log, fetchNewSession, submitResult, entities, dmChat, isDMThinking,
         isInventoryOpen, setInventoryOpen, isQuestLogOpen, setQuestLogOpen
     } = useGameStore();
 
@@ -91,7 +91,14 @@ function App() {
 
                 {/* THE BATTLE MAP */}
                 <div className="flex-grow overflow-auto flex items-center justify-center bg-[#0d0d12] p-12">
-                    <MapGrid />
+                    <MapCanvas
+                        mapData={map}
+                        entities={entities}
+                        onCellClick={(x, y) => {
+                            console.log("Moving to:", x, y);
+                            dmChat(`I move to ${x}, ${y}`);
+                        }}
+                    />
                 </div>
 
                 {/* DM COMMAND BAR (Active Dungeon Master Interface) */}

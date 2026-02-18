@@ -37,10 +37,22 @@ class SensoryLayer:
         prompt = f"SIM_EVENT: {event_type}\nDATA: {json.dumps(data)}\nDescribe this event narratively to the player."
         return self.chat(prompt)
 
+    def _load_prompt(self, filename, fallback=""):
+        try:
+            path = os.path.join(os.path.dirname(__file__), "..", "prompts", filename)
+            if os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    return f.read().strip()
+        except:
+            pass
+        return fallback
+
     def generate_narrative(self, action_result, world_context, persona="Dark & Visceral"):
         """
         The 'Prompt Sandwich' logic with Quest Awareness (Deep Sight).
         """
+        system_prompt = self._load_prompt("narrative_dm.txt", "You are the SAGA Oracle.")
+        
         # 1. BOTTOM: Context (Lore & World State & Quests)
         bottom = f"WORLD_STATE: {world_context.get('chaos', 'Stable')}\n"
         
@@ -53,31 +65,20 @@ class SensoryLayer:
         if world_context.get('lore'):
             bottom += f"LORE_RELEVANCE: {world_context['lore']}\n"
             
+        if world_context.get('history'):
+            bottom += f"ADVENTURE_CONTEXT:\n{world_context['history']}\n"
+
         # 2. MEAT: Simulation Result
         meat = f"SIM_RESULT: {action_result}\n"
         
-        # 3. TOP: Persona & Formatting
-        top = f"PERSONA: {persona}\nCONSTRAINT: 2-3 sentences. Focus on sensory details and quest relevance. No internal monologue."
-        
-        full_prompt = f"{bottom}\n{meat}\n{top}"
-        return self.chat(full_prompt)
+        full_prompt = f"{bottom}\n{meat}"
+        return self.chat(full_prompt, system_prompt=system_prompt)
+
     def resolve_intent(self, user_input, character_context):
         """
         Translates player natural language into an engine action.
-        Returns JSON: {"action": "MOVE|ATTACK|SEARCH|TALK|WAIT", "target": "...", "parameters": {...}}
         """
-        system_prompt = """
-        You are the T.A.L.E.W.E.A.V.E.R.S. Intent Resolver. 
-        Your job is to translate player chat into structured engine commands.
-        VALID ACTIONS:
-        - MOVE: Travel (params: dx, dy)
-        - ATTACK: Combat (target: enemy name)
-        - SEARCH: Look for items/secrets
-        - TALK: Interact with NPC
-        - WAIT: Advance time
-        
-        OUTPUT FORMAT: JSON ONLY.
-        """
+        system_prompt = self._load_prompt("intent_resolver.txt", "Extract action from input.")
         
         prompt = f"CHARACTER_STATE: {json.dumps(character_context)}\nUSER_INPUT: '{user_input}'\nRESOLVE INTENT:"
         
