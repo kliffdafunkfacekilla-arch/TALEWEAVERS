@@ -17,6 +17,10 @@ graph TD
         Sim -->|Mechanical Result| Narrative[4. Narrative Node]
     end
     
+    subgraph "Vault Pipeline"
+        Obsidian[Obsidian Vault (.md)] -->|Vault Compiler| SQLite
+    end
+
     Brain -->|Workflow| Intent
     Narrative -->|Visual Updates + Text| User
     
@@ -86,7 +90,10 @@ TALEWEAVERS/
 │   ├── workflow/             # The Brain's State Machine nodes
 │   └── prompts/              # AI personality files
 ├── data/
-│   ├── lore.json             # Static world history
+│   ├── lore/                 # Atomic Knowledge Graph (Categories)
+│   │   ├── biology/          # Species/Plants from Obsidian
+│   │   ├── history/          # C++ Sim Historical Log
+│   │   └── ...
 │   └── world_state.db        # Active game save (SQLite)
 └── vtt/                      # React + PixiJS Frontend
 ```

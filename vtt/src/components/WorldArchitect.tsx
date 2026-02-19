@@ -361,6 +361,56 @@ export function WorldArchitect() {
                             />
                         </div>
 
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Fertility</label>
+                                    <span className="text-[10px] font-mono text-green-500">
+                                        {Math.round((placedEntities.find(e => e.id === inspectorId)?.properties?.fertility || 0.1) * 100)}%
+                                    </span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0" max="1" step="0.01"
+                                    value={placedEntities.find(e => e.id === inspectorId)?.properties?.fertility || 0.1}
+                                    onChange={(e) => {
+                                        const val = parseFloat(e.target.value);
+                                        const ent = placedEntities.find(e => e.id === inspectorId);
+                                        if (ent) {
+                                            updateEntity(inspectorId, {
+                                                properties: { ...ent.properties, fertility: val }
+                                            });
+                                        }
+                                    }}
+                                    className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-green-500"
+                                />
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Tech Level</label>
+                                    <span className="text-[10px] font-mono text-purple-500">
+                                        {Math.round((placedEntities.find(e => e.id === inspectorId)?.properties?.techLevel || 0) * 10)}
+                                    </span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0" max="1" step="0.1"
+                                    value={placedEntities.find(e => e.id === inspectorId)?.properties?.techLevel || 0}
+                                    onChange={(e) => {
+                                        const val = parseFloat(e.target.value);
+                                        const ent = placedEntities.find(e => e.id === inspectorId);
+                                        if (ent) {
+                                            updateEntity(inspectorId, {
+                                                properties: { ...ent.properties, techLevel: val }
+                                            });
+                                        }
+                                    }}
+                                    className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-purple-500"
+                                />
+                            </div>
+                        </div>
+
                         {/* RESOURCE STOCKPILES */}
                         <div className="pt-4 border-t border-white/5 space-y-6">
                             <label className="text-[9px] font-black text-yellow-500 uppercase tracking-[0.2em] block">Starting Stockpiles</label>
