@@ -1,0 +1,75 @@
+{
+    "agents": [
+        {
+            "id": 1000,
+            "name": "The Iron Caldera",
+            "type": "Civilized",
+            "pos": [
+                10,
+                10
+            ],
+            "pop": 5000,
+            "description": "Victorian Industrial Revolution meets Volcanic Survivalism. Brass, obsidian, and steam."
+        },
+        {
+            "id": 1002,
+            "name": "Ash-Bison Herd",
+            "type": "Fauna",
+            "pos": [
+                15,
+                5
+            ],
+            "pop": 200,
+            "description": "Massive bovines with concrete-like stone armor plating."
+        },
+        {
+            "id": 1003,
+            "name": "Cloud Cutter Pod",
+            "type": "Fauna",
+            "pos": [
+                5,
+                15
+            ],
+            "pop": 50,
+            "description": "Apex opportunist sky-rays that ride the pressure wakes of airships."
+        }
+    ],
+    "locations": [
+        {
+            "name": "Forgespire",
+            "type": "Volcanic Capital",
+            "pos": [
+                10,
+                10
+            ],
+            "description": "The center of the Iron Caldera. A city of stacked independent rings and steam pistons."
+        },
+        {
+            "name": "The Vent-Fields",
+            "type": "Agricultural Zone",
+            "pos": [
+                11,
+                11
+            ],
+            "description": "Subterranean fields for fungi and Gritbore livestock."
+        },
+        {
+            "name": "Counterweight Cathedral",
+            "type": "Shrine",
+            "pos": [
+                10,
+                9
+            ],
+            "description": "The spiritual and mechanical center of the city."
+        },
+        {
+            "name": "Old Watchtower",
+            "type": "Tower",
+            "pos": [
+                18,
+                18
+            ],
+            "description": "An ancient stone structure overlooking the Shatterlands."
+        }
+    ]
+}

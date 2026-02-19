@@ -25,9 +25,8 @@ if BRAIN_DIR not in sys.path:
 
 try:
     from campaign_system import CampaignGenerator, POIType, QuestType, CampaignState
-    from combat.mechanics import CombatEngine, LegacyCombatant
+    from combat.mechanics import CombatEngine
     from core.sensory_layer import SensoryLayer
-    from core.models.character import Character
     from core.item_generator import ItemGenerator
     from core.quest_manager import QuestManager
     from world.sim_manager import SimulationManager
@@ -36,14 +35,13 @@ try:
     from core.database import PersistenceLayer
     from core.rag import SimpleRAG
     from workflow.gamestate_machine import SagaGameLoop
-    from core.ecs import Renderable, Vitals # For index lookups
+    from core.ecs import world_ecs, Renderable, Vitals, Stats, Position, FactionMember
+    from core.world_grid import WorldGrid
 except ImportError as e:
     print(f"[ERROR] Failed to import internal Core components: {e}")
     CampaignGenerator = None
     CombatEngine = None
-    LegacyCombatant = None
     SensoryLayer = None
-    Character = None
     ItemGenerator = None
     QuestManager = None
     PersistenceLayer = None
@@ -52,6 +50,7 @@ except ImportError as e:
     SimpleRAG = None
     SagaGameLoop = None
     SimulationManager = None
+    WorldGrid = None
 
 LORE_PATH = os.path.join(DATA_DIR, "lore.json")
 GAMESTATE_PATH = os.path.join(DATA_DIR, "gamestate.json")
@@ -59,11 +58,6 @@ GAMESTATE_PATH = os.path.join(DATA_DIR, "gamestate.json")
 print(f"[BOOT] Taleweavers Brain initializing...")
 print(f"[BOOT] Root: {TALEWEAVERS_ROOT}")
 print(f"[BOOT] Data: {DATA_DIR}")
-print(f"[DEBUG] Components Status:")
-print(f"  - SensoryLayer: {'OK' if SensoryLayer else 'FAILED'}")
-print(f"  - SagaGameLoop: {'OK' if SagaGameLoop else 'FAILED'}")
-print(f"  - PersistenceLayer: {'OK' if PersistenceLayer else 'FAILED'}")
-print(f"  - WorldGraph: {'OK' if WorldGraph else 'FAILED'}")
 
 # --- DATA LOADER ---
 class WorldDatabase:
@@ -81,25 +75,20 @@ class WorldDatabase:
         self.memory = None
         self.graph = None
         self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db")) if PersistenceLayer else None
+        self.world_grid = WorldGrid(width=100, height=100, save_path=os.path.join(DATA_DIR, "world_grid.json")) if WorldGrid else None
         self.rag = None
         self.loop = None
     
     def load(self):
-        # Load Lore (Static)
         try:
             if os.path.exists(LORE_PATH):
                 with open(LORE_PATH, 'r', encoding='utf-8') as f:
                     self.lore = json.load(f)
-                print(f"[DATA] Loaded {len(self.lore)} lore entries.")
                 if SimpleRAG:
                     self.rag = SimpleRAG(self.lore, async_init=True)
-                    print("[DATA] RAG Engine Initialized (Async Indexing Started).")
         except Exception as e:
             print(f"[ERROR] Failed to load lore.json: {e}")
-            import traceback
-            traceback.print_exc()
 
-        # Load Gamestate (Dynamic)
         try:
             if os.path.exists(GAMESTATE_PATH):
                 with open(GAMESTATE_PATH, 'r', encoding='utf-8') as f:
@@ -107,57 +96,28 @@ class WorldDatabase:
                 
                 self.factions = {f['id']: f for f in self.gamestate.get('factions', [])}
                 self.nodes = self.gamestate.get('nodes', [])
-                
-                meta = self.gamestate.get('meta', {})
-                print(f"[DATA] Loaded Gamestate (Epoch: {meta.get('epoch', 0)})")
-                print(f"[DATA] Factions: {len(self.factions)} | Nodes: {len(self.nodes)}")
-            else:
-                print("[DATA] No gamestate.json found. Starting fresh.")
-                self.nodes = []
-                self.gamestate = {}
+            
+            if self.quests: self.quests.load()
+            if SimulationManager: self.sim = SimulationManager(self.gamestate)
+            if MemoryManager and self.sensory: self.memory = MemoryManager(self.sensory)
+            if WorldGraph: self.graph = WorldGraph(self.nodes)
+            if self.db: self.db.sync_nodes(self.nodes)
 
-            if self.quests:
-                self.quests.load()
-                # print(f"[DATA] Loaded {len(self.quests.quests)} quests.")
-            
-            # Initialize Simulation Manager with loaded state
-            if SimulationManager:
-                self.sim = SimulationManager(self.gamestate)
-                print(f"[DATA] Simulation Manager Active.")
-            
-            # Initialize Memory Manager
-            if MemoryManager and self.sensory:
-                self.memory = MemoryManager(self.sensory)
-                print("[DATA] Memory Manager Initialized.")
-            
-            # Initialize World Graph
-            if WorldGraph:
-                self.graph = WorldGraph(self.nodes)
-                print(f"[DATA] World Graph built with {len(self.nodes)} nodes.")
-            
-            # Setup SQLite Persistence
-            if self.db:
-                self.db.sync_nodes(self.nodes)
-
-            # Initialize Game Loop (LangGraph Logic)
-            print(f"[DEBUG] Checking Game Loop Init: Saga={bool(SagaGameLoop)}, Sensory={bool(self.sensory)}")
             if SagaGameLoop and self.sensory:
                 self.loop = SagaGameLoop(
                     self.sensory, 
-                    lambda: self.active_combat, # Dynamic Combat Provider 
+                    lambda: self.active_combat,
                     self.rag, 
                     self.memory,
                     self.sim,
                     self.quests
                 )
-                print("[DATA] SAGA Game Loop Initialized (LangGraph Pattern).")
-            else:
-                print("[ERROR] Game Loop prereqs failed.")
-        
+
+            # --- RESTORE WORLD STATE ---
+            world_ecs.load_all()
+            
         except Exception as e:
             print(f"[ERROR] Failed to load gamestate/init components: {e}")
-            import traceback
-            traceback.print_exc()
 
 db = WorldDatabase()
 db.load()
@@ -174,20 +134,10 @@ app.add_middleware(
 )
 
 # --- MODELS ---
-class NewCampaignRequest(BaseModel):
-    hero_name: str
-    theme: str = "Classic High Fantasy"
-
-class CharCreateRequest(BaseModel):
-    name: str
-    species: str
-    stats: Dict[str, int]
-
 class DMActionRequest(BaseModel):
     message: str
     context: Dict[str, Any] = {}
 
-# --- TACTICAL STATE MODELS ---
 class TacticalHealth(BaseModel):
     current: int
     max: int
@@ -221,248 +171,265 @@ class TacticalStateResponse(BaseModel):
     enemy_list: List[EnemyState]
     active_effects: List[Dict[str, Any]]
 
-# --- HELPER FUNCTIONS ---
-def get_distance(x1, y1, x2, y2):
-    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
-
-def resolve_mechanical_interaction(action: str, intent: Dict, player_name: str = "Burt"):
-    """
-    Handles mechanical results for SEARCH/INTERACT intents.
-    Returns (mechanical_result_string, visual_updates_list)
-    """
-    visual_updates = []
-    res = "The world remains still."
-    
-    target_name = intent.get("target", "").lower() if intent else ""
-    
-    # Check for search/loot interaction
-    is_search = action == "SEARCH" or "chest" in target_name or "inspect" in str(intent.get("text", "")).lower()
-    
-    if is_search:
-        if db.item_gen:
-            loot = db.item_gen.generate_loot(max_tier=2)
-            item_name = loot.get("name", "Glinting Trinket")
-            
-            # Update Character Save
-            save_path = os.path.join(DATA_DIR, "Saves", f"{player_name}.json")
-            if os.path.exists(save_path):
-                try:
-                    with open(save_path, 'r') as f:
-                        char_data = json.load(f)
-                    
-                    if "Inventory" not in char_data:
-                        char_data["Inventory"] = []
-                    
-                    char_data["Inventory"].append(loot)
-                    
-                    with open(save_path, 'w') as f:
-                        json.dump(char_data, f, indent=4)
-                    
-                    res = f"You searched the area and found: {item_name}!"
-                    visual_updates.append({"type": "ADD_ITEM", "item": loot})
-                    visual_updates.append({"type": "OPEN_INVENTORY"})
-                    
-                    # Update Quest Objectives if relevant
-                    if db.quests:
-                        db.quests.update_objective("open_chest", 1)
-                except Exception as e:
-                    print(f"[ERROR] Interaction save failed: {e}")
-                    res = "You find something, but can't seem to carry it."
-
-    return res, visual_updates
-
 # --- ENDPOINTS ---
 
 @app.get("/")
 def health_check():
-    return {
-        "status": "online",
-        "service": "SAGA Brain",
-        "data": {
-            "lore_count": len(db.lore),
-            "campaign_active": db.campaign_gen.current_campaign is not None if db.campaign_gen else False,
-            "epoch": db.gamestate.get('meta', {}).get('epoch', 0)
-        }
-    }
+    return {"status": "online", "lore_count": len(db.lore)}
 
 @app.post("/dm/action")
 async def dm_action(req: DMActionRequest):
-    print(f"[DEBUG] dm_action start: {req.message}")
-    if not db.loop:
-        raise HTTPException(status_code=503, detail="Game Loop Offline.")
-    
+    if not db.loop: raise HTTPException(status_code=503, detail="Game Loop Offline.")
     try:
-        # Execute the Graph Workflow
-        result = db.loop.process_turn(req.message, req.context)
-        
-        print(f"[DEBUG] Workflow Complete. Intent: {result['intent']}")
-        return result
+        return db.loop.process_turn(req.message, req.context)
     except Exception as e:
-        import traceback
-        error_msg = f"[CRITICAL ERROR] dm_action failed: {e}\n{traceback.format_exc()}"
-        print(error_msg)
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/tactical/generate")
 def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
-    # Simple procedural grid (20x20)
     width, height = 20, 20
-    # Floor: 128, Wall: 896
     grid = [[896 if (gx == 0 or gx == width-1 or gy == 0 or gy == height-1 or random.random() < 0.1) else 128 for gx in range(width)] for gy in range(height)]
     
-    vtt_entities = []
-    
-    # Initialize Mechanical Rules Engine
     if CombatEngine:
         db.active_combat = CombatEngine(cols=width, rows=height)
         db.active_combat.walls = {(gx, gy) for gy in range(height) for gx in range(width) if grid[gy][gx] == 896}
         
-        # Load Player
+        # Load Persistent Entities from the World Database
+        # Filter for anything at these coordinates (approx)
+        nearby = [e for e in world_ecs.entities.values() if e.has_component(Position)]
+        
+        vtt_entities = []
+        for e in nearby:
+            p = e.get_component(Position)
+            # For now, let's just include all persistent entities that aren't the player
+            # so the user can see them on the map.
+            vtt_entities.append({
+                "id": e.id,
+                "name": e.name,
+                "type": 'enemy' if e.has_tag("faction") else 'object',
+                "pos": [p.x, p.y],
+                "hp": e.hp if e.has_component(Vitals) else None,
+                "maxHp": e.max_hp if e.has_component(Vitals) else None,
+                "icon": e.get_component(Renderable).icon if e.has_component(Renderable) else "sheet:5074",
+                "tags": list(e.tags)
+            })
+
+        # Load Player (Persistent Save)
         burt_path = os.path.join(DATA_DIR, "Saves", "Burt.json")
         if os.path.exists(burt_path):
-            with open(burt_path, 'r') as f:
+            with open(burt_path, 'r', encoding='utf-8') as f:
                 char_data = json.load(f)
-                player_c = Character.create(char_data)
+                player_c = world_ecs.create_character(char_data)
                 player_c.name = "player_burt"
+                player_c.x, player_c.y = 5, 5
                 db.active_combat.combatants.append(player_c)
-        
-        # P1 (Burt) - PC index 5074
-        p1 = next((c for c in db.active_combat.combatants if c.name == "player_burt"), None)
-        if p1:
-            p1.x, p1.y = 5, 5
-            p1.team = "Neutral"
-        
-        # Enemy (Sample Monster 3778)
-        enemy_c = next((c for c in db.active_combat.combatants if "enemy" in c.name), None)
-        if not enemy_c and db.active_combat.combatants:
-            # Fallback: create a mock enemy if none exists
-            enemy_c = Character.create({"Name": "Orc Grunt", "Team": "Enemy", "Stats": {"Might": 14, "Vitality": 12}})
-            db.active_combat.combatants.append(enemy_c)
-        
-        if enemy_c:
-            enemy_c.name = "enemy_0"
-            enemy_c.x, enemy_c.y = 10, 10
-            enemy_c.team = "Enemy"
+                vtt_entities.append({
+                    "id": player_c.id,
+                    "name": "Burt",
+                    "type": 'player',
+                    "pos": [5, 5],
+                    "hp": player_c.hp, "maxHp": player_c.max_hp,
+                    "icon": player_c.get_component(Renderable).icon,
+                    "tags": ["hero"]
+                })
 
-        vtt_entities = [
-            {
-                "id": c.id,
-                "name": c.name.title(),
-                "type": 'player' if c.team == 'Neutral' else 'enemy',
-                "pos": [c.x, c.y],
-                "hp": c.hp,
-                "maxHp": c.max_hp,
-                "icon": c.get_component(Renderable).icon if c.has_component(Renderable) else "sheet:5074",
-                "tags": ["hero"] if c.team == 'Neutral' else ["hostile"]
-            }
-            for c in db.active_combat.combatants
-        ]
-
-    # Add Objects (Chest index 6)
-    world_objects = [
-        {"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable"]},
-    ]
-    if db.active_combat:
-        db.active_combat.world_objects = world_objects
+    world_objects = [{"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable"]}]
     vtt_entities.extend(world_objects)
 
     return {
-        "meta": {"title": "Wilderness Encounter", "description": "A tactical skirmish.", "world_pos": [x, y]},
+        "meta": {"title": "Wilderness Encounter", "world_pos": [x, y]},
         "map": {"width": width, "height": height, "grid": grid, "biome": "forest"},
         "entities": vtt_entities,
         "log": ["Tactical simulation initiated."]
     }
 
-@app.get("/campaign/quests")
-async def get_quests():
-    return db.quests.get_active_quests() if db.quests else []
-
-@app.post("/world/advance_time")
-def advance_world_time(hours: int = Query(1), x: int = Query(500), y: int = Query(500)):
-    """
-    Advances world time and triggers hierarchical simulation ticks (LOD-aware).
-    """
-    if not db.sim:
-        raise HTTPException(status_code=503, detail="Simulation Engine Offline.")
+@app.get("/char/{name}")
+def get_character(name: str):
+    player = next((e for e in world_ecs.entities.values() if e.name.lower() == name.lower()), None)
+    if player: return player.to_dict()
     
-    db.sim.advance_time(hours, player_pos=(x, y))
-    
-    # Save updated gamestate
-    try:
-        with open(GAMESTATE_PATH, 'w', encoding='utf-8') as f:
-            json.dump(db.gamestate, f, indent=4)
-    except Exception as e:
-        print(f"[ERROR] Failed to save updated gamestate: {e}")
-
-    return {
-        "status": "Time Advanced",
-        "new_time": db.sim.get_time_string(),
-        "epoch": db.gamestate.get('meta', {}).get('epoch', 0),
-        "global_wealth": db.gamestate.get('meta', {}).get('global_wealth', 0)
-    }
+    save_path = os.path.join(DATA_DIR, "Saves", f"{name}.json")
+    if os.path.exists(save_path):
+        with open(save_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    raise HTTPException(status_code=404, detail="Character not found.")
 
 @app.get("/tactical/state", response_model=TacticalStateResponse)
 def get_tactical_state():
-    """
-    Returns the current tactical state in the standardized JSON format.
-    """
-    if not db.active_combat:
-        raise HTTPException(status_code=404, detail="No active tactical session found.")
+    if not db.active_combat: raise HTTPException(status_code=404, detail="No active tactical session found.")
     
-    # 1. Map Player
     player_c = next((c for c in db.active_combat.combatants if "player" in c.name), None)
-    if not player_c:
-        raise HTTPException(status_code=404, detail="Player not found in active combat.")
+    if not player_c: raise HTTPException(status_code=404, detail="Player not found in active combat.")
     
-    v = player_c.get_component(Vitals)
-    stats_raw = player_c.get_component(Stats).attrs if player_c.has_component(Stats) else {}
-
     player_stats = PlayerTacticalStats(
-        name=player_c.name.title(),
+        name=player_c.name,
         health=TacticalHealth(current=player_c.hp, max=player_c.max_hp),
         stamina=TacticalHealth(current=player_c.sp, max=player_c.max_sp),
         focus=TacticalHealth(current=player_c.fp, max=player_c.max_fp),
         composure=TacticalHealth(current=player_c.cmp, max=player_c.max_cmp),
         coordinates=TacticalCoords(x=player_c.x, y=player_c.y),
-        attributes=stats_raw
+        attributes=player_c.get_component(Stats).attrs if player_c.has_component(Stats) else {}
     )
     
-    # 2. Map Enemies
-    enemy_list = []
-    for c in db.active_combat.combatants:
-        if c.team == "Enemy":
-            # Extract active effects for this enemy
-            effects = []
-            status_flags = ["is_staggered", "is_shaken", "is_blinded", "is_stunned", "is_burning", "is_bleeding"]
-            for flag in status_flags:
-                if getattr(c, flag, False):
-                    effects.append({"name": flag.replace("is_", "").title(), "type": "Condition"})
-            
-            enemy_list.append(EnemyState(
-                id=c.id,
-                name=c.name.title(),
-                type="Enemy",
-                health=TacticalHealth(current=c.hp, max=c.max_hp),
-                coordinates=TacticalCoords(x=c.x, y=c.y),
-                active_effects=effects
-            ))
-            
-    # 3. Global Effects
-    active_effects = [] # Placeholder for global environmental effects
+    enemy_list = [
+        EnemyState(
+            id=c.id, name=c.name, type="Enemy",
+            health=TacticalHealth(current=c.hp, max=c.max_hp),
+            coordinates=TacticalCoords(x=c.x, y=c.y)
+        ) for c in db.active_combat.combatants if "enemy" in c.name
+    ]
     
-    # 4. Turn Order
-    turn_order = [c.name for c in db.active_combat.turn_order] if hasattr(db.active_combat, 'turn_order') and db.active_combat.turn_order else []
-    active_char = db.active_combat.get_active_char() if hasattr(db.active_combat, 'get_active_char') else None
-    active_name = active_char.name if active_char else None
-
     return TacticalStateResponse(
-        round=getattr(db.active_combat, 'round_count', 1),
-        turn_order=turn_order,
-        active_combatant=active_name,
         player_stats=player_stats,
         enemy_list=enemy_list,
-        active_effects=active_effects
+        active_effects=[]
     )
+
+class SimulationRequest(BaseModel):
+    entities: List[Dict[str, Any]]
+    years: int = 100
+
+@app.post("/architect/simulate")
+async def run_world_simulation(req: SimulationRequest):
+    """
+    Invokes the C++ Headless Engine to generate history based on the editor's seed state.
+    """
+    print(f"[ARCHITECT] Initializing Simulation Bridge for {req.years} years...")
+    
+    # 1. Save Seed State
+    seed_path = os.path.join(DATA_DIR, "seed_state.json")
+    with open(seed_path, 'w', encoding='utf-8') as f:
+        json.dump({"agents": req.entities}, f, indent=4)
+    
+    # 2. Invoke C++ Engine
+    # Path to the engine relative to the workspace root
+    engine_path = os.path.join(TALEWEAVERS_ROOT, "FantasyLloreAndWorldSimulator", "bin", "TALEWEAVERS_Engine.exe")
+    
+    if not os.path.exists(engine_path):
+        # Fallback to local dev bin if exists
+        engine_path = os.path.join(TALEWEAVERS_ROOT, "bin", "TALEWEAVERS_Engine.exe")
+
+    if not os.path.exists(engine_path):
+        print(f"[ERROR] Simulation Engine not found at {engine_path}")
+        raise HTTPException(status_code=500, detail="Simulation Engine executable missing.")
+
+    import subprocess
+    try:
+        # We pass the number of years as an argument
+        print(f"[ARCHITECT] Executing {engine_path}...")
+        proc = subprocess.run([engine_path, str(req.years)], capture_output=True, text=True, timeout=300)
+        
+        if proc.returncode != 0:
+            print(f"[ERROR] Engine Failed: {proc.stderr}")
+            raise HTTPException(status_code=500, detail=f"Simulation Engine error: {proc.stderr}")
+            
+        print("[ARCHITECT] Simulation Successful. History generated.")
+        
+        # 3. Synchronize ECS (ETL Bridge)
+        from core.import_world import WorldImporter
+        importer = WorldImporter()
+        importer.clear_world()
+        
+        # C++ Engine saves its final state to gamestate.json in the data hub
+        # Here we assume the engine uses the standardized export path we discussed
+        master_export = os.path.join(DATA_DIR, "master_export.json")
+        # For now, let's just trigger the importer on whatever the engine dropped
+        importer.import_entities(master_export)
+        
+        # Reload ECS registry
+        world_ecs.load_all()
+        
+        return {
+            "status": "success", 
+            "log": proc.stdout.splitlines()[-10:],
+            "years_simulated": req.years
+        }
+        
+    except subprocess.TimeoutExpired:
+        raise HTTPException(status_code=504, detail="Simulation timed out.")
+    except Exception as e:
+        print(f"[ERROR] Simulation Bridge Failure: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/architect/history/list")
+async def list_world_history():
+    """Returns a list of years available in the simulation history."""
+    history_dir = os.path.join(DATA_DIR, "history")
+    if not os.path.exists(history_dir):
+        return {"years": []}
+    
+    files = os.listdir(history_dir)
+    years = []
+    for f in files:
+        if f.startswith("year_") and f.endswith(".map"):
+            try:
+                year = int(f.replace("year_", "").replace(".map", ""))
+                years.append(year)
+            except: continue
+            
+    return {"years": sorted(years)}
+
+@app.post("/architect/history/load/{year}")
+async def load_historical_year(year: int):
+    """Loads a specific historical snapshot into the active ECS state."""
+    print(f"[ARCHITECT] Scrubbing to Year {year}...")
+    
+    snapshot_path = os.path.join(DATA_DIR, "history", f"year_{year}.map")
+    if not os.path.exists(snapshot_path):
+        raise HTTPException(status_code=404, detail=f"History snapshot for year {year} not found.")
+
+    engine_path = os.path.join(TALEWEAVERS_ROOT, "FantasyLloreAndWorldSimulator", "bin", "TALEWEAVERS_Engine.exe")
+    if not os.path.exists(engine_path):
+        engine_path = os.path.join(TALEWEAVERS_ROOT, "bin", "TALEWEAVERS_Engine.exe")
+
+    import subprocess
+    try:
+        # Run engine in export mode to generate master_export.json for this year
+        print(f"[ARCHITECT] Running engine export for: {snapshot_path}")
+        proc = subprocess.run([engine_path, "--export", snapshot_path], capture_output=True, text=True, timeout=30)
+        
+        if proc.returncode != 0:
+            print(f"[ERROR] Engine Export Failed: {proc.stderr}")
+            raise HTTPException(status_code=500, detail="Failed to export historical state.")
+
+        # Sync master_export.json back to ECS
+        from core.import_world import WorldImporter
+        importer = WorldImporter()
+        importer.clear_world()
+        
+        master_export = os.path.join(DATA_DIR, "master_export.json")
+        importer.import_entities(master_export)
+        
+        # Refresh registry
+        world_ecs.load_all()
+        
+        return {"status": "success", "year": year}
+        
+    except Exception as e:
+        print(f"[ERROR] Scrubbing Failure: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+class PaintRequest(BaseModel):
+    x: int
+    y: int
+    tile_index: int
+    radius: int = 2
+
+@app.get("/architect/grid")
+def get_architect_grid():
+    if not db.world_grid: raise HTTPException(status_code=503, detail="Grid System Offline.")
+    return {
+        "width": db.world_grid.width,
+        "height": db.world_grid.height,
+        "grid": db.world_grid.grid
+    }
+
+@app.post("/architect/paint")
+def paint_architect_grid(req: PaintRequest):
+    if not db.world_grid: raise HTTPException(status_code=503, detail="Grid System Offline.")
+    db.world_grid.paint(req.x, req.y, req.tile_index, req.radius)
+    db.world_grid.save()
+    return {"status": "success"}
 
 @app.post("/refresh")
 def refresh_data():

@@ -58,6 +58,14 @@ class PersistenceLayer:
             return {"name": row[0], "data": json.loads(row[1])}
         return None
 
+    def load_all_entities(self):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('SELECT id, name, data FROM entities')
+        rows = cursor.fetchall()
+        conn.close()
+        return rows
+
     def sync_nodes(self, nodes_list):
         """Batch update world nodes from JSON to SQLite."""
         conn = sqlite3.connect(self.db_path)

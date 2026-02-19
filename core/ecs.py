@@ -1,6 +1,7 @@
 import uuid
 import json
 from typing import Dict, List, Any, Optional
+from .database import PersistenceLayer
 
 class Entity:
     """
@@ -12,17 +13,13 @@ class Entity:
         self.name = name
         self.components: Dict[str, Any] = {}
         self.tags = set()
-        self.metadata = {} # For unstructured data hooks
+        self.metadata = {} 
 
     def add_component(self, component):
         self.components[type(component).__name__] = component
         return self
 
     def get_component(self, component_type):
-        """
-        Retrieves a component by its class type.
-        Example: entity.get_component(Position)
-        """
         return self.components.get(component_type.__name__)
 
     def has_component(self, component_type):
@@ -35,11 +32,32 @@ class Entity:
     def has_tag(self, tag: str):
         return tag in self.tags
 
-    def remove_tag(self, tag: str):
-        self.tags.discard(tag)
-        return self
+    def to_dict(self):
+        comp_data = {}
+        for name, comp in self.components.items():
+            comp_data[name] = vars(comp)
+        return {
+            "id": self.id,
+            "name": self.name,
+            "components": comp_data,
+            "tags": list(self.tags),
+            "metadata": self.metadata
+        }
 
-    # --- CORE PROPERTY ADAPTERS (Delegating to Components) ---
+    # --- CORE BEHAVIORS ---
+    def is_alive(self):
+        v = self.get_component(Vitals)
+        return v.hp > 0 if v else False
+
+    def take_damage(self, amount):
+        v = self.get_component(Vitals)
+        if not v: return 0
+        actual = min(amount, v.hp)
+        v.hp -= actual
+        # Trigger persistence update if world_ecs is managing it
+        return actual
+
+    # --- CORE PROPERTY ADAPTERS ---
     @property
     def x(self): 
         c = self.get_component(Position)
@@ -114,196 +132,105 @@ class Entity:
         c = self.get_component(Vitals)
         return c.max_cmp if c else 0
 
-    @property
-    def team(self):
-        c = self.get_component(FactionMember)
-        return c.faction_name if c else "Neutral"
-    @team.setter
-    def team(self, val):
-        c = self.get_component(FactionMember)
-        if c: c.faction_name = val
-
-    def __repr__(self):
-        return f"<Entity {self.name} ({self.id})>"
-
 # --- COMPONENTS ---
-
 class Position:
-    """Logical position in the world (Grid or Graph node)."""
-    def __init__(self, x=0, y=0, z=0, map_id=None):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.map_id = map_id  # For multi-map support
+    def __init__(self, x=0, y=0, z=0): self.x = x; self.y = y; self.z = z
 
 class Renderable:
-    """Visual representation for the VTT."""
-    def __init__(self, icon="token.png", color="#ffffff", scale=1.0, layer=1):
-        self.icon = icon
-        self.color = color
-        self.scale = scale
-        self.layer = layer
+    def __init__(self, icon="sheet:5074", color="#ffffff", scale=1.0):
+        self.icon = icon; self.color = color; self.scale = scale
 
 class Stats:
-    """Core attributes (Might, Finesse, etc)."""
-    def __init__(self, stats_dict: Dict[str, int] = None):
-        self.attrs = stats_dict or {}
-
-    def get(self, stat_name, default=10):
-        return self.attrs.get(stat_name, default)
-
-    def set(self, stat_name, value):
-        self.attrs[stat_name] = value
+    def __init__(self, attrs=None): self.attrs = attrs or {}
+    def get(self, name, default=10): return self.attrs.get(name, default)
 
 class Vitals:
-    """Dynamic survival resources (HP, SP, FP, CMP)."""
     def __init__(self, hp=10, max_hp=10, sp=10, max_sp=10, fp=10, max_fp=10, cmp=10, max_cmp=10):
-        self.hp = hp
-        self.max_hp = max_hp
-        self.sp = sp
-        self.max_sp = max_sp
-        self.fp = fp
-        self.max_fp = max_fp
-        self.cmp = cmp
-        self.max_cmp = max_cmp
+        self.hp = hp; self.max_hp = max_hp
+        self.sp = sp; self.max_sp = max_sp
+        self.fp = fp; self.max_fp = max_fp
+        self.cmp = cmp; self.max_cmp = max_cmp
 
 class Inventory:
-    """Carried items."""
-    def __init__(self, capacity=20):
-        self.items = [] # List of Item objects or dicts
-        self.capacity = capacity
-        self.gold = 0
-
-class Equipment:
-    """Currently worn/wielded items."""
-    def __init__(self):
-        self.slots = {
-            "Main Hand": None,
-            "Off Hand": None,
-            "Armor": None,
-            "Head": None,
-            "Accessory": None
-        }
-
-class AIController:
-    """Flags this entity as controlled by the AI Engine."""
-    def __init__(self, behavior_tree="default", aggression=0.5):
-        self.behavior_tree = behavior_tree
-        self.aggression = aggression
-        self.target_id = None
-
-class PlayerController:
-    """Flags this entity as controlled by a human user."""
-    def __init__(self, user_id="p1"):
-        self.user_id = user_id
+    def __init__(self, capacity=20): self.items = []; self.gold = 0
 
 class StatusEffects:
-    """Active buffs/debuffs."""
-    def __init__(self):
-        self.active_effects = []  # List of {name, duration, magnitude}
+    def __init__(self): self.active_effects = []
 
 class FactionMember:
-    """Allegiance data."""
-    def __init__(self, faction_name="Neutral", rank=0):
-        self.faction_name = faction_name
-        self.rank = rank
+    def __init__(self, faction="Neutral"): self.faction_name = faction
 
 class Logistics:
-    """Simulation data for trade, resources, and population."""
-    def __init__(self, resources: Dict[str, float] = None, population: int = 0):
-        self.resources = resources or {"Food": 100.0, "Gold": 100.0, "Materials": 50.0}
+    def __init__(self, resources=None, population=0):
+        self.resources = resources or {"Food": 100, "Gold": 100}
         self.population = population
-        self.last_tick = 0.0 # Narrative hour mark
-        self.needs = {"Food": 1.0} # Consumption per tick per population unit
+        self.needs = {"Food": 1.0}
+        self.last_tick = 0
 
 # --- REGISTRY & FACTORIES ---
-
 class ECSRegistry:
-    """Central store for all entities and factory methods."""
-    def __init__(self):
+    def __init__(self, db_path="data/world_state.db"):
         self.entities: Dict[str, Entity] = {}
+        self.db = PersistenceLayer(db_path)
 
     def add_entity(self, entity: Entity):
         self.entities[entity.id] = entity
+        self.db.save_entity(entity.id, entity.name, entity.to_dict())
         return entity
 
-    def get_entity(self, entity_id: str) -> Optional[Entity]:
-        return self.entities.get(entity_id)
+    def get_entity(self, eid): return self.entities.get(eid)
 
-    def get_entities_with(self, *component_types):
-        """Returns a generator of entities that have ALL specified components."""
-        for entity in self.entities.values():
-            if all(entity.has_component(c) for c in component_types):
-                yield entity
+    def load_all(self):
+        """Loads all entities from the SQLite persistence layer into the active registry."""
+        rows = self.db.load_all_entities()
+        for eid, name, data_json in rows:
+            data = json.loads(data_json)
+            e = Entity(name)
+            e.id = eid
+            e.tags = set(data.get("tags", []))
+            e.metadata = data.get("metadata", {})
+            
+            # Reconstruct Components
+            comp_data = data.get("components", {})
+            for c_name, c_vars in comp_data.items():
+                # Map component name to class
+                cls = getattr(sys.modules[__name__], c_name, None)
+                if cls:
+                    comp = cls()
+                    for k, v in c_vars.items():
+                        setattr(comp, k, v)
+                    e.add_component(comp)
+            
+            self.entities[eid] = e
+        print(f"[ECS] Restored {len(self.entities)} entities from database.")
 
-    # --- FACTORY METHODS (Replacing Models folder) ---
+    def create_character(self, data: Dict) -> Entity:
+        """Factory: registers character directly into active world state using TTS formulas."""
+        e = Entity(data.get("Name", "Hero"))
+        e.add_component(Position(data.get("x", 0), data.get("y", 0)))
+        e.add_component(Renderable(data.get("Sprite", data.get("Portrait", "sheet:5074"))))
+        e.add_component(Stats(data.get("Stats", {})))
+        e.add_component(Vitals())
+        e.add_component(Inventory())
+        e.add_component(StatusEffects())
+        e.add_component(FactionMember(data.get("Team", "Neutral")))
+        
+        # Calculate TTS Vitals
+        s = e.get_component(Stats)
+        v = e.get_component(Vitals)
+        
+        v.max_hp = int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2))
+        v.max_sp = int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2))
+        v.max_fp = int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2))
+        v.max_cmp = int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2))
+        
+        v.hp, v.sp, v.fp, v.cmp = v.max_hp, v.max_sp, v.max_fp, v.max_cmp
+        
+        return self.add_entity(e)
 
-    def create_character(self, data: Any) -> Entity:
-        """Hydrates a full character entity into the ECS."""
-        if isinstance(data, str):
-            data = {"Name": data}
-        
-        name = data.get("Name", data.get("name", "Unnamed"))
-        entity = Entity(name)
-        
-        # Add Components
-        entity.add_component(Position())
-        entity.add_component(Renderable())
-        entity.add_component(Stats())
-        entity.add_component(Vitals())
-        entity.add_component(Inventory())
-        entity.add_component(Equipment())
-        entity.add_component(StatusEffects())
-        entity.add_component(FactionMember())
-        
-        # Hydrate Stats
-        stats = entity.get_component(Stats)
-        stats.attrs = data.get("Stats", data.get("stats", {
-            "Might": 10, "Reflexes": 10, "Endurance": 10, "Vitality": 10,
-            "Fortitude": 10, "Knowledge": 10, "Logic": 10, "Awareness": 10,
-            "Intuition": 10, "Charm": 10, "Willpower": 10, "Finesse": 10
-        }))
-        
-        # Derived TTS Vitals
-        vitals = entity.get_component(Vitals)
-        s = stats
-        vitals.max_hp = int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2))
-        vitals.max_sp = int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2))
-        vitals.max_fp = int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2))
-        vitals.max_cmp = int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2))
-        
-        vitals.hp = data.get("Current_HP", data.get("HP", vitals.max_hp))
-        vitals.sp = data.get("Current_SP", data.get("SP", vitals.max_sp))
-        vitals.fp = data.get("Current_FP", data.get("FP", vitals.max_fp))
-        vitals.cmp = data.get("Current_CMP", data.get("CMP", vitals.max_cmp))
-        
-        # Metadata Passthrough
-        entity.metadata.update({
-            "species": data.get("Species", "Unknown"),
-            "level": data.get("Level", 1),
-            "traits": data.get("Traits", []),
-            "skills": data.get("Skills", [])
-        })
+    def get_entities_with(self, *types):
+        for e in self.entities.values():
+            if all(e.has_component(t) for t in types): yield e
 
-        # Renderable
-        render = entity.get_component(Renderable)
-        sprite = data.get("Sprite", data.get("Portrait", "sheet:5074"))
-        render.icon = sprite
-        
-        # Add to self
-        return self.add_entity(entity)
-
-    def create_item(self, data: Dict[str, Any]) -> Entity:
-        """Creates an Item entity."""
-        name = data.get("Name", "Unknown")
-        entity = Entity(name)
-        entity.add_component(Stats(data.get("Stats", {})))
-        entity.metadata.update({
-            "type": data.get("Type", "Misc"),
-            "cost": int(data.get("Cost", 0)),
-            "logic_tags": data.get("Logic_Tags", "")
-        })
-        return self.add_entity(entity)
-
-# Singleton Instance
+# Singleton
 world_ecs = ECSRegistry()

@@ -22,6 +22,11 @@ interface GameState extends SessionData {
     isQuestLogOpen: boolean;
     setQuestLogOpen: (open: boolean) => void;
     syncTacticalState: () => Promise<void>;
+
+    // Architect Mode
+    architectGrid: any | null;
+    fetchArchitectGrid: () => Promise<void>;
+    paintArchitectTile: (x: number, y: number, tileIndex: number, radius?: number) => Promise<void>;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -247,6 +252,50 @@ export const useGameStore = create<GameState>((set, get) => ({
             }));
         } catch (e) {
             console.error("Failed to sync tactical state", e);
+        }
+    },
+
+    architectGrid: null,
+    fetchArchitectGrid: async () => {
+        try {
+            const res = await fetch('/api/architect/grid');
+            if (!res.ok) throw new Error('Grid load failed');
+            const data = await res.json();
+            set({ architectGrid: data });
+        } catch (e) {
+            console.error(e);
+        }
+    },
+
+    paintArchitectTile: async (x, y, tileIndex, radius = 2) => {
+        const { architectGrid } = get();
+        if (!architectGrid) return;
+
+        // Optimistic Update
+        const newGrid = [...architectGrid.grid];
+        const r_sq = radius * radius;
+        for (let dy = -radius; dy <= radius; dy++) {
+            for (let dx = -radius; dx <= radius; dx++) {
+                if (dx * dx + dy * dy <= r_sq) {
+                    const nx = x + dx;
+                    const ny = y + dy;
+                    if (nx >= 0 && nx < architectGrid.width && ny >= 0 && ny < architectGrid.height) {
+                        newGrid[ny] = [...newGrid[ny]];
+                        newGrid[ny][nx] = tileIndex;
+                    }
+                }
+            }
+        }
+        set({ architectGrid: { ...architectGrid, grid: newGrid } });
+
+        try {
+            await fetch('/api/architect/paint', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ x, y, tile_index: tileIndex, radius })
+            });
+        } catch (e) {
+            console.error("Paint failed on server", e);
         }
     }
 }));

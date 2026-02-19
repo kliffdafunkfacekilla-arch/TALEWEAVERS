@@ -1,18 +1,39 @@
 from .graph_runtime import WorkflowNode, GraphState
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional, Literal
+from pydantic import BaseModel, Field
+
+class PlayerIntent(BaseModel):
+    """Structured representation of player action from natural language."""
+    action: Literal["ATTACK", "MOVE", "SEARCH", "TALK", "INTERACT", "USE", "REST"]
+    target: Optional[str] = Field(None, description="The name of the character or object being targeted")
+    parameters: Dict[str, Any] = Field(default_factory=dict, description="Metadata like dx, dy, or specific item names")
+    narrative_flavor: str = Field(..., description="A short description of HOW the player performed the action")
 
 class IntentNode(WorkflowNode):
     """
-    Step 1: Parse the user's intent.
+    Step 1: Parse the user's intent using Pydantic enforcement.
     """
     def __init__(self, sensory_layer):
         self.sensory = sensory_layer
 
     def run(self, state: GraphState) -> GraphState:
-        # Resolve natural language into structured JSON action
         print(f"[NODE] Parsing Intent: '{state.user_input}'")
-        intent_json = self.sensory.resolve_intent(state.user_input, state.player_data)
-        state.intent = intent_json
+        
+        # Use sensory layer to get structured intent
+        # The sensory layer should now return a PlayerIntent object or dict matching it
+        raw_intent = self.sensory.resolve_intent(state.user_input, state.player_data)
+        
+        # Enforce Pydantic validation
+        if isinstance(raw_intent, dict):
+            try:
+                intent_obj = PlayerIntent(**raw_intent)
+                state.intent = intent_obj.model_dump()
+            except Exception as e:
+                print(f"[ERROR] Intent Validation Failed: {e}. Falling back to TALK.")
+                state.intent = PlayerIntent(action="TALK", narrative_flavor="confused mumbling").model_dump()
+        else:
+            state.intent = raw_intent # Assume already validated if produced by sensory
+            
         return state
 
 class LoreNode(WorkflowNode):
@@ -56,19 +77,17 @@ class SimNode(WorkflowNode):
         # ADVANCE WORLD TIME (1 hour per action)
         if self.sim:
             self.sim.advance_time(1, player_pos)
-            print(f"[NODE] World Time: {self.sim.get_time_string()}")
 
         # MECHANICS ROUTING
-        # If combat is active, route the intent through the specialized CombatEngine
         if combat_engine and combat_engine.active:
             print(f"[NODE] Routing Intent '{action}' to CombatEngine")
             result, updates = combat_engine.process_intent(state.intent)
         
-        # WORLD LOGIC fallback (Graph/Regional Mode)
+        # WORLD LOGIC fallback
         elif self.sim:
             if action in ['MOVE', 'TRAVEL']:
-                cmd = state.intent.get('parameters', {})
-                dx, dy = cmd.get('dx', 0), cmd.get('dy', 0)
+                params = state.intent.get('parameters', {})
+                dx, dy = params.get('dx', 0), params.get('dy', 0)
                 new_x = player_pos[0] + dx
                 new_y = player_pos[1] + dy
                 state.player_data['pos'] = (new_x, new_y)
@@ -96,7 +115,6 @@ class NarrativeNode(WorkflowNode):
         self.quests = quest_manager
 
     def run(self, state: GraphState) -> GraphState:
-        # Construct context object for the sensory layer
         context = {
             "chaos": state.world_meta.get("chaos_level", 0.5),
             "position": state.player_data.get("pos", [500, 500]),
@@ -106,7 +124,6 @@ class NarrativeNode(WorkflowNode):
             "active_quests": self.quests.get_active_quests() if self.quests else []
         }
         
-        print(f"[NODE] Generating Narrative based on result: '{state.mechanical_result}'")
         response = self.sensory.generate_narrative(
             action_result=state.mechanical_result,
             world_context=context,
