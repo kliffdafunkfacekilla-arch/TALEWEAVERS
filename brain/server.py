@@ -80,14 +80,17 @@ class WorldDatabase:
         self.loop = None
     
     def load(self):
-        try:
-            if os.path.exists(LORE_PATH):
-                with open(LORE_PATH, 'r', encoding='utf-8') as f:
-                    self.lore = json.load(f)
-                if SimpleRAG:
-                    self.rag = SimpleRAG(self.lore, async_init=True)
-        except Exception as e:
-            print(f"[ERROR] Failed to load lore.json: {e}")
+        # 1. Initialize RAG with Atomic Lore Directory (v2.0)
+        lore_dir = os.path.join(DATA_DIR, "lore")
+        if os.path.exists(lore_dir) and SimpleRAG:
+            print(f"[BOOT] Building RAG index from atomic directory: {lore_dir}")
+            self.rag = SimpleRAG(data_path=lore_dir, async_init=True)
+        elif os.path.exists(LORE_PATH) and SimpleRAG:
+            # Fallback to legacy lore.json
+            print(f"[BOOT] WARNING: Using legacy lore.json. Atomic directory not found.")
+            with open(LORE_PATH, 'r', encoding='utf-8') as f:
+                self.lore = json.load(f)
+            self.rag = SimpleRAG(lore_data=self.lore, async_init=True)
 
         try:
             if os.path.exists(GAMESTATE_PATH):
@@ -430,6 +433,27 @@ def paint_architect_grid(req: PaintRequest):
     db.world_grid.paint(req.x, req.y, req.tile_index, req.radius)
     db.world_grid.save()
     return {"status": "success"}
+
+@app.post("/architect/sync/vault")
+async def sync_vault():
+    """
+    Triggers the Vault Compiler to index Obsidian notes and auto-populate the world.
+    """
+    from tools.vault_compiler import VaultCompiler, VAULT_PATH, DB_PATH
+    try:
+        compiler = VaultCompiler(VAULT_PATH, DB_PATH)
+        compiler.compile()
+        compiler.auto_populate()
+        
+        # Refresh registry and RAG
+        world_ecs.load_all()
+        if db.rag:
+            db.rag = SimpleRAG(data_path=os.path.join(DATA_DIR, "lore"), async_init=False)
+            
+        return {"status": "success", "message": "Vault synchronized and world auto-populated."}
+    except Exception as e:
+        print(f"[ERROR] Vault Sync Failure: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/refresh")
 def refresh_data():

@@ -13,7 +13,8 @@ import {
     ChevronRight,
     Layers,
     Cpu,
-    History
+    History,
+    RefreshCw
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useGameStore } from '../store';
@@ -210,6 +211,25 @@ export function WorldArchitect() {
                 </div>
 
                 <div className="p-6 bg-black/40 border-t border-white/5 space-y-3">
+                    <button
+                        onClick={async () => {
+                            console.log("[ARCHITECT] Syncing Obsidian Vault...");
+                            try {
+                                const response = await fetch("http://localhost:8000/architect/sync/vault", {
+                                    method: "POST"
+                                });
+                                const result = await response.json();
+                                console.log("[ARCHITECT] Sync Result:", result);
+                                alert("Vault Synced! Entities procedurally seeded.");
+                                window.location.reload();
+                            } catch (e) {
+                                console.error("Sync Failed:", e);
+                            }
+                        }}
+                        className="w-full flex items-center justify-center gap-2 py-3 bg-cyan-600/10 hover:bg-cyan-600 text-cyan-500 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+                    >
+                        <RefreshCw size={14} /> Sync Vault
+                    </button>
                     <button
                         onClick={async () => {
                             console.log("[ARCHITECT] Starting Simulation...");
