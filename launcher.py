@@ -16,7 +16,7 @@ def start_taleweavers():
     # 1. Start SAGA Brain (FastAPI)
     print("[1/3] Starting SAGA Brain Server...")
     brain_proc = subprocess.Popen(
-        [sys.executable, "-m", "uvicorn", "server:app", "--host", "127.0.0.1", "--port", "8000"],
+        [sys.executable, "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"],
         cwd=brain_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
