@@ -1,6 +1,7 @@
 from .graph_runtime import WorkflowNode, GraphState
 from typing import Dict, Any, List, Optional, Literal
 from pydantic import BaseModel, Field
+from core.systems.social_combat import social_engine
 
 class PlayerIntent(BaseModel):
     """Structured representation of player action from natural language."""
@@ -21,7 +22,11 @@ class IntentNode(WorkflowNode):
         
         # Use sensory layer to get structured intent
         # The sensory layer should now return a PlayerIntent object or dict matching it
-        raw_intent = self.sensory.resolve_intent(state.user_input, state.player_data)
+        raw_intent = self.sensory.resolve_intent(
+            state.user_input, 
+            state.player_data,
+            environment_context=state.environment_context
+        )
         
         # Enforce Pydantic validation
         if isinstance(raw_intent, dict):
@@ -60,10 +65,11 @@ class SimNode(WorkflowNode):
     """
     Step 3: Execute mechanical logic (Movement, Combat, etc).
     """
-    def __init__(self, combat_provider=None, simulation_manager=None, quest_manager=None):
+    def __init__(self, combat_provider=None, simulation_manager=None, quest_manager=None, campaign_gen=None):
         self.get_combat = combat_provider if callable(combat_provider) else (lambda: combat_provider)
         self.sim = simulation_manager
         self.quests = quest_manager
+        self.campaign_gen = campaign_gen
 
     def run(self, state: GraphState) -> GraphState:
         combat_engine = self.get_combat()
@@ -93,6 +99,23 @@ class SimNode(WorkflowNode):
                 state.player_data['pos'] = (new_x, new_y)
                 result = f"You travel through the wilds towards ({new_x}, {new_y})."
                 updates.append({'type': 'MOVE_PLAYER', 'pos': [new_x, new_y]})
+            elif action == 'TALK':
+                print(f"[NODE] Routing Intent '{action}' to Social Engine")
+                result, updates = social_engine.resolve_social_action(state.intent, state.player_data)
+            elif action in ['INTERACT', 'USE']:
+                target = state.intent.get('target', 'nothing')
+                result = f"You interact with the {target}. The environment responds physically."
+                
+                # Check if interaction triggers a Narrative Quest Seed
+                if self.campaign_gen and self.campaign_gen.current_campaign:
+                    # Target might be passed by the LLM as 'poi_path_...' or just its name
+                    for poi in self.campaign_gen.current_campaign.pois:
+                        if target.lower() in poi.id.lower() or target.lower() in poi.description.lower() or target.lower() in poi.type.lower():
+                            side_q = self.campaign_gen.trigger_side_quest(poi.id)
+                            if side_q:
+                                result += f" [QUEST DISCOVERED: {side_q.title} - {side_q.description}]"
+                            break
+
             else:
                 result = f"Action {action} performed. The world continues to turn."
 

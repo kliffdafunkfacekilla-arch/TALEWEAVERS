@@ -1,0 +1,19 @@
+Initializing Test Database...
+
+[Initial State]
+ Forestburg: Pop 500, Wealth 200, Food 200000, Wood 100, Iron 0
+ Ironpeak:   Pop 300, Wealth 800, Food 150000, Iron 50, Wood 0
+
+[Simulating 12 Months...]
+
+[Final State]
+ Forestburg: Pop 560, Wealth 1, Food 193670, Wood 136, Iron 407
+ Ironpeak:   Pop 336, Wealth 2204, Food 146202, Iron 21, Wood 600
+Traceback (most recent call last):
+  File "C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\verify\test_settlement.py", line 57, in <module>
+    test_settlements()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\verify\test_settlement.py", line 47, in test_settlements
+    assert entA.get_component(Economy).wealth > 200, "Wealth should have increased from taxes/trade"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Wealth should have increased from taxes/trade

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Application, Container, Graphics, Assets, Sprite, Texture, Rectangle } from 'pixi.js';
+import { Application, Container, Graphics, Assets, Sprite, Texture, Rectangle, Point } from 'pixi.js';
 import { Entity, MapData } from '../types';
+import { DynamicLightFilter } from '../shaders/DynamicLight';
 
 interface MapCanvasProps {
     mapData: any;
@@ -126,9 +127,40 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
         const bgLayer = new Container();
         world.addChild(bgLayer);
 
-        mapData.grid.forEach((row, y) => {
-            row.forEach((cell, x) => {
-                const tex = getTexture(cell);
+        // Apply Dynamic Lighting Shader
+        const lightFilter = new DynamicLightFilter(
+            app.renderer.width,
+            app.renderer.height,
+            { x: app.renderer.width / 2, y: app.renderer.height / 2 },
+            400 // Torch radius
+        );
+        bgLayer.filters = [lightFilter];
+
+        // Define which base tiles should use smart tiling
+        const SMART_TILES = new Set([896, 194, 130]); // Mountain, Water, Forest
+
+        // Need the SmartTiling logic:
+        const calculateBitmask = (grid: any[][], x: number, y: number, targetTileIndex: number) => {
+            let mask = 0;
+            const h = grid.length;
+            const w = h > 0 ? grid[0].length : 0;
+            if (y > 0 && grid[y - 1][x] === targetTileIndex) mask += 1;
+            if (x > 0 && grid[y][x - 1] === targetTileIndex) mask += 2;
+            if (x < w - 1 && grid[y][x + 1] === targetTileIndex) mask += 4;
+            if (y < h - 1 && grid[y + 1][x] === targetTileIndex) mask += 8;
+            return mask;
+        };
+
+        mapData.grid.forEach((row: number[], y: number) => {
+            row.forEach((cell: number, x: number) => {
+                let finalIndex = cell;
+
+                // Apply smart tiling if this is a supported terrain type
+                if (SMART_TILES.has(cell)) {
+                    finalIndex = cell + calculateBitmask(mapData.grid, x, y, cell);
+                }
+
+                const tex = getTexture(finalIndex);
                 let tile;
                 if (tex) {
                     tile = new Sprite(tex);
@@ -154,6 +186,10 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
         });
 
         bgLayer.on('pointermove', (e) => {
+            // Update light pos (needs global screen coords for shader, normalized by world offset) //
+            const globalPos = e.global;
+            lightFilter.updateLight(globalPos.x, globalPos.y, 400);
+
             if (isDragging && onCellDrag) {
                 const p = e.getLocalPosition(world);
                 onCellDrag(Math.floor(p.x / TILE), Math.floor(p.y / TILE));

@@ -1,12 +1,20 @@
 import { create } from 'zustand';
 import type { SessionData, Position } from './types';
 
+export interface CombatTurn {
+    entity_id: string;
+    initiative: number;
+    faction: string;
+}
+
 interface GameState extends SessionData {
     loadSession: (data: SessionData) => void;
     moveEntity: (id: string, newPos: Position) => void;
     addLog: (message: string, type?: 'system' | 'dm') => void;
     selectedEntityId: string | null;
     selectEntity: (id: string | null) => void;
+    activePlayerId: string | null;
+    setActivePlayerId: (id: string | null) => void;
     fetchNewSession: (x?: number, y?: number) => Promise<void>;
     submitResult: (outcome: 'VICTORY' | 'DEFEAT') => Promise<void>;
     dmChat: (message: string) => Promise<void>;
@@ -21,7 +29,18 @@ interface GameState extends SessionData {
     setInventoryOpen: (open: boolean) => void;
     isQuestLogOpen: boolean;
     setQuestLogOpen: (open: boolean) => void;
+    isCharacterSheetOpen: boolean;
+    setCharacterSheetOpen: (open: boolean) => void;
     syncTacticalState: () => Promise<void>;
+
+    // Player View State
+    playerMapView: 'TACTICAL' | 'WORLD';
+    setPlayerMapView: (view: 'TACTICAL' | 'WORLD') => void;
+
+    // Combat State Tracking
+    round?: number;
+    turn_order?: CombatTurn[];
+    active_combatant?: string | null;
 
     // Architect Mode
     architectGrid: any | null;
@@ -35,15 +54,22 @@ export const useGameStore = create<GameState>((set, get) => ({
     entities: [],
     log: ["Tactical Interface initialized."],
     selectedEntityId: null,
+    activePlayerId: null,
     isDMThinking: false,
     quests: [],
     isInventoryOpen: false,
     isQuestLogOpen: false,
+    isCharacterSheetOpen: false,
+    playerMapView: 'TACTICAL',
 
     loadSession: (data) => set({ ...data }),
 
     setInventoryOpen: (open) => set({ isInventoryOpen: open }),
     setQuestLogOpen: (open) => set({ isQuestLogOpen: open }),
+    setCharacterSheetOpen: (open) => set({ isCharacterSheetOpen: open }),
+    setPlayerMapView: (view) => set({ playerMapView: view }),
+    selectEntity: (id) => set({ selectedEntityId: id }),
+    setActivePlayerId: (id) => set({ activePlayerId: id }),
 
     moveEntity: (id, [x, y]) => set((state) => ({
         entities: state.entities.map(e =>
@@ -62,12 +88,17 @@ export const useGameStore = create<GameState>((set, get) => ({
             const response = await fetch(`/api/tactical/generate?x=${x}&y=${y}`);
             if (!response.ok) throw new Error('Failed to fetch session');
             const data = await response.json();
-            set({ ...data, selectedEntityId: null });
+
+            // Set first player as active automatically
+            const defaultActive = data.entities?.find((e: any) => e.type === 'player')?.id || null;
+
+            set({ ...data, selectedEntityId: null, activePlayerId: defaultActive });
             set((state) => ({ log: [...state.log, `[SYSTEM] Battle Map Loaded: ${data.meta.title}`] }));
 
-            // Auto-load detailed stats for Burt
+            // Auto-load detailed stats for Burt or the first player
             const { loadPlayerDetailed } = get();
-            await loadPlayerDetailed("Burt");
+            const playerToLoad = data.entities?.find((e: any) => e.type === 'player')?.name || "Burt";
+            await loadPlayerDetailed(playerToLoad);
         } catch (e) {
             console.error("Brain Server is offline!", e);
             set((state) => ({ log: [...state.log, "[ERROR] Brain Server is offline!"] }));

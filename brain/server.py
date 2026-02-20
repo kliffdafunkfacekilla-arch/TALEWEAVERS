@@ -113,7 +113,8 @@ class WorldDatabase:
                     self.rag, 
                     self.memory,
                     self.sim,
-                    self.quests
+                    self.quests,
+                    self.campaign_gen
                 )
 
             # --- RESTORE WORLD STATE ---
@@ -184,6 +185,23 @@ def health_check():
 async def dm_action(req: DMActionRequest):
     if not db.loop: raise HTTPException(status_code=503, detail="Game Loop Offline.")
     try:
+        # Augment context with environment details (nearby interactive objects)
+        player_data = req.context.get("player", {})
+        player_pos = player_data.get("pos", [500, 500])
+        
+        nearby = []
+        if db.active_combat:
+            for c in db.active_combat.combatants:
+                if c.id != player_data.get("id"):
+                    nearby.append({"id": c.id, "name": c.name, "tags": list(c.tags) if hasattr(c, 'tags') else []})
+        else:
+            for e in world_ecs.entities.values():
+                p = e.get_component(Position)
+                if p and abs(p.x - player_pos[0]) < 20 and abs(p.y - player_pos[1]) < 20:
+                    if e.id != player_data.get("id"):
+                        nearby.append({"id": e.id, "name": e.name, "tags": list(e.tags) if hasattr(e, 'tags') else []})
+                        
+        req.context["environment"] = nearby
         return db.loop.process_turn(req.message, req.context)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -232,15 +250,59 @@ def generate_tactical_map(x: int, y: int, poi_id: Optional[str] = None):
                     "type": 'player',
                     "pos": [5, 5],
                     "hp": player_c.hp, "maxHp": player_c.max_hp,
-                    "icon": player_c.get_component(Renderable).icon,
+                    "icon": player_c.get_component(Renderable).icon if player_c.has_component(Renderable) else "sheet:115",
                     "tags": ["hero"]
                 })
 
-    world_objects = [{"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable"]}]
+    world_objects = [{"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable", "openable"]}]
     vtt_entities.extend(world_objects)
 
+    # -------------------------------------------------------------
+    # Inject Active Campaign POIs & Quest Targets
+    # -------------------------------------------------------------
+    if db.campaign_gen and db.campaign_gen.current_campaign:
+        active_camp = db.campaign_gen.current_campaign
+        # Find POIs near this world_pos
+        for poi in active_camp.pois:
+            # If POI is within 50 units on the world map
+            if abs(poi.x - x) < 50 and abs(poi.y - y) < 50 and not poi.discovered:
+                poi.discovered = True
+                
+                # Pick a random local coordinate inside the 20x20 tactical map
+                lx, ly = random.randint(2, width-3), random.randint(2, height-3)
+                
+                # Map POIType to VTT icons
+                icon = "sheet:5074"
+                poi_type = "object"
+                tags = ["poi", "interactable"]
+                
+                if poi.type == "Person":
+                    icon = "sheet:3"
+                    poi_type = "npc"
+                    tags.append("talkable")
+                elif poi.type == "Hostile Monster":
+                    icon = "sheet:5076"
+                    poi_type = "enemy"
+                    tags.append("hostile")
+                elif poi.type == "Corpse":
+                    icon = "sheet:14"
+                    tags.append("searchable")
+                elif poi.type == "Item":
+                    icon = "sheet:6"
+                    tags.append("lootable")
+                
+                vtt_entities.append({
+                    "id": poi.id,
+                    "name": f"{poi.type} (Quest Seed)",
+                    "type": poi_type,
+                    "pos": [lx, ly],
+                    "icon": icon,
+                    "tags": tags,
+                    "description": poi.description
+                })
+
     return {
-        "meta": {"title": "Wilderness Encounter", "world_pos": [x, y]},
+        "meta": {"title": "Wilderness Encounter", "world_pos": [x, y], "description": "You scan the tactical area..."},
         "map": {"width": width, "height": height, "grid": grid, "biome": "forest"},
         "entities": vtt_entities,
         "log": ["Tactical simulation initiated."]

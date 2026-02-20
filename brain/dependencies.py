@@ -25,6 +25,7 @@ from core.rag import SimpleRAG
 from workflow.gamestate_machine import SagaGameLoop
 from core.ecs import world_ecs
 from core.world_grid import WorldGrid
+from core.definition_registry import DefinitionRegistry
 
 LORE_PATH = os.path.join(DATA_DIR, "lore.json")
 GAMESTATE_PATH = os.path.join(DATA_DIR, "gamestate.json")
@@ -43,6 +44,7 @@ class WorldDatabase:
         self.quests = QuestManager(os.path.join(DATA_DIR, "quests.json"))
         self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db"))
         self.world_grid = WorldGrid(width=100, height=100, save_path=os.path.join(DATA_DIR, "world_grid.json"))
+        self.definitions = DefinitionRegistry(DATA_DIR)
         
         # State & Logic
         self.active_combat = None
@@ -92,6 +94,9 @@ class WorldDatabase:
 
             # 4. Restore ECS (SQLite)
             world_ecs.load_all()
+            
+            # 5. Load Asset Definitions
+            self.definitions.load_all()
             
         except Exception as e:
             print(f"[ERROR] Database Hydration Failed: {e}")

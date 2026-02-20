@@ -1,0 +1,23 @@
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2214 modules transformed.
+x Build failed in 4.02s
+error during build:
+src/shaders/DynamicLight.ts (1:17): "DefaultFilterVertex" is not exported by "node_modules/pixi.js/lib/index.mjs", imported by "src/shaders/DynamicLight.ts".
+file: C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/src/shaders/DynamicLight.ts:1:17
+
+1: import { Filter, DefaultFilterVertex } from 'pixi.js';
+                    ^
+2: 
+3: // Simple ambient + point light shader
+
+    at getRollupError (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ChildScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at ClassBodyScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at ChildScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at ChildScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionScope.findVariable (file:///C:/Users/krazy/Documents/GitHub/TALEWEAVERS/TALEWEAVERS/vtt/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)

@@ -10,6 +10,7 @@ class GraphState(BaseModel):
     user_input: str
     player_data: Dict[str, Any]
     world_meta: Dict[str, Any]
+    environment_context: List[Dict[str, Any]] = []
     
     # 2. Intermediate Products
     intent: Optional[Dict[str, Any]] = None

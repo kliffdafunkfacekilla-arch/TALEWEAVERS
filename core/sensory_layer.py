@@ -74,7 +74,7 @@ class SensoryLayer:
         except:
             return "Connection Failed."
 
-    def resolve_intent(self, user_input, character_context):
+    def resolve_intent(self, user_input, character_context, environment_context=None):
         """
         Translates player natural language into a structured JSON action.
         Aligned with the PlayerIntent Pydantic model.
@@ -92,7 +92,12 @@ class SensoryLayer:
         }
         """
         
-        prompt = f"CHARACTER_STATE: {json.dumps(character_context)}\nUSER_INPUT: '{user_input}'\n{schema_hint}\nRESOLVE INTENT:"
+        env_str = ""
+        if environment_context:
+            env_str = f"ENVIRONMENT_TAGS (Interactive Objects Nearby): {json.dumps(environment_context)}\n"
+            schema_hint += "\nNote: You can target objects in the ENVIRONMENT_TAGS. If they have tags like 'breakable', 'openable', etc., your action should logically interact with them."
+        
+        prompt = f"CHARACTER_STATE: {json.dumps(character_context)}\n{env_str}USER_INPUT: '{user_input}'\n{schema_hint}\nRESOLVE INTENT:"
         
         response = self.chat(prompt, system_prompt=system_prompt)
         try:

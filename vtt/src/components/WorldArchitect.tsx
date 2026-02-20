@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapCanvas } from './MapCanvas';
+import { AssetEditor } from './AssetEditor';
 import { useArchitectStore, ArchitectEntity } from '../architectStore';
 import {
     MousePointer2,
@@ -14,7 +15,9 @@ import {
     Layers,
     Cpu,
     History,
-    RefreshCw
+    RefreshCw,
+    Sparkles,
+    CloudRain
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useGameStore } from '../store';
@@ -24,8 +27,13 @@ export function WorldArchitect() {
     const {
         selectedTool, setTool,
         selectedBrush, setBrush,
+        brushRadius, setBrushRadius,
         placedEntities, addEntity,
-        selectedEntityTemplate, setEntityTemplate
+        selectedEntityTemplate, setEntityTemplate,
+        scatterSettings, setScatterSettings,
+        viewLayer, setViewLayer,
+        climateSettings, setClimateSettings,
+        setAssetEditorOpen
     } = useArchitectStore();
 
     const [inspectorId, setInspectorId] = useState<string | null>(null);
@@ -78,7 +86,7 @@ export function WorldArchitect() {
         if (selectedTool === 'PAINT' && selectedBrush) {
             const brush = brushes.find(b => b.id === selectedBrush);
             if (brush) {
-                paintArchitectTile(x, y, brush.index, 2);
+                paintArchitectTile(x, y, brush.index, brushRadius);
             }
         }
     };
@@ -101,6 +109,31 @@ export function WorldArchitect() {
                 };
                 addEntity(newEnt);
             }
+        } else if (selectedTool === 'SCATTER' && scatterSettings.template) {
+            const template = templates.find(t => t.id === scatterSettings.template);
+            if (template) {
+                const radius = scatterSettings.radius;
+                const count = Math.floor((Math.PI * radius * radius) * scatterSettings.density);
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const r = Math.sqrt(Math.random()) * radius;
+                    const offsetX = Math.round(Math.cos(angle) * r);
+                    const offsetY = Math.round(Math.sin(angle) * r);
+                    const newEnt: ArchitectEntity = {
+                        id: `ent_sct_${Date.now()}_${i}`,
+                        name: `${template.name} (${Math.random().toString(36).substring(7)})`,
+                        type: template.type,
+                        icon: template.icon,
+                        pos: [x + offsetX, y + offsetY],
+                        properties: {
+                            population: 10,
+                            aggression: Math.random(),
+                            expansion: Math.random()
+                        }
+                    };
+                    addEntity(newEnt);
+                }
+            }
         } else if (selectedTool === 'PAINT') {
             handlePaint(x, y);
         }
@@ -119,7 +152,9 @@ export function WorldArchitect() {
                         {[
                             { id: 'SELECT', icon: MousePointer2 },
                             { id: 'PAINT', icon: Paintbrush },
-                            { id: 'ENTITY', icon: Box }
+                            { id: 'ENTITY', icon: Box },
+                            { id: 'SCATTER', icon: Sparkles },
+                            { id: 'CLIMATE', icon: CloudRain }
                         ].map(tool => (
                             <button
                                 key={tool.id}
@@ -137,8 +172,20 @@ export function WorldArchitect() {
                     </div>
 
                     {selectedTool === 'PAINT' && (
-                        <div className="space-y-4 animate-in fade-in slide-in-from-left-2 transition-all">
+                        <div className="space-y-6 animate-in fade-in slide-in-from-left-2 transition-all">
                             <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Landscape Brushes</p>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-yellow-500 uppercase">Brush Radius</label>
+                                <input
+                                    type="range" min="1" max="10"
+                                    value={brushRadius}
+                                    onChange={(e) => setBrushRadius(parseInt(e.target.value))}
+                                    className="w-full accent-yellow-500 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{brushRadius} tiles</div>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-2">
                                 {brushes.map(brush => (
                                     <button
@@ -180,6 +227,85 @@ export function WorldArchitect() {
                                         {tmpl.name}
                                     </button>
                                 ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {selectedTool === 'SCATTER' && (
+                        <div className="space-y-6 animate-in fade-in slide-in-from-left-2 transition-all">
+                            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Procedural Scatter</p>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-yellow-500 uppercase">Brush Radius</label>
+                                <input
+                                    type="range" min="1" max="10"
+                                    value={scatterSettings.radius}
+                                    onChange={(e) => setScatterSettings({ radius: parseInt(e.target.value) })}
+                                    className="w-full accent-yellow-500 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{scatterSettings.radius} tiles</div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-yellow-500 uppercase">Density</label>
+                                <input
+                                    type="range" min="0.05" max="0.8" step="0.05"
+                                    value={scatterSettings.density}
+                                    onChange={(e) => setScatterSettings({ density: parseFloat(e.target.value) })}
+                                    className="w-full accent-cyan-500 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{Math.round(scatterSettings.density * 100)}%</div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold text-yellow-500 uppercase">Subject</label>
+                                <select
+                                    className="w-full bg-white/5 border border-white/10 p-2 rounded-lg text-xs"
+                                    value={scatterSettings.template || ''}
+                                    onChange={(e) => setScatterSettings({ template: e.target.value })}
+                                >
+                                    <option value="" disabled>Select subject...</option>
+                                    {templates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                                </select>
+                            </div>
+                        </div>
+                    )}
+
+                    {selectedTool === 'CLIMATE' && (
+                        <div className="space-y-6 animate-in fade-in slide-in-from-left-2 transition-all">
+                            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Global Climate</p>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-orange-500 uppercase">Max Temperature</label>
+                                <input
+                                    type="range" min="0" max="60"
+                                    value={climateSettings.max_temp}
+                                    onChange={(e) => setClimateSettings({ max_temp: parseInt(e.target.value) })}
+                                    className="w-full accent-orange-500 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{climateSettings.max_temp}°C</div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-cyan-500 uppercase">Min Temperature</label>
+                                <input
+                                    type="range" min="-40" max="20"
+                                    value={climateSettings.min_temp}
+                                    onChange={(e) => setClimateSettings({ min_temp: parseInt(e.target.value) })}
+                                    className="w-full accent-cyan-500 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{climateSettings.min_temp}°C</div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-bold text-slate-300 uppercase">Wind Intensity</label>
+                                <input
+                                    type="range" min="0" max="1" step="0.05"
+                                    value={climateSettings.wind_intensity}
+                                    onChange={(e) => setClimateSettings({ wind_intensity: parseFloat(e.target.value) })}
+                                    className="w-full accent-slate-300 bg-white/10"
+                                />
+                                <div className="text-xs text-right opacity-50">{Math.round(climateSettings.wind_intensity * 100)}%</div>
                             </div>
                         </div>
                     )}
@@ -263,9 +389,27 @@ export function WorldArchitect() {
             {/* CENTER: VIEWPORT */}
             <div className="flex-grow relative bg-[#0f0f13] flex items-center justify-center">
                 <div className="absolute top-8 left-8 flex flex-col gap-4 z-10">
-                    <div className="flex items-center gap-3 bg-black/60 backdrop-blur-xl px-4 py-2 rounded-full border border-white/5 text-[10px] font-bold tracking-widest text-slate-400">
-                        <Layers size={14} className="text-yellow-500" />
-                        MAP: <span className="text-white uppercase font-black">Forestry Region X</span>
+                    <div className="flex flex-col gap-2 bg-black/60 backdrop-blur-xl p-2 rounded-2xl border border-white/5">
+                        <div className="flex items-center gap-3 px-2 py-1 text-[10px] font-bold tracking-widest text-slate-400">
+                            <Layers size={14} className="text-yellow-500" />
+                            MAP FOCUS: <span className="text-white uppercase font-black">{viewLayer} SECTOR</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            {(['GLOBAL', 'REGIONAL', 'LOCAL', 'TACTICAL'] as const).map(layer => (
+                                <button
+                                    key={layer}
+                                    onClick={() => setViewLayer(layer)}
+                                    className={clsx(
+                                        "px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all",
+                                        viewLayer === layer
+                                            ? "bg-yellow-500/20 text-yellow-500 border border-yellow-500/20 shadow-[0_0_15px_rgba(234,179,8,0.15)]"
+                                            : "text-slate-500 hover:text-white hover:bg-white/5"
+                                    )}
+                                >
+                                    {layer}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {/* TIMELINE SCRUBBER */}
@@ -305,12 +449,18 @@ export function WorldArchitect() {
                     />
                 </div>
 
-                <div className="absolute bottom-8 right-8 flex gap-2 z-10">
-                    <button className="p-4 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/5 text-slate-400 hover:text-white transition-all">
+                <div className="absolute top-8 right-8 flex gap-2 z-10">
+                    <button
+                        onClick={() => setAssetEditorOpen(true)}
+                        className="p-4 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl"
+                        title="Open Asset Editor"
+                    >
                         <Settings size={20} />
                     </button>
                 </div>
             </div>
+
+            <AssetEditor />
 
             {/* RIGHT: INSPECTOR */}
             {inspectorId && (

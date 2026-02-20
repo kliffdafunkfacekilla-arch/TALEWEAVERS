@@ -167,6 +167,29 @@ class Logistics:
         self.needs = {"Food": 1.0}
         self.last_tick = 0
 
+class Demographics:
+    def __init__(self, pop_total=100, growth_rate=0.02, culture="Generic", social_unrest=0.0):
+        self.pop_total = pop_total
+        self.pop_capacity = pop_total * 2
+        self.growth_rate = growth_rate
+        self.culture = culture
+        self.social_unrest = social_unrest
+        
+class Economy:
+    def __init__(self, wealth=500, primary_export="Wood", primary_import="Iron", tax_rate=0.1):
+        self.wealth = wealth
+        self.primary_export = primary_export
+        self.primary_import = primary_import
+        self.tax_rate = tax_rate
+        self.market_prices = { "Food": 1.0, "Wood": 2.0, "Iron": 5.0, "Stone": 3.0 }
+
+class Infrastructure:
+    def __init__(self, housing_level=1, defense_level=1, trade_level=1):
+        self.housing_level = housing_level
+        self.defense_level = defense_level
+        self.trade_level = trade_level
+        self.buildings = [] # List of specific building UUIDs or types
+
 # --- REGISTRY & FACTORIES ---
 class ECSRegistry:
     def __init__(self, db_path="data/world_state.db"):
