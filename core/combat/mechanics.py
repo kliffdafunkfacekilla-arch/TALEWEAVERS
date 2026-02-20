@@ -51,23 +51,45 @@ class CombatEngine:
 
         return " ".join(log), updates
 
-    def attack_target(self, attacker, target):
+    def attack_target(self, attacker, target, skill_used=None):
         """Margin-Based Resolution."""
         logs = []
-        atk_roll = random.randint(1, 20) + (attacker.get_component(Stats).get("Might") // 2)
-        def_roll = random.randint(1, 20) + (target.get_component(Stats).get("Reflexes") // 2)
+        
+        # Safe Stat Getters
+        atk_stats = attacker.get_component(Stats)
+        def_stats = target.get_component(Stats)
+        
+        atk_might = atk_stats.get("Might", 10) if atk_stats else 10
+        def_reflex = def_stats.get("Reflexes", 10) if def_stats else 10
+        
+        # Skill/Role Modifiers
+        skill_bonus = 0
+        if skill_used == "STRIKER": skill_bonus = 2
+        elif atk_stats and "Role" in atk_stats.attrs:
+            # Enemy rank/role math
+            role = atk_stats.get("Role", "")
+            if role == "BERZERKER": skill_bonus = 3
+            elif role == "SNIPER": skill_bonus = 4
+            
+        atk_roll = random.randint(1, 20) + (atk_might // 2) + skill_bonus
+        def_roll = random.randint(1, 20) + (def_reflex // 2)
         
         margin = atk_roll - def_roll
         logs.append(f"{attacker.name} vs {target.name}: {atk_roll} vs {def_roll} (Margin: {margin})")
         
-        if margin >= 10: # SMASH
-            dmg = 10; target.take_damage(dmg); logs.append(f"SMASH! {dmg} DMG dealt.")
-        elif margin > 0: # SOLID HIT
-            dmg = 5; target.take_damage(dmg); logs.append(f"Solid Hit! {dmg} DMG dealt.")
-        elif margin == 0: # CLASH
+        if margin >= 10: 
+            dmg = 15
+            if skill_used == "BREAKER": dmg += 10 # Massive shatter
+            target.take_damage(dmg)
+            logs.append(f"SMASH! {dmg} DMG dealt.")
+        elif margin > 0: 
+            dmg = 8
+            target.take_damage(dmg)
+            logs.append(f"Solid Hit! {dmg} DMG dealt.")
+        elif margin == 0: 
             logs.append("CLASH! Weapons lock!")
         else:
-            logs.append("Miss!")
+            logs.append("Miss or Deflected!")
             
         return logs
 

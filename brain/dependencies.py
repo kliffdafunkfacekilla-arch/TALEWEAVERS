@@ -16,6 +16,7 @@ if BRAIN_DIR not in sys.path: sys.path.append(BRAIN_DIR)
 from campaign_system import CampaignGenerator
 from core.sensory_layer import SensoryLayer
 from core.item_generator import ItemGenerator
+from core.enemy_generator import EnemyGenerator
 from core.quest_manager import QuestManager
 from world.sim_manager import SimulationManager
 from core.memory import MemoryManager
@@ -41,6 +42,7 @@ class WorldDatabase:
         self.campaign_gen = CampaignGenerator(save_dir=os.path.join(DATA_DIR, "Saves"))
         self.sensory = SensoryLayer(model="qwen2.5:latest")
         self.item_gen = ItemGenerator(os.path.join(DATA_DIR, "Item_Builder.json"))
+        self.enemy_gen = EnemyGenerator(os.path.join(DATA_DIR, "Enemy_Builder.json"))
         self.quests = QuestManager(os.path.join(DATA_DIR, "quests.json"))
         self.db = PersistenceLayer(os.path.join(DATA_DIR, "world_state.db"))
         self.world_grid = WorldGrid(width=100, height=100, save_path=os.path.join(DATA_DIR, "world_grid.json"))
@@ -82,15 +84,17 @@ class WorldDatabase:
             self.graph = WorldGraph(self.nodes)
             self.db.sync_nodes(self.nodes)
 
-            # 3. Initialize Game Loop
-            self.loop = SagaGameLoop(
-                self.sensory, 
-                lambda: self.active_combat,
-                self.rag, 
-                self.memory,
-                self.sim,
-                self.quests
-            )
+            if SagaGameLoop and self.sensory:
+                self.loop = SagaGameLoop(
+                    self.sensory, 
+                    lambda: self.active_combat,
+                    self.rag, 
+                    self.memory,
+                    self.sim,
+                    self.quests,
+                    self.campaign_gen,
+                    self.graph
+                )
 
             # 4. Restore ECS (SQLite)
             world_ecs.load_all()

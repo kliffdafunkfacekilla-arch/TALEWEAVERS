@@ -5,7 +5,7 @@ import clsx from 'clsx';
 const TILE_SIZE = 48; // Pixels
 
 export const MapGrid: React.FC = () => {
-    const { map, entities, selectedEntityId, moveEntity, selectEntity, addLog } = useGameStore();
+    const { map, entities, selectedEntityId, moveEntity, selectEntity, addLog, travel } = useGameStore();
 
     const handleTileClick = (x: number, y: number) => {
         // Logic: If we have an entity selected, try to move it
@@ -16,6 +16,15 @@ export const MapGrid: React.FC = () => {
             if (map.grid[y] && map.grid[y][x] === 1) {
                 addLog("Blocked! You cannot move into a wall.");
                 return;
+            }
+
+            // Travel Check (Edge of map)
+            if (x === 0 || y === 0 || x === map.width - 1 || y === map.height - 1) {
+                // If the player steps on an edge, trigger graph travel
+                if (entity.type === 'player') {
+                    travel();
+                    return;
+                }
             }
 
             // Move

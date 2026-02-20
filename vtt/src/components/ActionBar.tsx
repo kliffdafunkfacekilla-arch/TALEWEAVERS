@@ -4,27 +4,34 @@ import { Sword, Shield, Footprints, Flame, Sparkles, Wind, Eye, Hand } from 'luc
 import { clsx } from 'clsx';
 
 export function ActionBar() {
-    const { dmChat, isDMThinking, entities } = useGameStore();
+    const { castSkill, useItem, camp, selectedEntityId, addLog, isDMThinking, entities } = useGameStore();
 
     const player = entities.find(e => e.type === 'player');
 
     if (!player) return null;
 
-    // Hardcoded demo actions for now, we can link these to actual Equipped items later.
     const actions = [
-        { id: 'attack_melee', icon: Sword, label: 'Melee', prompt: 'I attack the nearest enemy with my melee weapon.', color: 'text-red-500' },
-        { id: 'attack_ranged', icon: Target, label: 'Shoot', prompt: 'I shoot the furthest enemy with my ranged weapon.', color: 'text-orange-500' },
-        { id: 'move', icon: Footprints, label: 'Move', prompt: 'I cautiously advance to a better tactical position.', color: 'text-blue-400' },
-        { id: 'defend', icon: Shield, label: 'Defend', prompt: 'I take a defensive stance, anticipating an attack.', color: 'text-slate-300' },
-        { id: 'spell_fire', icon: Flame, label: 'Fireball', prompt: 'I cast a fire spell at the largest group of enemies.', color: 'text-orange-600' },
-        { id: 'spell_heal', icon: Sparkles, label: 'Heal', prompt: 'I cast a healing spell on myself.', color: 'text-green-400' },
-        { id: 'search', icon: Eye, label: 'Search', prompt: 'I search the immediate area for traps or hidden loot.', color: 'text-yellow-400' },
-        { id: 'interact', icon: Hand, label: 'Interact', prompt: 'I attempt to interact with the object in front of me.', color: 'text-purple-400' }
+        { id: 'STRIKER', icon: Sword, label: 'Melee Strike', type: 'skill', requiresTarget: true, color: 'text-red-500' },
+        { id: 'SNIPER', icon: Target, label: 'Ranged Shot', type: 'skill', requiresTarget: true, color: 'text-orange-500' },
+        { id: 'FIREBALL', icon: Flame, label: 'Fireball', type: 'skill', requiresTarget: true, color: 'text-orange-600' },
+        { id: 'potion_hp_minor', icon: Sparkles, label: 'Minor Potion', type: 'item', color: 'text-green-400' },
+        { id: 'search', icon: Eye, label: 'Search', type: 'skill', color: 'text-yellow-400' },
+        { id: 'camp', icon: Hand, label: 'Set Camp', type: 'camp', color: 'text-purple-400' }
     ];
 
-    const handleActionClick = (prompt: string) => {
-        if (!isDMThinking) {
-            dmChat(prompt);
+    const handleActionClick = (action: any) => {
+        if (isDMThinking) return;
+
+        if (action.type === 'skill') {
+            if (action.requiresTarget && !selectedEntityId) {
+                addLog(`You must select a target to use ${action.label}!`, 'system');
+                return;
+            }
+            castSkill(action.id, selectedEntityId || undefined);
+        } else if (action.type === 'item') {
+            useItem(action.id);
+        } else if (action.type === 'camp') {
+            camp();
         }
     };
 
@@ -36,7 +43,7 @@ export function ActionBar() {
                     return (
                         <div key={action.id} className="relative group flex flex-col items-center">
                             <button
-                                onClick={() => handleActionClick(action.prompt)}
+                                onClick={() => handleActionClick(action)}
                                 disabled={isDMThinking}
                                 className={clsx(
                                     "w-12 h-12 rounded-xl flex items-center justify-center transition-all bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100",

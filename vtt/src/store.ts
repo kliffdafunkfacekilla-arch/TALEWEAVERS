@@ -46,6 +46,10 @@ interface GameState extends SessionData {
     architectGrid: any | null;
     fetchArchitectGrid: () => Promise<void>;
     paintArchitectTile: (x: number, y: number, tileIndex: number, radius?: number) => Promise<void>;
+    travel: () => Promise<void>;
+    castSkill: (skillId: string, targetId?: string) => Promise<void>;
+    useItem: (itemId: string) => Promise<void>;
+    camp: () => Promise<void>;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -83,9 +87,10 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     selectEntity: (id) => set({ selectedEntityId: id }),
 
-    fetchNewSession: async (x = 500, y = 500) => {
+    fetchNewSession: async (x?: number, y?: number) => {
         try {
-            const response = await fetch(`/api/tactical/generate?x=${x}&y=${y}`);
+            const url = (x !== undefined && y !== undefined) ? `/api/tactical/generate?x=${x}&y=${y}` : `/api/tactical/generate`;
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Failed to fetch session');
             const data = await response.json();
 
@@ -103,6 +108,67 @@ export const useGameStore = create<GameState>((set, get) => ({
             console.error("Brain Server is offline!", e);
             set((state) => ({ log: [...state.log, "[ERROR] Brain Server is offline!"] }));
         }
+    },
+
+    travel: async () => {
+        try {
+            useGameStore.getState().addLog("Traveling to adjacent region...", 'system');
+            const response = await fetch('/api/tactical/travel', { method: 'POST' });
+            if (!response.ok) throw new Error('Failed to travel');
+            const data = await response.json();
+
+            const defaultActive = data.entities?.find((e: any) => e.type === 'player')?.id || null;
+            set({ ...data, selectedEntityId: null, activePlayerId: defaultActive });
+            set((state) => ({ log: [...state.log, `[SYSTEM] Arrived at: ${data.meta.title}`] }));
+        } catch (e) {
+            console.error("Travel Failed", e);
+            useGameStore.getState().addLog("Travel action failed.", 'system');
+        }
+    },
+
+    castSkill: async (skillId: string, targetId?: string) => {
+        try {
+            const response = await fetch('/api/tactical/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action_type: 'skill', skill_id: skillId, target_id: targetId })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                set((state) => ({ log: [...state.log, data.narrative] }));
+                useGameStore.getState().syncTacticalState();
+            }
+        } catch (e) { console.error(e); }
+    },
+
+    useItem: async (itemId: string) => {
+        try {
+            const response = await fetch('/api/tactical/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action_type: 'item', item_id: itemId })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                set((state) => ({ log: [...state.log, data.narrative] }));
+                useGameStore.getState().syncTacticalState();
+            }
+        } catch (e) { console.error(e); }
+    },
+
+    camp: async () => {
+        try {
+            const response = await fetch('/api/tactical/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action_type: 'camp' })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                set((state) => ({ log: [...state.log, data.narrative] }));
+                useGameStore.getState().syncTacticalState();
+            }
+        } catch (e) { console.error(e); }
     },
 
     dmChat: async (message: string) => {
@@ -204,7 +270,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     loadPlayerDetailed: async (name: string) => {
         try {
-            const response = await fetch(`/api/char/${name}`);
+            const response = await fetch(`/api/tactical/char/${name}`);
             if (!response.ok) throw new Error('Failed to fetch player');
             const data = await response.json();
 
@@ -234,7 +300,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     fetchQuests: async () => {
         try {
-            const response = await fetch('/api/campaign/quests');
+            const response = await fetch('/api/dm/quests');
             if (!response.ok) throw new Error('Failed to fetch quests');
             const data = await response.json();
             set({ quests: data });

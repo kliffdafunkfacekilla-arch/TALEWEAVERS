@@ -2,6 +2,7 @@ from .graph_runtime import WorkflowNode, GraphState
 from typing import Dict, Any, List, Optional, Literal
 from pydantic import BaseModel, Field
 from core.systems.social_combat import social_engine
+from core.systems.interaction_engine import InteractionEngine
 
 class PlayerIntent(BaseModel):
     """Structured representation of player action from natural language."""
@@ -65,11 +66,12 @@ class SimNode(WorkflowNode):
     """
     Step 3: Execute mechanical logic (Movement, Combat, etc).
     """
-    def __init__(self, combat_provider=None, simulation_manager=None, quest_manager=None, campaign_gen=None):
+    def __init__(self, combat_provider=None, simulation_manager=None, quest_manager=None, campaign_gen=None, graph_manager=None):
         self.get_combat = combat_provider if callable(combat_provider) else (lambda: combat_provider)
         self.sim = simulation_manager
         self.quests = quest_manager
         self.campaign_gen = campaign_gen
+        self.graph = graph_manager
 
     def run(self, state: GraphState) -> GraphState:
         combat_engine = self.get_combat()
@@ -92,21 +94,55 @@ class SimNode(WorkflowNode):
         # WORLD LOGIC fallback
         elif self.sim:
             if action in ['MOVE', 'TRAVEL']:
-                params = state.intent.get('parameters', {})
-                dx, dy = params.get('dx', 0), params.get('dy', 0)
-                new_x = player_pos[0] + dx
-                new_y = player_pos[1] + dy
-                state.player_data['pos'] = (new_x, new_y)
-                result = f"You travel through the wilds towards ({new_x}, {new_y})."
+                target = state.intent.get('target')
+                if self.graph and target:
+                    # Graph Travel
+                    current_node = self.graph.find_nearest_node(player_pos[0], player_pos[1])
+                    if current_node:
+                        neighbors = self.graph.get_neighbors(current_node['id'])
+                        destination = None
+                        
+                        # Check graph neighbors
+                        for n in neighbors:
+                            if target.lower() in str(n['id']).lower() or target.lower() in current_node.get('name', '').lower():
+                                destination = n
+                                break
+                                
+                        if destination:
+                            # Actually find the node's coordinates
+                            dest_node = next((node for node in self.graph.nodes if str(node['id']) == str(destination['id'])), None)
+                            if dest_node:
+                                state.player_data['pos'] = (dest_node['x'], dest_node['y'])
+                                travel_time = int(destination.get('weight', 10) / 10)
+                                self.sim.advance_time(travel_time, state.player_data['pos'])
+                                result = f"You travel along the trade route to {dest_node.get('name', dest_node['id'])}. The journey takes {travel_time} hours."
+                            else:
+                                result = f"You cannot find the path to {target}."
+                        else:
+                            result = f"There is no known route to {target} from here."
+                    else:
+                        result = f"You are lost in the wilds, off the main graph."
+                else:
+                    # Local tactical coordinate travel fallback
+                    params = state.intent.get('parameters', {})
+                    dx, dy = params.get('dx', 0), params.get('dy', 0)
+                    new_x = player_pos[0] + dx
+                    new_y = player_pos[1] + dy
+                    state.player_data['pos'] = (new_x, new_y)
+                    result = f"You travel through the wilds towards ({new_x}, {new_y})."
                 updates.append({'type': 'MOVE_PLAYER', 'pos': [new_x, new_y]})
             elif action == 'TALK':
                 print(f"[NODE] Routing Intent '{action}' to Social Engine")
                 result, updates = social_engine.resolve_social_action(state.intent, state.player_data)
             elif action in ['INTERACT', 'USE']:
                 target = state.intent.get('target', 'nothing')
-                result = f"You interact with the {target}. The environment responds physically."
                 
-                # Check if interaction triggers a Narrative Quest Seed
+                # 1. Rules-Engine Execution (Strict Determinism)
+                mech_result, mech_updates = InteractionEngine.resolve_interaction(state.intent, state.player_data)
+                result = mech_result
+                updates.extend(mech_updates)
+                
+                # 2. Check Narrative Quest seeds (Side effect of interaction)
                 if self.campaign_gen and self.campaign_gen.current_campaign:
                     # Target might be passed by the LLM as 'poi_path_...' or just its name
                     for poi in self.campaign_gen.current_campaign.pois:

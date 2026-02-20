@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapCanvas } from './components/MapCanvas';
 import { InventoryDrawer } from './components/InventoryDrawer';
 import { QuestLog } from './components/QuestLog';
+import { QuestTracker } from './components/QuestTracker';
 import { ActionBar } from './components/ActionBar';
 import { CharacterSheet } from './components/CharacterSheet';
 import { PartyFrames } from './components/PartyFrames';
@@ -157,6 +158,9 @@ function App() {
                         </div>
 
                     </div>
+
+                {/* ACTIVE QUEST HUD */}
+                <QuestTracker />
 
                 {/* MAP SETTINGS HUD */}
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 flex bg-black/60 p-1 rounded-xl border border-white/10 z-20 backdrop-blur-xl shadow-2xl">
