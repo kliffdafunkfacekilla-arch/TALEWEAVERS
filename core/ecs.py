@@ -230,11 +230,45 @@ class ECSRegistry:
     def create_character(self, data: Dict) -> Entity:
         """Factory: registers character directly into active world state using TTS formulas."""
         e = Entity(data.get("Name", "Hero"))
+        
+        # --- EVO-TRAIT PROCESSING ---
+        evo_traits = data.get("Evolution Traits", {})
+        if evo_traits:
+            # Lazy load the matrix if needed to avoid top-level IO
+            if not getattr(self, "_evo_matrix", None):
+                matrix_path = os.path.join(os.path.dirname(__file__), "..", "data", "Evolution_Matrix.json")
+                try:
+                    with open(matrix_path, 'r', encoding='utf-8') as f:
+                        self._evo_matrix = json.load(f)
+                except Exception as ex:
+                    print(f"[ECS] Failed to load Evo Matrix: {ex}")
+                    self._evo_matrix = {"slots": {}}
+                    
+            traits_dict = data.get("Traits", {})
+            for slot, mapping in evo_traits.items():
+                if slot in self._evo_matrix["slots"]:
+                    mental = mapping.get("mental")
+                    physical = mapping.get("physical")
+                    if mental and physical:
+                        try:
+                            # Matrix structure: slots[HEAD]["matrix"][Knowledge][Might]["mechanic"]
+                            mechanic = self._evo_matrix["slots"][slot]["matrix"][mental][physical]["mechanic"]
+                            name = self._evo_matrix["slots"][slot]["matrix"][mental][physical]["name"]
+                            traits_dict[name] = mechanic
+                        except KeyError:
+                            pass
+            data["Traits"] = traits_dict
+        
         e.metadata = data # Store raw data for trait/item lookup
         e.add_component(Position(data.get("x", 0), data.get("y", 0)))
         e.add_component(Renderable(data.get("Sprite", data.get("Portrait", "sheet:5074"))))
-        e.add_component(Stats(data.get("Stats", {})))
-        e.add_component(Vitals())
+        
+        s = Stats(data.get("Stats", {}))
+        e.add_component(s)
+        
+        v = Vitals()
+        e.add_component(v)
+        
         e.add_component(Inventory())
         e.add_component(StatusEffects())
         e.add_component(FactionMember(data.get("Team", "Neutral")))

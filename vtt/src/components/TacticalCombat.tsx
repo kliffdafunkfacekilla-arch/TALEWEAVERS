@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGameStore } from '../store';
 import { MapCanvas } from './MapCanvas';
-import { Skull, Move, Sword, RefreshCw, User, ChevronRight, MessageSquare } from 'lucide-react';
+import { Skull, Move, Sword, RefreshCw, User, ChevronRight, MessageSquare, Droplets, Zap, Link, Wind, Flame, MoveUp, Database } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export function TacticalCombat() {
@@ -13,6 +13,7 @@ export function TacticalCombat() {
     const [hoverInfo, setHoverInfo] = useState<{ x: number, y: number, type: string } | null>(null);
     const [isSmashMode, setIsSmashMode] = useState(false);
     const [vEvents, setVEvents] = useState<any[]>([]);
+    const [targetingSkill, setTargetingSkill] = useState<string | null>(null);
 
     useEffect(() => {
         fetchSaves();
@@ -84,6 +85,22 @@ export function TacticalCombat() {
         }
     };
 
+    const handleExportCombat = async () => {
+        setIsLoading(true);
+        try {
+            const res = await fetch('/api/combat/export_combat', { method: 'POST' });
+            if (res.ok) {
+                const data = await res.json();
+                addLog(`Combat exported successfully: ${data.file}`, 'system');
+                setCombatState(null); // Reset view
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const player = combatState?.entities?.find((e: any) => e.tags?.includes('hero'));
 
     return (
@@ -132,7 +149,12 @@ export function TacticalCombat() {
                                 width: 10,
                                 height: 10,
                                 grid: combatState.grid?.cells || Array(10).fill(Array(10).fill(128)),
-                                biome: 'arena'
+                                biome: 'arena',
+                                hoveredEntity: hoverInfo?.entity,
+                                threat: combatState.grid?.threat,
+                                terrain: combatState.grid?.terrain,
+                                items: combatState.grid?.items,
+                                elevation: combatState.grid?.elevation
                             }}
                             entities={combatState.entities || []}
                             visualEvents={vEvents}
@@ -142,6 +164,12 @@ export function TacticalCombat() {
                                 if (isSmashMode) {
                                     handleAction('SMASH', { x, y });
                                     setIsSmashMode(false);
+                                    return;
+                                }
+
+                                if (targetingSkill) {
+                                    handleAction('SKILL', { skill_name: targetingSkill, x, y });
+                                    setTargetingSkill(null);
                                     return;
                                 }
 
@@ -163,12 +191,27 @@ export function TacticalCombat() {
                                     return;
                                 }
                                 const cell = combatState.grid?.cells?.[y]?.[x];
-                                let type = "Clear";
+                                const entity = combatState.entities?.find((e: any) => e.pos[0] === x && e.pos[1] === y);
+
+                                let type = "Clear Ground";
                                 if (cell === 896) type = "Wall (Obstructing)";
                                 if (cell === 130) type = "Bushes (Difficult)";
-                                setHoverInfo({ x, y, type });
+
+                                setHoverInfo({
+                                    x, y,
+                                    type,
+                                    entity: entity ? {
+                                        name: entity.name,
+                                        hp: entity.hp,
+                                        maxHp: entity.maxHp,
+                                        pos: entity.pos,
+                                        traits: entity.metadata?.Traits || {},
+                                        status: entity.statusEffects || []
+                                    } : null
+                                });
                             }}
-                            range={player ? Math.floor(player.sp) : 0}
+                            visualEvents={vEvents}
+                            range={targetingSkill === 'SHOCKING BURST' ? 2 : (targetingSkill === 'ACID SPIT' ? 5 : (targetingSkill === 'GRAPPLING LASH' ? 4 : (targetingSkill === 'JUMP' ? 3 : (player ? Math.floor(player.sp) : 0))))}
                             origin={player ? player.pos : [0, 0]}
                         />
                     ) : (
@@ -216,11 +259,90 @@ export function TacticalCombat() {
                             >
                                 <Sword size={16} /> Assault Strike
                             </button>
+
+                            <div className="h-full w-px bg-white/10 mx-2" />
+
+                            <button
+                                onClick={() => { setTargetingSkill(targetingSkill === 'ACID SPIT' ? null : 'ACID SPIT'); setIsSmashMode(false); }}
+                                className={clsx(
+                                    "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                    targetingSkill === 'ACID SPIT'
+                                        ? "bg-lime-600 border-lime-400 text-white shadow-[0_0_20px_rgba(132,204,22,0.4)]"
+                                        : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                )}
+                            >
+                                <Droplets size={16} /> Acid Spit (4 SP)
+                            </button>
+
+                            <button
+                                onClick={() => { setTargetingSkill(targetingSkill === 'SHOCKING BURST' ? null : 'SHOCKING BURST'); setIsSmashMode(false); }}
+                                className={clsx(
+                                    "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                    targetingSkill === 'SHOCKING BURST'
+                                        ? "bg-blue-600 border-blue-400 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+                                        : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                )}
+                            >
+                                <Zap size={16} /> Shock Burst (6 SP)
+                            </button>
+
+                            <button
+                                onClick={() => { setTargetingSkill(targetingSkill === 'GRAPPLING LASH' ? null : 'GRAPPLING LASH'); setIsSmashMode(false); }}
+                                className={clsx(
+                                    "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                    targetingSkill === 'GRAPPLING LASH'
+                                        ? "bg-indigo-600 border-indigo-400 text-white shadow-[0_0_20px_rgba(79,70,229,0.4)]"
+                                        : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                )}
+                            >
+                                <Link size={16} /> Lash (5 SP)
+                            </button>
+
+                            <button
+                                onClick={() => handleAction('SKILL', { skill_name: 'TAUNTING ROAR' })}
+                                className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/5 text-red-300 hover:bg-red-900/20 hover:border-red-900/30 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all"
+                            >
+                                <Wind size={16} /> Taunting Roar (4 SP)
+                            </button>
+
+                            <button
+                                onClick={() => { setTargetingSkill(targetingSkill === 'KINETIC SHOVE' ? null : 'KINETIC SHOVE'); setIsSmashMode(false); }}
+                                className={clsx(
+                                    "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                    targetingSkill === 'KINETIC SHOVE'
+                                        ? "bg-orange-600 border-orange-400 text-white shadow-[0_0_20px_rgba(234,88,12,0.4)]"
+                                        : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                )}
+                            >
+                                <Move size={16} /> Kinetic Shove (4 SP)
+                            </button>
+
+                            <button
+                                onClick={() => { setTargetingSkill(targetingSkill === 'JUMP' ? null : 'JUMP'); setIsSmashMode(false); }}
+                                className={clsx(
+                                    "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                    targetingSkill === 'JUMP'
+                                        ? "bg-purple-600 border-purple-400 text-white shadow-[0_0_20px_rgba(147,51,234,0.4)]"
+                                        : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                )}
+                            >
+                                <MoveUp size={16} /> Jump (3 SP)
+                            </button>
+
+                            <button
+                                onClick={() => handleAction('SKILL', { skill_name: 'PRIMAL FURY' })}
+                                className="flex items-center gap-3 px-6 py-3 bg-red-900/40 border border-red-500/50 text-red-200 hover:bg-red-800/60 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+                            >
+                                <Flame size={16} /> Primal Fury (5 SP)
+                            </button>
+
+                            <div className="h-full w-px bg-white/10 mx-2" />
+
                             <button className="flex items-center gap-3 px-6 py-3 bg-white/5 hover:bg-white/10 text-slate-300 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border border-white/5">
                                 <Move size={16} /> Dash (3 SP)
                             </button>
                             <button
-                                onClick={() => setIsSmashMode(!isSmashMode)}
+                                onClick={() => { setIsSmashMode(!isSmashMode); setTargetingSkill(null); }}
                                 className={clsx(
                                     "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
                                     isSmashMode
@@ -232,11 +354,17 @@ export function TacticalCombat() {
                             </button>
                             <button
                                 onClick={handleEndTurn}
-
                                 disabled={isLoading}
                                 className="flex items-center gap-3 px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(217,119,6,0.2)] disabled:opacity-50"
                             >
                                 <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} /> End Turn
+                            </button>
+                            <button
+                                onClick={handleExportCombat}
+                                disabled={isLoading}
+                                className="flex items-center gap-3 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(8,145,178,0.2)] disabled:opacity-50"
+                            >
+                                <Database size={16} /> Sync & End Combat
                             </button>
                         </div>
 
@@ -255,18 +383,59 @@ export function TacticalCombat() {
                 </div>
 
                 {hoverInfo && (
-                    <div className="px-6 py-4 bg-yellow-500/5 border-b border-white/5">
-                        <div className="text-[9px] font-black text-yellow-500 uppercase tracking-widest mb-1">Targeting {hoverInfo.x}, {hoverInfo.y}</div>
-                        <div className="text-xs font-bold text-white uppercase">{hoverInfo.type}</div>
+                    <div className="px-6 py-4 bg-white/5 border-b border-white/5">
+                        <div className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Targeting {hoverInfo.x}, {hoverInfo.y}</div>
+                        <div className="text-xs font-bold text-white uppercase mb-2">{hoverInfo.type}</div>
+
+                        {hoverInfo.entity && (
+                            <div className="mt-4 p-3 bg-black/40 rounded-lg border border-white/5">
+                                <div className="flex justify-between items-center mb-2">
+                                    <span className="text-[10px] font-black text-yellow-500 uppercase">{hoverInfo.entity.name}</span>
+                                    <span className="text-[10px] font-bold text-red-400">{hoverInfo.entity.hp}/{hoverInfo.entity.maxHp} HP</span>
+                                </div>
+
+                                {Object.keys(hoverInfo.entity.traits).length > 0 && (
+                                    <div className="mb-2">
+                                        <div className="text-[8px] font-black text-slate-600 uppercase mb-1">Traits</div>
+                                        <div className="flex flex-wrap gap-1">
+                                            {Object.keys(hoverInfo.entity.traits).map(t => (
+                                                <span key={t} className="px-1.5 py-0.5 bg-blue-500/10 text-blue-400 text-[8px] font-bold rounded border border-blue-500/20">{t}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {hoverInfo.entity.status.length > 0 && (
+                                    <div>
+                                        <div className="text-[8px] font-black text-slate-600 uppercase mb-1">Status</div>
+                                        <div className="flex flex-wrap gap-1">
+                                            {hoverInfo.entity.status.map((s: any) => (
+                                                <span key={s.type} className="px-1.5 py-0.5 bg-red-500/10 text-red-400 text-[8px] font-bold rounded border border-red-500/20">{s.type}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
 
-                <div className="flex-grow p-6 overflow-y-auto space-y-3 font-mono text-[10px] custom-scrollbar">
-                    {combatState?.log?.map((entry: string, i: number) => (
-                        <div key={i} className="text-slate-400 border-l border-white/10 pl-3 py-1 mb-1">
-                            {entry}
-                        </div>
-                    ))}
+                <div className="flex-grow p-6 overflow-y-auto space-y-3 font-mono text-[10px] custom-scrollbar flex flex-col-reverse">
+                    {[...(combatState?.log || [])].reverse().map((entry: string, i: number) => {
+                        let colorClass = "text-slate-400";
+                        if (entry.includes("[ADAPT]")) colorClass = "text-cyan-400 font-bold";
+                        if (entry.includes("[SYMBIO]")) colorClass = "text-pink-400 font-bold";
+                        if (entry.includes("[RESISTED]")) colorClass = "text-blue-300 italic";
+                        if (entry.includes("PRIMAL FURY") || entry.includes("ENRAGED")) colorClass = "text-red-500 font-black";
+                        if (entry.includes("ACID")) colorClass = "text-lime-400";
+                        if (entry.includes("LAVA") || entry.includes("scorch")) colorClass = "text-orange-500";
+
+                        return (
+                            <div key={i} className={clsx("border-l border-white/10 pl-3 py-1", colorClass)}>
+                                {entry}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

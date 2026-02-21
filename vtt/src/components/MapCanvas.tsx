@@ -112,8 +112,56 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
                 } else {
                     tile = new Graphics().rect(0, 0, TILE, TILE).fill(0x111111);
                 }
+
+                // Elevation adjustment
+                const height = mapData.elevation?.[`${x},${y}`] || 0;
+                if (height > 0) {
+                    tile.tint = height === 1 ? 0xcccccc : 0x999999; // Darker the higher? No, brighter or distinct.
+                    // Let's go with brighter for high ground
+                    tile.tint = height === 1 ? 0xffffff : 0xeeeeee;
+                    // Actually, let's use a scale
+                }
                 tile.x = x * TILE; tile.y = y * TILE;
                 bgLayer.addChild(tile);
+
+                if (height > 0) {
+                    const hText = new Text({ text: `${height}`, style: { fontSize: 8, fill: 0xffffff, alpha: 0.5 } });
+                    hText.x = x * TILE + 2; hText.y = y * TILE + 2;
+                    bgLayer.addChild(hText);
+                }
+
+                const hazard = mapData.terrain?.[`${x},${y}`];
+                if (hazard) {
+                    const hColor = hazard === 'ACID' ? 0x84cc16 : (hazard === 'LAVA' ? 0xef4444 : (hazard === 'GOO' ? 0xa855f7 : (hazard === 'WOODEN_BRIDGE' ? 0x78350f : 0x64748b)));
+                    const hAlpha = (hazard === 'GOO' || hazard === 'WOODEN_BRIDGE') ? 0.6 : 0.3;
+                    const overlay = new Graphics().rect(0, 0, TILE, TILE).fill({ color: hColor, alpha: hAlpha });
+
+                    if (hazard === 'STEAM_VENT') {
+                        overlay.stroke({ color: 0x1e293b, width: 2, alpha: 0.8 });
+                        // Add central 'grate' lines
+                        overlay.moveTo(TILE * 0.2, TILE * 0.2).lineTo(TILE * 0.8, TILE * 0.8).stroke({ color: 0x1e293b, width: 1 });
+                        overlay.moveTo(TILE * 0.8, TILE * 0.2).lineTo(TILE * 0.2, TILE * 0.8).stroke({ color: 0x1e293b, width: 1 });
+                    }
+
+                    if (hazard === 'WOODEN_BRIDGE') {
+                        overlay.stroke({ color: 0x451a03, width: 2, alpha: 0.8 });
+                        // Add horizontal plank lines
+                        for (let i = 1; i < 4; i++) {
+                            overlay.moveTo(2, TILE * (i / 4)).lineTo(TILE - 2, TILE * (i / 4)).stroke({ color: 0x451a03, width: 1, alpha: 0.6 });
+                        }
+                    }
+
+                    overlay.x = x * TILE; overlay.y = y * TILE;
+                    bgLayer.addChild(overlay);
+                }
+
+                const item = mapData.items?.[`${x},${y}`];
+                if (item) {
+                    const iColor = item === 'MIGHT_VIAL' ? 0xf59e0b : (item === 'SPEED_VIAL' ? 0x3b82f6 : 0xec4899);
+                    const vial = new Graphics().circle(TILE / 2, TILE / 2, 6).fill(iColor).circle(TILE / 2, TILE / 2, 10).stroke({ color: iColor, alpha: 0.3, width: 2 });
+                    vial.x = x * TILE; vial.y = y * TILE;
+                    bgLayer.addChild(vial);
+                }
             });
         });
 
@@ -122,19 +170,107 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
         entities.forEach(ent => {
             const eGroup = new Container();
             const sheetMatch = ent.icon?.match(/sheet:(\d+)/);
-            const tex = getTexture(sheetMatch ? parseInt(sheetMatch[1]) : 5074);
+            const isBoss = ent.tags?.includes('boss');
+            const scale = isBoss ? 1.2 : 0.8;
+
             if (tex) {
                 const s = new Sprite(tex);
                 s.anchor.set(0.5);
-                s.width = TILE * 0.8; s.height = TILE * 0.8;
+                s.width = TILE * scale; s.height = TILE * scale;
                 eGroup.addChild(s);
             }
+
+            if (isBoss) {
+                const bossGlow = new Graphics().circle(0, 0, TILE * 0.6).fill({ color: 0xfbbf24, alpha: 0.15 }).stroke({ color: 0xfbbf24, alpha: 0.3, width: 2 });
+                eGroup.addChildAt(bossGlow, 0);
+            }
+
             eGroup.x = ent.pos[0] * TILE + TILE / 2;
             eGroup.y = ent.pos[1] * TILE + TILE / 2;
 
             if (ent.hp !== undefined) {
                 const hpBar = new Graphics().rect(-15, 18, 30, 4).fill(0x333333).rect(-15, 18, 30 * (ent.hp / (ent.maxHp || 100)), 4).fill(0x22c55e);
                 eGroup.addChild(hpBar);
+            }
+
+            if (ent.statusEffects && ent.statusEffects.length > 0) {
+                ent.statusEffects.forEach((eff: any, i: number) => {
+                    const eColor = eff.type === 'POISON' ? 0x84cc16 : 0xf97316;
+                    const dot = new Graphics().circle(-15 + (i * 6), 25, 2).fill(eColor);
+                    eGroup.addChild(dot);
+                });
+            }
+
+            if (ent.tempBuffs && ent.tempBuffs.length > 0) {
+                const aura = new Graphics().circle(0, 0, TILE * 0.45).stroke({ color: 0xf59e0b, alpha: 0.5, width: 2 });
+                eGroup.addChildAt(aura, 0); // Put behind the sprite
+            }
+
+            // Fury Aura (ENRAGED)
+            if (ent.statusEffects && ent.statusEffects.some((s: any) => s.type === 'ENRAGED')) {
+                const furyAura = new Graphics().circle(0, 0, TILE * 0.48).stroke({ color: 0xef4444, alpha: 0.7, width: 3 });
+                eGroup.addChildAt(furyAura, 0);
+            }
+
+            // Adaptive Shell Visual (Any RESIST_ status)
+            if (ent.statusEffects && ent.statusEffects.some((s: any) => s.type.startsWith('RESIST_'))) {
+                const shell = new Graphics()
+                    .poly([
+                        0, -TILE * 0.5,
+                        TILE * 0.45, -TILE * 0.25,
+                        TILE * 0.45, TILE * 0.25,
+                        0, TILE * 0.5,
+                        -TILE * 0.45, TILE * 0.25,
+                        -TILE * 0.45, -TILE * 0.25
+                    ])
+                    .stroke({ color: 0x22d3ee, alpha: 0.6, width: 2 });
+                eGroup.addChildAt(shell, 0);
+            }
+
+            // Pheromone Aura (Pack Leader)
+            if (ent.metadata?.Traits?.["Pheromone Synthesis"]) {
+                const pheromoneAura = new Graphics().circle(0, 0, TILE * 3).fill({ color: 0x22c55e, alpha: 0.1 });
+                eGroup.addChildAt(pheromoneAura, 0);
+            }
+
+            // Pheromone Buff Indicator
+            if (ent.statusEffects && ent.statusEffects.some((s: any) => s.type === 'PHEROMONES')) {
+                const buffIndicator = new Graphics().circle(TILE * 0.35, -TILE * 0.35, TILE * 0.1).fill(0x22c55e);
+                eGroup.addChild(buffIndicator);
+            }
+
+            // Symbiotic Tether
+            if (ent.symbioticLink && ent.hp > 0) {
+                const partner = mapData.entities.find((e: any) => e.id === ent.symbioticLink);
+                if (partner && partner.hp > 0 && ent.id < partner.id) { // Draw once
+                    const tether = new Graphics()
+                        .moveTo(0, 0)
+                        .lineTo((partner.pos[0] - ent.pos[0]) * TILE, (partner.pos[1] - ent.pos[1]) * TILE)
+                        .stroke({ color: 0xec4899, width: 2, alpha: 0.6 });
+                    eGroup.addChildAt(tether, 0);
+                }
+            }
+
+            // Aggro indicator
+            const threatMap = mapData.threat || {};
+            let isAggroed = false;
+            Object.keys(threatMap).forEach(npcId => {
+                const npcThreats = threatMap[npcId];
+                if (!npcThreats || Object.keys(npcThreats).length === 0) return;
+                const highestThreatId = Object.keys(npcThreats).reduce((a, b) => npcThreats[a] > npcThreats[b] ? a : b);
+                if (highestThreatId === ent.id) isAggroed = true;
+            });
+
+            if (isAggroed) {
+                const threatRing = new Graphics().circle(0, 0, TILE * 0.52).stroke({ color: 0xef4444, alpha: 0.4, width: 3 });
+                eGroup.addChildAt(threatRing, 0);
+            }
+
+            // Cover indicator
+            const charTerrain = mapData.terrain?.[`${ent.pos[0]},${ent.pos[1]}`];
+            if (charTerrain === 'DIFFICULT') {
+                const shield = new Graphics().poly([-4, -22, 4, -22, 0, -18]).fill(0x60a5fa);
+                eGroup.addChild(shield);
             }
             entLayer.addChild(eGroup);
             entGroupRef.current.set(ent.id, eGroup);
@@ -170,6 +306,25 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
             uiLayer.addChild(rl);
         }
 
+        // Hover Overlay (Pixi-side)
+        if (mapData.hoveredEntity && isReady) {
+            const ent = mapData.hoveredEntity;
+            const style = new TextStyle({ fontSize: 10, fill: 0xffffff, fontWeight: 'bold' });
+            const tooltip = new Graphics()
+                .rect(0, 0, 80, 20)
+                .fill({ color: 0x000000, alpha: 0.8 })
+                .stroke({ color: 0xffffff, alpha: 0.2, width: 1 });
+
+            tooltip.x = ent.pos[0] * TILE + TILE;
+            tooltip.y = ent.pos[1] * TILE - 20;
+
+            const res = ent.statusEffects?.find((s: any) => s.type.startsWith('RESIST_'))?.type?.replace('RESIST_', '') || 'NONE';
+            const info = new Text({ text: `HARDENED: ${res}`, style });
+            info.x = 5; info.y = 5;
+            tooltip.addChild(info);
+            uiLayer.addChild(tooltip);
+        }
+
     }, [mapData, entities, isReady, range, origin]);
 
     // 3. Visual Effects Processor
@@ -185,7 +340,7 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
                     fontFamily: 'monospace',
                     fontSize: evt.style === 'crit' ? 18 : 14,
                     fontWeight: '900',
-                    fill: evt.style === 'crit' ? '#fbbf24' : (evt.style === 'miss' ? '#94a3b8' : '#ef4444'),
+                    fill: evt.style === 'crit' ? '#fbbf24' : (evt.style === 'miss' ? '#94a3b8' : (evt.style === 'react' ? '#22d3ee' : '#ef4444')),
                     stroke: { color: '#000000', width: 4 }
                 });
                 const t = new Text({ text: evt.text, style });
@@ -237,6 +392,76 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
                     };
                     app.ticker.add(anim);
                 }
+            } else if (evt.type === 'PROJECTILE') {
+                const dot = new Graphics().circle(0, 0, 4).fill(evt.color || '#ffffff');
+                dot.x = evt.from[0] * TILE + TILE / 2;
+                dot.y = evt.from[1] * TILE + TILE / 2;
+                world.addChild(dot);
+
+                const tx = evt.to[0] * TILE + TILE / 2;
+                const ty = evt.to[1] * TILE + TILE / 2;
+                const dx = tx - dot.x;
+                const dy = ty - dot.y;
+
+                let elapsed = 0;
+                const anim = (ticker: any) => {
+                    elapsed += ticker.deltaTime;
+                    dot.x += dx * 0.1 * ticker.deltaTime;
+                    dot.y += dy * 0.1 * ticker.deltaTime;
+                    if (Math.abs(dot.x - tx) < 5 && Math.abs(dot.y - ty) < 5) {
+                        world.removeChild(dot);
+                        app.ticker.remove(anim);
+                    }
+                };
+                app.ticker.add(anim);
+
+            } else if (evt.type === 'AOE_PULSE') {
+                const px = evt.pos[0] * TILE + TILE / 2;
+                const py = evt.pos[1] * TILE + TILE / 2;
+                const ring = new Graphics().circle(0, 0, TILE * (evt.radius || 1)).stroke({ color: evt.color || '#ffffff', width: 2, alpha: 0.5 });
+                ring.x = px;
+                ring.y = py;
+                ring.scale.set(0);
+                world.addChild(ring);
+
+                let elapsed = 0;
+                const anim = (ticker: any) => {
+                    elapsed += ticker.deltaTime;
+                    ring.scale.set(elapsed / 30);
+                    ring.alpha = 1 - (elapsed / 30);
+                    if (elapsed > 30) {
+                        world.removeChild(ring);
+                        app.ticker.remove(anim);
+                    }
+                };
+                app.ticker.add(anim);
+            } else if (evt.type === 'JUMP') {
+                const px1 = evt.from[0] * TILE + TILE / 2;
+                const py1 = evt.from[1] * TILE + TILE / 2;
+                const px2 = evt.to[0] * TILE + TILE / 2;
+                const py2 = evt.to[1] * TILE + TILE / 2;
+
+                const arc = new Graphics();
+                arc.moveTo(px1, py1);
+
+                // Control point for parabola
+                const cx = (px1 + px2) / 2;
+                const cy = Math.min(py1, py2) - TILE * 2;
+
+                arc.quadraticCurveTo(cx, cy, px2, py2);
+                arc.stroke({ color: 0xffffff, width: 2, alpha: 0.8 });
+                world.addChild(arc);
+
+                let elapsed = 0;
+                const anim = (ticker: any) => {
+                    elapsed += ticker.deltaTime;
+                    arc.alpha = 1 - (elapsed / 45);
+                    if (elapsed > 45) {
+                        world.removeChild(arc);
+                        app.ticker.remove(anim);
+                    }
+                };
+                app.ticker.add(anim);
             }
         });
     }, [visualEvents, isReady]);
