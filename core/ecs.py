@@ -230,6 +230,7 @@ class ECSRegistry:
     def create_character(self, data: Dict) -> Entity:
         """Factory: registers character directly into active world state using TTS formulas."""
         e = Entity(data.get("Name", "Hero"))
+        e.metadata = data # Store raw data for trait/item lookup
         e.add_component(Position(data.get("x", 0), data.get("y", 0)))
         e.add_component(Renderable(data.get("Sprite", data.get("Portrait", "sheet:5074"))))
         e.add_component(Stats(data.get("Stats", {})))
@@ -238,14 +239,11 @@ class ECSRegistry:
         e.add_component(StatusEffects())
         e.add_component(FactionMember(data.get("Team", "Neutral")))
         
-        # Calculate TTS Vitals
-        s = e.get_component(Stats)
-        v = e.get_component(Vitals)
-        
-        v.max_hp = int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2))
-        v.max_sp = int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2))
-        v.max_fp = int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2))
-        v.max_cmp = int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2))
+        # Calculate TTS Vitals (Default if not provided)
+        v.max_hp = data.get("HP", int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2)))
+        v.max_sp = data.get("Stamina", int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2)))
+        v.max_fp = data.get("Focus", int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2)))
+        v.max_cmp = data.get("CMP", int(s.get("Willpower") + s.get("Intuition") + (s.get("Awareness") / 2)))
         
         v.hp, v.sp, v.fp, v.cmp = v.max_hp, v.max_sp, v.max_fp, v.max_cmp
         

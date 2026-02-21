@@ -5,18 +5,21 @@ import { QuestLog } from './components/QuestLog';
 import { QuestTracker } from './components/QuestTracker';
 import { ActionBar } from './components/ActionBar';
 import { CharacterSheet } from './components/CharacterSheet';
+import { CharacterCreator } from './components/CharacterCreator';
 import { PartyFrames } from './components/PartyFrames';
 import { useGameStore } from './store';
 import { Terminal, Scroll, Skull, Shield, Sword, MessageSquare, Sparkles, LayoutGrid, Hammer, User } from 'lucide-react';
 import { clsx } from 'clsx';
 import { WorldArchitect } from './components/WorldArchitect';
+import { TacticalCombat } from './components/TacticalCombat';
 
 function App() {
-    const [viewMode, setViewMode] = useState<'PLAY' | 'ARCHITECT'>('PLAY');
+    const [viewMode, setViewMode] = useState<'PLAY' | 'ARCHITECT' | 'BATTLE_LAB'>('PLAY');
     const {
         meta, map, log, fetchNewSession, submitResult, entities, dmChat, isDMThinking,
         isInventoryOpen, setInventoryOpen, isQuestLogOpen, setQuestLogOpen,
         isCharacterSheetOpen, setCharacterSheetOpen,
+        isCharacterCreatorOpen, setCharacterCreatorOpen,
         round, turn_order, active_combatant,
         playerMapView, setPlayerMapView, architectGrid, fetchArchitectGrid,
         activePlayerId
@@ -70,8 +73,30 @@ function App() {
                     <Hammer size={22} className={clsx(viewMode === 'ARCHITECT' ? "text-white" : "text-slate-500 group-hover:text-white")} />
                 </div>
 
+                <div
+                    onClick={() => setViewMode('BATTLE_LAB')}
+                    className={clsx(
+                        "w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer border group",
+                        viewMode === 'BATTLE_LAB'
+                            ? "bg-gradient-to-br from-red-500 to-red-900 shadow-[0_0_15px_rgba(239,68,68,0.3)] border-red-400/20"
+                            : "bg-white/5 border-white/5 text-slate-500 hover:text-white"
+                    )}
+                >
+                    <LayoutGrid size={22} className={clsx(viewMode === 'BATTLE_LAB' ? "text-white" : "text-slate-500 group-hover:text-white")} />
+                </div>
+
                 <div className="w-8 h-px bg-white/5 my-2" />
 
+                <button
+                    onClick={() => setCharacterCreatorOpen(true)}
+                    title="New Character"
+                    className={clsx(
+                        "p-2.5 rounded-xl transition-all",
+                        isCharacterCreatorOpen ? "text-yellow-500 bg-white/5" : "text-green-500 hover:text-green-400 hover:bg-white/5"
+                    )}
+                >
+                    <Sparkles size={22} />
+                </button>
                 <button
                     onClick={() => setCharacterSheetOpen(true)}
                     className={clsx(
@@ -273,9 +298,11 @@ function App() {
                 <InventoryDrawer />
                 <QuestLog />
             </>
-            ) : (
+            ) : viewMode === 'ARCHITECT' ? (
             <WorldArchitect />
-                )}
+            ) : (
+            <TacticalCombat />
+            )}
         </div>
 
             {/* ADVENTURE LOG (Chronicle) - Only in PLAY mode */ }

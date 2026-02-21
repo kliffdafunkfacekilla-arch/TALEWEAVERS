@@ -1,0 +1,95 @@
+Mental System,Might (Heavy),Reflex (Quick),Endure (Tough),Finesse (Sharp),Vitality (Vibrant),Fortitude (Rigid)
+Know (Ears),Heavy Ears,Quick Ears,Tough Ears,Sharp Ears,Vibrant Ears,Rigid Ears
+Logic (Nose),Heavy Nose,Quick Nose,Tough Nose,Sharp Nose,Vibrant Nose,Rigid Nose
+Aware (Eyes),Heavy Eyes,Quick Eyes,Tough Eyes,Sharp Eyes,Vibrant Eyes,Rigid Eyes
+Intuit (Nerves),Heavy Nerves,Quick Nerves,Tough Nerves,Sharp Nerves,Vibrant Nerves,Rigid Nerves
+Charm (Emotion),Heavy Emotion,Quick Emotion,Tough Emotion,Sharp Emotion,Vibrant Emotion,Rigid Emotion
+Will (Jaws),Heavy Jaws,Quick Jaws,Tough Jaws,Sharp Jaws,Vibrant Jaws,Rigid Jaws
+
+Physical Frame,Know (Neural),Logic (Symmetric),Aware (Vigilant),Intuit (Primal),Charm (Magnetic),Will (Zealot)
+Might (Absorbing),Neural Absorbing,Symmetric Absorbing,Vigilant Absorbing,Primal Absorbing,Magnetic Absorbing,Zealot Absorbing
+Reflex (Agility),Neural Agility,Symmetric Agility,Vigilant Agility,Primal Agility,Magnetic Agility,Zealot Agility
+Endure (Cardio),Neural Cardio,Symmetric Cardio,Vigilant Cardio,Primal Cardio,Magnetic Cardio,Zealot Cardio
+Finesse (Dexterity),Neural Dexterity,Symmetric Dexterity,Vigilant Dexterity,Primal Dexterity,Magnetic Dexterity,Zealot Dexterity
+Vitality (Regenitive),Neural Regenitive,Symmetric Regenitive,Vigilant Regenitive,Primal Regenitive,Magnetic Regenitive,Zealot Regenitive
+Fortitude (Resistent),Neural Resistent,Symmetric Resistent,Vigilant Resistent,Primal Resistent,Magnetic Resistent,Zealot Resistent
+
+Mental Drive,Might (Titanic),Reflex (Blurring),Endure (Dense),Finesse (Needle),Vitality (Blooming),Fortitude (Unbending)
+Know (Manipulative),Titanic Manipulative,Blurring Manipulative,Dense Manipulative,Needle Manipulative,Blooming Manipulative,Unbending Manipulative
+Logic (Tactile),Titanic Tactile,Blurring Tactile,Dense Tactile,Needle Tactile,Blooming Tactile,Unbending Tactile
+Aware (Sensitive),Titanic Sensitive,Blurring Sensitive,Dense Sensitive,Needle Sensitive,Blooming Sensitive,Unbending Sensitive
+Intuit (Autonomous),Titanic Autonomous,Blurring Autonomous,Dense Autonomous,Needle Autonomous,Blooming Autonomous,Unbending Autonomous
+Charm (Showy),Titanic Showy,Blurring Showy,Dense Showy,Needle Showy,Blooming Showy,Unbending Showy
+Will (Steadfast),Titanic Steadfast,Blurring Steadfast,Dense Steadfast,Needle Steadfast,Blooming Steadfast,Unbending Steadfast
+
+Physical Move,Know (Link),Logic (Calculated),Aware (Sensor),Intuit (Reflexive),Charm (Radiant),Will (Persistent)
+Might (Powerful),Link Powerful,Calculated Powerful,Sensor Powerful,Reflexive Powerful,Radiant Powerful,Persistent Powerful
+Reflex (Wired),Link Wired,Calculated Wired,Sensor Wired,Reflexive Wired,Radiant Wired,Persistent Wired
+Endure (Sturdy),Link Sturdy,Calculated Sturdy,Sensor Sturdy,Reflexive Sturdy,Radiant Sturdy,Persistent Sturdy
+Finesse (Nimble),Link Nimble,Calculated Nimble,Sensor Nimble,Reflexive Nimble,Radiant Nimble,Persistent Nimble
+Vitality (Adapted),Link Adapted,Calculated Adapted,Sensor Adapted,Reflexive Adapted,Radiant Adapted,Persistent Adapted
+Fortitude (Resistant),Link Resistant,Calculated Resistant,Sensor Resistant,Reflexive Resistant,Radiant Resistant,Persistent Resistant
+
+Physical Layer,Know (Data),Logic (Pattern),Aware (Optic),Intuit (Sensitive),Charm (Allure),Will (Dread)
+Might (Hard),Data Hard,Pattern Hard,Optic Hard,Sensitive Hard,Allure Hard,Dread Hard
+Reflex (Slick),Data Slick,Pattern Slick,Optic Slick,Sensitive Slick,Allure Slick,Dread Slick
+Endure (Fur),Data Fur,Pattern Fur,Optic Fur,Sensitive Fur,Allure Fur,Dread Fur
+Finesse (Elastic),Data Elastic,Pattern Elastic,Optic Elastic,Sensitive Elastic,Allure Elastic,Dread Elastic
+Vitality (Fatty),Data Fatty,Pattern Fatty,Optic Fatty,Sensitive Fatty,Allure Fatty,Dread Fatty
+Fortitude (Adaptive),Data Adaptive,Pattern Adaptive,Optic Adaptive,Sensitive Adaptive,Allure Adaptive,Dread Adaptive
+
+Physical Stat,Know (Cerebro),Logic (Vector),Aware (Echo),Intuit (Omen),Charm (Aura),Will (Spirit)
+Might (Enviro),Cerebro Enviro,Vector Enviro,Echo Enviro,Omen Enviro,Aura Enviro,Spirit Enviro
+Reflex (Tool),Cerebro Tool,Vector Tool,Echo Tool,Omen Tool,Aura Tool,Spirit Tool
+Endure (Tank),Cerebro Tank,Vector Tank,Echo Tank,Omen Tank,Aura Tank,Spirit Tank
+Finesse (Tail),Cerebro Tail,Vector Tail,Echo Tail,Omen Tail,Aura Tail,Spirit Tail
+Vitality (Toxic),Cerebro Toxic,Vector Toxic,Echo Toxic,Omen Toxic,Aura Toxic,Spirit Toxic
+Fortitude (Horn),Cerebro Horn,Vector Horn,Echo Horn,Omen Horn,Aura Horn,Spirit Horn
+
+
+Enviro =    Enviro bonus (hot/cold resistence, gliding, swimming , climbing etc.) 
+Tool = bonus to skill  (digging claws, fight ing claws , padded paws, etc.)
+Tank = bonus to resource (hoarding pouch , camel humps, etc)
+Tail = an action with tail(trip, interact, or hold item well climbing, etc)
+Toxic = poison damage (with bite, claws , quills, etc)
+Horn/spurs/spines/quills = horn action (horn attack, or parry, cause distraction, etc.)
+
+1. HEAD (Sensory & Social)
+Ears (Know Lead): bonus to acoustic detection, hearing through walls, or sensing frequency.
+Nose (Logic Lead): bonus to tracking, identifying scents, or detecting chemical changes.
+Eyes (Aware Lead): bonus to night vision, thermal sight, or seeing through illusions.
+Nerves (Intuit Lead): bonus to reaction timing, initiative, or sensing nearby danger.
+Emotion (Charm Lead): bonus to social insight, resisting fear, or sensing intent.
+Jaws (Will Lead): bonus to bite strength, grapple hold, or crushing shells.
+
+2. BODY (Physical Frame)
+Absorbing (Might Lead): Reduces incoming blunt damage or knockback.
+Agility (Reflex Lead): Bonus to defense rolls or evasion when moving.
+Cardio (Endure Lead): Increases max Stamina pool or recovery rate.
+Dexterity (Finesse Lead): Bonus to escaping grapples or avoiding traps.
+Regenerative (Vitality Lead): Regain HP/Meat during rests or at the start of turns.
+Resistant (Fortitude Lead): Bonus to resisting poison, bleed, or environmental heat/cold.
+
+3. ARMS (Mental Drive)
+Manipulative (Know Lead): Interacting with complex items, lockpicking, or tool use.
+Tactile (Logic Lead): Precise unarmed strikes, disarming enemies, or feeling weak points.
+Sensitive (Aware Lead): Detecting hidden objects by touch or gaining advantage on aim.
+Autonomous (Intuit Lead): Reflexive parries or automatic counter-attacks.
+Showy (Charm Lead): Distracting flails, imposing presence, or causing target confusion.
+Steadfast (Will Lead): grappling or holding  or withstanding force.
+
+4. LEGS (Physical Move)
+Powerful (Might Lead): Power leaps, stomps, or pushing enemies while moving.
+Wired (Reflex Lead): Bursts of speed, extra dashes, or moving through enemies.
+Sturdy (Endure Lead): Marching through difficult terrain without slowing down.
+Nimble (Finesse Lead): Wall-running, climbing, or tight-rope balancing.
+Adapted (Vitality Lead): Swimming, gliding, or moving through water/air.
+Resistant (Fortitude Lead): Rooting in place or ignoring floor hazards (lava/spikes).
+
+5. SKIN (Physical Layer)
+Hard (Might Lead): Grants natural armor DB or reduces slashing damage.
+Slick (Reflex Lead): Makes you harder to grapple or causes ranged attacks to slip off.
+Fur (Endure Lead): Protection against cold or storage of static energy.
+Elastic (Finesse Lead): Bonus to stealth or squeezed movement through gaps.
+Fatty (Vitality Lead): Storage of energy (Focus/Stamina) or protection from hunger.
+Adaptive (Fortitude Lead): Changes color/texture to match the environment (Camo).

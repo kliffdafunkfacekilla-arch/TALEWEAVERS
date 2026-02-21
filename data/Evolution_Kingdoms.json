@@ -1,0 +1,362 @@
+{
+    "AQUATIC": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Sonar Pits",
+                "Logic": "Olfactory Slits",
+                "Awareness": "Pressure Eyes",
+                "Intuition": "Lateral Lines",
+                "Charm": "Lures",
+                "Willpower": "Crushing Maws"
+            },
+            "BODY": {
+                "Might": "Abyssal Frame",
+                "Reflexes": "Current-Warp",
+                "Endurance": "Benthic Pacing",
+                "Finesse": "Eel-Twist",
+                "Vitality": "Spawning Bloom",
+                "Fortitude": "Deep-Scale"
+            },
+            "ARMS": {
+                "Knowledge": "Manipulators",
+                "Logic": "Snappers",
+                "Awareness": "Sensory Fins",
+                "Intuition": "Reflex Grips",
+                "Charm": "Flash-Fins",
+                "Willpower": "Culling Hooks"
+            },
+            "LEGS": {
+                "Might": "Jet-Kick",
+                "Reflexes": "Fin-Flutter",
+                "Endurance": "Tidal Stride",
+                "Finesse": "Reef-Glide",
+                "Vitality": "Spawning Kick",
+                "Fortitude": "Floor-Anchor"
+            },
+            "SKIN": {
+                "Might": "Plated Skin",
+                "Reflexes": "Mucus-Coat",
+                "Endurance": "Blubber-Layer",
+                "Finesse": "Elastic Membrane",
+                "Vitality": "Fatty Sheath",
+                "Fortitude": "Chroma-Camo"
+            },
+            "SPECIAL": {
+                "Might": "Hydro-Jet",
+                "Reflexes": "Tool-Claw",
+                "Endurance": "Storage-Sac",
+                "Finesse": "Propel-Tail",
+                "Vitality": "Venom-Gland",
+                "Fortitude": "Spurs"
+            }
+        },
+        "adjectives": {
+            "Might": "Heavy",
+            "Reflexes": "Quick",
+            "Endurance": "Tough",
+            "Finesse": "Sharp",
+            "Vitality": "Vibrant",
+            "Fortitude": "Rigid"
+        }
+    },
+    "INSECT": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Antennae",
+                "Logic": "Palps",
+                "Awareness": "Compound Eyes",
+                "Intuition": "Vibration Hairs",
+                "Charm": "Pheromone Nodes",
+                "Willpower": "Mandibles"
+            },
+            "BODY": {
+                "Might": "Exoskeleton",
+                "Reflexes": "Wired Twitch",
+                "Endurance": "Hive-Heart",
+                "Finesse": "Segmented Slip",
+                "Vitality": "Larval Regen",
+                "Fortitude": "Hard Chitin"
+            },
+            "ARMS": {
+                "Knowledge": "Graspers",
+                "Logic": "Strikers",
+                "Awareness": "Sensory Bristles",
+                "Intuition": "Auto-Scythes",
+                "Charm": "Display Wings",
+                "Willpower": "Vice-Claws"
+            },
+            "LEGS": {
+                "Might": "Spring-Jump",
+                "Reflexes": "Rapid-Scuttle",
+                "Endurance": "Foraging Stride",
+                "Finesse": "Wall-Walkers",
+                "Vitality": "Moulting Step",
+                "Fortitude": "Hooked Hold"
+            },
+            "SKIN": {
+                "Might": "Sclerite Plates",
+                "Reflexes": "Chitin Slough",
+                "Endurance": "Fibrous Hairs",
+                "Finesse": "Membranous",
+                "Vitality": "Hemolymph",
+                "Fortitude": "Mimicry Shell"
+            },
+            "SPECIAL": {
+                "Might": "Jet-Vent",
+                "Reflexes": "Digging-Tool",
+                "Endurance": "Abdomen-Tank",
+                "Finesse": "Stinger-Tail",
+                "Vitality": "Acid-Spray",
+                "Fortitude": "Spikes"
+            }
+        },
+        "adjectives": {
+            "Might": "Titanic",
+            "Reflexes": "Blurring",
+            "Endurance": "Dense",
+            "Finesse": "Needle",
+            "Vitality": "Blooming",
+            "Fortitude": "Unbending"
+        }
+    },
+    "PLANT": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Phyto-Sensors",
+                "Logic": "Aroma Vents",
+                "Awareness": "Light-Nodes",
+                "Intuition": "Root-Nerves",
+                "Charm": "Petal-Display",
+                "Willpower": "Seed-Pods"
+            },
+            "BODY": {
+                "Might": "Stem-Core",
+                "Reflexes": "Vine-Snap",
+                "Endurance": "Sap-Flow",
+                "Finesse": "Tender-Bend",
+                "Vitality": "Photosynth",
+                "Fortitude": "Bark-Layer"
+            },
+            "ARMS": {
+                "Knowledge": "Tendrils",
+                "Logic": "Vines",
+                "Awareness": "Leaf-Ends",
+                "Intuition": "Spore-Grips",
+                "Charm": "Pollinator-Bloom",
+                "Willpower": "Thorny Hold"
+            },
+            "LEGS": {
+                "Might": "Root-Slam",
+                "Reflexes": "Vining-Step",
+                "Endurance": "Drought-March",
+                "Finesse": "Leaf-Glide",
+                "Vitality": "Growth-Step",
+                "Fortitude": "Entrench"
+            },
+            "SKIN": {
+                "Might": "Iron-Bark",
+                "Reflexes": "Waxy-Leaf",
+                "Endurance": "Mossy-Layer",
+                "Finesse": "Willowy",
+                "Vitality": "Resin-Coat",
+                "Fortitude": "Camo-Leaves"
+            },
+            "SPECIAL": {
+                "Might": "Solar-Vent",
+                "Reflexes": "Seed-Dispense",
+                "Endurance": "Nectar-Tank",
+                "Finesse": "Whiplash-Vine",
+                "Vitality": "Poison-Sap",
+                "Fortitude": "Thorns"
+            }
+        },
+        "adjectives": {
+            "Might": "Ancient",
+            "Reflexes": "Springing",
+            "Endurance": "Evergreen",
+            "Finesse": "Supple",
+            "Vitality": "Lush",
+            "Fortitude": "Petrified"
+        }
+    },
+    "AVIAN": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Nav-Crystals",
+                "Logic": "Beak Vents",
+                "Awareness": "Eagle Vision",
+                "Intuition": "Air-Pressure",
+                "Charm": "Pluamge",
+                "Willpower": "Talons"
+            },
+            "BODY": {
+                "Might": "Wing-Frame",
+                "Reflexes": "Dive-Snap",
+                "Endurance": "High-Alt",
+                "Finesse": "Hollow-Bone",
+                "Vitality": "Nesting-Warmth",
+                "Fortitude": "Feather-Coat"
+            },
+            "ARMS": {
+                "Knowledge": "Pinions",
+                "Logic": "Primary-Feathers",
+                "Awareness": "Wind-Sensors",
+                "Intuition": "Sky-Counter",
+                "Charm": "Song-Wings",
+                "Willpower": "Eagle-Grip"
+            },
+            "LEGS": {
+                "Might": "Swooping-Kicking",
+                "Reflexes": "Quick-Perch",
+                "Endurance": "Migration-March",
+                "Finesse": "Talons-Climb",
+                "Vitality": "Flight-Step",
+                "Fortitude": "Landing-Brace"
+            },
+            "SKIN": {
+                "Might": "Down-Layer",
+                "Reflexes": "Smooth-Plumes",
+                "Endurance": "Insulated",
+                "Finesse": "Aerodynamic",
+                "Vitality": "Oil-Preened",
+                "Fortitude": "Defense-Fluff"
+            },
+            "SPECIAL": {
+                "Might": "Aero-Jet",
+                "Reflexes": "Beak-Tool",
+                "Endurance": "Crop-Tank",
+                "Finesse": "Rudder-Tail",
+                "Vitality": "Screech-Toxic",
+                "Fortitude": "Crest"
+            }
+        },
+        "adjectives": {
+            "Might": "Hurricane",
+            "Reflexes": "Sky-Fast",
+            "Endurance": "High-Fly",
+            "Finesse": "Air-Sharp",
+            "Vitality": "Sun-Warm",
+            "Fortitude": "Mountain-Cold"
+        }
+    },
+    "MAMMAL": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Primal Ears",
+                "Logic": "Snout",
+                "Awareness": "Night-Sight",
+                "Intuition": "Whiskers",
+                "Charm": "Posturing",
+                "Willpower": "Fang-Jaws"
+            },
+            "BODY": {
+                "Might": "Muscle-Mass",
+                "Reflexes": "Cat-Reflex",
+                "Endurance": "Pack-Stamina",
+                "Finesse": "Lithe-Frame",
+                "Vitality": "Warm-Blood",
+                "Fortitude": "Thick-Hide"
+            },
+            "ARMS": {
+                "Knowledge": "Paws",
+                "Logic": "Pad-Strike",
+                "Awareness": "Grip-Hairs",
+                "Intuition": "Swipe-Parry",
+                "Charm": "Mane-Display",
+                "Willpower": "Bear-Hug"
+            },
+            "LEGS": {
+                "Might": "Pound",
+                "Reflexes": "Sprint",
+                "Endurance": "Lope",
+                "Finesse": "Scale",
+                "Vitality": "Heal-Step",
+                "Fortitude": "Stand"
+            },
+            "SKIN": {
+                "Might": "Fur",
+                "Reflexes": "Oily",
+                "Endurance": "Thick",
+                "Finesse": "Soft",
+                "Vitality": "Padded",
+                "Fortitude": "Shaggy"
+            },
+            "SPECIAL": {
+                "Might": "Musk",
+                "Reflexes": "Claw-Tool",
+                "Endurance": "Fat-Store",
+                "Finesse": "Prehensile-Tail",
+                "Vitality": "Rabid",
+                "Fortitude": "Antler"
+            }
+        },
+        "adjectives": {
+            "Might": "Brawny",
+            "Reflexes": "Feral",
+            "Endurance": "Wild",
+            "Finesse": "Sleek",
+            "Vitality": "Primal",
+            "Fortitude": "Beastly"
+        }
+    },
+    "REPTILE": {
+        "nouns": {
+            "HEAD": {
+                "Knowledge": "Heat-Sensors",
+                "Logic": "Flick-Tongue",
+                "Awareness": "Slit-Eyes",
+                "Intuition": "Scale-Vibes",
+                "Charm": "Frill-Display",
+                "Willpower": "Death-Grip"
+            },
+            "BODY": {
+                "Might": "Saurian-Core",
+                "Reflexes": "Cold-Snap",
+                "Endurance": "Sun-Bask",
+                "Finesse": "Serpent-Slither",
+                "Vitality": "Limb-Regen",
+                "Fortitude": "Scale-Plate"
+            },
+            "ARMS": {
+                "Knowledge": "Claws",
+                "Logic": "Digit-Feel",
+                "Awareness": "Thermal-Grip",
+                "Intuition": "Snap-Strike",
+                "Charm": "Crest-Wave",
+                "Willpower": "Crusher-Wrap"
+            },
+            "LEGS": {
+                "Might": "Tail-Sweep",
+                "Reflexes": "Scramble",
+                "Endurance": "Endless-Trek",
+                "Finesse": "Climb-Hook",
+                "Vitality": "Desert-Step",
+                "Fortitude": "Stone-Still"
+            },
+            "SKIN": {
+                "Might": "Dinosaur-Hide",
+                "Reflexes": "Dry-Scale",
+                "Endurance": "Insulated-Plate",
+                "Finesse": "Camouflage",
+                "Vitality": "Shed-Skin",
+                "Fortitude": "Spiny-Plate"
+            },
+            "SPECIAL": {
+                "Might": "Dragon-Breath",
+                "Reflexes": "Venom-Fang",
+                "Endurance": "Water-Store",
+                "Finesse": "Whip-Tail",
+                "Vitality": "Constrict",
+                "Fortitude": "Bony-Spur"
+            }
+        },
+        "adjectives": {
+            "Might": "Ancient",
+            "Reflexes": "Snake-Fast",
+            "Endurance": "Sun-Harded",
+            "Finesse": "Venom-Sharp",
+            "Vitality": "Cold-Blood",
+            "Fortitude": "Obsidian"
+        }
+    }
+}

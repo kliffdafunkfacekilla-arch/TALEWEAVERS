@@ -59,17 +59,22 @@ class TacticalStateResponse(BaseModel):
 # --- ENDPOINTS ---
 
 @router.get("/generate")
-def generate_tactical_map(x: Optional[int] = None, y: Optional[int] = None, poi_id: Optional[str] = None, db=Depends(get_db)):
+def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] = None, player_name: Optional[str] = None, db=Depends(get_db)):
     from combat.mechanics import CombatEngine
     width, height = 20, 20
     
     # 1. Resolve World Location
-    if x is None or y is None:
-        if db.campaign_gen and db.campaign_gen.current_campaign and db.campaign_gen.current_campaign.plot_points:
-            x = db.campaign_gen.current_campaign.plot_points[0].x
-            y = db.campaign_gen.current_campaign.plot_points[0].y
-        else:
-            x, y = 500, 500
+    x, y = 500, 500
+    if node_id and getattr(db, 'graph', None):
+        node = next((n for n in db.graph.nodes if str(n['id']) == str(node_id)), None)
+        if node:
+            x, y = node['x'], node['y']
+            db.meta['current_node'] = node_id
+    elif db.campaign_gen and db.campaign_gen.current_campaign and db.campaign_gen.current_campaign.plot_points:
+        # Default to first plot point node
+        pp = db.campaign_gen.current_campaign.plot_points[0]
+        x, y = pp.x, pp.y
+        db.meta['current_node'] = pp.id
             
     grid = [[896 if (gx == 0 or gx == width-1 or gy == 0 or gy == height-1 or random.random() < 0.1) else 128 for gx in range(width)] for gy in range(height)]
     
@@ -91,15 +96,23 @@ def generate_tactical_map(x: Optional[int] = None, y: Optional[int] = None, poi_
         })
 
     # Restore Player
-    burt_path = os.path.join(DATA_DIR, "Saves", "Burt.json")
-    if os.path.exists(burt_path):
-        with open(burt_path, 'r', encoding='utf-8') as f:
-            player_c = world_ecs.create_character(json.load(f))
-            player_c.name = "player_burt"
+    player_file = f"{player_name.replace(' ', '_')}.json" if player_name else "Burt.json"
+    player_path = os.path.join(DATA_DIR, "Saves", player_file)
+    
+    if not os.path.exists(player_path):
+        # Fallback to Burt if custom load fails
+        player_path = os.path.join(DATA_DIR, "Saves", "Burt.json")
+        
+    if os.path.exists(player_path):
+        with open(player_path, 'r', encoding='utf-8') as f:
+            player_data = json.load(f)
+            player_c = world_ecs.create_character(player_data)
+            p_name = player_data.get("Name", "Hero")
+            player_c.name = f"player_{p_name.lower().replace(' ', '_')}"
             player_c.x, player_c.y = 5, 5
             db.active_combat.combatants.append(player_c)
             vtt_entities.append({
-                "id": player_c.id, "name": "Burt", "type": 'player',
+                "id": player_c.id, "name": p_name, "type": 'player',
                 "pos": [5, 5], "hp": player_c.hp, "maxHp": player_c.max_hp,
                 "icon": player_c.get_component(Renderable).icon if player_c.has_component(Renderable) else "sheet:115",
                 "tags": ["hero"]
@@ -132,6 +145,22 @@ def generate_tactical_map(x: Optional[int] = None, y: Optional[int] = None, poi_
                         enemy["tags"].extend(["poi", "interactable"])
                         enemy["description"] = poi.description
                         vtt_entities.append(enemy)
+                        
+                        # Build True ECS representation for mechanics engine
+                        from core.ecs import Entity, Position, Vitals, Stats, Renderable
+                        enemy_e = Entity(uid=enemy["id"])
+                        enemy_e.name = enemy["name"]
+                        enemy_e.tags = set(enemy["tags"])
+                        enemy_e.add_component(Position(lx, ly))
+                        enemy_e.add_component(Vitals(hp=enemy["hp"], max_hp=enemy["maxHp"], sp=enemy["sp"], max_sp=enemy["maxSp"], fp=0, max_fp=0, cmp=50, max_cmp=50))
+                        
+                        # Store abstract stats dict in attributes
+                        sys_stats = Stats()
+                        sys_stats.attrs = enemy["stats"]
+                        enemy_e.add_component(sys_stats)
+                        enemy_e.add_component(Renderable(icon=enemy["icon"]))
+                        
+                        db.active_combat.combatants.append(enemy_e)
                         continue
                     else:
                         icon, poi_type, tags = "sheet:5076", "enemy", ["poi", "interactable", "hostile"]
@@ -194,27 +223,29 @@ def process_tactical_feedback(req: TacticalFeedback, db=Depends(get_db)):
 @router.post("/travel")
 def travel_to_node(db=Depends(get_db)):
     """Handles edge-of-map map transitioning. Advances time and moves to next POI."""
-    new_x, new_y = 500, 500
+    new_node_id = None
     
-    # 1. Advanced Time
-    if getattr(db, 'sim', None):
-        db.sim.advance_time(8, (new_x, new_y))
-        
-    # 2. Pick next target
+    # Pick next target from campaign timeline
     if db.campaign_gen and db.campaign_gen.current_campaign:
         # Find first undiscovered POI
         for poi in db.campaign_gen.current_campaign.pois:
-            if not poi.discovered:
-                new_x, new_y = poi.x, poi.y
+            if not getattr(poi, 'discovered', False):
+                new_node_id = poi.id
+                poi.discovered = True
+                db.meta['world_pos'] = [poi.x, poi.y]
                 break
         else:
             # Or fall back to next plot point
             if len(db.campaign_gen.current_campaign.plot_points) > 1:
-                new_x = db.campaign_gen.current_campaign.plot_points[1].x
-                new_y = db.campaign_gen.current_campaign.plot_points[1].y
+                new_node_id = db.campaign_gen.current_campaign.plot_points[1].id
+                db.meta['world_pos'] = [db.campaign_gen.current_campaign.plot_points[1].x, db.campaign_gen.current_campaign.plot_points[1].y]
+
+    # Advance time natively
+    if getattr(db, 'sim', None) and 'world_pos' in db.meta:
+        db.sim.advance_time(8, db.meta['world_pos'])
                 
-    # 3. Generate New Map
-    return generate_tactical_map(x=new_x, y=new_y, db=db)
+    # 3. Generate New Map via Node ID abstraction
+    return generate_tactical_map(node_id=new_node_id, db=db)
 
 @router.post("/action")
 def execute_system_action(req: CombatActionRequest, db=Depends(get_db)):

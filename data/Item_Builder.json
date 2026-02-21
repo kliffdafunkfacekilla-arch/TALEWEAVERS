@@ -9,31 +9,36 @@
                         "dmg": "1d6",
                         "prop": "Finesse",
                         "cost": "1 SP",
-                        "slots": 1
+                        "slots": 1,
+                        "triad_group": "ASSAULT"
                     },
                     "Heavy Cleaver": {
                         "dmg": "1d10",
                         "prop": "Heavy",
                         "cost": "3 SP",
-                        "slots": 2
+                        "slots": 2,
+                        "triad_group": "ASSAULT"
                     },
                     "Polearm": {
                         "dmg": "1d8",
                         "prop": "Reach",
                         "cost": "2 SP",
-                        "slots": 1
+                        "slots": 1,
+                        "triad_group": "ASSAULT"
                     },
                     "Bow": {
                         "dmg": "1d8",
                         "prop": "Ranged (100ft)",
                         "cost": "2 SP",
-                        "slots": 1
+                        "slots": 1,
+                        "triad_group": "BALLISTICS"
                     },
                     "Catalyst": {
                         "dmg": "1d4",
                         "prop": "Magic (Focus)",
                         "cost": "2 FP",
-                        "slots": 3
+                        "slots": 3,
+                        "triad_group": "BALLISTICS"
                     }
                 }
             },
@@ -43,27 +48,32 @@
                     "Robes": {
                         "prot": 0,
                         "cost": "0 SP",
-                        "trait": "Comfort (Regain FP faster)"
+                        "trait": "Comfort (Regain FP faster)",
+                        "triad_group": "RESOLVE"
                     },
                     "Light Leather": {
                         "prot": 1,
                         "cost": "1 SP",
-                        "trait": "Silent (No Stealth Penalty)"
+                        "trait": "Silent (No Stealth Penalty)",
+                        "triad_group": "RESOLVE"
                     },
                     "Chainmail": {
                         "prot": 2,
                         "cost": "3 SP",
-                        "trait": "Reliable (Cannot be broken)"
+                        "trait": "Reliable (Cannot be broken)",
+                        "triad_group": "FORTIFY"
                     },
                     "Plate": {
                         "prot": 4,
                         "cost": "5 SP",
-                        "trait": "Bulky (Disadvantage Stealth)"
+                        "trait": "Bulky (Disadvantage Stealth)",
+                        "triad_group": "FORTIFY"
                     },
                     "Shield": {
                         "prot": 2,
                         "cost": "2 SP",
-                        "trait": "Block (Active Defense)"
+                        "trait": "Block (Active Defense)",
+                        "triad_group": "FORTIFY"
                     }
                 }
             },

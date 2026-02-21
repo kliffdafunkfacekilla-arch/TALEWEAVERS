@@ -85,8 +85,10 @@ class SensoryLayer:
         schema_hint = """
         Output MUST be valid JSON matching this schema:
         {
-          "action": "ATTACK" | "MOVE" | "SEARCH" | "TALK" | "INTERACT" | "USE" | "REST",
-          "target": string | null,
+          "action": "ATTACK" | "MOVE" | "SEARCH" | "TALK" | "INTERACT" | "USE" | "REST" | "SKILL" | "ITEM",
+          "target": string | null (The target entity ID or name),
+          "item_id": string | null (If ITEM, the item ID, e.g. 'potion_hp_minor'),
+          "skill_id": string | null (If SKILL, the skill ID, e.g. 'FIREBALL'),
           "parameters": { "dx": int, "dy": int, ... },
           "narrative_flavor": "Short description of the action"
         }

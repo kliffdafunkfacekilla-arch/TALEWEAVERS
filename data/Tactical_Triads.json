@@ -1,0 +1,318 @@
+{
+    "version": "1.0",
+    "description": "The Software: Learned Skills representing combat training and situational processing.",
+    "triads": {
+        "ASSAULT": {
+            "category": "Physical Offense",
+            "disciplines": [
+                {
+                    "name": "Aggressive",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ]
+                },
+                {
+                    "name": "Calculated",
+                    "stats": [
+                        "Reflexes",
+                        "Logic"
+                    ]
+                },
+                {
+                    "name": "Patient",
+                    "stats": [
+                        "Finesse",
+                        "Intuition"
+                    ]
+                }
+            ]
+        },
+        "COERCION": {
+            "category": "Mental Offense",
+            "disciplines": [
+                {
+                    "name": "Intimidating",
+                    "stats": [
+                        "Vitality",
+                        "Charm"
+                    ]
+                },
+                {
+                    "name": "Deception",
+                    "stats": [
+                        "Endurance",
+                        "Willpower"
+                    ]
+                },
+                {
+                    "name": "Relentless",
+                    "stats": [
+                        "Fortitude",
+                        "Awareness"
+                    ]
+                }
+            ]
+        },
+        "BALLISTICS": {
+            "category": "Physical Ranged",
+            "disciplines": [
+                {
+                    "name": "Skirmish",
+                    "stats": [
+                        "Vitality",
+                        "Intuition"
+                    ]
+                },
+                {
+                    "name": "Precise",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ]
+                },
+                {
+                    "name": "Thrown/Tossed",
+                    "stats": [
+                        "Endurance",
+                        "Charm"
+                    ]
+                }
+            ]
+        },
+        "SUPPRESSION": {
+            "category": "Mental Ranged",
+            "disciplines": [
+                {
+                    "name": "Predict",
+                    "stats": [
+                        "Reflexes",
+                        "Knowledge"
+                    ]
+                },
+                {
+                    "name": "Impose",
+                    "stats": [
+                        "Finesse",
+                        "Logic"
+                    ]
+                },
+                {
+                    "name": "Imply",
+                    "stats": [
+                        "Might",
+                        "Awareness"
+                    ]
+                }
+            ]
+        },
+        "FORTIFY": {
+            "category": "Physical Defense",
+            "disciplines": [
+                {
+                    "name": "Rooted",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ]
+                },
+                {
+                    "name": "Fluid",
+                    "stats": [
+                        "Fortitude",
+                        "Knowledge"
+                    ]
+                },
+                {
+                    "name": "Dueling",
+                    "stats": [
+                        "Might",
+                        "Intuition"
+                    ]
+                }
+            ]
+        },
+        "RESOLVE": {
+            "category": "Mental Defense",
+            "disciplines": [
+                {
+                    "name": "Confidence",
+                    "stats": [
+                        "Vitality",
+                        "Willpower"
+                    ]
+                },
+                {
+                    "name": "Reasoning",
+                    "stats": [
+                        "Reflexes",
+                        "Awareness"
+                    ]
+                },
+                {
+                    "name": "Cavalier",
+                    "stats": [
+                        "Finesse",
+                        "Charm"
+                    ]
+                }
+            ]
+        },
+        "OPERATIONS": {
+            "category": "Physical Strategy",
+            "disciplines": [
+                {
+                    "name": "Alter",
+                    "stats": [
+                        "Might",
+                        "Logic"
+                    ]
+                },
+                {
+                    "name": "Utilize",
+                    "stats": [
+                        "Fortitude",
+                        "Willpower"
+                    ]
+                },
+                {
+                    "name": "Introduce",
+                    "stats": [
+                        "Endurance",
+                        "Awareness"
+                    ]
+                }
+            ]
+        },
+        "TACTICS": {
+            "category": "Mental Strategy",
+            "disciplines": [
+                {
+                    "name": "Command",
+                    "stats": [
+                        "Fortitude",
+                        "Charm"
+                    ]
+                },
+                {
+                    "name": "Exploit",
+                    "stats": [
+                        "Finesse",
+                        "Intuition"
+                    ]
+                },
+                {
+                    "name": "Tactics",
+                    "stats": [
+                        "Might",
+                        "Knowledge"
+                    ]
+                }
+            ]
+        },
+        "STABILIZE": {
+            "category": "Physical Health",
+            "disciplines": [
+                {
+                    "name": "First Aid",
+                    "stats": [
+                        "Endurance",
+                        "Charm"
+                    ]
+                },
+                {
+                    "name": "Medicine",
+                    "stats": [
+                        "Vitality",
+                        "Knowledge"
+                    ]
+                },
+                {
+                    "name": "Surgery",
+                    "stats": [
+                        "Fortitude",
+                        "Intuition"
+                    ]
+                }
+            ]
+        },
+        "RALLY": {
+            "category": "Mental Health",
+            "disciplines": [
+                {
+                    "name": "Self-Awareness",
+                    "stats": [
+                        "Intuition",
+                        "Vitality"
+                    ]
+                },
+                {
+                    "name": "Detached",
+                    "stats": [
+                        "Willpower",
+                        "Logic"
+                    ]
+                },
+                {
+                    "name": "Mindfulness",
+                    "stats": [
+                        "Awareness",
+                        "Fortitude"
+                    ]
+                }
+            ]
+        },
+        "MOBILITY": {
+            "category": "Physical Motion",
+            "disciplines": [
+                {
+                    "name": "Charge",
+                    "stats": [
+                        "Reflexes",
+                        "Willpower"
+                    ]
+                },
+                {
+                    "name": "Flanking",
+                    "stats": [
+                        "Vitality",
+                        "Awareness"
+                    ]
+                },
+                {
+                    "name": "Speed",
+                    "stats": [
+                        "Endurance",
+                        "Logic"
+                    ]
+                }
+            ]
+        },
+        "BRAVERY": {
+            "category": "Mental Vibe",
+            "disciplines": [
+                {
+                    "name": "Commitment",
+                    "stats": [
+                        "Finesse",
+                        "Intuition"
+                    ]
+                },
+                {
+                    "name": "Determined",
+                    "stats": [
+                        "Might",
+                        "Awareness"
+                    ]
+                },
+                {
+                    "name": "Outsmart",
+                    "stats": [
+                        "Reflexes",
+                        "Finesse"
+                    ]
+                }
+            ]
+        }
+    }
+}

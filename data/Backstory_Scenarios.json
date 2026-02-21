@@ -1,0 +1,108 @@
+{
+    "stages": [
+        {
+            "id": "violence",
+            "label": "The First Conflict (Violence)",
+            "prompt": "You were barely an adult when your first true trial of strength occurred. How did you strike back at the world?",
+            "groups": [
+                "ASSAULT",
+                "BALLISTICS"
+            ],
+            "introspection": "My hands were stained but my heart was set."
+        },
+        {
+            "id": "control",
+            "label": "The Social Crucible (Control)",
+            "prompt": "Words and presence are often sharper than iron. When you were challenged by authority, how did you dominate the situation?",
+            "groups": [
+                "COERCION",
+                "SUPPRESSION"
+            ],
+            "introspection": "I realized then that the mind is the greatest weapon."
+        },
+        {
+            "id": "protection",
+            "label": "Standing Fast (Protection)",
+            "prompt": "The world tried to break you, but you refused to move. During the siege of your youth, how did you hold the line?",
+            "groups": [
+                "FORTIFY"
+            ],
+            "introspection": "I became the mountain that the storm could not move."
+        },
+        {
+            "id": "willpower",
+            "label": "The Internal War (Willpower)",
+            "prompt": "Doubt is a poison. When your spirit was at its lowest ebb, how did you find your resolve?",
+            "groups": [
+                "RESOLVE"
+            ],
+            "introspection": "The fire within burned brighter than the ice without."
+        },
+        {
+            "id": "wandering_1",
+            "label": "The Long Road (Wandering I)",
+            "prompt": "You left your home behind to seek something greater. What lesson did you learn on the frontier?",
+            "groups": [
+                "OPERATIONS",
+                "TACTICS",
+                "STABILIZE",
+                "RALLY",
+                "MOBILITY",
+                "BRAVERY"
+            ],
+            "introspection": "The road taught me what the classroom could not."
+        },
+        {
+            "id": "wandering_2",
+            "label": "The Hardship (Wandering II)",
+            "prompt": "Survival is not guaranteed. When resources were thin and your companions were weary, what was your role?",
+            "groups": [
+                "OPERATIONS",
+                "TACTICS",
+                "STABILIZE",
+                "RALLY",
+                "MOBILITY",
+                "BRAVERY"
+            ],
+            "introspection": "We survived because I knew what had to be done."
+        },
+        {
+            "id": "wandering_3",
+            "label": "The Discovery (Wandering III)",
+            "prompt": "In the ruins of the old world, you found a fragment of truth. How did you process this revelation?",
+            "groups": [
+                "OPERATIONS",
+                "TACTICS",
+                "STABILIZE",
+                "RALLY",
+                "MOBILITY",
+                "BRAVERY"
+            ],
+            "introspection": "The past whispered to me, and I finally understood."
+        },
+        {
+            "id": "wandering_4",
+            "label": "The Final Preparation (Wandering IV)",
+            "prompt": "Before you set out on this final quest, what last skill did you master to ensure your legend?",
+            "groups": [
+                "OPERATIONS",
+                "TACTICS",
+                "STABILIZE",
+                "RALLY",
+                "MOBILITY",
+                "BRAVERY"
+            ],
+            "introspection": "I am ready. Let the weavers tell the tale."
+        }
+    ],
+    "context_intro": {
+        "violence": "Growing up in a harsh land, your first conflict defined you.",
+        "control": "As you matured, you learned that social power is the key to leadership.",
+        "protection": "When the shadows grew long, you served as a shield for those you loved.",
+        "willpower": "Even when isolated and broken, your inner spirit refused to fade.",
+        "wandering_1": "Your travels took you far beyond the familiar borders.",
+        "wandering_2": "The wilderness was unforgiving, testing your very limits.",
+        "wandering_3": "Ancient secrets revealed themselves to you in the deep dark.",
+        "wandering_4": "With your training complete, you stood on the precipice of destiny."
+    }
+}

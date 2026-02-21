@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import { Application, Container, Graphics, Assets, Sprite, Texture, Rectangle, Point } from 'pixi.js';
-import { Entity, MapData } from '../types';
-import { DynamicLightFilter } from '../shaders/DynamicLight';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { Application, Container, Graphics, Assets, Sprite, Texture, Rectangle, Point, Text, TextStyle } from 'pixi.js';
+import { clsx } from 'clsx';
 
 interface MapCanvasProps {
     mapData: any;
     entities: any[];
     onCellClick: (x: number, y: number) => void;
-    onCellDrag?: (x: number, y: number) => void;
+    onCellHover?: (x: number, y: number | null) => void;
+    range?: number;
+    origin?: [number, number];
+    visualEvents?: any[]; // Transient events like [{type: 'FCT', ...}]
 }
 
 const SHEET_CONFIG = {
@@ -16,78 +18,49 @@ const SHEET_CONFIG = {
     spriteHeight: 32,
 };
 
-export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
+export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, origin, visualEvents }: MapCanvasProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
+    const worldRef = useRef<Container | null>(null);
+    const entGroupRef = useRef<Map<string, Container>>(new Map());
     const [isReady, setIsReady] = useState(false);
     const texturesCache = useRef<Map<number, Texture>>(new Map());
+    const TILE = 40;
 
+    // 1. App Initialization
     useEffect(() => {
         if (!containerRef.current) return;
-
         const app = new Application();
-        let resizeObserver: ResizeObserver | null = null;
         let isDestroyed = false;
 
         const init = async () => {
-            console.log("[TALEWEAVERS] MapCanvas V3 (Clean Lifecycle) Initializing...");
             try {
-                // Initialize Pixi
                 await app.init({
                     background: '#0f0f13',
                     antialias: true,
                     resolution: window.devicePixelRatio || 1,
-                    resizeTo: containerRef.current || undefined, // Use built-in resize first
+                    resizeTo: containerRef.current || undefined,
                 });
-
-                if (isDestroyed) {
-                    app.destroy(true, { children: true, texture: true });
-                    return;
-                }
-
+                if (isDestroyed) { app.destroy(true); return; }
                 if (containerRef.current) {
                     containerRef.current.appendChild(app.canvas);
                     appRef.current = app;
                 }
-
-                // Load Assets
                 await Assets.load(SHEET_CONFIG.url);
-
-                if (!isDestroyed) {
-                    setIsReady(true);
-                }
+                if (!isDestroyed) setIsReady(true);
             } catch (e) {
                 console.error("Pixi Init Error:", e);
-                // Even on error, we might be able to render something if app.renderer exists
                 if (!isDestroyed) setIsReady(true);
             }
         };
-
         init();
 
         return () => {
             isDestroyed = true;
-            if (resizeObserver) resizeObserver.disconnect();
-
-            // Critical: Pixi v8 destruction safety
-            const cleanUp = async () => {
-                if (appRef.current) {
-                    const toDestroy = appRef.current;
-                    appRef.current = null;
-                    try {
-                        toDestroy.destroy(true, { children: true, texture: true });
-                    } catch (err) {
-                        console.warn("Pixi Destroy Error:", err);
-                    }
-                } else {
-                    try {
-                        app.destroy(true, { children: true, texture: true });
-                    } catch (err) {
-                        // Ignore errors during early destruction
-                    }
-                }
-            };
-            cleanUp();
+            if (appRef.current) {
+                appRef.current.destroy(true, { children: true, texture: true });
+                appRef.current = null;
+            }
         };
     }, []);
 
@@ -96,127 +69,66 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
             if (texturesCache.current.has(index)) return texturesCache.current.get(index)!;
             const base = Assets.get<Texture>(SHEET_CONFIG.url);
             if (!base || !base.source) return null;
-
             const cols = Math.floor(base.width / SHEET_CONFIG.spriteWidth);
             const col = index % cols;
             const row = Math.floor(index / cols);
-
             const tex = new Texture({
                 source: base.source,
                 frame: new Rectangle(col * 32, row * 32, 32, 32)
             });
             texturesCache.current.set(index, tex);
             return tex;
-        } catch (e) {
-            return null;
-        }
+        } catch (e) { return null; }
     };
 
-    // Render logic
+    // 2. Main Render Loop
     useEffect(() => {
         const app = appRef.current;
         if (!app || !app.stage || !isReady) return;
 
         app.stage.removeChildren();
         const world = new Container();
+        worldRef.current = world;
         app.stage.addChild(world);
 
-        const TILE = 40;
-
-        // 1. Static Background
+        // Layers
         const bgLayer = new Container();
-        world.addChild(bgLayer);
+        const entLayer = new Container();
+        const uiLayer = new Container();
+        world.addChild(bgLayer, entLayer, uiLayer);
 
-        // Apply Dynamic Lighting Shader
-        const lightFilter = new DynamicLightFilter(
-            app.renderer.width,
-            app.renderer.height,
-            { x: app.renderer.width / 2, y: app.renderer.height / 2 },
-            400 // Torch radius
-        );
-        bgLayer.filters = [lightFilter];
+        // Centering
+        world.x = (app.renderer.width - mapData.width * TILE) / 2;
+        world.y = (app.renderer.height - mapData.height * TILE) / 2;
 
-        // Define which base tiles should use smart tiling
-        const SMART_TILES = new Set([896, 194, 130]); // Mountain, Water, Forest
-
-        // Need the SmartTiling logic:
-        const calculateBitmask = (grid: any[][], x: number, y: number, targetTileIndex: number) => {
-            let mask = 0;
-            const h = grid.length;
-            const w = h > 0 ? grid[0].length : 0;
-            if (y > 0 && grid[y - 1][x] === targetTileIndex) mask += 1;
-            if (x > 0 && grid[y][x - 1] === targetTileIndex) mask += 2;
-            if (x < w - 1 && grid[y][x + 1] === targetTileIndex) mask += 4;
-            if (y < h - 1 && grid[y + 1][x] === targetTileIndex) mask += 8;
-            return mask;
-        };
-
+        // Static Grid
         mapData.grid.forEach((row: number[], y: number) => {
             row.forEach((cell: number, x: number) => {
-                let finalIndex = cell;
-
-                // Apply smart tiling if this is a supported terrain type
-                if (SMART_TILES.has(cell)) {
-                    finalIndex = cell + calculateBitmask(mapData.grid, x, y, cell);
-                }
-
-                const tex = getTexture(finalIndex);
+                const tex = getTexture(cell);
                 let tile;
                 if (tex) {
                     tile = new Sprite(tex);
-                    tile.width = TILE;
-                    tile.height = TILE;
+                    tile.width = TILE; tile.height = TILE;
                 } else {
-                    const g = new Graphics().rect(0, 0, TILE, TILE).fill(cell === 896 ? 0x222222 : 0x111111);
-                    tile = g;
+                    tile = new Graphics().rect(0, 0, TILE, TILE).fill(0x111111);
                 }
-                tile.x = x * TILE;
-                tile.y = y * TILE;
+                tile.x = x * TILE; tile.y = y * TILE;
                 bgLayer.addChild(tile);
             });
         });
 
-        bgLayer.interactive = true;
-        let isDragging = false;
-
-        bgLayer.on('pointerdown', (e) => {
-            isDragging = true;
-            const p = e.getLocalPosition(world);
-            onCellClick(Math.floor(p.x / TILE), Math.floor(p.y / TILE));
-        });
-
-        bgLayer.on('pointermove', (e) => {
-            // Update light pos (needs global screen coords for shader, normalized by world offset) //
-            const globalPos = e.global;
-            lightFilter.updateLight(globalPos.x, globalPos.y, 400);
-
-            if (isDragging && onCellDrag) {
-                const p = e.getLocalPosition(world);
-                onCellDrag(Math.floor(p.x / TILE), Math.floor(p.y / TILE));
-            }
-        });
-
-        bgLayer.on('pointerup', () => isDragging = false);
-        bgLayer.on('pointerupoutside', () => isDragging = false);
-
-        // 2. Entities
-        const entLayer = new Container();
-        world.addChild(entLayer);
-
+        // Entities
+        entGroupRef.current.clear();
         entities.forEach(ent => {
             const eGroup = new Container();
             const sheetMatch = ent.icon?.match(/sheet:(\d+)/);
-            const index = sheetMatch ? parseInt(sheetMatch[1]) : 5074;
-            const tex = getTexture(index);
-
+            const tex = getTexture(sheetMatch ? parseInt(sheetMatch[1]) : 5074);
             if (tex) {
                 const s = new Sprite(tex);
                 s.anchor.set(0.5);
-                s.width = TILE * 0.8;
-                s.height = TILE * 0.8;
+                s.width = TILE * 0.8; s.height = TILE * 0.8;
                 eGroup.addChild(s);
             }
-
             eGroup.x = ent.pos[0] * TILE + TILE / 2;
             eGroup.y = ent.pos[1] * TILE + TILE / 2;
 
@@ -225,13 +137,109 @@ export function MapCanvas({ mapData, entities, onCellClick }: MapCanvasProps) {
                 eGroup.addChild(hpBar);
             }
             entLayer.addChild(eGroup);
+            entGroupRef.current.set(ent.id, eGroup);
         });
 
-        // Initial Centering
-        world.x = (app.renderer.width - mapData.width * TILE) / 2;
-        world.y = (app.renderer.height - mapData.height * TILE) / 2;
+        // Overlay & Interaction
+        bgLayer.interactive = true;
+        bgLayer.on('pointerdown', (e) => {
+            const p = e.getLocalPosition(world);
+            onCellClick(Math.floor(p.x / TILE), Math.floor(p.y / TILE));
+        });
 
-    }, [mapData, entities, isReady]);
+        bgLayer.on('pointermove', (e) => {
+            const p = e.getLocalPosition(world);
+            const hx = Math.floor(p.x / TILE);
+            const hy = Math.floor(p.y / TILE);
+            if (onCellHover) onCellHover(hx, (hx >= 0 && hx < mapData.width && hy >= 0 && hy < mapData.height) ? hy : null);
+        });
+
+        if (origin && range !== undefined) {
+            const rl = new Graphics();
+            const [ox, oy] = origin;
+            for (let dy = -range; dy <= range; dy++) {
+                for (let dx = -range; dx <= range; dx++) {
+                    if (Math.max(Math.abs(dx), Math.abs(dy)) <= range && (dx !== 0 || dy !== 0)) {
+                        const tx = ox + dx, ty = oy + dy;
+                        if (tx >= 0 && tx < mapData.width && ty >= 0 && ty < mapData.height) {
+                            rl.rect(tx * TILE, ty * TILE, TILE, TILE).fill({ color: 0x22c55e, alpha: 0.1 });
+                        }
+                    }
+                }
+            }
+            uiLayer.addChild(rl);
+        }
+
+    }, [mapData, entities, isReady, range, origin]);
+
+    // 3. Visual Effects Processor
+    useEffect(() => {
+        if (!isReady || !visualEvents?.length) return;
+        const app = appRef.current;
+        const world = worldRef.current;
+        if (!app || !world) return;
+
+        visualEvents.forEach(evt => {
+            if (evt.type === 'FCT') {
+                const style = new TextStyle({
+                    fontFamily: 'monospace',
+                    fontSize: evt.style === 'crit' ? 18 : 14,
+                    fontWeight: '900',
+                    fill: evt.style === 'crit' ? '#fbbf24' : (evt.style === 'miss' ? '#94a3b8' : '#ef4444'),
+                    stroke: { color: '#000000', width: 4 }
+                });
+                const t = new Text({ text: evt.text, style });
+                t.anchor.set(0.5);
+                t.x = evt.pos[0] * TILE + TILE / 2;
+                t.y = evt.pos[1] * TILE;
+                world.addChild(t);
+
+                let elapsed = 0;
+                const anim = (ticker: any) => {
+                    elapsed += ticker.deltaTime;
+                    t.y -= 0.5 * ticker.deltaTime;
+                    t.alpha = 1 - (elapsed / 60);
+                    if (elapsed > 60) {
+                        world.removeChild(t);
+                        app.ticker.remove(anim);
+                    }
+                };
+                app.ticker.add(anim);
+
+            } else if (evt.type === 'SHAKE') {
+                const ox = world.x, oy = world.y;
+                let elapsed = 0;
+                const intensity = evt.intensity || 5;
+                const anim = (ticker: any) => {
+                    elapsed += ticker.deltaTime;
+                    world.x = ox + (Math.random() - 0.5) * intensity;
+                    world.y = oy + (Math.random() - 0.5) * intensity;
+                    if (elapsed > 15) {
+                        world.x = ox; world.y = oy;
+                        app.ticker.remove(anim);
+                    }
+                };
+                app.ticker.add(anim);
+
+            } else if (evt.type === 'ACTION_START') {
+                const group = entGroupRef.current.get(evt.id);
+                if (group) {
+                    const ring = new Graphics().circle(0, 0, 20).stroke({ color: 0xfbbf24, width: 2, alpha: 0.8 });
+                    group.addChild(ring);
+                    let elapsed = 0;
+                    const anim = (ticker: any) => {
+                        elapsed += ticker.deltaTime;
+                        ring.scale.set(1 + Math.sin(elapsed * 0.2) * 0.2);
+                        if (elapsed > 60) {
+                            group.removeChild(ring);
+                            app.ticker.remove(anim);
+                        }
+                    };
+                    app.ticker.add(anim);
+                }
+            }
+        });
+    }, [visualEvents, isReady]);
 
     return <div ref={containerRef} className="w-full h-full bg-[#0f0f13] overflow-hidden" />;
 }

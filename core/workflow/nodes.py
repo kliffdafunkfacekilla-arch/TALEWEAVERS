@@ -6,8 +6,10 @@ from core.systems.interaction_engine import InteractionEngine
 
 class PlayerIntent(BaseModel):
     """Structured representation of player action from natural language."""
-    action: Literal["ATTACK", "MOVE", "SEARCH", "TALK", "INTERACT", "USE", "REST"]
+    action: Literal["ATTACK", "MOVE", "SEARCH", "TALK", "INTERACT", "USE", "REST", "SKILL", "ITEM"]
     target: Optional[str] = Field(None, description="The name of the character or object being targeted")
+    item_id: Optional[str] = Field(None, description="The ID of the item being used, if action is ITEM (e.g. potion_hp_minor)")
+    skill_id: Optional[str] = Field(None, description="The ID of the skill being cast, if action is SKILL (e.g. FIREBALL)")
     parameters: Dict[str, Any] = Field(default_factory=dict, description="Metadata like dx, dy, or specific item names")
     narrative_flavor: str = Field(..., description="A short description of HOW the player performed the action")
 
@@ -151,6 +153,38 @@ class SimNode(WorkflowNode):
                             if side_q:
                                 result += f" [QUEST DISCOVERED: {side_q.title} - {side_q.description}]"
                             break
+
+            elif action in ['ITEM', 'SKILL', 'REST']:
+                # The LLM understood a specific numeric UI intent from natural language
+                player_c = next((c for c in combat_engine.combatants if "player" in c.name), None) if combat_engine else None
+                if player_c:
+                    if action == 'SKILL':
+                        target_id = state.intent.get('target')
+                        target_unit = next((c for c in combat_engine.combatants if target_id and (c.id == target_id or c.name.lower() == target_id.lower())), None)
+                        skill_id = state.intent.get('skill_id', 'Unknown Skill')
+                        
+                        if target_unit:
+                            logs = combat_engine.attack_target(player_c, target_unit, skill_used=skill_id)
+                            result = f"You cast {skill_id}! " + " ".join(logs)
+                            updates.append({"type": "PLAY_ANIMATION", "name": "MAGIC", "target": target_unit.id})
+                            updates.append({"type": "UPDATE_HP", "id": target_unit.id, "hp": target_unit.hp})
+                        else:
+                            result = f"Target '{target_id}' is not valid for {skill_id}."
+                            
+                    elif action == 'ITEM':
+                        item_id = state.intent.get('item_id', 'Unknown Item')
+                        result = f"You used {item_id}. Restored 20 HP!"
+                        player_c.hp = min(player_c.max_hp, player_c.hp + 20)
+                        updates.append({"type": "UPDATE_HP", "id": player_c.id, "hp": player_c.hp})
+                        
+                    elif action == 'REST':
+                        result = "You set up camp. 8 hours pass. Vitals restored."
+                        if self.sim: self.sim.advance_time(8, (player_c.x, player_c.y))
+                        player_c.hp = player_c.max_hp
+                        player_c.sp = player_c.max_sp
+                        updates.append({"type": "UPDATE_HP", "id": player_c.id, "hp": player_c.hp})
+                else:
+                    result = f"You cannot perform {action} while the physics engine is offline."
 
             else:
                 result = f"Action {action} performed. The world continues to turn."

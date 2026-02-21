@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from brain.dependencies import db
-from brain.routers import architect, tactical, narrative
+from brain.routers import architect, tactical, narrative, character_creator, combat_api
 
 # --- APP INITIALIZATION ---
 app = FastAPI(
@@ -31,6 +31,8 @@ async def startup_event():
 app.include_router(architect.router)
 app.include_router(tactical.router)
 app.include_router(narrative.router)
+app.include_router(character_creator.router)
+app.include_router(combat_api.router)
 
 # --- GLOBAL UTILITY ENDPOINTS ---
 @app.get("/")

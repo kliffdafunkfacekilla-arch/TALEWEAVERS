@@ -15,7 +15,7 @@ interface GameState extends SessionData {
     selectEntity: (id: string | null) => void;
     activePlayerId: string | null;
     setActivePlayerId: (id: string | null) => void;
-    fetchNewSession: (x?: number, y?: number) => Promise<void>;
+    fetchNewSession: (playerName?: string, nodeId?: string) => Promise<void>;
     submitResult: (outcome: 'VICTORY' | 'DEFEAT') => Promise<void>;
     dmChat: (message: string) => Promise<void>;
     loadPlayerDetailed: (name: string) => Promise<void>;
@@ -31,6 +31,8 @@ interface GameState extends SessionData {
     setQuestLogOpen: (open: boolean) => void;
     isCharacterSheetOpen: boolean;
     setCharacterSheetOpen: (open: boolean) => void;
+    isCharacterCreatorOpen: boolean;
+    setCharacterCreatorOpen: (open: boolean) => void;
     syncTacticalState: () => Promise<void>;
 
     // Player View State
@@ -64,6 +66,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     isInventoryOpen: false,
     isQuestLogOpen: false,
     isCharacterSheetOpen: false,
+    isCharacterCreatorOpen: false,
     playerMapView: 'TACTICAL',
 
     loadSession: (data) => set({ ...data }),
@@ -71,6 +74,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     setInventoryOpen: (open) => set({ isInventoryOpen: open }),
     setQuestLogOpen: (open) => set({ isQuestLogOpen: open }),
     setCharacterSheetOpen: (open) => set({ isCharacterSheetOpen: open }),
+    setCharacterCreatorOpen: (open) => set({ isCharacterCreatorOpen: open }),
     setPlayerMapView: (view) => set({ playerMapView: view }),
     selectEntity: (id) => set({ selectedEntityId: id }),
     setActivePlayerId: (id) => set({ activePlayerId: id }),
@@ -87,9 +91,17 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     selectEntity: (id) => set({ selectedEntityId: id }),
 
-    fetchNewSession: async (x?: number, y?: number) => {
+    fetchNewSession: async (playerName?: string, nodeId?: string) => {
         try {
-            const url = (x !== undefined && y !== undefined) ? `/api/tactical/generate?x=${x}&y=${y}` : `/api/tactical/generate`;
+            let url = `/api/tactical/generate`;
+            const params = [];
+            if (nodeId) params.push(`node_id=${nodeId}`);
+            if (playerName) params.push(`player_name=${playerName}`);
+
+            if (params.length > 0) {
+                url += `?${params.join('&')}`;
+            }
+
             const response = await fetch(url);
             if (!response.ok) throw new Error('Failed to fetch session');
             const data = await response.json();
