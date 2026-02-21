@@ -8,6 +8,7 @@ interface MapCanvasProps {
     onCellClick: (x: number, y: number) => void;
     onCellHover?: (x: number, y: number | null) => void;
     range?: number;
+    aoeRadius?: number;
     origin?: [number, number];
     visualEvents?: any[]; // Transient events like [{type: 'FCT', ...}]
 }
@@ -18,7 +19,7 @@ const SHEET_CONFIG = {
     spriteHeight: 32,
 };
 
-export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, origin, visualEvents }: MapCanvasProps) {
+export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, aoeRadius, origin, visualEvents }: MapCanvasProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
     const worldRef = useRef<Container | null>(null);
@@ -306,26 +307,60 @@ export function MapCanvas({ mapData, entities, onCellClick, onCellHover, range, 
             uiLayer.addChild(rl);
         }
 
+        // AoE Template Overlay
+        if (mapData.hoveredX !== undefined && mapData.hoveredY !== undefined && aoeRadius !== undefined) {
+            const hx = mapData.hoveredX;
+            const hy = mapData.hoveredY;
+            const aoeOver = new Graphics();
+            for (let dy = -aoeRadius; dy <= aoeRadius; dy++) {
+                for (let dx = -aoeRadius; dx <= aoeRadius; dx++) {
+                    if (Math.max(Math.abs(dx), Math.abs(dy)) <= aoeRadius) {
+                        const tx = hx + dx;
+                        const ty = hy + dy;
+                        if (tx >= 0 && tx < mapData.width && ty >= 0 && ty < mapData.height) {
+                            aoeOver.rect(tx * TILE, ty * TILE, TILE, TILE).fill({ color: 0xef4444, alpha: 0.3 });
+                        }
+                    }
+                }
+            }
+            uiLayer.addChild(aoeOver);
+        }
+
         // Hover Overlay (Pixi-side)
         if (mapData.hoveredEntity && isReady) {
             const ent = mapData.hoveredEntity;
             const style = new TextStyle({ fontSize: 10, fill: 0xffffff, fontWeight: 'bold' });
+
+            let hoverLines: string[] = [];
+            if (ent.status && ent.status.length > 0) {
+                ent.status.forEach((s: any) => hoverLines.push(`${s.type} (${s.duration || 1})`));
+            }
+            if (ent.buffs && ent.buffs.length > 0) {
+                ent.buffs.forEach((b: any) => hoverLines.push(`${b.type} (${b.duration || 1})`));
+            }
+
+            if (hoverLines.length === 0) {
+                const res = ent.status?.find((s: any) => s.type.startsWith('RESIST_'))?.type?.replace('RESIST_', '') || 'NONE';
+                hoverLines.push(`HARDENED: ${res}`);
+            }
+
+            const hoverText = hoverLines.join('\n');
+            const info = new Text({ text: hoverText, style });
+
             const tooltip = new Graphics()
-                .rect(0, 0, 80, 20)
+                .rect(0, 0, Math.max(80, info.width + 10), Math.max(20, info.height + 10))
                 .fill({ color: 0x000000, alpha: 0.8 })
                 .stroke({ color: 0xffffff, alpha: 0.2, width: 1 });
 
             tooltip.x = ent.pos[0] * TILE + TILE;
-            tooltip.y = ent.pos[1] * TILE - 20;
+            tooltip.y = ent.pos[1] * TILE - (info.height + 10);
 
-            const res = ent.statusEffects?.find((s: any) => s.type.startsWith('RESIST_'))?.type?.replace('RESIST_', '') || 'NONE';
-            const info = new Text({ text: `HARDENED: ${res}`, style });
             info.x = 5; info.y = 5;
             tooltip.addChild(info);
             uiLayer.addChild(tooltip);
         }
 
-    }, [mapData, entities, isReady, range, origin]);
+    }, [mapData, entities, isReady, range, origin, aoeRadius]);
 
     // 3. Visual Effects Processor
     useEffect(() => {

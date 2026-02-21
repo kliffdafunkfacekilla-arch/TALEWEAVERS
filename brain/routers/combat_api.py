@@ -64,6 +64,12 @@ def load_character(req: CombatLoadRequest, db=Depends(get_db)):
     db.active_combat.grid_cells = grid # Store the visual grid reference
     
     # Create ECS Entity
+    # Inject test spells & skills for Phase 47/48
+    if "Spells" not in char_data:
+        char_data["Spells"] = ["Push", "Flame Spit", "Shocking Burst"] 
+    if "Skills" not in char_data:
+        char_data["Skills"] = ["BREAKER (Siegecraft)", "SPRINTER (Evasion)", "INTIMIDATOR (Presence)"]
+        
     char_entity = world_ecs.create_character(char_data)
     char_entity.add_tag("hero")
     char_entity.x, char_entity.y = 2, 2
@@ -107,7 +113,9 @@ def load_character(req: CombatLoadRequest, db=Depends(get_db)):
         },
         "Evolution Traits": {
             "HEAD": {"mental": "Logic", "physical": "Might"} # Might Nose: Heavy-Scent
-        }
+        },
+        "Spells": ["Shocking Burst"],
+        "Skills": ["BREAKER (Siegecraft)"]
     })
     alpha.x, alpha.y = 8, 8
     db.active_combat.combatants.append(alpha)
@@ -139,7 +147,8 @@ def load_character(req: CombatLoadRequest, db=Depends(get_db)):
         "Name": "Long-Range Spitter",
         "Stats": {"Vitality": 12, "Reflexes": 15, "Endurance": 10},
         "Team": "Enemy",
-        "Archetype": "SNIPER"
+        "Archetype": "SNIPER",
+        "Skills": ["MARKSMAN (Ballistics)"]
     })
     spitter.get_component(Renderable).icon = "sheet:5077"
     spitter.x, spitter.y = 2, 7 # On the central peak of the plateau
@@ -150,7 +159,8 @@ def load_character(req: CombatLoadRequest, db=Depends(get_db)):
         "Name": "Swarm Herald",
         "Stats": {"Vitality": 15, "Reflexes": 10, "Endurance": 12},
         "Team": "Enemy",
-        "Archetype": "HEALER"
+        "Archetype": "HEALER",
+        "Skills": ["MEDIC (First Aid)"]
     })
     herald.get_component(Renderable).icon = "sheet:5079"
     herald.x, herald.y = 9, 9 # Back corner

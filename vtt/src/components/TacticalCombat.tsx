@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGameStore } from '../store';
 import { MapCanvas } from './MapCanvas';
-import { Skull, Move, Sword, RefreshCw, User, ChevronRight, MessageSquare, Droplets, Zap, Link, Wind, Flame, MoveUp, Database } from 'lucide-react';
+import { Skull, Move, Sword, RefreshCw, User, ChevronRight, MessageSquare, Droplets, Zap, Link, Wind, Flame, MoveUp, Database, Sparkles } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export function TacticalCombat() {
@@ -151,6 +151,8 @@ export function TacticalCombat() {
                                 grid: combatState.grid?.cells || Array(10).fill(Array(10).fill(128)),
                                 biome: 'arena',
                                 hoveredEntity: hoverInfo?.entity,
+                                hoveredX: hoverInfo?.x,
+                                hoveredY: hoverInfo?.y,
                                 threat: combatState.grid?.threat,
                                 terrain: combatState.grid?.terrain,
                                 items: combatState.grid?.items,
@@ -206,12 +208,14 @@ export function TacticalCombat() {
                                         maxHp: entity.maxHp,
                                         pos: entity.pos,
                                         traits: entity.metadata?.Traits || {},
-                                        status: entity.statusEffects || []
+                                        status: entity.statusEffects || [],
+                                        buffs: entity.tempBuffs || []
                                     } : null
                                 });
                             }}
                             visualEvents={vEvents}
-                            range={targetingSkill === 'SHOCKING BURST' ? 2 : (targetingSkill === 'ACID SPIT' ? 5 : (targetingSkill === 'GRAPPLING LASH' ? 4 : (targetingSkill === 'JUMP' ? 3 : (player ? Math.floor(player.sp) : 0))))}
+                            range={targetingSkill === 'SHOCKING BURST' ? 4 : (targetingSkill === 'ACID SPIT' ? 5 : (targetingSkill === 'GRAPPLING LASH' ? 4 : (targetingSkill === 'JUMP' ? 3 : (player ? Math.floor(player.sp) : 0))))}
+                            aoeRadius={targetingSkill && (targetingSkill.includes('BURST') || targetingSkill.includes('ROAR') || targetingSkill.includes('PULSE') || targetingSkill.includes('INTIMIDATOR')) ? (targetingSkill.includes('INTIMIDATOR') || targetingSkill.includes('ROAR') ? 3 : 2) : undefined}
                             origin={player ? player.pos : [0, 0]}
                         />
                     ) : (
@@ -352,6 +356,39 @@ export function TacticalCombat() {
                             >
                                 <Skull size={16} /> Might: Smash (3 SP)
                             </button>
+
+                            {/* --- DYNAMIC SPELLS (Phase 47) --- */}
+                            {player.metadata?.Spells && player.metadata.Spells.map((spellName: string) => (
+                                <button
+                                    key={spellName}
+                                    onClick={() => { setTargetingSkill(targetingSkill === spellName ? null : spellName); setIsSmashMode(false); }}
+                                    className={clsx(
+                                        "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                        targetingSkill === spellName
+                                            ? "bg-cyan-600 border-cyan-400 text-white shadow-[0_0_20px_rgba(8,145,178,0.4)]"
+                                            : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10"
+                                    )}
+                                >
+                                    <Sparkles size={16} /> Cast {spellName}
+                                </button>
+                            ))}
+
+                            {/* --- DYNAMIC SKILLS (Phase 48) --- */}
+                            {player.metadata?.Skills && player.metadata.Skills.map((quadSkillName: string) => (
+                                <button
+                                    key={quadSkillName}
+                                    onClick={() => { setTargetingSkill(targetingSkill === quadSkillName ? null : quadSkillName); setIsSmashMode(false); }}
+                                    className={clsx(
+                                        "flex items-center gap-3 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border",
+                                        targetingSkill === quadSkillName
+                                            ? "bg-red-700 border-red-500 text-white shadow-[0_0_20px_rgba(185,28,28,0.4)]"
+                                            : "bg-black/40 border-slate-700 text-slate-300 hover:bg-slate-800"
+                                    )}
+                                >
+                                    <Sword size={16} /> {quadSkillName.split(" ")[0]}
+                                </button>
+                            ))}
+
                             <button
                                 onClick={handleEndTurn}
                                 disabled={isLoading}

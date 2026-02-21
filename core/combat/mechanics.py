@@ -334,7 +334,8 @@ class CombatEngine:
         return False, f"{char.name} strikes the obstacle, but it holds firm.", [{"type": "FCT", "text": "CLANG", "pos": [tx, ty], "style": "dmg"}]
 
     def use_skill(self, char, skill_name, tx, ty):
-        """Processes active evolutionary abilities."""
+        """Processes active evolutionary abilities and generic spellcasts."""
+        orig_skill_name = skill_name
         skill_name = skill_name.upper()
         logs = []
         updates = []
@@ -346,6 +347,226 @@ class CombatEngine:
         if char_h > target_h:
             h_bonus = char_h - target_h
             logs.append(f"[HIGH GROUND] Range increased by {h_bonus}!")
+
+        # ------------------------------------------------------------------
+        # --- GENERIC SPELL RESOLUTION (Phase 47) ---
+        # ------------------------------------------------------------------
+        # Lazy load Schools_of_Power
+        if not getattr(self, "_schools_of_power", None):
+            matrix_path = os.path.join(os.path.dirname(__file__), "..", "..", "data", "Schools_of_Power.json")
+            try:
+                with open(matrix_path, 'r', encoding='utf-8') as f:
+                    self._schools_of_power = json.load(f)
+            except Exception as ex:
+                self._schools_of_power = {"schools": {}}
+                
+        # Search for spell across all schools
+        spell_data = None
+        for school_name, school_info in self._schools_of_power.get("schools", {}).items():
+            for sp in school_info.get("spells", []):
+                if sp["name"].upper() == skill_name:
+                    spell_data = sp
+                    break
+            if spell_data: break
+            
+        if spell_data:
+            sp_cost = spell_data.get("tier", 1) * 2 # Formula: Tier x 2 = SP Cost
+            if char.sp < sp_cost: 
+                return f"Not enough SP for {orig_skill_name}! (Requires {sp_cost})", []
+            
+            dist = max(abs(char.x - tx), abs(char.y - ty))
+            max_range = 4 + h_bonus + spell_data.get("tier", 1) # Range scales with tier
+            if dist > max_range: 
+                return f"Target out of range ({max_range} tiles).", []
+                
+            char.sp -= sp_cost
+            target = next((c for c in self.combatants if c.x == tx and c.y == ty), None)
+            
+            logic_tag = spell_data.get("logic_tag", "UNKNOWN")
+            dmg_type = spell_data.get("damage_type", "FORCE").upper()
+            
+            # Color mapping based on element
+            color_map = {
+                "FIRE": "#ef4444", "HEAT": "#ef4444", "COLD": "#60a5fa",
+                "POISON": "#10b981", "ACID": "#84cc16", "SHOCK": "#fde047",
+                "FORCE": "#a8a29e", "RADIANT": "#fcd34d", "NECROTIC": "#7e22ce"
+            }
+            proj_color = color_map.get(dmg_type, "#ffffff")
+            updates.append({"type": "PROJECTILE", "from": [char.x, char.y], "to": [tx, ty], "color": proj_color})
+
+            if target:
+                if logic_tag.startswith("OFFENSE"):
+                    # Generic Offensive Damage
+                    dmg = spell_data.get("tier", 1) * 5 # Base damage formula
+                    final_dmg, d_logs, d_updates = self.apply_damage_with_resistance(target, dmg, dmg_type)
+                    logs.extend(d_logs)
+                    updates.extend(d_updates)
+                    
+                    if "hero" in char.tags and "hero" not in target.tags:
+                        self.apply_threat(target, char, final_dmg)
+                        
+                    logs.append(f"{char.name} casts {orig_skill_name} on {target.name}! ({final_dmg} {dmg_type} DMG)")
+                    updates.append({"type": "FCT", "text": f"-{final_dmg} {dmg_type}", "pos": [tx, ty], "style": "dmg"})
+                    
+                    # Specific tag sub-handlers
+                    if "PUSH" in logic_tag:
+                        dx = 1 if tx > char.x else (-1 if tx < char.x else 0)
+                        dy = 1 if ty > char.y else (-1 if ty < char.y else 0)
+                        nx, ny = target.x + dx, target.y + dy
+                        if not any(c.x == nx and c.y == ny for c in self.combatants) and (nx, ny) not in self.walls:
+                            target.x, target.y = nx, ny
+                            updates.append({"type": "MOVE_TOKEN", "id": target.id, "pos": [nx, ny]})
+                            logs.append(f"{target.name} is knocked back!")
+                            hx_logs, hx_updates = self.check_tile_effects(target)
+                            logs.extend(hx_logs)
+                            updates.extend(hx_updates)
+                            
+                    elif "PULL" in logic_tag:
+                        dx = 1 if tx < char.x else (-1 if tx > char.x else 0)
+                        dy = 1 if ty < char.y else (-1 if ty > char.y else 0)
+                        nx, ny = target.x + dx, target.y + dy
+                        if not any(c.x == nx and c.y == ny for c in self.combatants) and (nx, ny) not in self.walls:
+                            target.x, target.y = nx, ny
+                            updates.append({"type": "MOVE_TOKEN", "id": target.id, "pos": [nx, ny]})
+                            logs.append(f"{target.name} is dragged closer!")
+                            hx_logs, hx_updates = self.check_tile_effects(target)
+                            logs.extend(hx_logs)
+                            updates.extend(hx_updates)
+                            
+                elif logic_tag.startswith("UTILITY:HEAL"): # Assuming a generic heal tag exists or is planned
+                     heal = spell_data.get("tier", 1) * 10
+                     target.hp = min(target.max_hp, target.hp + heal)
+                     logs.append(f"{char.name} heals {target.name} for {heal} HP!")
+                     updates.append({"type": "FCT", "text": f"+{heal} HEAL", "pos": [tx, ty], "style": "heal"})
+                else:
+                    # Generic hit for unimplemented logic tags
+                    logs.append(f"{char.name} casts {orig_skill_name} on {target.name}! (Effect pending implementation)")
+            else:
+                logs.append(f"{char.name} casts {orig_skill_name} at the ground.")
+                
+            return " ".join(logs), updates
+        # ------------------------------------------------------------------
+
+        # ------------------------------------------------------------------
+        # --- GENERIC QUADRANT SKILL RESOLUTION (Phase 48) ---
+        # ------------------------------------------------------------------
+        # Lazy load skills_v2
+        if not getattr(self, "_quadrant_skills", None):
+            matrix_path = os.path.join(os.path.dirname(__file__), "..", "..", "data", "skills_v2.json")
+            try:
+                with open(matrix_path, 'r', encoding='utf-8') as f:
+                    self._quadrant_skills = json.load(f)
+            except Exception as ex:
+                self._quadrant_skills = {}
+                
+        # Search for skill across all 4 Quadrants
+        q_skill_data = None
+        quadrants = ["quadrant_1_violence", "quadrant_2_survival", "quadrant_3_influence", "quadrant_4_resolve"]
+        for quad in quadrants:
+            for s in self._quadrant_skills.get(quad, {}).get("skills", []):
+                if s["name"].upper() == skill_name:
+                    q_skill_data = s
+                    q_skill_data["_quadrant"] = quad
+                    break
+            if q_skill_data: break
+            
+        if q_skill_data:
+            quadrant = q_skill_data.get("_quadrant")
+            sp_cost = 3 # Fixed SP cost for mundane physical skills for now
+            if char.sp < sp_cost: 
+                return f"Not enough SP for {orig_skill_name}! (Requires {sp_cost})", []
+            
+            # Action Mapping based on Quadrant Intent
+            if quadrant == "quadrant_1_violence":
+                # Melee/Ranged Attacks
+                dist = max(abs(char.x - tx), abs(char.y - ty))
+                max_range = 1 + h_bonus 
+                if "MARKSMAN" in skill_name or "SKIRMISHER" in skill_name: max_range = 5 + h_bonus
+                if dist > max_range: return f"Target out of range ({max_range} tiles).", []
+                
+                char.sp -= sp_cost
+                target = next((c for c in self.combatants if c.x == tx and c.y == ty), None)
+                if max_range > 1:
+                     updates.append({"type": "PROJECTILE", "from": [char.x, char.y], "to": [tx, ty], "color": "#a8a29e"}) # grey arrow/thrown arc
+                
+                if target:
+                    dmg = 8
+                    final_dmg, d_logs, d_updates = self.apply_damage_with_resistance(target, dmg, "IMPACT")
+                    logs.extend(d_logs)
+                    updates.extend(d_updates)
+                    if "hero" in char.tags and "hero" not in target.tags:
+                        self.apply_threat(target, char, final_dmg)
+                    logs.append(f"{char.name} executes {orig_skill_name} on {target.name}! ({final_dmg} Physical DMG)")
+                    updates.append({"type": "FCT", "text": f"-{final_dmg} IMPACT", "pos": [tx, ty], "style": "dmg"})
+                    
+                    if "BREAKER" in skill_name:
+                        updates.append({"type": "SHAKE", "intensity": 4})
+                else:
+                    if "BREAKER" in skill_name and (tx, ty) in self.walls:
+                        char.sp -= sp_cost
+                        self.walls.remove((tx, ty))
+                        if self.grid_cells: self.grid_cells[ty][tx] = 129
+                        updates.append({"type": "GRID_UPDATE", "x": tx, "y": ty, "cell": 128})
+                        logs.append(f"{char.name} uses {orig_skill_name} and shatters the obstacle!")
+                        updates.append({"type": "FCT", "text": "SHATTERED", "pos": [tx, ty], "style": "crit"})
+                        updates.append({"type": "SHAKE", "intensity": 8})
+                    elif max_range > 1: logs.append(f"{char.name} misses their shot.")
+                    else: logs.append(f"{char.name} strikes the air.")
+
+            elif quadrant == "quadrant_2_survival":
+                 # Movement, defense, repositioning
+                 if "SPRINTER" in skill_name or "ATHLETE" in skill_name:
+                     if not hasattr(char, "temp_buffs"): char.temp_buffs = []
+                     char.temp_buffs.append({"type": f"{orig_skill_name}_SPEED", "stat": "Reflexes", "bonus": 5, "duration": 2})
+                     char.sp -= sp_cost
+                     logs.append(f"{char.name} uses {orig_skill_name}! (+5 Reflexes for 2 rounds)")
+                     updates.append({"type": "FCT", "text": "MOBILITY UP", "pos": [char.x, char.y], "style": "react"})
+                 elif "VANGUARD" in skill_name or "DEFLECTOR" in skill_name:
+                     if not hasattr(char, "status_effects"): char.status_effects = []
+                     char.status_effects.append({"type": "RESIST_PHYSICAL", "duration": 2})
+                     char.sp -= sp_cost
+                     logs.append(f"{char.name} holds the line with {orig_skill_name}!")
+                     updates.append({"type": "FCT", "text": "GUARDING", "pos": [char.x, char.y], "style": "heal"})
+                 else:
+                     logs.append(f"{orig_skill_name} logic pending.")
+                     
+            elif quadrant == "quadrant_3_influence":
+                # Taunts, fears, debuffs
+                char.sp -= sp_cost
+                if "INTIMIDATOR" in skill_name or "COMMANDER" in skill_name:
+                    updates.append({"type": "AOE_PULSE", "pos": [char.x, char.y], "radius": 3, "color": "#eab308"}) # Yellow aura
+                    for c in self.combatants:
+                        if "hero" not in c.tags and max(abs(char.x - c.x), abs(char.y - c.y)) <= 3:
+                            current_max = max(self.threat.get(c.id, {}).values()) if self.threat.get(c.id) else 0
+                            self.apply_threat(c, char, current_max + 10)
+                            logs.append(f"{c.name}'s attention is drawn by {orig_skill_name}!")
+                            updates.append({"type": "FCT", "text": "THREATENED", "pos": [c.x, c.y], "style": "dmg"})
+                    logs.append(f"{char.name} uses {orig_skill_name} to control the battlefield!")
+                else:
+                    logs.append(f"{orig_skill_name} logic pending.")
+
+            elif quadrant == "quadrant_4_resolve":
+                 # Focus, Willpower, steady aim
+                 if "MEDIC" in skill_name:
+                     dist = max(abs(char.x - tx), abs(char.y - ty))
+                     if dist > 1: return "Must be adjacent to use Medical skills.", []
+                     target = next((c for c in self.combatants if c.x == tx and c.y == ty), None)
+                     if target:
+                         char.sp -= sp_cost
+                         heal = 12
+                         target.hp = min(target.max_hp, target.hp + heal)
+                         logs.append(f"{char.name} applies first aid with {orig_skill_name} to {target.name}! (+{heal} HP)")
+                         updates.append({"type": "FCT", "text": f"+{heal} MENDED", "pos": [tx, ty], "style": "heal"})
+                     else: logs.append("No patient there.")
+                 else:
+                     if not hasattr(char, "temp_buffs"): char.temp_buffs = []
+                     char.temp_buffs.append({"type": f"{orig_skill_name}_FOCUS", "stat": "Willpower", "bonus": 5, "duration": 2})
+                     char.sp -= sp_cost
+                     logs.append(f"{char.name} steels their resolve with {orig_skill_name}! (+5 Willpower)")
+                     updates.append({"type": "FCT", "text": "FOCUSED", "pos": [char.x, char.y], "style": "react"})
+
+            return " ".join(logs), updates
+        # ------------------------------------------------------------------
 
         if skill_name == "ACID SPIT":
             sp_cost = 4
@@ -709,6 +930,9 @@ class CombatEngine:
             dist = max(abs(npc.x - target.x), abs(npc.y - target.y))
             archetype = getattr(npc, "metadata", {}).get("Archetype", "MELEE").upper()
             
+            npc_spells = getattr(npc, "metadata", {}).get("Spells", [])
+            npc_skills = getattr(npc, "metadata", {}).get("Skills", [])
+            
             executed = False
             
             # --- SNIPER LOGIC ---
@@ -729,17 +953,24 @@ class CombatEngine:
                                 executed = True
                                 break
                 
-                if not executed and npc.sp >= 4:
+                if not executed:
                     h_bonus = self.elevation.get((npc.x, npc.y), 0) - self.elevation.get((target.x, target.y), 0)
                     if dist <= 5 + max(0, h_bonus):
-                        # Combo Logic: If target is in GOO, use FLAME SPIT (Heat)
-                        t_terrain = self.terrain.get((target.x, target.y))
-                        skill_to_use = "FLAME SPIT" if t_terrain == "GOO" else "ACID SPIT"
+                        skill_to_use = None
+                        if any("MARKSMAN" in s for s in npc_skills):
+                            skill_to_use = next(s for s in npc_skills if "MARKSMAN" in s)
+                        elif npc_spells:
+                            skill_to_use = npc_spells[0]
+                        else:
+                            # Combo Logic Fallback
+                            t_terrain = self.terrain.get((target.x, target.y))
+                            skill_to_use = "FLAME SPIT" if t_terrain == "GOO" else "ACID SPIT"
                         
                         log_msg, skill_updates = self.use_skill(npc, skill_to_use, target.x, target.y)
-                        self.replay_log.append(log_msg)
-                        self.pending_updates.extend(skill_updates)
-                        executed = True
+                        if not log_msg.startswith("Not enough SP") and "failed" not in log_msg.lower():
+                            self.replay_log.append(log_msg)
+                            self.pending_updates.extend(skill_updates)
+                            executed = True
 
             # --- HEALER LOGIC ---
             elif archetype == "HEALER":
@@ -747,12 +978,23 @@ class CombatEngine:
                 if wounded:
                     w_target = wounded[0]
                     t_dist = max(abs(npc.x - w_target.x), abs(npc.y - w_target.y))
-                    if t_dist <= 3 and npc.sp >= 5:
-                        log_msg, skill_updates = self.use_skill(npc, "REJUVENATING SPORES", w_target.x, w_target.y)
-                        self.replay_log.append(log_msg)
-                        self.pending_updates.extend(skill_updates)
-                        executed = True
-                    elif npc.sp >= 1:
+                    skill_to_use = None
+                    opt_range = 1
+                    if any("MEDIC" in s for s in npc_skills):
+                        skill_to_use = next(s for s in npc_skills if "MEDIC" in s)
+                        opt_range = 1
+                    else:
+                        skill_to_use = "REJUVENATING SPORES"
+                        opt_range = 3
+                        
+                    if t_dist <= opt_range:
+                        log_msg, skill_updates = self.use_skill(npc, skill_to_use, w_target.x, w_target.y)
+                        if not log_msg.startswith("Not enough SP") and "failed" not in log_msg.lower():
+                            self.replay_log.append(log_msg)
+                            self.pending_updates.extend(skill_updates)
+                            executed = True
+                            
+                    if not executed and npc.sp >= 1:
                         path = self.find_path((npc.x, npc.y), (w_target.x, w_target.y))
                         if path and len(path) > 1:
                             tx, ty = path[0]
@@ -795,9 +1037,24 @@ class CombatEngine:
 
                 if not executed:
                     if dist <= 1:
-                        results, v_updates = self.attack_target(npc, target)
-                        self.replay_log.extend(results)
-                        self.pending_updates.extend(v_updates)
+                        skill_to_use = None
+                        if npc_spells:
+                            skill_to_use = npc_spells[0]
+                        elif npc_skills:
+                            skill_to_use = npc_skills[0]
+                            
+                        if skill_to_use:
+                            log_msg, skill_updates = self.use_skill(npc, skill_to_use, target.x, target.y)
+                            if not log_msg.startswith("Not enough SP") and "failed" not in log_msg.lower() and "range" not in log_msg.lower():
+                                self.replay_log.append(log_msg)
+                                self.pending_updates.extend(skill_updates)
+                                executed = True
+                                
+                        if not executed:
+                            results, v_updates = self.attack_target(npc, target)
+                            self.replay_log.extend(results)
+                            self.pending_updates.extend(v_updates)
+                            executed = True
                     elif npc.sp >= 1:
                         path = self.find_path((npc.x, npc.y), (target.x, target.y))
                         if path and len(path) > 1:
