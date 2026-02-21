@@ -182,178 +182,176 @@ function App() {
                             )}
                         </div>
 
-                    </div>
+                        {/* ACTIVE QUEST HUD */}
+                        <QuestTracker />
 
-                {/* ACTIVE QUEST HUD */}
-                <QuestTracker />
-
-                {/* MAP SETTINGS HUD */}
-                <div className="absolute top-24 left-1/2 -translate-x-1/2 flex bg-black/60 p-1 rounded-xl border border-white/10 z-20 backdrop-blur-xl shadow-2xl">
-                    <button
-                        onClick={() => setPlayerMapView('TACTICAL')}
-                        className={clsx(
-                            "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                            playerMapView === 'TACTICAL'
-                                ? "bg-yellow-600/90 text-white shadow-lg"
-                                : "text-slate-400 hover:text-white hover:bg-white/5"
-                        )}
-                    >
-                        Battle Map
-                    </button>
-                    <button
-                        onClick={() => {
-                            if (!architectGrid) fetchArchitectGrid();
-                            setPlayerMapView('WORLD');
-                        }}
-                        className={clsx(
-                            "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                            playerMapView === 'WORLD'
-                                ? "bg-blue-600/90 text-white shadow-lg"
-                                : "text-slate-400 hover:text-white hover:bg-white/5"
-                        )}
-                    >
-                        World Map
-                    </button>
-                </div>
-
-                {/* THE MAP DATA VIEW */}
-                <div className="flex-grow overflow-auto flex items-center justify-center bg-[#0d0d12] p-12">
-                    {playerMapView === 'TACTICAL' ? (
-                        <MapCanvas
-                            mapData={map}
-                            entities={entities}
-                            onCellClick={(x, y) => {
-                                if (isDMThinking) return;
-                                const clickedEntity = entities.find(e => e.pos[0] === x && e.pos[1] === y);
-                                if (clickedEntity && clickedEntity.type === 'enemy') {
-                                    dmChat(`I attack ${clickedEntity.name}`);
-                                } else {
-                                    dmChat(`I move to ${x}, ${y}`);
-                                }
-                            }}
-                        />
-                    ) : (
-                        <MapCanvas
-                            mapData={architectGrid || map}
-                            entities={[{
-                                id: 'player_marker', type: 'player', name: 'Party',
-                                pos: meta.world_pos || [500, 500],
-                                icon: 'sheet:115'
-                            }]}
-                            onCellClick={(x, y) => {
-                                if (isDMThinking) return;
-                                setPlayerMapView('TACTICAL');
-                                dmChat(`We travel to world coordinates ${x}, ${y}`);
-                            }}
-                        />
-                    )}
-                </div>
-
-                {/* MULTI-CHARACTER PARTY FRAMES */}
-                {playerMapView === 'TACTICAL' && <PartyFrames />}
-
-                {/* ACTION BAR (SKILLS/HUD) */}
-                <ActionBar />
-
-                {/* DM COMMAND BAR */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-2xl px-6 z-50">
-                    <form
-                        onSubmit={handleDmSubmit}
-                        className="relative group"
-                    >
-                        <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600/20 via-amber-600/30 to-yellow-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                        <div className="relative flex items-center bg-[#0a0a0f]/90 border border-white/10 backdrop-blur-2xl rounded-2xl p-1 shadow-2xl overflow-hidden">
-                            <div className="flex items-center justify-center w-12 h-12 text-yellow-500 opacity-60">
-                                {isDMThinking ? <Sparkles size={20} className="animate-spin" /> : <MessageSquare size={20} />}
-                            </div>
-
-                            <input
-                                type="text"
-                                value={dmInput}
-                                onChange={(e) => setDmInput(e.target.value)}
-                                placeholder={isDMThinking ? "The Oracle is synthesizing destiny..." : "Speak your intent to the Oracle..."}
-                                className="flex-grow bg-transparent border-none outline-none text-sm placeholder:text-slate-600 px-2 py-4 font-medium tracking-tight disabled:opacity-50"
-                                disabled={isDMThinking}
-                            />
-
+                        {/* MAP SETTINGS HUD */}
+                        <div className="absolute top-24 left-1/2 -translate-x-1/2 flex bg-black/60 p-1 rounded-xl border border-white/10 z-20 backdrop-blur-xl shadow-2xl">
                             <button
-                                type="submit"
-                                disabled={isDMThinking || !dmInput.trim()}
-                                className="px-6 py-3 bg-yellow-600/10 hover:bg-yellow-600 text-yellow-500 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-0"
+                                onClick={() => setPlayerMapView('TACTICAL')}
+                                className={clsx(
+                                    "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
+                                    playerMapView === 'TACTICAL'
+                                        ? "bg-yellow-600/90 text-white shadow-lg"
+                                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                                )}
                             >
-                                Execute
+                                Battle Map
+                            </button>
+                            <button
+                                onClick={() => {
+                                    if (!architectGrid) fetchArchitectGrid();
+                                    setPlayerMapView('WORLD');
+                                }}
+                                className={clsx(
+                                    "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
+                                    playerMapView === 'WORLD'
+                                        ? "bg-blue-600/90 text-white shadow-lg"
+                                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                                )}
+                            >
+                                World Map
                             </button>
                         </div>
-                    </form>
-                </div>
 
-                <div className="absolute bottom-6 left-6 flex gap-2 z-50 pointer-events-auto">
-                    <button onClick={() => fetchNewSession()} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg border border-white/5 transition-colors"><Scroll size={16} className="text-slate-400" /></button>
-                    <button onClick={() => submitResult('VICTORY')} className="px-4 py-2 bg-yellow-600/80 hover:bg-yellow-600 text-[10px] font-black uppercase tracking-tight rounded-lg border border-yellow-500/20 transition-all active:scale-95">Complete Objective</button>
-                </div>
-
-                {/* DRAWERS */}
-                <CharacterSheet />
-                <InventoryDrawer />
-                <QuestLog />
-            </>
-            ) : viewMode === 'ARCHITECT' ? (
-            <WorldArchitect />
-            ) : (
-            <TacticalCombat />
-            )}
-        </div>
-
-            {/* ADVENTURE LOG (Chronicle) - Only in PLAY mode */ }
-    {
-        viewMode === 'PLAY' && (
-            <div className="w-96 bg-[#050508]/95 backdrop-blur-2xl border-l border-white/5 flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.4)]">
-                <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="p-1.5 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
-                            <Terminal size={14} className="text-yellow-500" />
+                        {/* THE MAP DATA VIEW */}
+                        <div className="flex-grow overflow-auto flex items-center justify-center bg-[#0d0d12] p-12">
+                            {playerMapView === 'TACTICAL' ? (
+                                <MapCanvas
+                                    mapData={map}
+                                    entities={entities}
+                                    onCellClick={(x, y) => {
+                                        if (isDMThinking) return;
+                                        const clickedEntity = entities.find(e => e.pos[0] === x && e.pos[1] === y);
+                                        if (clickedEntity && clickedEntity.type === 'enemy') {
+                                            dmChat(`I attack ${clickedEntity.name}`);
+                                        } else {
+                                            dmChat(`I move to ${x}, ${y}`);
+                                        }
+                                    }}
+                                />
+                            ) : (
+                                <MapCanvas
+                                    mapData={architectGrid || map}
+                                    entities={[{
+                                        id: 'player_marker', type: 'player', name: 'Party',
+                                        pos: meta.world_pos || [500, 500],
+                                        icon: 'sheet:115'
+                                    }]}
+                                    onCellClick={(x, y) => {
+                                        if (isDMThinking) return;
+                                        setPlayerMapView('TACTICAL');
+                                        dmChat(`We travel to world coordinates ${x}, ${y}`);
+                                    }}
+                                />
+                            )}
                         </div>
-                        <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-300">Chronicle</h2>
-                    </div>
-                </div>
 
-                <div className="flex-grow p-6 overflow-y-auto space-y-4 font-mono text-[11px] custom-scrollbar">
-                    {log.map((entry, i) => {
-                        const isOracle = entry.includes("[THE ORACLE]");
-                        const cleanEntry = entry.replace("[THE ORACLE] ", "");
+                        {/* MULTI-CHARACTER PARTY FRAMES */}
+                        {playerMapView === 'TACTICAL' && <PartyFrames />}
 
-                        return (
-                            <div key={i} className={clsx(
-                                "group animate-in fade-in slide-in-from-right-2 duration-500",
-                                isOracle && "relative"
-                            )}>
-                                <div className={clsx(
-                                    "flex items-start gap-3 leading-relaxed border-l pl-4 py-2 hover:bg-white/5 rounded-r-lg transition-colors",
-                                    isOracle ? "border-yellow-500/40 bg-yellow-500/5 shadow-[inset_4px_0_10px_rgba(234,179,8,0.05)]" : "border-white/10"
-                                )}>
-                                    <div className={clsx(
-                                        "mt-1 w-1 h-1 rounded-full px-0.5",
-                                        isOracle ? "bg-yellow-500 shadow-[0_0_8px_#eab308]" : "bg-white/20 group-hover:bg-yellow-500"
-                                    )} />
-                                    <span className={clsx(
-                                        "transition-colors",
-                                        isOracle ? "text-amber-100 italic font-bold tracking-tight" : "text-slate-400 group-hover:text-slate-200 uppercase tracking-tight"
-                                    )}>
-                                        {cleanEntry}
-                                    </span>
+                        {/* ACTION BAR (SKILLS/HUD) */}
+                        <ActionBar />
+
+                        {/* DM COMMAND BAR */}
+                        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-2xl px-6 z-50">
+                            <form
+                                onSubmit={handleDmSubmit}
+                                className="relative group"
+                            >
+                                <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600/20 via-amber-600/30 to-yellow-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                <div className="relative flex items-center bg-[#0a0a0f]/90 border border-white/10 backdrop-blur-2xl rounded-2xl p-1 shadow-2xl overflow-hidden">
+                                    <div className="flex items-center justify-center w-12 h-12 text-yellow-500 opacity-60">
+                                        {isDMThinking ? <Sparkles size={20} className="animate-spin" /> : <MessageSquare size={20} />}
+                                    </div>
+
+                                    <input
+                                        type="text"
+                                        value={dmInput}
+                                        onChange={(e) => setDmInput(e.target.value)}
+                                        placeholder={isDMThinking ? "The Oracle is synthesizing destiny..." : "Speak your intent to the Oracle..."}
+                                        className="flex-grow bg-transparent border-none outline-none text-sm placeholder:text-slate-600 px-2 py-4 font-medium tracking-tight disabled:opacity-50"
+                                        disabled={isDMThinking}
+                                    />
+
+                                    <button
+                                        type="submit"
+                                        disabled={isDMThinking || !dmInput.trim()}
+                                        className="px-6 py-3 bg-yellow-600/10 hover:bg-yellow-600 text-yellow-500 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-0"
+                                    >
+                                        Execute
+                                    </button>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                            </form>
+                        </div>
 
-                <div className="p-8 bg-gradient-to-t from-[#050508] to-transparent">
-                    <p className="text-center text-[9px] font-bold text-slate-600 uppercase tracking-widest opacity-50">T.A.L.E.W.E.A.V.E.R.S. Session</p>
-                </div>
+                        <div className="absolute bottom-6 left-6 flex gap-2 z-50 pointer-events-auto">
+                            <button onClick={() => fetchNewSession()} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg border border-white/5 transition-colors"><Scroll size={16} className="text-slate-400" /></button>
+                            <button onClick={() => submitResult('VICTORY')} className="px-4 py-2 bg-yellow-600/80 hover:bg-yellow-600 text-[10px] font-black uppercase tracking-tight rounded-lg border border-yellow-500/20 transition-all active:scale-95">Complete Objective</button>
+                        </div>
+
+                        {/* DRAWERS */}
+                        <CharacterSheet />
+                        <InventoryDrawer />
+                        <QuestLog />
+                    </>
+                ) : viewMode === 'ARCHITECT' ? (
+                    <WorldArchitect />
+                ) : (
+                    <TacticalCombat />
+                )}
             </div>
-        )
-    }
+
+            {/* ADVENTURE LOG (Chronicle) - Only in PLAY mode */}
+            {
+                viewMode === 'PLAY' && (
+                    <div className="w-96 bg-[#050508]/95 backdrop-blur-2xl border-l border-white/5 flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.4)]">
+                        <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="p-1.5 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+                                    <Terminal size={14} className="text-yellow-500" />
+                                </div>
+                                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-300">Chronicle</h2>
+                            </div>
+                        </div>
+
+                        <div className="flex-grow p-6 overflow-y-auto space-y-4 font-mono text-[11px] custom-scrollbar">
+                            {log.map((entry, i) => {
+                                const isOracle = entry.includes("[THE ORACLE]");
+                                const cleanEntry = entry.replace("[THE ORACLE] ", "");
+
+                                return (
+                                    <div key={i} className={clsx(
+                                        "group animate-in fade-in slide-in-from-right-2 duration-500",
+                                        isOracle && "relative"
+                                    )}>
+                                        <div className={clsx(
+                                            "flex items-start gap-3 leading-relaxed border-l pl-4 py-2 hover:bg-white/5 rounded-r-lg transition-colors",
+                                            isOracle ? "border-yellow-500/40 bg-yellow-500/5 shadow-[inset_4px_0_10px_rgba(234,179,8,0.05)]" : "border-white/10"
+                                        )}>
+                                            <div className={clsx(
+                                                "mt-1 w-1 h-1 rounded-full px-0.5",
+                                                isOracle ? "bg-yellow-500 shadow-[0_0_8px_#eab308]" : "bg-white/20 group-hover:bg-yellow-500"
+                                            )} />
+                                            <span className={clsx(
+                                                "transition-colors",
+                                                isOracle ? "text-amber-100 italic font-bold tracking-tight" : "text-slate-400 group-hover:text-slate-200 uppercase tracking-tight"
+                                            )}>
+                                                {cleanEntry}
+                                            </span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div className="p-8 bg-gradient-to-t from-[#050508] to-transparent">
+                            <p className="text-center text-[9px] font-bold text-slate-600 uppercase tracking-widest opacity-50">T.A.L.E.W.E.A.V.E.R.S. Session</p>
+                        </div>
+                    </div>
+                )
+            }
 
             <InventoryDrawer isOpen={isInventoryOpen} onClose={() => setInventoryOpen(false)} />
             <QuestLog isOpen={isQuestLogOpen} onClose={() => setQuestLogOpen(false)} />

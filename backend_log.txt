@@ -5,7 +5,7 @@ C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\main.py:24: Deprec
         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
         
   @app.on_event("startup")
-INFO:     Started server process [39192]
+INFO:     Started server process [23224]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
@@ -17,7 +17,13 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 [ERROR] Database Hydration Failed: too many values to unpack (expected 3)
 [SERVER] World State Hydrated.
 [RAG] ChromaDB initialization complete. 1 vectors mapped.
-INFO:     127.0.0.1:49162 - "POST /combat/load HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64856 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53402 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52051 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49391 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49237 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53402 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62033 - "GET /tactical/generate?player_name=Burt HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "C:\Users\krazy\AppData\Roaming\Python\Python313\site-packages\uvicorn\protocols\http\httptools_impl.py", line 409, in run_asgi
@@ -85,13 +91,10 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "C:\Users\krazy\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 967, in run
     result = context.run(func, *args)
-  File "C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\routers\combat_api.py", line 106, in load_character
-    alpha = world_ecs.create_character({
-        "Name": "Predator Alpha",
-    ...<10 lines>...
-        "Skills": ["BREAKER (Siegecraft)"]
-    })
-  File "C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\core\ecs.py", line 239, in create_character
-    matrix_path = os.path.join(os.path.dirname(__file__), "..", "data", "Evolution_Matrix.json")
-                  ^^
-NameError: name 'os' is not defined. Did you forget to import 'os'?
+  File "C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\routers\tactical.py", line 117, in generate_tactical_map
+    "icon": player_c.get_component(Renderable).icon if player_c.has_component(Renderable) else "sheet:115",
+                                                                              ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'Renderable' where it is not associated with a value
+INFO:     127.0.0.1:51751 - "GET /tactical/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58319 - "GET /tactical/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53402 - "GET /tactical/state HTTP/1.1" 200 OK

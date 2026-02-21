@@ -60,7 +60,7 @@ class TacticalStateResponse(BaseModel):
 
 @router.get("/generate")
 def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] = None, player_name: Optional[str] = None, db=Depends(get_db)):
-    from combat.mechanics import CombatEngine
+    from core.combat.mechanics import CombatEngine
     width, height = 20, 20
     
     # 1. Resolve World Location
@@ -148,7 +148,8 @@ def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] =
                         
                         # Build True ECS representation for mechanics engine
                         from core.ecs import Entity, Position, Vitals, Stats, Renderable
-                        enemy_e = Entity(uid=enemy["id"])
+                        enemy_e = Entity(name=enemy["name"])
+                        enemy_e.id = enemy["id"]  # Override with the pre-assigned ID
                         enemy_e.name = enemy["name"]
                         enemy_e.tags = set(enemy["tags"])
                         enemy_e.add_component(Position(lx, ly))
