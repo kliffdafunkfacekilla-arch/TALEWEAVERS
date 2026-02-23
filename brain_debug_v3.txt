@@ -1,0 +1,195 @@
+C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\main.py:24: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [40252]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[SERVER] Taleweavers Brain v2.0 booting up...
+[BOOT] Initializing World Database Services...
+[BOOT] RAG: Loading Atomic Knowledge Graph...
+[RAG] Initializing ChromaDB Vector Store...
+[DB] Synced 0 nodes to SQLite.
+[ECS] Restored 21 entities from database.
+[REGISTRY] Loaded 0 species, 0 factions, 0 resources.
+[SERVER] World State Hydrated.
+[RAG] ChromaDB initialization complete. 1 vectors mapped.
+INFO:     127.0.0.1:50153 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50157 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62510 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54502 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62364 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50061 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61611 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61382 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65279 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59079 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51142 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64961 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61028 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50345 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57227 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59010 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64275 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63056 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52167 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59262 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53402 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62202 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51964 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64745 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59963 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50472 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53837 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52495 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49926 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59180 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55312 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51810 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55164 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62367 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64536 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61016 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55564 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57798 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65393 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59066 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55408 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53401 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58489 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63636 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52484 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56468 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52559 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51878 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50261 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53470 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59904 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60186 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51950 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53573 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59246 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63755 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55075 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52477 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63893 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55885 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60446 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60688 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52283 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54552 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65119 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65267 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61248 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59423 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62724 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63582 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52240 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62480 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54084 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59961 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56609 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56247 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61005 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62349 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61986 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62442 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51958 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65257 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57515 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51670 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56789 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52379 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53401 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62329 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55819 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64596 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55352 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57391 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64816 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65229 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55406 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49991 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55001 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58851 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50866 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59686 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50746 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61128 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62047 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61668 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54374 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57270 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62125 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58448 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50683 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50177 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60264 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61571 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56544 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64024 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63337 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61934 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50494 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54201 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51333 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51428 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62147 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53528 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57340 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60222 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58055 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61537 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58984 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54345 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63933 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50611 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58903 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65159 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53402 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55561 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57632 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61416 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54784 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58360 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59733 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53438 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54566 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54029 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59042 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54444 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60102 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54931 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56553 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51810 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60093 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50620 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62643 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55388 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57051 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50062 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52021 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64232 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50555 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56209 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58681 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52049 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59217 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60844 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60559 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62125 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53403 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56430 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54737 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62833 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58971 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50489 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60825 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58168 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51069 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57464 - "GET /tactical/state HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52366 - "GET /tactical/state HTTP/1.1" 404 Not Found

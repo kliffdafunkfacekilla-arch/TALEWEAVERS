@@ -1,0 +1,22 @@
+C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\main.py:24: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [40492]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[SERVER] Taleweavers Brain v2.0 booting up...
+[BOOT] Initializing World Database Services...
+[BOOT] RAG: Loading Atomic Knowledge Graph...
+[RAG] Initializing ChromaDB Vector Store...
+[DB] Synced 0 nodes to SQLite.
+[ECS] Restored 12 entities from database.
+[REGISTRY] Loaded 0 species, 0 factions, 0 resources.
+[SERVER] World State Hydrated.
+[RAG] ChromaDB initialization complete. 1 vectors mapped.
+INFO:     127.0.0.1:55638 - "GET /tactical/generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64785 - "GET /tactical/state HTTP/1.1" 200 OK

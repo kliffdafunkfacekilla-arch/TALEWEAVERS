@@ -6,7 +6,8 @@ from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
 from brain.dependencies import get_db, DATA_DIR
-from core.ecs import world_ecs, Position, Renderable, Vitals, Stats
+from core.ecs import Entity, Position, Renderable, Vitals, Stats, world_ecs
+from core.combat.mechanics import CombatEngine
 
 router = APIRouter(prefix="/tactical", tags=["tactical"])
 
@@ -60,7 +61,6 @@ class TacticalStateResponse(BaseModel):
 
 @router.get("/generate")
 def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] = None, player_name: Optional[str] = None, db=Depends(get_db)):
-    from combat.mechanics import CombatEngine
     width, height = 20, 20
     
     # 1. Resolve World Location
@@ -100,7 +100,6 @@ def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] =
     player_path = os.path.join(DATA_DIR, "Saves", player_file)
     
     if not os.path.exists(player_path):
-        # Fallback to Burt if custom load fails
         player_path = os.path.join(DATA_DIR, "Saves", "Burt.json")
         
     if os.path.exists(player_path):
@@ -125,9 +124,6 @@ def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] =
     world_objects = [{"id": "chest_01", "name": "Ancient Chest", "type": "object", "pos": [width-3, 3], "icon": "sheet:6", "tags": ["lootable", "openable"], "inventory": chest_loot}]
     vtt_entities.extend(world_objects)
 
-    # -------------------------------------------------------------
-    # Inject Active Campaign POIs & Quest Targets
-    # -------------------------------------------------------------
     if db.campaign_gen and db.campaign_gen.current_campaign:
         active_camp = db.campaign_gen.current_campaign
         for poi in active_camp.pois:
@@ -146,15 +142,11 @@ def generate_tactical_map(node_id: Optional[str] = None, poi_id: Optional[str] =
                         enemy["description"] = poi.description
                         vtt_entities.append(enemy)
                         
-                        # Build True ECS representation for mechanics engine
-                        from core.ecs import Entity, Position, Vitals, Stats, Renderable
-                        enemy_e = Entity(uid=enemy["id"])
-                        enemy_e.name = enemy["name"]
+                        enemy_e = Entity(name=enemy["name"], uid=enemy["id"])
                         enemy_e.tags = set(enemy["tags"])
                         enemy_e.add_component(Position(lx, ly))
                         enemy_e.add_component(Vitals(hp=enemy["hp"], max_hp=enemy["maxHp"], sp=enemy["sp"], max_sp=enemy["maxSp"], fp=0, max_fp=0, cmp=50, max_cmp=50))
                         
-                        # Store abstract stats dict in attributes
                         sys_stats = Stats()
                         sys_stats.attrs = enemy["stats"]
                         enemy_e.add_component(sys_stats)
@@ -200,11 +192,10 @@ def get_tactical_state(db=Depends(get_db)):
                 id=c.id, name=c.name, type="Enemy",
                 health=TacticalHealth(current=c.hp, max=c.max_hp),
                 coordinates=TacticalCoords(x=c.x, y=c.y)
-            ) for c in db.active_combat.combatants if "enemy" in c.name
+            ) for c in db.active_combat.combatants if "player" not in c.name
         ]
     )
 
-# --- CHARACTER ENDPOINT --- (Keeping near tactical)
 @router.get("/char/{name}")
 def get_character(name: str):
     player = next((e for e in world_ecs.entities.values() if e.name.lower() == name.lower()), None)
@@ -222,12 +213,8 @@ def process_tactical_feedback(req: TacticalFeedback, db=Depends(get_db)):
 
 @router.post("/travel")
 def travel_to_node(db=Depends(get_db)):
-    """Handles edge-of-map map transitioning. Advances time and moves to next POI."""
     new_node_id = None
-    
-    # Pick next target from campaign timeline
     if db.campaign_gen and db.campaign_gen.current_campaign:
-        # Find first undiscovered POI
         for poi in db.campaign_gen.current_campaign.pois:
             if not getattr(poi, 'discovered', False):
                 new_node_id = poi.id
@@ -235,52 +222,37 @@ def travel_to_node(db=Depends(get_db)):
                 db.meta['world_pos'] = [poi.x, poi.y]
                 break
         else:
-            # Or fall back to next plot point
             if len(db.campaign_gen.current_campaign.plot_points) > 1:
                 new_node_id = db.campaign_gen.current_campaign.plot_points[1].id
                 db.meta['world_pos'] = [db.campaign_gen.current_campaign.plot_points[1].x, db.campaign_gen.current_campaign.plot_points[1].y]
 
-    # Advance time natively
     if getattr(db, 'sim', None) and 'world_pos' in db.meta:
         db.sim.advance_time(8, db.meta['world_pos'])
-                
-    # 3. Generate New Map via Node ID abstraction
     return generate_tactical_map(node_id=new_node_id, db=db)
 
 @router.post("/action")
 def execute_system_action(req: CombatActionRequest, db=Depends(get_db)):
-    """Executes a hard-coded system action, bypassing the LLM DM."""
     if not db.active_combat: raise HTTPException(status_code=400, detail="No active combat.")
-    
     player_c = next((c for c in db.active_combat.combatants if "player" in c.name), None)
     if not player_c: raise HTTPException(status_code=400, detail="Player not found in combat.")
-    
     updates = []
     log_msg = ""
-    
     if req.action_type == "skill":
         target = next((c for c in db.active_combat.combatants if req.target_id and c.id == req.target_id), None)
         if target:
-            logs = db.active_combat.attack_target(player_c, target, skill_used=req.skill_id)
+            logs, v_updates = db.active_combat.attack_target(player_c, target, skill_used=req.skill_id)
             log_msg = f"You cast {req.skill_id}! " + " ".join(logs)
-            updates.append({"type": "PLAY_ANIMATION", "name": "MAGIC", "target": target.id})
+            updates.extend(v_updates)
             updates.append({"type": "UPDATE_HP", "id": target.id, "hp": target.hp})
         else:
-            log_msg = f"Target not valid for {req.skill_id}."
-            
+            log_msg = f"Target not valid."
     elif req.action_type == "item":
-        log_msg = f"You used {req.item_id}. Restored 20 HP!"
+        log_msg = f"You used {req.item_id}. +20 HP!"
         player_c.hp = min(player_c.max_hp, player_c.hp + 20)
         updates.append({"type": "UPDATE_HP", "id": player_c.id, "hp": player_c.hp})
-        
     elif req.action_type == "camp":
-        log_msg = "You set up camp. 8 hours pass. Vitals restored."
+        log_msg = "Vitals restored."
         if db.sim: db.sim.advance_time(8, (player_c.x, player_c.y))
-        player_c.hp = player_c.max_hp
-        player_c.sp = player_c.max_sp
+        player_c.hp, player_c.sp = player_c.max_hp, player_c.max_sp
         updates.append({"type": "UPDATE_HP", "id": player_c.id, "hp": player_c.hp})
-        
-    return {
-        "narrative": f"[SYSTEM] {log_msg}",
-        "visual_updates": updates
-    }
+    return {"narrative": f"[SYSTEM] {log_msg}", "visual_updates": updates}

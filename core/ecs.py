@@ -1,5 +1,6 @@
 import uuid
 import json
+import sys
 from typing import Dict, List, Any, Optional
 from .database import PersistenceLayer
 
@@ -8,8 +9,8 @@ class Entity:
     The fundamental object in the ECS. 
     It is merely a container for a unique ID and a collection of Components.
     """
-    def __init__(self, name="Unnamed Entity"):
-        self.id = str(uuid.uuid4())
+    def __init__(self, name="Unnamed Entity", uid=None):
+        self.id = uid if uid else str(uuid.uuid4())
         self.name = name
         self.components: Dict[str, Any] = {}
         self.tags = set()
@@ -54,7 +55,6 @@ class Entity:
         if not v: return 0
         actual = min(amount, v.hp)
         v.hp -= actual
-        # Trigger persistence update if world_ecs is managing it
         return actual
 
     # --- CORE PROPERTY ADAPTERS ---
@@ -206,17 +206,15 @@ class ECSRegistry:
     def load_all(self):
         """Loads all entities from the SQLite persistence layer into the active registry."""
         rows = self.db.load_all_entities()
-        for eid, name, data_json in rows:
+        for eid, name, data_json, layer_id, location_id in rows:
             data = json.loads(data_json)
-            e = Entity(name)
-            e.id = eid
+            e = Entity(name, uid=eid)
             e.tags = set(data.get("tags", []))
             e.metadata = data.get("metadata", {})
             
             # Reconstruct Components
             comp_data = data.get("components", {})
             for c_name, c_vars in comp_data.items():
-                # Map component name to class
                 cls = getattr(sys.modules[__name__], c_name, None)
                 if cls:
                     comp = cls()
@@ -230,16 +228,20 @@ class ECSRegistry:
     def create_character(self, data: Dict) -> Entity:
         """Factory: registers character directly into active world state using TTS formulas."""
         e = Entity(data.get("Name", "Hero"))
-        e.metadata = data # Store raw data for trait/item lookup
+        e.metadata = data
         e.add_component(Position(data.get("x", 0), data.get("y", 0)))
         e.add_component(Renderable(data.get("Sprite", data.get("Portrait", "sheet:5074"))))
-        e.add_component(Stats(data.get("Stats", {})))
-        e.add_component(Vitals())
+        
+        s = Stats(data.get("Stats", {}))
+        e.add_component(s)
+        
+        v = Vitals()
+        e.add_component(v)
         e.add_component(Inventory())
         e.add_component(StatusEffects())
         e.add_component(FactionMember(data.get("Team", "Neutral")))
         
-        # Calculate TTS Vitals (Default if not provided)
+        # Calculate TTS Vitals
         v.max_hp = data.get("HP", int(s.get("Vitality") + s.get("Fortitude") + (s.get("Endurance") / 2)))
         v.max_sp = data.get("Stamina", int(s.get("Endurance") + s.get("Might") + (s.get("Reflexes") / 2)))
         v.max_fp = data.get("Focus", int(s.get("Knowledge") + s.get("Logic") + (s.get("Willpower") / 2)))

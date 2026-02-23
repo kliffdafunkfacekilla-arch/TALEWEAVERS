@@ -1,0 +1,22 @@
+C:\Users\krazy\Documents\GitHub\TALEWEAVERS\TALEWEAVERS\brain\main.py:24: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [22344]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('0.0.0.0', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+[SERVER] Taleweavers Brain v2.0 booting up...
+[BOOT] Initializing World Database Services...
+[BOOT] RAG: Loading Atomic Knowledge Graph...
+[RAG] Initializing ChromaDB Vector Store...
+[DB] Synced 0 nodes to SQLite.
+[ECS] Restored 12 entities from database.
+[REGISTRY] Loaded 0 species, 0 factions, 0 resources.
+[SERVER] World State Hydrated.
+[RAG] ChromaDB initialization complete. 1 vectors mapped.

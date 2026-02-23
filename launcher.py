@@ -10,17 +10,15 @@ def start_taleweavers():
     print("==================================================")
     
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    brain_dir = os.path.join(root_dir, "brain")
     vtt_dir = os.path.join(root_dir, "vtt")
     
     # 1. Start SAGA Brain (FastAPI)
     print("[1/3] Starting SAGA Brain Server...")
+    # Executing from root_dir using brain.main:app to ensure package imports work
     brain_proc = subprocess.Popen(
-        [sys.executable, "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"],
-        cwd=brain_dir,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True
+        [sys.executable, "-m", "uvicorn", "brain.main:app", "--host", "127.0.0.1", "--port", "8000"],
+        cwd=root_dir,
+        creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == 'nt' else 0
     )
     
     # 2. Start VTT Frontend (Vite)
@@ -32,7 +30,8 @@ def start_taleweavers():
     )
     
     # Wait for servers to warm up
-    time.sleep(3)
+    print("Warming up tactical relays...")
+    time.sleep(5)
     
     # 3. Open Browser
     print("[3/3] Launching Strategic Interface...")

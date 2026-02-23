@@ -29,6 +29,8 @@ class PersistenceLayer:
             )
         ''')
         
+        self._ensure_columns(cursor)
+        
         # 1. Global Layer (30 Regions)
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS global_regions (
@@ -80,15 +82,19 @@ class PersistenceLayer:
         conn.commit()
         conn.close()
 
+    def _ensure_columns(self, cursor):
+        """Migration helper to ensure columns exist in existing tables."""
+        try:
+            cursor.execute('ALTER TABLE entities ADD COLUMN layer_id INTEGER DEFAULT 0')
+        except sqlite3.OperationalError: pass
+        try:
+            cursor.execute('ALTER TABLE entities ADD COLUMN location_id TEXT')
+        except sqlite3.OperationalError: pass
+
     def save_entity(self, entity_id, name, data_dict, layer_id=0, location_id=None):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        # Ensure columns exist if migration didn't run (rudimentary check)
-        try:
-            cursor.execute('ALTER TABLE entities ADD COLUMN layer_id INTEGER DEFAULT 0')
-            cursor.execute('ALTER TABLE entities ADD COLUMN location_id TEXT')
-        except sqlite3.OperationalError:
-            pass # Columns already exist
+        self._ensure_columns(cursor)
 
         cursor.execute('''
             INSERT OR REPLACE INTO entities (id, name, data, layer_id, location_id) 
@@ -100,6 +106,7 @@ class PersistenceLayer:
     def load_entity(self, entity_id):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
+        self._ensure_columns(cursor)
         cursor.execute('SELECT name, data FROM entities WHERE id = ?', (entity_id,))
         row = cursor.fetchone()
         conn.close()
@@ -110,6 +117,7 @@ class PersistenceLayer:
     def load_all_entities(self):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
+        self._ensure_columns(cursor)
         cursor.execute('SELECT id, name, data, layer_id, location_id FROM entities')
         rows = cursor.fetchall()
         conn.close()
@@ -128,8 +136,6 @@ class PersistenceLayer:
         conn.commit()
         conn.close()
         print(f"[DB] Synced {len(nodes_list)} nodes to SQLite.")
-
-    # --- 4-Layer Hierarchy Methods ---
 
     def create_global_region(self, region_id, name, grid_x, grid_y, biome_data, political_data=None):
         conn = sqlite3.connect(self.db_path)
