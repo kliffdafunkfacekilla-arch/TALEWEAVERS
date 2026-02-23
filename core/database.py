@@ -78,6 +78,30 @@ class PersistenceLayer:
                 state TEXT
             )
         ''')
+
+        # Quests Table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS quests (
+                id TEXT PRIMARY KEY,
+                title TEXT,
+                description TEXT,
+                status TEXT,
+                data TEXT -- Serialized objectives and rewards
+            )
+        ''')
+
+        # Conversations/Memory Table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS conversations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                entity_id TEXT,
+                session_id TEXT,
+                role TEXT, -- 'user' or 'assistant'
+                content TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY(entity_id) REFERENCES entities(id)
+            )
+        ''')
         
         conn.commit()
         conn.close()
@@ -192,3 +216,55 @@ class PersistenceLayer:
         if row:
             return {"id": row[0], "local_zone_id": row[1], "local_x": row[2], "local_y": row[3], "map_data": json.loads(row[4])}
         return None
+
+    # --- QUEST PERSISTENCE ---
+    def save_quest(self, quest_id, title, description, status, data_dict):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT OR REPLACE INTO quests (id, title, description, status, data)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (quest_id, title, description, status, json.dumps(data_dict)))
+        conn.commit()
+        conn.close()
+
+    def load_all_quests(self):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('SELECT id, title, description, status, data FROM quests')
+        rows = cursor.fetchall()
+        conn.close()
+        return [{"id": r[0], "title": r[1], "description": r[2], "status": r[3], "data": json.loads(r[4])} for r in rows]
+
+    # --- CONVERSATION PERSISTENCE ---
+    def save_chat_turn(self, entity_id, session_id, role, content):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO conversations (entity_id, session_id, role, content)
+            VALUES (?, ?, ?, ?)
+        ''', (entity_id, session_id, role, content))
+        conn.commit()
+        conn.close()
+
+    def get_chat_history(self, entity_id=None, session_id=None, limit=50):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        query = 'SELECT role, content, timestamp FROM conversations'
+        params = []
+        if entity_id or session_id:
+            query += ' WHERE'
+            if entity_id:
+                query += ' entity_id = ?'
+                params.append(entity_id)
+            if session_id:
+                if entity_id: query += ' AND'
+                query += ' session_id = ?'
+                params.append(session_id)
+        
+        query += f' ORDER BY timestamp DESC LIMIT {limit}'
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        conn.close()
+        # Return in chronological order
+        return [{"role": r[0], "content": r[1], "timestamp": r[2]} for r in reversed(rows)]

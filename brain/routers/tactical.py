@@ -207,6 +207,69 @@ def get_character(name: str):
             return json.load(f)
     raise HTTPException(status_code=404, detail="Character not found.")
 
+@router.post("/interact")
+def interact_with_object(target_id: str, action_type: str = "SEARCH", player_name: str = "Burt", db=Depends(get_db)):
+    """
+    Handles mechanical interactions like SEARCH, OPEN, or LOOT.
+    Matches logic from legacy resolve_mechanical_interaction.
+    """
+    if not db.active_combat:
+        raise HTTPException(status_code=400, detail="No active tactical session.")
+        
+    visual_updates = []
+    res = "The world remains still."
+    
+    # In tactical.py context, we check combatants or world_objects
+    target = next((c for c in db.active_combat.combatants if c.id == target_id), None)
+    is_object = False
+    if not target and hasattr(db.active_combat, 'world_objects'):
+        target = next((o for o in db.active_combat.world_objects if o['id'] == target_id), None)
+        is_object = True
+
+    if not target:
+        raise HTTPException(status_code=404, detail="Target not found in current area.")
+
+    target_name = (target.name if not is_object else target['name']).lower()
+    
+    # Search/Loot Logic
+    if action_type == "SEARCH" or "chest" in target_name:
+        if db.item_gen:
+            loot = db.item_gen.generate_loot(max_tier=2)
+            item_name = loot.get("name", "Glinting Trinket")
+            
+            # Update Character Save
+            player_file = f"{player_name.replace(' ', '_')}.json"
+            save_path = os.path.join(DATA_DIR, "Saves", player_file)
+            
+            if os.path.exists(save_path):
+                try:
+                    with open(save_path, 'r', encoding='utf-8') as f:
+                        char_data = json.load(f)
+                    
+                    if "Inventory" not in char_data:
+                        char_data["Inventory"] = []
+                    
+                    char_data["Inventory"].append(loot)
+                    
+                    with open(save_path, 'w', encoding='utf-8') as f:
+                        json.dump(char_data, f, indent=4)
+                    
+                    res = f"You searched the {target_name} and found: {item_name}!"
+                    visual_updates.append({"type": "ADD_ITEM", "item": loot})
+                    visual_updates.append({"type": "OPEN_INVENTORY"})
+                    
+                    # Update Quest Objectives
+                    if db.quests:
+                        db.quests.update_objective("open_chest", 1)
+                        
+                except Exception as e:
+                    print(f"[ERROR] Interaction save failed: {e}")
+                    res = "You find something, but can't seem to carry it."
+            else:
+                res = f"You found {item_name}, but your save file ({player_file}) is missing."
+
+    return {"narrative": f"[SYSTEM] {res}", "visual_updates": visual_updates}
+
 @router.post("/feedback")
 def process_tactical_feedback(req: TacticalFeedback, db=Depends(get_db)):
     return {"status": "success", "message": f"Combat outcome: {req.outcome} recorded."}

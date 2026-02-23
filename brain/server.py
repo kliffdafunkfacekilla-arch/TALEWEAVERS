@@ -8,7 +8,7 @@ from brain.dependencies import db
 db.load()
 
 # Import Routers
-from brain.routers import architect, tactical, narrative
+from brain.routers import architect, tactical, narrative, character_creator
 
 print("[BOOT] Taleweavers Brain initializing...")
 
@@ -27,6 +27,7 @@ app.add_middleware(
 app.include_router(architect.router)
 app.include_router(tactical.router)
 app.include_router(narrative.router)
+app.include_router(character_creator.router)
 
 @app.get("/")
 def health_check():

@@ -48,9 +48,10 @@ class Quest:
         }
 
 class QuestManager:
-    def __init__(self, save_path: Optional[str] = None):
+    def __init__(self, save_path: Optional[str] = None, persistence_layer=None):
         self.quests: List[Quest] = []
         self.save_path = save_path
+        self.db = persistence_layer
 
     def add_quest(self, quest_data: Dict[str, Any]):
         new_quest = Quest(
@@ -81,23 +82,45 @@ class QuestManager:
         return [q.to_dict() for q in self.quests if q.status == "ACTIVE"]
 
     def save(self, path=None):
+        # 1. Save to SQLite if DB available
+        if self.db:
+            for q in self.quests:
+                self.db.save_quest(q.id, q.title, q.description, q.status, q.to_dict())
+            print(f"[QUESTS] Synced {len(self.quests)} quests to SQLite.")
+
+        # 2. Fallback/Dual save to JSON
         target = path or self.save_path
         if not target: return
         with open(target, 'w') as f:
             json.dump([q.to_dict() for q in self.quests], f, indent=4)
 
     def load(self, path=None):
+        # 1. Try loading from SQLite first
+        if self.db:
+            db_quests = self.db.load_all_quests()
+            if db_quests:
+                self.quests = []
+                for q_data in db_quests:
+                    q = self._reconstruct_quest(q_data["data"])
+                    q.status = q_data["status"]
+                    self.quests.append(q)
+                print(f"[QUESTS] Loaded {len(self.quests)} quests from SQLite.")
+                return
+
+        # 2. Fallback to JSON
         target = path or self.save_path
         if not target or not os.path.exists(target): return
         with open(target, 'r') as f:
             data = json.load(f)
             self.quests = []
             for q_data in data:
-                # Reconstruct quest objects
-                q = Quest(q_data["title"], q_data["description"], [])
-                q.id = q_data["id"]
-                q.status = q_data["status"]
-                q.objectives = [QuestObjective(**obj) for obj in q_data["objectives"]]
-                q.rewards = q_data["rewards"]
-                q.narrative_hook = q_data.get("narrative_hook", "")
-                self.quests.append(q)
+                self.quests.append(self._reconstruct_quest(q_data))
+
+    def _reconstruct_quest(self, q_data: Dict[str, Any]) -> Quest:
+        q = Quest(q_data["title"], q_data["description"], [])
+        q.id = q_data["id"]
+        q.status = q_data["status"]
+        q.objectives = [QuestObjective(**obj) for obj in q_data["objectives"]]
+        q.rewards = q_data["rewards"]
+        q.narrative_hook = q_data.get("narrative_hook", "")
+        return q

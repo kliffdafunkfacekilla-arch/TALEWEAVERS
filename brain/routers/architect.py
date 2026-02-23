@@ -192,6 +192,31 @@ def create_player_map(req: PlayerMapRequest, db=Depends(get_db)):
     db.db.create_player_map(req.id, req.local_zone_id, req.local_x, req.local_y, req.map_data)
     return {"status": "success"}
 
+@router.post("/advance_time")
+def advance_world_time(hours: int = Query(1), x: int = Query(500), y: int = Query(500), db=Depends(get_db)):
+    """
+    Advances world time and triggers hierarchical simulation ticks (LOD-aware).
+    """
+    if not db.sim:
+        raise HTTPException(status_code=503, detail="Simulation Engine Offline.")
+    
+    db.sim.advance_time(hours, player_pos=(x, y))
+    
+    # Save updated gamestate
+    try:
+        from brain.dependencies import GAMESTATE_PATH
+        with open(GAMESTATE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(db.gamestate, f, indent=4)
+    except Exception as e:
+        print(f"[ERROR] Failed to save updated gamestate: {e}")
+
+    return {
+        "status": "Time Advanced",
+        "new_time": db.sim.get_time_string(),
+        "epoch": db.gamestate.get('meta', {}).get('epoch', 0),
+        "global_wealth": db.gamestate.get('meta', {}).get('global_wealth', 0)
+    }
+
 # --- Phase 7 Asset Endpoints ---
 @router.get("/assets")
 async def get_all_assets(db=Depends(get_db)):
